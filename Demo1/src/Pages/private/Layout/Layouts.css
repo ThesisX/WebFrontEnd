@@ -1,0 +1,79 @@
+.ant-layout{
+  position: fixed;
+  top: 8;
+  width: 100%;
+  height: 100%;
+  background-size: contain ;
+  background-color:#1b1b1bec;
+}
+.ant-layout-sider ,  .site-layout-header{
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background: #a8680d;
+    max-width:  none;
+    
+}
+.ant-layout-sider-trigger{
+    background:  #010101;
+}
+
+.ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub{
+    color: #f2ebe1 ;
+    background: #010101;
+}
+
+.ant-layout-footer{
+    text-align: center;
+    background: transparent;
+
+}
+
+.site-layout .site-layout-content {
+   
+    color: #010101 ;
+    background:#655b50;
+}
+
+
+.site-layout-content {
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) ;
+    padding: 40px;
+    min-height: 480px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    padding: 10px;
+    padding-left: 20px;
+    height: 65px;
+    font-size: 45px;
+    color: #1DA57A;
+}
+
+.footer{
+    height:10%;
+    width: 100%;
+    color: #655b50;
+    background: #010101;
+
+}
+
+.buttonlog{
+    margin-top: 5cm;
+   margin-left: 24cm;
+}
+
+.btn-log-and-reg{
+    float: right;
+}
+
+.ant-col {
+    text-align: center;
+}
+
+.btn_log {
+    color: #1b1b1b;
+}
+
+    

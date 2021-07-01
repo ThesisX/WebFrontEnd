@@ -1,0 +1,48 @@
+.p-welcome{
+        font-size: 20px;
+        margin-top: 10%;
+       margin-bottom: 25px;
+       margin-left: 8%;
+       color: #1c1a18;
+       size: 5%;
+}
+
+.p-web{
+    margin-left: 17%;
+    font-size: 18px;
+    margin-bottom: 3px;
+    color:#b9b9b7;
+}
+
+.b3{
+    margin-left: 17%;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color:#b9b9b7;
+}
+
+.b6{
+    background-color: transparent;
+    color: #ffba00;
+    border-color:#ffba00 ;
+}
+
+.b6:hover{
+    background-color: transparent;
+    color: currentColor;
+    border-color: currentColor ;
+}
+
+.right-head{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color:#afa791;
+}
+
+.obj-center{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color:transparent;
+}

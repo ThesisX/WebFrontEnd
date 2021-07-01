@@ -1,0 +1,29 @@
+.col-login-title {
+  text-align: right;
+  margin-bottom: 5%;
+}
+.col-login-form {
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+
+.login-title {
+  margin-top: 45%;
+}
+.login-form{
+  margin-top: 25%;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-forgot {
+  float: left;
+  margin-right: 0.3cm;
+}
+
+.login-form-button {
+  width: 100%;
+  margin-left: auto;
+}

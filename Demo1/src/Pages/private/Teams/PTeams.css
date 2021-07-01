@@ -1,0 +1,23 @@
+.slider-card {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  margin-top: 1px;
+  border-radius: 15px;
+  background-color: #655b50;
+}
+
+.slide-img {
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+.slide-text {
+  margin-top: 0.2px;
+}
+.content-center {
+    margin: auto;
+    width: 50%;
+  
+}

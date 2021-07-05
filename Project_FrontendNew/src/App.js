@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Signin from "./Views/SigninPage/Signin";
 import Hello from './Views/HelloPage/Hello';
+import Signup from "./Views/SignupPage/Signup";
 
 function App() {
 
@@ -8,10 +9,11 @@ function App() {
   
   return (
     <div>
-      {UserSignin ?
+      {/* {UserSignin ?
         <Hello />
         : <Signin />
-      }
+      } */}
+      <Signup/>
     </div>
   )
 }

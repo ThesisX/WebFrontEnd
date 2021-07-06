@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   fade,
   ThemeProvider,
@@ -15,6 +15,8 @@ import { green } from '@material-ui/core/colors';
 import axios from 'axios'
 import qs from 'qs';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const CssTextField = withStyles({
@@ -41,6 +43,7 @@ const CssTextField = withStyles({
 
 
 // user pass mail name lname
+// ชื่อรร จังหวัด 
 
 const Signup = () => {
 
@@ -51,21 +54,29 @@ const Signup = () => {
   let [Email, setEmail] = useState("")
   let [Name, setName] = useState("")
   let [Lname, setLname] = useState("")
+  let [Schollname, setSchollname] = useState("")
+  let [Province, setProvince] = useState("")
 
 
-  let BASE_URL = "http://127.0.0.1:8000"
-
-  let form_data = {
-    user: User,
-    password: Password,
-    email: Email,
-    name: Name,
-    lname: Lname,
-  };
 
   const handleSignup = async (e) => {
     e.preventDefault()
-    
+
+    let BASE_URL = "http://172.18.41.124:8000"
+
+    let form_data = {
+      username: User,
+      email: Email,
+      full_name: Name + " " + Lname,
+      hashed_password: Password,
+
+    };
+
+    await axios.post(BASE_URL + "/sign-up", form_data)
+      .then(res => {
+        console.log(res)
+        // console.log(res.data)
+      });
   }
 
 
@@ -132,16 +143,6 @@ const Signup = () => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-  }));
-
-  const ValidationTextField = withStyles({
-    root: {
       '& input:valid + fieldset': {
         borderColor: 'green',
         borderWidth: 2,
@@ -154,8 +155,35 @@ const Signup = () => {
         borderLeftWidth: 6,
         padding: '4px !important', // override inline-style
       },
+
+      display: 'flex',
+      flexWrap: 'wrap',
     },
-  })(TextField);
+    margin: {
+      margin: theme.spacing(1),
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+  }));
+
+  // const ValidationTextField = withStyles({
+  //   root: {
+  //     '& input:valid + fieldset': {
+  //       borderColor: 'green',
+  //       borderWidth: 2,
+  //     },
+  //     '& input:invalid + fieldset': {
+  //       borderColor: 'red',
+  //       borderWidth: 2,
+  //     },
+  //     '& input:valid:focus + fieldset': {
+  //       borderLeftWidth: 6,
+  //       padding: '4px !important', // override inline-style
+  //     },
+  //   },
+  // })(TextField);
 
   // const FormHelperText = withStyles({
   //   root: {
@@ -184,19 +212,18 @@ const Signup = () => {
       primary: green,
     },
   });
+
+
   const classes = useStyles();
 
   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
- 
-    
 
-
-     
   return (
 
-    <form className={classes.root} noValidate onSubmit={handleSignup}>
 
-      <ValidationTextField
+    <form className={classes.root} onSubmit={handleSignup}>
+
+      <TextField
         className={classes.margin}
         label="USER"
         required
@@ -207,7 +234,7 @@ const Signup = () => {
           setUser(e.target.value)}
         value={User} />
 
-      <ValidationTextField
+      <TextField
         className={classes.margin}
         label="PASSWORD"
         required
@@ -218,7 +245,7 @@ const Signup = () => {
           setPassword(e.target.value)}
         value={Password} />
 
-      <ValidationTextField
+      <TextField
         className={classes.margin}
         label="EMAIL"
         required
@@ -229,17 +256,16 @@ const Signup = () => {
           setEmail(e.target.value)}
         value={Email} />
 
-
       <ThemeProvider theme={theme}>
+
         <TextField
           className={classes.margin}
           label="NAME"
           id="mui-theme-provider-standard-input"
-          id="validation-outlined-input"
           onChange={(e) =>
             setName(e.target.value)}
           value={Name} />
-  
+
 
         <TextField
           className={classes.margin}
@@ -248,17 +274,43 @@ const Signup = () => {
           onChange={(e) =>
             setLname(e.target.value)}
           value={Lname} />
-  
-        <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
-          Submit
-        </Button>
 
+        <TextField
+          className={classes.margin}
+          label="SCHOOL"
+          id="mui-theme-provider-standard-input"
+          onChange={(e) =>
+            setLname(e.target.value)}
+          value={Lname} />
       </ThemeProvider>
 
 
+      <FormControl className={classes.margin}>
+        <InputLabel id="demo-customized-select-label">Province</InputLabel>
+        <Select
+          labelId="demo-customized-select-label"
+          id="demo-customized-select"
+          value=""
+          input={<BootstrapInput />}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+
+          <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
+            Submit
+          </Button>
+
+
+
     </form>
-  );
+      );
 }
 
 
-export default Signup;
+      export default Signup;

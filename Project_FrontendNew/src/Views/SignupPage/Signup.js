@@ -152,7 +152,7 @@ const Signup = () => {
         borderWidth: 2,
       },
       '& input:valid:focus + fieldset': {
-        borderLeftWidth: 6,
+        borderLeftWidth: 5,
         padding: '4px !important', // override inline-style
       },
 
@@ -160,12 +160,19 @@ const Signup = () => {
       flexWrap: 'wrap',
     },
     margin: {
-      margin: theme.spacing(1),
+      margin: theme.spacing(5),
     },
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
+      margin: theme.spacing(5),  
+    
     },
+    button: {
+      height: 50,
+      margin: theme.spacing(5),  
+
+    }
+   
+
   }));
 
   // const ValidationTextField = withStyles({
@@ -273,34 +280,33 @@ const Signup = () => {
           id="mui-theme-provider-standard-input"
           onChange={(e) =>
             setLname(e.target.value)}
-          value={Lname} />
+          value={Lname} /> <br/>
 
         <TextField
           className={classes.margin}
           label="SCHOOL"
           id="mui-theme-provider-standard-input"
           onChange={(e) =>
-            setLname(e.target.value)}
-          value={Lname} />
+            setSchollname(e.target.value)}
+          value={Schollname} />
       </ThemeProvider>
 
 
-      <FormControl className={classes.margin}>
-        <InputLabel id="demo-customized-select-label">Province</InputLabel>
-        <Select
-          labelId="demo-customized-select-label"
-          id="demo-customized-select"
-          value=""
-          input={<BootstrapInput />}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="grouped-native-select">Province</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select">
+          <option aria-label="None" value="" />
+          <optgroup label="Category 1">
+            <option value={1}>Option 1</option>
+            <option value={2}>Option 2</option>
+          </optgroup>
+          <optgroup label="Category 2">
+            <option value={3}>Option 3</option>
+            <option value={4}>Option 4</option>
+          </optgroup>
         </Select>
       </FormControl>
+
 
           <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
             Submit

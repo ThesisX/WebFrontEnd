@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Signin from "./Views/SigninPage/Signin";
 import Hello from './Views/HelloPage/Hello';
 import Signup from "./Views/SignupPage/Signup";
+import Manager from "./Page/Manager"
 
 function App() {
 
@@ -13,7 +14,8 @@ function App() {
         <Hello />
         : <Signin />
       } */}
-      <Signup/>
+      {/* <Signup/> */}
+      <Manager/>
     </div>
   )
 }

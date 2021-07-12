@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Signin from "./Views/SigninPage/Signin";
 import Hello from './Views/HelloPage/Hello';
 import Signup from "./Views/SignupPage/Signup";
-import Manager from "./Page/Manager"
+import Manager from "./Page/Manager/Manager"
 
 function App() {
 

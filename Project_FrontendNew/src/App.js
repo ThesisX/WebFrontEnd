@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Signin from "./Views/SigninPage/Signin";
 import Hello from './Views/HelloPage/Hello';
 import Signup from "./Views/SignupPage/Signup";
+import Theam from "./Pages/Theam/Theam";
 
 function App() {
 
@@ -13,7 +14,9 @@ function App() {
         <Hello />
         : <Signin />
       } */}
-      <Signup/>
+      {/* <Signup/> */}
+      <Theam/>
+
     </div>
   )
 }

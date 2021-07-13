@@ -286,7 +286,7 @@ const Signup = () => {
 
 
       <FormControl className={classes.margin}>
-        <InputLabel id="demo-customized-select-label">Province</InputLabel>
+        <InputLabel id="demo-customized-select-label" >Province</InputLabel>
         <Select
           labelId="demo-customized-select-label"
           id="demo-customized-select"

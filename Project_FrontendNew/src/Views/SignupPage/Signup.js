@@ -292,6 +292,22 @@ const Signup = () => {
       </ThemeProvider>
 
 
+<<<<<<< HEAD
+      <FormControl className={classes.margin}>
+        <InputLabel id="demo-customized-select-label" >Province</InputLabel>
+        <Select
+          labelId="demo-customized-select-label"
+          id="demo-customized-select"
+          value=""
+          input={<BootstrapInput />}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+=======
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="grouped-native-select">Province</InputLabel>
         <Select native defaultValue="" id="grouped-native-select">
@@ -304,6 +320,7 @@ const Signup = () => {
             <option value={3}>Option 3</option>
             <option value={4}>Option 4</option>
           </optgroup>
+>>>>>>> 56b9d002405d6593c453aab8794e4c033669dfa3
         </Select>
       </FormControl>
 

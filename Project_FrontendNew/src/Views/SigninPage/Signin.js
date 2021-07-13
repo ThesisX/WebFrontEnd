@@ -69,7 +69,7 @@ const Singin = ({setToken}) => {
 
     await axios(options)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         // console.log(res.data.access_token)
         setToken(res.data.access_token)
       });

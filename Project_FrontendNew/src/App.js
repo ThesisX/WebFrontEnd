@@ -7,7 +7,7 @@ import Hello from './Views/HelloPage/Hello';
 
 const App = () => {
   const { token, setToken } = useToken();
-  console.log("My Token : " + token)
+  // console.log("My Token : " + token)
 
   if (!token) {
     return <Signin setToken={setToken} />

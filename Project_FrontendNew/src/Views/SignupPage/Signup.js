@@ -163,15 +163,15 @@ const Signup = () => {
       margin: theme.spacing(5),
     },
     formControl: {
-      margin: theme.spacing(5),  
-    
+      margin: theme.spacing(5),
+
     },
     button: {
       height: 50,
-      margin: theme.spacing(5),  
+      margin: theme.spacing(5),
 
     }
-   
+
 
   }));
 
@@ -280,7 +280,7 @@ const Signup = () => {
           id="mui-theme-provider-standard-input"
           onChange={(e) =>
             setLname(e.target.value)}
-          value={Lname} /> <br/>
+          value={Lname} /> <br />
 
         <TextField
           className={classes.margin}
@@ -291,8 +291,6 @@ const Signup = () => {
           value={Schollname} />
       </ThemeProvider>
 
-
-<<<<<<< HEAD
       <FormControl className={classes.margin}>
         <InputLabel id="demo-customized-select-label" >Province</InputLabel>
         <Select
@@ -307,33 +305,19 @@ const Signup = () => {
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
-=======
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Province</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="" />
-          <optgroup label="Category 1">
-            <option value={1}>Option 1</option>
-            <option value={2}>Option 2</option>
-          </optgroup>
-          <optgroup label="Category 2">
-            <option value={3}>Option 3</option>
-            <option value={4}>Option 4</option>
-          </optgroup>
->>>>>>> 56b9d002405d6593c453aab8794e4c033669dfa3
         </Select>
       </FormControl>
 
 
-          <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
-            Submit
-          </Button>
+      <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
+        Submit
+      </Button>
 
 
 
     </form>
-      );
+  );
 }
 
 
-      export default Signup;
+export default Signup;

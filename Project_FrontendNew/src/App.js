@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Signin from "./Views/SigninPage/Signin";
-import Hello from './Views/HelloPage/Hello';
-import Signup from "./Views/SignupPage/Signup";
-import Theam from "./Pages/Theam/Theam";
+// import Signin from "./Views/SigninPage/Signin";
+// import Hello from './Views/HelloPage/Hello';
+// import Signup from "./Views/SignupPage/Signup";
+import Manager from "./Page/Manager/Manager"
+// import Tester from "./Page/tester/Tester"
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
         : <Signin />
       } */}
       {/* <Signup/> */}
-      <Theam/>
+      <Manager/>
 
     </div>
   )

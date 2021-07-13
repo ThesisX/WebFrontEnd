@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios'
+import qs from 'qs';
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -16,12 +20,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-
-import axios from 'axios'
-import qs from 'qs';
-
-
-
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -33,18 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Singin = () => {
-
+const Singin = ({setToken}) => {
+  const classes = useStyles();
+  let BASE_URL = "http://127.0.0.1:8000"
   let [Username, setUsername] = useState("sathaphornma")
   let [Password, setPassword] = useState("string")
-
-  let BASE_URL = "http://127.0.0.1:8000"
-
-  const classes = useStyles();
-
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   
-
   const handleChange = (event) => {
     setPassword(event.target.value)
   };
@@ -77,18 +70,10 @@ const Singin = () => {
     await axios(options)
       .then(res => {
         console.log(res)
-        // console.log(res.data)
+        // console.log(res.data.access_token)
+        setToken(res.data.access_token)
       });
-
-    // await axios.get(BASE_URL + '/users/info')
-    //   .then(res => {
-    //     console.log("user : " + res)
-    //     // console.log(res.data)
-    // });
-
   }
-
-  console.log(showPassword)
   return (
 
     <form onSubmit={handleSignin}>
@@ -101,7 +86,7 @@ const Singin = () => {
           <Grid item >
             <TextField
               id="input-with-icon-grid"
-              label="USER"
+              label="ชิ่อผู้เข้าใช้งาน"
               onChange={(e) =>
                 setUsername(e.target.value)}
               value={Username}
@@ -114,7 +99,7 @@ const Singin = () => {
           <Grid item><AccountCircle /></Grid>
           <Grid item >
           <FormControl className={clsx(classes.margin, classes.textField)}>
-          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+          <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
           <Input
             id="standard-adornment-password"
             type={showPassword ? 'text' : 'password'}
@@ -123,7 +108,7 @@ const Singin = () => {
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label="สลับการมองเห็นรหัสผ่าน"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                 >
@@ -139,11 +124,15 @@ const Singin = () => {
         </Grid>
 
         <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
-          Submit
+          เข้าสู่ระบบ
         </Button>
       </div>
     </form>
   );
+}
+
+Singin.propTypes = {
+  setToken: PropTypes.func.isRequired
 }
 
 export default Singin;

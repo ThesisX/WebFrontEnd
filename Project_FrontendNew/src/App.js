@@ -1,23 +1,27 @@
-import React, { useState } from "react";
-// import Signin from "./Views/SigninPage/Signin";
-// import Hello from './Views/HelloPage/Hello';
-// import Signup from "./Views/SignupPage/Signup";
-import Manager from "./Page/Manager/Manager"
-import Tester from "./Page/tester/Tester"
+import React from "react";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-function App() {
+import useToken from './useToken';
+import Signin from "./Views/SigninPage/Signin";
+import Hello from './Views/HelloPage/Hello';
 
-  const [UserSignin, setUserSignin] = useState(false)
-  
+const App = () => {
+  const { token, setToken } = useToken();
+  console.log("My Token : " + token)
+
+  if (!token) {
+    return <Signin setToken={setToken} />
+  }
+
   return (
-    <div>
-      {/* {UserSignin ?
-        <Hello />
-        : <Signin />
-      } */}
-      {/* <Signup/> */}
-      <Manager/>
-    </div>
+    <BrowserRouter>
+      <h1>Application</h1>
+      <Switch>
+        <Route exact path="/">
+          <Hello />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   )
 }
 

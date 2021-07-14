@@ -9,17 +9,20 @@ import {
 
 import Signin from "./SigninPage/Signin";
 import Signup from "./SignupPage/Signup";
+import TabbarPublic from "./Tabbar/TabbarPublic";
 
 const RoutesPublic = () => {
   return (
     <BrowserRouter>
     <div>
-      <nav>
+      {/* <nav>
         <ul>
           <li><Link to="/">เข้าสู่ระบบ</Link></li>
           <li><Link to="/sign-up">สมัครสมาชิก</Link></li>
         </ul>
-      </nav>
+      </nav> */}
+      <TabbarPublic/>
+
       <Publics />
     </div>
     </BrowserRouter>

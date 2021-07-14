@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios'
 import qs from 'qs';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Singin = () => {
+const Singin = ({setToken}) => {
   const classes = useStyles();
   let BASE_URL = "http://127.0.0.1:8000"
   let [Username, setUsername] = useState("sathaphornma")
@@ -71,8 +71,8 @@ const Singin = () => {
       .then(res => {
         // console.log(res)
         // console.log(res.data.access_token)
-        // setToken(res.data.access_token)
         Cookies.set("token", res.data.access_token);
+        // setToken(res.data.access_token)
         window.location.reload();
       });
   }

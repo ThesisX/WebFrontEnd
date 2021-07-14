@@ -1,5 +1,6 @@
 import React from 'react'
 import Cookies from 'js-cookie'
+import Button from '@material-ui/core/Button';
 
 import {
     BrowserRouter,
@@ -9,12 +10,13 @@ import {
 } from "react-router-dom";
 
 import Dashboard from './Dashboard/Dashboard';
+import System from './SystemPage/System';
 
 const RoutesPrivate = () => {
 
     const handleSignout = () => {
         Cookies.remove("token");
-        window.location.reload();
+        window.location = '/';
     }
 
     return (
@@ -24,13 +26,14 @@ const RoutesPrivate = () => {
                     <nav>
                         <ul>
                             <li><Link to="/">หน้าแรก</Link></li>
-                            <li><Link to="/systems">ระบบตรวจข้อสอบ</Link></li>
+                            <li><Link to="/system">ระบบตรวจข้อสอบ</Link></li>
                         </ul>
                     </nav>
+                    <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
+
                     <Privates />
                 </div>
             </BrowserRouter>
-            <button onClick={handleSignout}>ออกจากระบบ</button>
         </div>
     )
 }
@@ -42,14 +45,12 @@ const Privates = () => {
                 <Route exact path="/">
                     <Dashboard />
                 </Route>
-                <Route path="/systems">
-                    <Systems />
+                <Route path="/system">
+                    <System />
                 </Route>
             </Switch>
         </div>
     );
 }
-
-const Systems = () => <div><h2>System page</h2></div>
 
 export default RoutesPrivate;

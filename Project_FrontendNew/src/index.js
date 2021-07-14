@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Appbar from './Components/Appbar/MyAppBar'
-import Tabbar from './Components/Tabbar/Tabbar'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Tabbar />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

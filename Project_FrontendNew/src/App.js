@@ -43,8 +43,7 @@ const App = () => {
     <AuthApi.Provider value={{ auth, setAuth }}>
       <TokenApi.Provider value={{ token, setToken }}>
         <Router>
-          <div>
-            <nav>
+            {/* <nav>
               <ul>
                 {!auth ? (
                   <li>
@@ -61,12 +60,10 @@ const App = () => {
                 </li>
               </ul>
             </nav>
-            <Routes />
-          </div>
+            <Routes /> */}
         </Router>
       </TokenApi.Provider>
     </AuthApi.Provider>
-    // <MyAppBar/>
   )
 }
 

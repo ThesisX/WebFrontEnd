@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Appbar from './Components/Appbar/MyAppBar'
-import Tabbar from './Components/Tabbar/Tabbar'
+import Singin from './Public/SigninPage/Signin';
+import TabbarPublic from './Public/Tabbar/TabbarPublic'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Tabbar />
+    {/* <Singin /> */}
+    <TabbarPublic/>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -16,7 +16,9 @@ const Dashboard = () => {
             .get(BASE_URL + '/users/info', { headers })
             .then(res => {
                 let info = res.data;
+                console.log(info)
                 setData(info)
+                Cookies.set("uid", info.id)
             });
 
     }

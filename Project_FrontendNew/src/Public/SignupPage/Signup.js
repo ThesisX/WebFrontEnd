@@ -10,36 +10,36 @@ import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// import FormHelperText from '@material-ui/core/FormHelperText';
 import { green } from '@material-ui/core/colors';
 import axios from 'axios'
-import qs from 'qs';
+// import qs from 'qs';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
-const CssTextField = withStyles({
-  root: {
-    '& label.Mui-focused': {
-      color: 'green',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'red',
-      },
-      '&:hover fieldset': {
-        borderColor: 'yellow',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'green',
-      },
-    },
-  },
-})(TextField);
+// const CssTextField = withStyles({
+//   root: {
+//     '& label.Mui-focused': {
+//       color: 'green',
+//     },
+//     '& .MuiInput-underline:after': {
+//       borderBottomColor: 'green',
+//     },
+//     '& .MuiOutlinedInput-root': {
+//       '& fieldset': {
+//         borderColor: 'red',
+//       },
+//       '&:hover fieldset': {
+//         borderColor: 'yellow',
+//       },
+//       '&.Mui-focused fieldset': {
+//         borderColor: 'green',
+//       },
+//     },
+//   },
+// })(TextField);
 
 
 // user pass mail name lname
@@ -47,7 +47,7 @@ const CssTextField = withStyles({
 
 const Signup = () => {
 
-  const [data, setData] = useState({})
+  // const [data, setData] = useState({})
 
   let [User, setUser] = useState("")
   let [Password, setPassword] = useState("")
@@ -55,7 +55,7 @@ const Signup = () => {
   let [Name, setName] = useState("")
   let [Lname, setLname] = useState("")
   let [Schollname, setSchollname] = useState("")
-  let [Province, setProvince] = useState("")
+  // let [Province, setProvince] = useState("")
 
 
 
@@ -116,30 +116,30 @@ const Signup = () => {
     },
   }))(InputBase);
 
-  const useStylesReddit = makeStyles((theme) => ({
-    root: {
-      border: '1px solid #e2e2e1',
-      overflow: 'hidden',
-      borderRadius: 4,
-      backgroundColor: '#fcfcfb',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      '&:hover': {
-        backgroundColor: '#fff',
-      },
-      '&$focused': {
-        backgroundColor: '#fff',
-        boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
-        borderColor: theme.palette.primary.main,
-      },
-    },
-    focused: {},
-  }));
+  // const useStylesReddit = makeStyles((theme) => ({
+  //   root: {
+  //     border: '1px solid #e2e2e1',
+  //     overflow: 'hidden',
+  //     borderRadius: 4,
+  //     backgroundColor: '#fcfcfb',
+  //     transition: theme.transitions.create(['border-color', 'box-shadow']),
+  //     '&:hover': {
+  //       backgroundColor: '#fff',
+  //     },
+  //     '&$focused': {
+  //       backgroundColor: '#fff',
+  //       boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
+  //       borderColor: theme.palette.primary.main,
+  //     },
+  //   },
+  //   focused: {},
+  // }));
 
-  function RedditTextField(props) {
-    const classes = useStylesReddit();
+  // function RedditTextField(props) {
+  //   const classes = useStylesReddit();
 
-    return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
-  }
+  //   return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
+  // }
 
   const useStyles = makeStyles((theme) => ({
     root: {

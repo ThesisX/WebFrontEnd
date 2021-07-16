@@ -2,11 +2,19 @@ import React, { useState } from 'react'
 
 import { DropzoneArea } from 'material-ui-dropzone'
 
-const Answer = () => {
-    const [files, setFiles] = useState()
+const Answer = ({stepAns}) => {
+    const [files, setFiles] = useState([])
 
-    console.log(files)
+    // console.log(files)
+    // console.log(files.length)
 
+    if(files.length > 0){
+        stepAns(true)
+        console.log("files ans:", true)
+    }else{
+        stepAns(false)
+        console.log("files ans:", false)
+    }
     return (
         <div>
             <DropzoneArea

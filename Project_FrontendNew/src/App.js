@@ -8,13 +8,13 @@ import RoutesPrivate from "./Private/RoutesPrivate";
 
 const App = () => {
   const [auth, setAuth] = useState(false);
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
 
   const readCookie = () => {
     let tokenCookies = Cookies.get("token");
     if (tokenCookies) {
       setAuth(true);
-      setToken(tokenCookies);
+      // setToken(tokenCookies);
     }
   };
 

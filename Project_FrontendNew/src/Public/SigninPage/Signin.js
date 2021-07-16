@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios'
 import qs from 'qs';
 import Cookies from 'js-cookie';
+import Container from '@material-ui/core/Container';
+
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +14,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+// import { Link } from "react-router-dom";
+
 
 // import Alert from '@material-ui/lab/Alert';
 
@@ -22,13 +26,41 @@ import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
-    marginTop: '10px',
+    width: '380px',
+    // height: '200',
+    // margin: theme.spacing(1),
+    // marginTop: '100px',
+    marginLeft: '230px',
+    margin: '140px',
+    backgroundColor: '#fce4ec',
+    contrastText: '#000',
+    borderRadius: 15,
+    padding: '0 60px',
+    paddingLeft: '90px',
+    paddingTop: '50px',
+    boxShadow: '10px 7px 14px 8px rgba(255, 175, 145, .6)',
+
+    // paddingTop: '70px',
   },
   button: {
-    margin: '30px',
+    margin: '50px',
 
   },
+  password: {
+    marginTop: '20px',
+  },
+  form: {
+    width: '1000px',
+    backgroundColor: '#fffcdc',
+    transparency: '20%',
+    height: '600px',
+    margin: '80px',
+    marginLeft: '420px',
+    padding: '80px',
+    borderRadius: 15,
+
+  }
+
 }));
 
 const Singin = ({setToken}) => {
@@ -78,17 +110,17 @@ const Singin = ({setToken}) => {
   }
   return (
 
-    <form onSubmit={handleSignin}>
+    <form className={classes.form} onSubmit={handleSignin}>
       {/* <Alert severity="error">This is an error alert — check it out!</Alert> */}
-      <div className={classes.margin}>
+      <div className={classes.margin} >
 
         {/* Username Input */}
         <Grid container spacing={3} alignItems="flex-end">
           <Grid item><AccountCircle /></Grid>
           <Grid item >
-            <TextField
+            <TextField 
               id="input-with-icon-grid"
-              label="ชิ่อผู้เข้าใช้งาน"
+              label="ชื่อผู้เข้าใช้งาน"
               onChange={(e) =>
                 setUsername(e.target.value)}
               value={Username}
@@ -97,10 +129,9 @@ const Singin = ({setToken}) => {
         </Grid>
 
         {/* Password Input */}
-        <Grid container spacing={2} alignItems="flex-end">
+        <Grid className={classes.password} container spacing={3} alignItems="flex-end">
           <Grid item><AccountCircle /></Grid>
           <Grid item >
-          <FormControl className={clsx(classes.margin, classes.textField)}>
           <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
           <Input
             id="standard-adornment-password"
@@ -119,18 +150,14 @@ const Singin = ({setToken}) => {
               </InputAdornment>
             }
           />
-        </FormControl>
-            
-
           </Grid>
         </Grid>
-
         <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
           เข้าสู่ระบบ
         </Button>
       </div>
     </form>
-  );
+    );
 }
 
 export default Singin;

@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,12 +12,16 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Switch,
   Route,
   Link,
 } from "react-router-dom";
+import RoutesPublic from '../RoutesPublic';
+import Singin from '../SigninPage/Signin';
+import Signup from '../SignupPage/Signup';
 
 const useStyles = makeStyles({
   root: {
@@ -36,6 +39,8 @@ const useStyles = makeStyles({
   }
 });
 
+
+
 export default function IconLabelTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -45,7 +50,8 @@ export default function IconLabelTabs() {
   };
 
   return (
-    <BrowserRouter>
+    <Router>
+{/* <BrowserRouter>     */}
       <div>
         <Container className={classes.container} >
           {/* <AppBar position="fixed"> */}
@@ -68,19 +74,26 @@ export default function IconLabelTabs() {
                 textColor="secondary"
                 aria-label="icon label tabs example"
               >
-                <Tab icon={<FavoriteIcon />} label="LOGIN" />
+              {/* <Button variant="outlined" color="secondary">
+                 Secondary
+              </Button> */}
 
+                <Tab icon={<FavoriteIcon />} label="LOGIN" >
+                <Link to="/sign-up"></Link>
+                </Tab>
 
                 <Tab icon={<PersonPinIcon />} label="SINGIN" >
-                  <Link to="/sign-in">hi</Link>
+                  <Link to="/">HI</Link>
                 </Tab>
+
               </Tabs>
-            </Paper>
+             </Paper>
           </center>
           </div>
-          <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '70vh' }} />
+          {/* <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '70vh' }} /> */}
         </Container>
       </div >
-    </BrowserRouter>
+    {/* </BrowserRouter> */}
+   </Router>
   );
 }

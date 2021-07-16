@@ -1,4 +1,8 @@
 import React from "react";
+import Tab from '@material-ui/core/Tab';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Button from '@material-ui/core/Button';
+
 
 import {
   BrowserRouter,
@@ -9,7 +13,7 @@ import {
 
 import Signin from "./SigninPage/Signin";
 import Signup from "./SignupPage/Signup";
-// import TabbarPublic from "./Tabbar/TabbarPublic";
+import TabbarPublic from "./Tabbar/TabbarPublic";
 
 const RoutesPublic = () => {
   return (
@@ -17,14 +21,15 @@ const RoutesPublic = () => {
     <div>
       <nav>
         <ul>
+       
           <li><Link to="/">เข้าสู่ระบบ</Link></li>
-          <li><Link to="/sign-up">สมัครสมาชิก</Link></li>
+          <Button variant="outlined" color="secondary"><Link to="/sign-up">สมัครสมาชิก</Link></Button>
         </ul>
-      </nav>
-      {/* <TabbarPublic/> */}
+      </nav> 
 
-      <Publics />
+       <Publics />
     </div>
+      {/* <TabbarPublic/> */}
     </BrowserRouter>
   );
 };

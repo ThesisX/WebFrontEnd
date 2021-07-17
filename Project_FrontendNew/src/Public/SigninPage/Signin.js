@@ -26,38 +26,43 @@ import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    width: '380px',
+   
+     display: 'auto',
+    // width: '380px',
     // height: '200',
     // margin: theme.spacing(1),
-    // marginTop: '100px',
-    marginLeft: '230px',
-    margin: '140px',
+    // marginTop: '180px',
+    // marginLeft: '230px',
+    margin: '70px',
     backgroundColor: '#fce4ec',
     contrastText: '#000',
     borderRadius: 15,
-    padding: '0 60px',
-    paddingLeft: '90px',
-    paddingTop: '50px',
+    padding: '70px',
+    // paddingLeft: '150px',
+    // paddingTop: '60px',
     boxShadow: '10px 7px 14px 8px rgba(255, 175, 145, .6)',
-
-    // paddingTop: '70px',
   },
   button: {
     margin: '50px',
 
   },
   password: {
-    marginTop: '20px',
+    marginTop: '50px',
   },
-  form: {
-    width: '1000px',
-    backgroundColor: '#fffcdc',
-    transparency: '20%',
-    height: '600px',
-    margin: '80px',
-    marginLeft: '420px',
-    padding: '80px',
-    borderRadius: 15,
+  user: {
+    marginTop: '15px',
+  },
+   form: {
+    //  display: 'flexGrow',
+    // float: 'display',
+    // backgroundColor: '#fffcdc',
+    // transparency: '20%',
+    //  height: '700px',
+      width: '650px',
+    // margin: '80px',
+    // marginLeft: '380px',
+    // padding: '80px',
+    // borderRadius: 15,
 
   }
 
@@ -110,14 +115,14 @@ const Singin = ({setToken}) => {
   }
   return (
 
-    <form className={classes.form} onSubmit={handleSignin}>
+    <Container  alignItems="center"  className={classes.form} onSubmit={handleSignin}>
       {/* <Alert severity="error">This is an error alert — check it out!</Alert> */}
       <div className={classes.margin} >
 
         {/* Username Input */}
-        <Grid container spacing={3} alignItems="flex-end">
-          <Grid item><AccountCircle /></Grid>
-          <Grid item >
+        <Grid  className={classes.user} spacing={3} alignItems="flex-end" >
+          <Grid className={classes.icon} ><AccountCircle /></Grid>
+          <Grid >
             <TextField 
               id="input-with-icon-grid"
               label="ชื่อผู้เข้าใช้งาน"
@@ -129,9 +134,9 @@ const Singin = ({setToken}) => {
         </Grid>
 
         {/* Password Input */}
-        <Grid className={classes.password} container spacing={3} alignItems="flex-end">
-          <Grid item><AccountCircle /></Grid>
-          <Grid item >
+        <Grid className={classes.password} spacing={3} alignItems="flex-end">
+          <Grid className={classes.icon} ><AccountCircle /></Grid>
+          <Grid  >
           <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
           <Input
             id="standard-adornment-password"
@@ -156,7 +161,7 @@ const Singin = ({setToken}) => {
           เข้าสู่ระบบ
         </Button>
       </div>
-    </form>
+    </Container>
     );
 }
 

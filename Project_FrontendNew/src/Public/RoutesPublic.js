@@ -18,17 +18,17 @@ import TabbarPublic from "./Tabbar/TabbarPublic";
 const RoutesPublic = () => {
   return (
     <BrowserRouter>
-    <div>
-      <nav>
-        <ul>
-       
-          <li><Link to="/">เข้าสู่ระบบ</Link></li>
-          <Button variant="outlined" color="secondary"><Link to="/sign-up">สมัครสมาชิก</Link></Button>
-        </ul>
-      </nav> 
+      <div>
+        <nav>
+          <ul>
 
-       <Publics />
-    </div>
+            <li><Link to="/">เข้าสู่ระบบ</Link></li>
+            <Button variant="outlined" color="secondary"><Link to="/sign-up">สมัครสมาชิก</Link></Button>
+          </ul>
+        </nav>
+
+        <Publics />
+      </div>
       {/* <TabbarPublic/> */}
     </BrowserRouter>
   );
@@ -48,60 +48,5 @@ const Publics = () => {
     </div>
   );
 }
-
-
-
-// const Home = ({AuthApi, TokenApi}) => {
-//   const [data, setData] = useState("");
-//   const Auth = useContext(AuthApi);
-//   const Token = useContext(TokenApi);
-
-//   const handleonclick = () => {
-//     Auth.setAuth(false);
-//     Cookies.remove("token");
-//   };
-//   let toke = Token.token;
-//   const headers = {
-//     Authorization: `Bearer ${toke}`,
-//   };
-//   const getdata = async () => {
-//     let res = await axios
-//       .get("http://127.0.0.1:8000/", { headers })
-//       .then((response) => {
-//         return response.data.data;
-//       });
-//     return res;
-//   };
-//   useEffect(async () => {
-//     let x = await getdata();
-//     setData(x);
-//     console.log(x);
-//   }, []);
-//   return (
-//     <div>
-//       <h2>Home</h2>
-//       <button onClick={handleonclick}>Logout</button>
-//       <h1>{data}</h1>
-//     </div>
-//   );
-// };
-
-// const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
-//   return (
-//     <Route
-//       {...rest}
-//       render={() => (auth ? <Component /> : <Redirect to="/sign-in" />)}
-//     />
-//   );
-// };
-
-// const ProtectedLogin = ({ auth, component: Component, ...rest }) => {
-//   return (
-//     <Route
-//       {...rest}
-//       render={() => (!auth ? <Component /> : <Redirect to="/" />)}
-//     />
-//   );
-// };
 
 export default RoutesPublic

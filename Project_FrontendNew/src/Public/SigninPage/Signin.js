@@ -152,7 +152,7 @@ const Singin = ({setToken}) => {
           />
           </Grid>
         </Grid>
-        <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
+        <Button className={classes.button} type="submit" variant="outlined" color="secondary">
           เข้าสู่ระบบ
         </Button>
       </div>

@@ -12,8 +12,14 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
+    container: {
+        padding: 50,
+    },
     root: {
         width: '100%',
     },
@@ -31,17 +37,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getSteps = () => {
-    return ['สร้างรายวิชา', 'อัปโหลดเฉลยข้อสอบ', 'อัปโหลดกระดาษคำตอบ', 'ตรวจข้อสอบ'];
+    return ['อัปโหลดเฉลยข้อสอบ', 'อัปโหลดกระดาษคำตอบ', 'ตรวจข้อสอบ'];
 }
 
 const System = () => {
-    let uid = Cookies.get('uid');
-    let n = new Date();
-    let t = n.getTime();
-    let sname = `A-${uid}-${t}`;
+
     const [activeStep, setActiveStep] = useState(0);
     const [stepStatus, setStepStatus] = useState(false);
-    const [SubjectName, setSubjectName] = useState(sname)
+    const [activate, setActivate] = useState(false)
+    const [ansfile, setAnsfile] = useState([])
+    const [examfile, setExamfile] = useState([])
+
     const classes = useStyles();
     const steps = getSteps();
 
@@ -65,10 +71,14 @@ const System = () => {
         setStepStatus(status);
     };
 
+    const StorageAns = ([files]) => {
+        setAnsfile([files]);
+    }
+
     const getStepContent = (stepIndex) => {
         switch (stepIndex) {
             case 0:
-                return <Answer stepAns={stepAns} />;
+                return <Answer stepAns={stepAns} StorageAns={StorageAns} ansfile={ansfile}/>;
             case 1:
                 return <Exams stepExam={stepExam} />;
             case 2:
@@ -78,68 +88,59 @@ const System = () => {
         }
     }
 
-    // console.log("stepStatus : ", stepStatus);
-
-    const handlegetSubjectname = sname => {
-        setSubjectName(sname)
-
-        return SubjectName
+    const getActivate = (status) => {
+        // console.log('status ', status);
+        setActivate(status)
     }
 
+    // console.log("activate : ", activate);
     return (
-        <div className={classes.root}>
-            <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-            <div>
-                <TextField
-                    className={classes.SubjectInput}
-                    id="filled-read-only-input"
-                    label="ชื่อรายวิชา"
-                    defaultValue={SubjectName}
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                    variant="filled"
-                />
-                <Subjects getSubjectName={handlegetSubjectname} />
-            </div>
-            <div>
-                {activeStep === steps.length ? (
+        <Paper className={classes.container}>
+            <div className={classes.root}>
+                <Subjects getActivate={getActivate} />
+                {activate ? (
                     <div>
-                        <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
-                    </div>
-                ) : (
-                    <div>
-                        <Typography className={classes.instructions}>
-                            {getStepContent(activeStep)}
-                        </Typography>
+                    <Stepper activeStep={activeStep} alternativeLabel>
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+            
+                    {activeStep === steps.length ? (
                         <div>
-                            <Button
-                                disabled={activeStep === 0}
-                                onClick={handleBack}
-                                className={classes.backButton}
-                            >
-                                ย้อนกลับ
-                            </Button>
-                            <Button
-                                disabled={stepStatus === false}
-                                variant="contained"
-                                color="primary"
-                                onClick={handleNext}
-                            >
-                                {activeStep === steps.length - 1 ? 'ดาวน์โหลด' : 'ถัดไป'}
-                            </Button>
+                            <Typography className={classes.instructions}>All steps completed</Typography>
+                            <Button onClick={handleReset}>Reset</Button>
                         </div>
-                    </div>
-                )}
+                    ) : (
+                        <div>
+                            <Typography className={classes.instructions}>
+                                {getStepContent(activeStep)}
+                            </Typography>
+                            <div>
+                                <Button
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                    className={classes.backButton}
+                                >
+                                    ย้อนกลับ
+                                </Button>
+                                <Button
+                                    disabled={stepStatus === false}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleNext}
+                                >
+                                    {activeStep === steps.length - 1 ? 'ดาวน์โหลด' : 'ถัดไป'}
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+                ) : (<div></div>)}
             </div>
-        </div>
+        </Paper >
     )
 }
 

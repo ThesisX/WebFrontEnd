@@ -26,8 +26,8 @@ import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-   
-     display: 'auto',
+
+    display: 'auto',
     // width: '380px',
     // height: '200',
     // margin: theme.spacing(1),
@@ -52,13 +52,13 @@ const useStyles = makeStyles((theme) => ({
   user: {
     marginTop: '15px',
   },
-   form: {
+  form: {
     //  display: 'flexGrow',
     // float: 'display',
     // backgroundColor: '#fffcdc',
     // transparency: '20%',
     //  height: '700px',
-      width: '650px',
+    width: '650px',
     // margin: '80px',
     // marginLeft: '380px',
     // padding: '80px',
@@ -68,13 +68,13 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Singin = ({setToken}) => {
+const Singin = ({ setToken }) => {
   const classes = useStyles();
   let BASE_URL = "http://127.0.0.1:8000"
   let [Username, setUsername] = useState("sathaphornma")
   let [Password, setPassword] = useState("string")
   const [showPassword, setShowPassword] = useState(false);
-  
+
   const handleChange = (event) => {
     setPassword(event.target.value)
   };
@@ -103,6 +103,7 @@ const Singin = ({setToken}) => {
       url: BASE_URL + '/token',
     };
 
+    console.log("log");
 
     await axios(options)
       .then(res => {
@@ -115,54 +116,52 @@ const Singin = ({setToken}) => {
   }
   return (
 
-    <Container  alignItems="center"  className={classes.form} onSubmit={handleSignin}>
-      {/* <Alert severity="error">This is an error alert — check it out!</Alert> */}
+    <Container alignItems="center" className={classes.form} >
       <div className={classes.margin} >
-
-        {/* Username Input */}
-        <Grid  className={classes.user} spacing={3} alignItems="flex-end" >
-          <Grid className={classes.icon} ><AccountCircle /></Grid>
-          <Grid >
-            <TextField 
-              id="input-with-icon-grid"
-              label="ชื่อผู้เข้าใช้งาน"
-              onChange={(e) =>
-                setUsername(e.target.value)}
-              value={Username}
-            />
+          {/* Username Input */}
+          <Grid className={classes.user} spacing={3} alignItems="flex-end" >
+            <Grid className={classes.icon} ><AccountCircle /></Grid>
+            <Grid >
+              <TextField
+                id="input-with-icon-grid"
+                label="ชื่อผู้เข้าใช้งาน"
+                onChange={(e) =>
+                  setUsername(e.target.value)}
+                value={Username}
+              />
+            </Grid>
           </Grid>
-        </Grid>
 
-        {/* Password Input */}
-        <Grid className={classes.password} spacing={3} alignItems="flex-end">
-          <Grid className={classes.icon} ><AccountCircle /></Grid>
-          <Grid  >
-          <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
-          <Input
-            id="standard-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            value={Password}
-            onChange={handleChange}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="สลับการมองเห็นรหัสผ่าน"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
+          {/* Password Input */}
+          <Grid className={classes.password} spacing={3} alignItems="flex-end">
+            <Grid className={classes.icon} ><AccountCircle /></Grid>
+            <Grid  >
+              <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
+              <Input
+                id="standard-adornment-password"
+                type={showPassword ? 'text' : 'password'}
+                value={Password}
+                onChange={handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="สลับการมองเห็นรหัสผ่าน"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </Grid>
           </Grid>
-        </Grid>
-        <Button className={classes.button} type="submit" variant="outlined" color="secondary">
-          เข้าสู่ระบบ
-        </Button>
+          <Button className={classes.button} type="button" onClick={handleSignin} variant="outlined" color="secondary">
+            เข้าสู่ระบบ
+          </Button>
       </div>
     </Container>
-    );
+  );
 }
 
 export default Singin;

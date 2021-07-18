@@ -3,6 +3,7 @@ import Answer from './Answer';
 import Exams from './Exams';
 import Result from './Result';
 import Subjects from './Subjects';
+import Datastudents from './Datastudents';
 import Cookies from 'js-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,13 +16,16 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
 import axios from 'axios';
+import { Divider, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-        padding: 50,
-    },
     root: {
-        width: '100%',
+        // padding: 50,
+        // width: '100%',
+        flexGrow: 1,
+    },
+    paper: {
+        padding: 50,
     },
     backButton: {
         marginRight: theme.spacing(1),
@@ -34,17 +38,20 @@ const useStyles = makeStyles((theme) => ({
         width: '20%',
         float: 'left',
     },
+    step: {
+        marginRight: 0,
+    }
 }));
 
 const getSteps = () => {
-    return ['อัปโหลดเฉลยข้อสอบ', 'อัปโหลดกระดาษคำตอบ', 'ตรวจข้อสอบ'];
+    return ['อัปโหลดข้อมูลผู้เข้าสอบ', 'อัปโหลดเฉลยข้อสอบ', 'อัปโหลดกระดาษคำตอบ', 'ตรวจข้อสอบ'];
 }
 
 const System = () => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [stepStatus, setStepStatus] = useState(false);
-    const [activate, setActivate] = useState(false)
+    const [activate, setActivate] = useState(true)
     const [ansfile, setAnsfile] = useState([])
     const [examfile, setExamfile] = useState([])
 
@@ -59,29 +66,15 @@ const System = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
-    const stepAns = (status) => {
-        setStepStatus(status);
-    };
-
-    const stepExam = (status) => {
-        setStepStatus(status);
-    };
-
-    const StorageAns = ([files]) => {
-        setAnsfile([files]);
-    }
-
     const getStepContent = (stepIndex) => {
         switch (stepIndex) {
             case 0:
-                return <Answer stepAns={stepAns} StorageAns={StorageAns} ansfile={ansfile}/>;
+                return <Datastudents stepData={(s) => setStepStatus(s)} />;
             case 1:
-                return <Exams stepExam={stepExam} />;
+                return <Answer stepAns={(s) => setStepStatus(s)} />;
             case 2:
+                return <Exams stepExam={(s) => setStepStatus(s)} />;
+            case 3:
                 return <Result />;
             default:
                 return '';
@@ -95,52 +88,65 @@ const System = () => {
 
     // console.log("activate : ", activate);
     return (
-        <Paper className={classes.container}>
-            <div className={classes.root}>
-                <Subjects getActivate={getActivate} />
-                {activate ? (
-                    <div>
-                    <Stepper activeStep={activeStep} alternativeLabel>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-            
-                    {activeStep === steps.length ? (
-                        <div>
-                            <Typography className={classes.instructions}>All steps completed</Typography>
-                            <Button onClick={handleReset}>Reset</Button>
-                        </div>
-                    ) : (
-                        <div>
-                            <Typography className={classes.instructions}>
-                                {getStepContent(activeStep)}
-                            </Typography>
+        <div className={classes.root}>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <Paper className={classes.paper}>
+                        {/* Subject name and Subject group. */}
+                        <Grid item xs={12}>
+                            <Subjects getActivate={getActivate} />
+                            {/* <Divider light/> */}
+                        </Grid>
+
+                        {/* Systems */}
+                        {activate ? (
                             <div>
-                                <Button
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
-                                    className={classes.backButton}
-                                >
-                                    ย้อนกลับ
-                                </Button>
-                                <Button
-                                    disabled={stepStatus === false}
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleNext}
-                                >
-                                    {activeStep === steps.length - 1 ? 'ดาวน์โหลด' : 'ถัดไป'}
-                                </Button>
+                                <Grid item xs={12}>
+                                    <Stepper activeStep={activeStep} alternativeLabel>
+                                        {steps.map((label) => (
+                                            <Step key={label}>
+                                                <StepLabel>{label}</StepLabel>
+                                            </Step>
+                                        ))}
+                                    </Stepper>
+                                </Grid>
+                                {activeStep === steps.length ? (
+                                    <Grid item xs={12}>
+                                        <Typography className={classes.instructions}>All steps completed</Typography>
+                                        <Button onClick={() => setActiveStep(0)}>Reset</Button>
+                                    </Grid>
+                                ) : (
+                                    <Grid item xs={12}>
+                                        <Grid item xs={12}>
+                                            <Typography className={classes.instructions}>
+                                                {getStepContent(activeStep)}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} className={classes.step}>
+                                            <Button
+                                                disabled={activeStep === 0}
+                                                onClick={handleBack}
+                                                className={classes.backButton}
+                                            >
+                                                ย้อนกลับ
+                                            </Button>
+                                            <Button
+                                                disabled={stepStatus === false}
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={handleNext}
+                                            >
+                                                {activeStep === steps.length - 1 ? 'ดาวน์โหลด' : 'ถัดไป'}
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                )}
                             </div>
-                        </div>
-                    )}
-                </div>
-                ) : (<div></div>)}
-            </div>
-        </Paper >
+                        ) : (<div></div>)}
+                    </Paper >
+                </Grid>
+            </Grid>
+        </div>
     )
 }
 

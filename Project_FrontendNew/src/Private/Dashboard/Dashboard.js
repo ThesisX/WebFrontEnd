@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Cookies from "js-cookie";
+import { BASE_URL } from '../../service';
 
 const Dashboard = () => {
     const [data, setData] = useState([])
 
-    const BASE_URL = 'http://127.0.0.1:8000';
     let tokenCookies = Cookies.get("token");
 
     const headers = {

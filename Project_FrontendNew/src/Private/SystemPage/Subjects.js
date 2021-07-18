@@ -1,52 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BASE_URL } from '../../service';
+
+import Cookies from 'js-cookie';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Divider from '@material-ui/core/Divider';
-
-import Cookies from 'js-cookie';
-
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    subjectgroup: {
-        width: '100%',
-        margin: '10px',
 
+    Subjects: {
+        marginRight: 10,
+        marginBottom: 10,
     },
-    subjectLabel: {
-        marginRight:10,
-    },
-    
-    subjectInputNameDisabled: {
-        width:'20%',
-    },
-    subjectInputGroupDisabled: {
-        width:'10%',
-    },
-    subjectInputName: {
-        marginRight:20,
-        width: '50%',
-    },
-    subjectInputGroup: {
+    SubjectsDialog: {
+        marginRight: 5,
         width: '40%',
     },
-    subjectSubmit: {
-        marginLeft: '5px',
-        height: '100%',
-    },
-    divider: {
-        marginBottom:20,
-    }
 }));
 
-const Subjects = ({getActivate}) => {
+const Subjects = ({ getActivate }) => {
+    const tokenCookies = Cookies.get("token");
+
     const [open, setOpen] = useState(true);
     const [lableDialog, setLableDialog] = useState("สร้างรายวิชา")
     const [subjectname, setSubjectname] = useState("")
@@ -59,29 +41,29 @@ const Subjects = ({getActivate}) => {
     };
 
     const handleClose = () => {
-        
         let uid = Cookies.get('uid');
         let n = new Date();
         let t = n.getTime();
         let sname = `A-${uid}-${t}`;
 
-        if(subjectname === ""){
+        if (subjectname === "") {
             setSubjectname(sname);
             setSubjectgroup(uid);
             setLableDialog("แก้ไขรายวิชา");
         }
 
         setOpen(false);
+        onSubmit();
     };
 
     const handleChangeSubjectname = (e) => {
         let sname = e.target.value;
         setSubjectname(sname);
 
-        if (sname !== ""){
+        if (sname !== "") {
             setLableDialog("แก้ไขรายวิชา");
         }
-        else{
+        else {
             setLableDialog("สร้างรายวิชา");
         }
     };
@@ -91,40 +73,71 @@ const Subjects = ({getActivate}) => {
         setSubjectgroup(gname);
     }
 
-    if(subjectname && subjectgroup){
+    if (subjectname && subjectgroup) {
         getActivate(true);
     }
 
+    const form_data = {
+        sub_name: subjectname,
+        sub_group: subjectgroup,
+    };
+
+    const options = {
+        method: 'POST',
+        headers: { 
+            'content-type': 'application/json', 
+            'Authorization' : `Bearer ${tokenCookies}`,
+        },
+        data: form_data,
+        url: BASE_URL + '/subjects/create-subject/',
+    };
+
+    const onSubmit = async () => {
+        await axios(options)
+            .then(res => {
+                console.log(res)
+            });
+    }
     return (
-        <div>
-            <div className={classes.subjectgroup}>
-                <Typography className={classes.subjectLabel} variant="subtitle1" component="subtitle1">
-                    <b>ชื่อรายวิชา</b>
-                </Typography>
-                <InputBase
-                    className={classes.subjectInputNameDisabled}
-                    placeholder="วิชาคอมพิวเตอร์"
-                    inputProps={{ 'aria-label': 'วิชาคอมพิวเตอร์' }}
-                    value={subjectname}
-                    disabled
+        <Grid container>
+            <Grid container item xs={12} spacing={3}>
+                <Grid container item xs={12}>
+                    <TextField
+                        type="text"
+                        className={classes.Subjects}
+                        placeholder="วิชาคอมพิวเตอร์"
+                        label="ชื่อรายวิชา"
+                        value={subjectname}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+                        size="small"
 
-                />
-                <Typography className={classes.subjectLabel} variant="subtitle1" component="subtitle1">
-                    <b>กลุ่มที่</b>
-                </Typography>
-                <InputBase
-                    className={classes.subjectInputGroupDisabled}
-                    placeholder="9"
-                    inputProps={{ 'aria-label': '9' }}
-                    value={subjectgroup}
-                    disabled
-
-                />
-                <Button className={classes.subjectSubmit} variant="outlined" size="medium" color="primary" onClick={handleClickOpen}>
-                    {lableDialog}
-                </Button>
-            </div>
-            <Divider light className={classes.divider} />
+                    />
+                    <TextField
+                        type="number"
+                        className={classes.Subjects}
+                        placeholder="9"
+                        label="กลุ่มที่"
+                        value={subjectgroup}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+                        size="small"
+                    />
+                    <Button
+                        className={classes.Subjects}
+                        variant="outlined"
+                        color="primary"
+                        onClick={handleClickOpen}
+                        size="small"
+                    >
+                        {lableDialog}
+                    </Button>
+                </Grid>
+            </Grid>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
                 <DialogContent>
@@ -132,44 +145,37 @@ const Subjects = ({getActivate}) => {
                         คุณสามารถสร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น หากคุณไม่ได้ตั้งชื่อรายวิชาระบบจะทำการตั้งชื่อให้อัตโนมัติ
                     </DialogContentText>
                     <TextField
-                        name="subjectname"
-                        className={classes.subjectInputName}
+                        type="text"
                         autoFocus
-                        margin="dense"
-                        id="name"
+                        type="text"
+                        className={classes.SubjectsDialog}
                         label="ชื่อรายวิชา"
                         placeholder="วิชาคอมพิวเตอร์"
-                        type="text"
                         value={subjectname}
-                        onChange={handleChangeSubjectname}
-                        
                         required
+                        onChange={handleChangeSubjectname}
+
                     />
                     <TextField
-                        name="subjectname"
-                        className={classes.subjectInputGroup}
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="ชื่อกลุ่มวิชา"
+                        type="number"
+                        className={classes.SubjectsDialog}
+                        label="กลุ่ม"
                         placeholder="9"
                         value={subjectgroup}
-                        onChange={handleChangeSubjectgroup}
-                        type="text"
-                        
                         required
+                        onChange={handleChangeSubjectgroup}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         ยกเลิก
                     </Button>
-                    <Button type="submit" color="primary">
+                    <Button type="submit" color="primary" >
                         ยืนยัน
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </Grid>
     );
 }
 

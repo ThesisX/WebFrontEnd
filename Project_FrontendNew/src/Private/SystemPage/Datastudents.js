@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Divider, Paper } from '@material-ui/core';
 import DescriptionIcon from '@material-ui/icons/Description';
-import ImageIcon from '@material-ui/icons/Image';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     filelist: {
@@ -24,30 +24,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Answer = ({ stepAns }) => {
+const Datastudents = ({ stepData }) => {
 
     const classes = useStyles();
     const [files, setFiles] = useState([])
 
     console.log(files)
 
-    const getAvatarType = (file) => {
-        if (file.name.slice(-4) == '.csv') {
-            return <DescriptionIcon />
-        } else {
-            return <ImageIcon />
-        }
-    }
-
     if (files.length > 0) {
-        stepAns(true);
-        console.log("files ans:", true);
+        stepData(true);
+        console.log("files data:", true);
     } else {
-        stepAns(false)
-        console.log("files ans:", false);
+        stepData(false)
+        console.log("files data:", false);
     }
 
-    console.log(files);
+    // useEffect(async()=>{
+    //     await axios.post()
+
+    // },[])
+
+
+
     return (
         <div>
             <Grid container spacing={1}>
@@ -55,11 +53,11 @@ const Answer = ({ stepAns }) => {
                     <DropzoneArea
                         dropzoneText={
                             <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางเฉลยข้อสอบที่นี่ รองรับเฉพาะ .csv .jpg .png
+                                คลิก หรือวางข้อมูลผู้เข้าสอบที่นี่ รองรับเฉพาะ .csv
                             </Typography>
                         }
                         onChange={(file) => setFiles(file)}
-                        acceptedFiles={['image/jpeg', 'image/png', '.csv']}
+                        acceptedFiles={['.csv']}
                         maxFileSize={5000000}
                         alertSnackbarProps={{
                             autoHideDuration: 5000,
@@ -80,7 +78,7 @@ const Answer = ({ stepAns }) => {
                                 <ListItem>
                                     <ListItemAvatar>
                                         <Avatar>
-                                            {getAvatarType(file)}
+                                            <DescriptionIcon />
                                         </Avatar>
                                     </ListItemAvatar>
 
@@ -100,4 +98,4 @@ const Answer = ({ stepAns }) => {
     )
 }
 
-export default Answer
+export default Datastudents

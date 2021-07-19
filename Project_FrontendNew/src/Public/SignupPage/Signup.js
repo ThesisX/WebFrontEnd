@@ -10,13 +10,21 @@ import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+
+
 // import FormHelperText from '@material-ui/core/FormHelperText';
 import { green } from '@material-ui/core/colors';
 import axios from 'axios'
 // import qs from 'qs';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 
 // const CssTextField = withStyles({
@@ -51,16 +59,24 @@ const Signup = () => {
 
   let [User, setUser] = useState("")
   let [Password, setPassword] = useState("")
+  let [ConfirmPassword, setConfirmPassword] = useState("")
   let [Email, setEmail] = useState("")
   let [Name, setName] = useState("")
   let [Lname, setLname] = useState("")
   let [Schollname, setSchollname] = useState("")
   // let [Province, setProvince] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault()
+
 
     let BASE_URL = "http://172.18.41.124:8000"
 
@@ -84,7 +100,10 @@ const Signup = () => {
   const BootstrapInput = withStyles((theme) => ({
     root: {
       'label + &': {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(5),
+        display: 'auto',
+        borderRadius: 15,
+        paddingTop: '270px',
       },
     },
     input: {
@@ -113,6 +132,7 @@ const Signup = () => {
         boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
         borderColor: theme.palette.primary.main,
       },
+
     },
   }))(InputBase);
 
@@ -152,26 +172,35 @@ const Signup = () => {
         borderWidth: 2,
       },
       '& input:valid:focus + fieldset': {
-        borderLeftWidth: 5,
-        padding: '4px !important', // override inline-style
+        borderLeftWidth: 2,
+        padding: '2px !important', // override inline-style
       },
 
       display: 'flex',
       flexWrap: 'wrap',
     },
     margin: {
-      margin: theme.spacing(5),
+      margin: theme.spacing(3),
     },
     formControl: {
-      margin: theme.spacing(5),
+      margin: theme.spacing(3),
 
     },
     button: {
       height: 50,
       margin: theme.spacing(5),
-
-    }
-
+    },
+    divform: {
+      backgroundColor: '#fce4ec',
+      padding: '60px',
+    },
+    formControl: {
+      margin: theme.spacing(3),
+      minWidth: 200,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
 
   }));
 
@@ -228,94 +257,125 @@ const Signup = () => {
   return (
 
 
-    <form className={classes.root} onSubmit={handleSignup}>
 
-      <TextField
-        className={classes.margin}
-        label="USER"
-        required
-        variant="outlined"
-        id="validation-outlined-input"
-        helperText="ERROR"
-        onChange={(e) =>
-          setUser(e.target.value)}
-        value={User} />
-
-      <TextField
-        className={classes.margin}
-        label="PASSWORD"
-        required
-        variant="outlined"
-        id="validation-outlined-input"
-        helperText="ERROR"
-        onChange={(e) =>
-          setPassword(e.target.value)}
-        value={Password} />
-
-      <TextField
-        className={classes.margin}
-        label="EMAIL"
-        required
-        variant="outlined"
-        id="validation-outlined-input"
-        helperText="ERROR"
-        onChange={(e) =>
-          setEmail(e.target.value)}
-        value={Email} />
-
-      <ThemeProvider theme={theme}>
+    <Container alignItems="center" className={classes.root} style={{ height: 'auto', width: '150vh' }}>
+      <div className={classes.divform} >
 
         <TextField
           className={classes.margin}
-          label="NAME"
-          id="mui-theme-provider-standard-input"
+          label="USER"
+          required
+          variant="outlined"
+          id="validation-outlined-input"
+          helperText="ERROR"
           onChange={(e) =>
-            setName(e.target.value)}
-          value={Name} />
+            setUser(e.target.value)}
+          value={User} />
+
+        <TextField
+          className={classes.margin}
+          type={showPassword ? 'text' : 'password'}
+          label="PASSWORD"
+          required
+          variant="outlined"
+          id="validation-outlined-input"
+          helperText="ERROR"
+          onChange={(e) =>
+            setPassword(e.target.value)}
+          value={Password}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="สลับการมองเห็นรหัสผ่าน"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+
+          }
+        />
 
 
         <TextField
           className={classes.margin}
-          label="LAST NAME"
-          id="mui-theme-provider-standard-input"
+          type="password"
+          label="ConfirmPASSWORD"
+          required
+          variant="outlined"
+          id="validation-outlined-input"
+          helperText="ERROR"
           onChange={(e) =>
-            setLname(e.target.value)}
-          value={Lname} /> <br />
+            setConfirmPassword(e.target.value)}
+          value={ConfirmPassword} />
+
 
         <TextField
           className={classes.margin}
-          label="SCHOOL"
-          id="mui-theme-provider-standard-input"
+          type="email"
+          label="EMAIL"
+          required
+          variant="outlined"
+          id="validation-outlined-input"
+          helperText="ERROR"
           onChange={(e) =>
-            setSchollname(e.target.value)}
-          value={Schollname} />
-      </ThemeProvider>
+            setEmail(e.target.value)}
+          value={Email} />
 
-      <FormControl className={classes.margin}>
-        <InputLabel id="demo-customized-select-label" >Province</InputLabel>
-        <Select
-          labelId="demo-customized-select-label"
-          id="demo-customized-select"
-          value=""
-          input={<BootstrapInput />}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+        <ThemeProvider theme={theme}>
+
+          <TextField
+            className={classes.margin}
+            label="NAME"
+            id="mui-theme-provider-standard-input"
+            onChange={(e) =>
+              setName(e.target.value)}
+            value={Name} />
 
 
-      <Button className={classes.button} type="Submit" variant="outlined" color="secondary">
-        Submit
-      </Button>
+          <TextField
+            className={classes.margin}
+            label="LAST NAME"
+            id="mui-theme-provider-standard-input"
+            onChange={(e) =>
+              setLname(e.target.value)}
+            value={Lname} />
+
+          <TextField
+            className={classes.margin}
+            label="SCHOOL"
+            id="mui-theme-provider-standard-input"
+            onChange={(e) =>
+              setSchollname(e.target.value)}
+            value={Schollname} />
+        </ThemeProvider>
+
+        <FormControl variant="standard" className={classes.formControl}>
+          <InputLabel htmlFor="outlined-age-native-simple">province</InputLabel>
+          <Select
+            native
+            label="Age"
+            inputProps={{
+              name: 'age',
+              id: 'outlined-age-native-simple',
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={10}>นครราชสีมา</option>
+            <option value={20}>กรุงเทพ</option>
+            <option value={30}>ภูเก็ต</option>
+          </Select>
+        </FormControl>
 
 
+        <Button className={classes.button} type="Submit" onClick={handleSignup} variant="outlined" color="secondary">
+          Submit
+        </Button>
 
-    </form>
+      </div>
+    </Container>
+
   );
 }
 

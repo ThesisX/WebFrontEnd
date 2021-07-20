@@ -15,7 +15,6 @@ import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Divider, Paper } from '@material-ui/core';
 import DescriptionIcon from '@material-ui/icons/Description';
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     filelist: {
@@ -24,27 +23,32 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Datastudents = ({ stepData }) => {
+const Datastudents = ({ stepData, toStorage, dataList }) => {
 
     const classes = useStyles();
-    const [files, setFiles] = useState([])
 
-    console.log(files)
+    const onDelete = () => {
+        toStorage([]);
+        stepData(false);
+    };
 
-    if (files.length > 0) {
-        stepData(true);
-        console.log("files data:", true);
-    } else {
-        stepData(false)
-        console.log("files data:", false);
-    }
+    const onAdd = (f) => {
+        if (f.length > 0) {
+            toStorage(f);
+            stepData(true);
+        }
+    };
 
-    // useEffect(async()=>{
-    //     await axios.post()
+    useEffect(() => {
+        if (dataList.length > 0) {
+            console.log("data zone is:", true);
+            stepData(true);
+        } else {
+            console.log("data zone is:", false);
+            stepData(false);
+        }
 
-    // },[])
-
-
+    },[]);
 
     return (
         <div>
@@ -53,15 +57,16 @@ const Datastudents = ({ stepData }) => {
                     <DropzoneArea
                         dropzoneText={
                             <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางข้อมูลผู้เข้าสอบที่นี่ รองรับเฉพาะ .csv
+                                คลิก หรือวางข้อมูลผู้เข้าสอบที่นี่ รองรับเฉพาะ .csv เท่านั้น
                             </Typography>
                         }
-                        onChange={(file) => setFiles(file)}
+                        onChange={(f) => onAdd(f)}
                         acceptedFiles={['.csv']}
                         maxFileSize={5000000}
                         alertSnackbarProps={{
                             autoHideDuration: 5000,
                         }}
+
                         showPreviewsInDropzone={false}
                         filesLimit={1}
                         showAlerts={false}
@@ -74,18 +79,18 @@ const Datastudents = ({ stepData }) => {
                         </Typography>
                         <Divider />
                         <List dense={false}>
-                            {files.map((file) => (
-                                <ListItem>
+                            {dataList.map((f) => (
+                                <ListItem key={f.name}>
                                     <ListItemAvatar>
                                         <Avatar>
                                             <DescriptionIcon />
                                         </Avatar>
                                     </ListItemAvatar>
 
-                                    <ListItemText primary={file.name} />
+                                    <ListItemText primary={f.name} />
                                     <ListItemSecondaryAction>
                                         <IconButton edge="end" aria-label="delete">
-                                            <DeleteIcon onClick={() => setFiles([])} />
+                                            <DeleteIcon onClick={onDelete} />
                                         </IconButton>
                                     </ListItemSecondaryAction>
                                 </ListItem>
@@ -98,4 +103,4 @@ const Datastudents = ({ stepData }) => {
     )
 }
 
-export default Datastudents
+export default Datastudents;

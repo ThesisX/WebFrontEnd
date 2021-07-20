@@ -24,30 +24,41 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Answer = ({ stepAns }) => {
+const Answer = ({ stepAns, toStorage, ansList }) => {
 
     const classes = useStyles();
-    const [files, setFiles] = useState([])
 
-    console.log(files)
-
-    const getAvatarType = (file) => {
-        if (file.name.slice(-4) == '.csv') {
+    const getAvatarType = (n) => {
+        if (n.slice(-4) == '.csv') {
             return <DescriptionIcon />
         } else {
             return <ImageIcon />
         }
-    }
+    };
 
-    if (files.length > 0) {
-        stepAns(true);
-        console.log("files ans:", true);
-    } else {
-        stepAns(false)
-        console.log("files ans:", false);
-    }
+    const onDelete = () => {
+        toStorage([]);
+        stepAns(false);
+    };
 
-    console.log(files);
+    const onAdd = (f) => {
+        if (f.length > 0) {
+            toStorage(f);
+            stepAns(true);
+        }
+    };
+
+    useEffect(() => {
+        if (ansList.length > 0) {
+            console.log("data zone is:", true);
+            stepAns(true);
+        } else {
+            console.log("data zone is:", false);
+            stepAns(false);
+        }
+
+    }, []);
+    
     return (
         <div>
             <Grid container spacing={1}>
@@ -55,15 +66,16 @@ const Answer = ({ stepAns }) => {
                     <DropzoneArea
                         dropzoneText={
                             <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางเฉลยข้อสอบที่นี่ รองรับเฉพาะ .csv .jpg .png
+                                คลิก หรือวางเฉลยข้อสอบที่นี่ รองรับเฉพาะ .csv .jpeg .png เท่านั้น
                             </Typography>
                         }
-                        onChange={(file) => setFiles(file)}
-                        acceptedFiles={['image/jpeg', 'image/png', '.csv']}
+                        onChange={(f) => onAdd(f)}
+                        acceptedFiles={['.csv', '.jpeg', '.png']}
                         maxFileSize={5000000}
                         alertSnackbarProps={{
                             autoHideDuration: 5000,
                         }}
+
                         showPreviewsInDropzone={false}
                         filesLimit={1}
                         showAlerts={false}
@@ -76,18 +88,18 @@ const Answer = ({ stepAns }) => {
                         </Typography>
                         <Divider />
                         <List dense={false}>
-                            {files.map((file) => (
-                                <ListItem>
+                            {ansList.map((f) => (
+                                <ListItem key={f.name}>
                                     <ListItemAvatar>
                                         <Avatar>
-                                            {getAvatarType(file)}
+                                            {getAvatarType(f.name)}
                                         </Avatar>
                                     </ListItemAvatar>
 
-                                    <ListItemText primary={file.name} />
+                                    <ListItemText primary={f.name} />
                                     <ListItemSecondaryAction>
                                         <IconButton edge="end" aria-label="delete">
-                                            <DeleteIcon onClick={() => setFiles([])} />
+                                            <DeleteIcon onClick={onDelete} />
                                         </IconButton>
                                     </ListItemSecondaryAction>
                                 </ListItem>
@@ -100,4 +112,4 @@ const Answer = ({ stepAns }) => {
     )
 }
 
-export default Answer
+export default Answer;

@@ -93,6 +93,7 @@ const Subjects = ({ getActivate }) => {
         .then(res => {
             console.log(res)
         });
+        setOpen(false);
     }
 
     useEffect(() => {

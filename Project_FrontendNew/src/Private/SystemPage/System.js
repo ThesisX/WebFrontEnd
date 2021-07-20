@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Answer from './Answer';
 import Exams from './Exams';
 import Result from './Result';
@@ -51,9 +51,10 @@ const System = () => {
 
     const [activeStep, setActiveStep] = useState(0);
     const [stepStatus, setStepStatus] = useState(false);
-    const [activate, setActivate] = useState(true)
-    const [ansfile, setAnsfile] = useState([])
-    const [examfile, setExamfile] = useState([])
+    const [activate, setActivate] = useState(true);
+    const [ansfile, setAnsfile] = useState([]);
+    const [examfile, setExamfile] = useState([]);
+    const [datafile, setDatafile] = useState([]);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -69,11 +70,17 @@ const System = () => {
     const getStepContent = (stepIndex) => {
         switch (stepIndex) {
             case 0:
-                return <Datastudents stepData={(s) => setStepStatus(s)} />;
+                return <Datastudents stepData={(s) => setStepStatus(s)}
+                    toStorage={(f)=>setDatafile(f)}
+                    dataList={datafile} />;
             case 1:
-                return <Answer stepAns={(s) => setStepStatus(s)} />;
+                return <Answer stepAns={(s) => setStepStatus(s)} 
+                    toStorage={(f)=>setAnsfile(f)}
+                    ansList={ansfile} />;
             case 2:
-                return <Exams stepExam={(s) => setStepStatus(s)} />;
+                return <Exams stepExam={(s) => setStepStatus(s)} 
+                    toStorage={(f)=>setExamfile(f)}
+                    examList={examfile} />;
             case 3:
                 return <Result />;
             default:
@@ -81,12 +88,10 @@ const System = () => {
         }
     }
 
-    const getActivate = (status) => {
-        // console.log('status ', status);
-        setActivate(status)
-    }
+    useEffect(() => {
+        console.log("datafile :", datafile);
+    },[]);
 
-    // console.log("activate : ", activate);
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
@@ -94,7 +99,7 @@ const System = () => {
                     <Paper className={classes.paper}>
                         {/* Subject name and Subject group. */}
                         <Grid item xs={12}>
-                            <Subjects getActivate={getActivate} />
+                            <Subjects getActivate={(s)=>setActivate(s)} />
                             {/* <Divider light/> */}
                         </Grid>
 

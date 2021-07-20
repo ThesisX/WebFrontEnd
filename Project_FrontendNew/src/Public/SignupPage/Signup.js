@@ -25,6 +25,7 @@ import axios from 'axios'
 // import qs from 'qs';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
+import { OutlinedInput } from '@material-ui/core';
 
 
 // const CssTextField = withStyles({
@@ -289,6 +290,7 @@ const Signup = () => {
                 aria-label="สลับการมองเห็นรหัสผ่าน"
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPassword}
+                edge="end"
               >
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
@@ -296,7 +298,26 @@ const Signup = () => {
 
           }
         />
-
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? 'text' : 'password'}
+          value={Password}
+          onChange={(e) =>
+            setPassword(e.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+          labelWidth={70}
+        />
 
         <TextField
           className={classes.margin}

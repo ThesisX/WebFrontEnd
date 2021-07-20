@@ -17,6 +17,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
 
 
 // import FormHelperText from '@material-ui/core/FormHelperText';
@@ -28,7 +29,7 @@ import Select from '@material-ui/core/Select';
 import { OutlinedInput } from '@material-ui/core';
 
 
-// const CssTextField = withStyles({
+// const OutlinedInput = withStyles({
 //   root: {
 //     '& label.Mui-focused': {
 //       color: 'green',
@@ -273,13 +274,13 @@ const Signup = () => {
             setUser(e.target.value)}
           value={User} />
 
-        <TextField
-          className={classes.margin}
+         {/* <CssTextField
+        className={classes.margin}
+        variant="outlined"
+        id="custom-css-outlined-input"
           type={showPassword ? 'text' : 'password'}
           label="PASSWORD"
           required
-          variant="outlined"
-          id="validation-outlined-input"
           helperText="ERROR"
           onChange={(e) =>
             setPassword(e.target.value)}
@@ -287,27 +288,7 @@ const Signup = () => {
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                aria-label="สลับการมองเห็นรหัสผ่าน"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-
-          }
-        />
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          value={Password}
-          onChange={(e) =>
-            setPassword(e.target.value)}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
+                // aria-label="สลับการมองเห็นรหัสผ่าน"
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
@@ -316,9 +297,32 @@ const Signup = () => {
               </IconButton>
             </InputAdornment>
           }
-          labelWidth={70}
-        />
+          
+        /> */}
 
+<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            onChange={(e) =>
+              setPassword(e.target.value)}
+            value={Password}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+
+        
         <TextField
           className={classes.margin}
           type="password"

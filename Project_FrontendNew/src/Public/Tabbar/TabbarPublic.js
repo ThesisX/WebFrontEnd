@@ -51,7 +51,7 @@ export default function IconLabelTabs() {
 
   return (
     <Router>
-{/* <BrowserRouter>     */}
+      {/* <BrowserRouter>     */}
       <div>
         <Container className={classes.container} >
           {/* <AppBar position="fixed"> */}
@@ -74,12 +74,12 @@ export default function IconLabelTabs() {
                 textColor="secondary"
                 aria-label="icon label tabs example"
               >
-              {/* <Button variant="outlined" color="secondary">
+                {/* <Button variant="outlined" color="secondary">
                  Secondary
               </Button> */}
 
                 <Tab icon={<FavoriteIcon />} label="LOGIN" >
-                <Link to="/sign-up"></Link>
+                  <Link to="/sign-up"></Link>
                 </Tab>
 
                 <Tab icon={<PersonPinIcon />} label="SINGIN" >
@@ -87,13 +87,13 @@ export default function IconLabelTabs() {
                 </Tab>
 
               </Tabs>
-             </Paper>
+            </Paper>
           </center>
           </div>
           {/* <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '70vh' }} /> */}
         </Container>
       </div >
-    {/* </BrowserRouter> */}
-   </Router>
+      {/* </BrowserRouter> */}
+    </Router>
   );
 }

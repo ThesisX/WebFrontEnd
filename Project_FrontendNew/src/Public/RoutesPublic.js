@@ -26,10 +26,9 @@ const RoutesPublic = () => {
             <Button variant="outlined" color="secondary"><Link to="/sign-up">สมัครสมาชิก</Link></Button>
           </ul>
         </nav>
-
-        <Publics />
+        <Publics /> 
       </div>
-      {/* <TabbarPublic/> */}
+      <TabbarPublic/>
     </BrowserRouter>
   );
 };

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
+
 import {
   fade,
   ThemeProvider,
@@ -29,7 +31,7 @@ import Select from '@material-ui/core/Select';
 import { OutlinedInput } from '@material-ui/core';
 
 
-// const OutlinedInput = withStyles({
+// const FormControt = withStyles({
 //   root: {
 //     '& label.Mui-focused': {
 //       color: 'green',
@@ -206,22 +208,22 @@ const Signup = () => {
 
   }));
 
-  // const ValidationTextField = withStyles({
-  //   root: {
-  //     '& input:valid + fieldset': {
-  //       borderColor: 'green',
-  //       borderWidth: 2,
-  //     },
-  //     '& input:invalid + fieldset': {
-  //       borderColor: 'red',
-  //       borderWidth: 2,
-  //     },
-  //     '& input:valid:focus + fieldset': {
-  //       borderLeftWidth: 6,
-  //       padding: '4px !important', // override inline-style
-  //     },
-  //   },
-  // })(TextField);
+  const formControl = withStyles({
+   margin: {
+      '& input:valid + fieldset': {
+        borderColor: 'green',
+        borderWidth: 2,
+      },
+      '& input:invalid + fieldset': {
+        borderColor: 'red',
+        borderWidth: 2,
+      },
+      '& input:valid:focus + fieldset': {
+        borderLeftWidth: 6,
+        padding: '4px !important', // override inline-style
+      },
+    },
+  })(TextField);
 
   // const FormHelperText = withStyles({
   //   root: {
@@ -253,8 +255,7 @@ const Signup = () => {
 
 
   const classes = useStyles();
-
-  // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
+   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
 
   return (
 
@@ -300,10 +301,36 @@ const Signup = () => {
           
         /> */}
 
-<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onChange={(e) =>
+                    setPassword(e.target.value)}
+                  value={Password}
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+        </FormControl>
+
+{/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            label="ConfirmPASSWORD"
+
             onChange={(e) =>
               setPassword(e.target.value)}
             value={Password}
@@ -320,7 +347,7 @@ const Signup = () => {
               </InputAdornment>
             }
             labelWidth={70}
-          />
+          /> */}
 
         
         <TextField

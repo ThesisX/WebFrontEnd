@@ -81,21 +81,26 @@ const Subjects = ({ getActivate, sid }) => {
         
         if(subjectid === 0){
             const form_data = {
+                sub_id : 0,
                 sub_name: subjectname,
                 sub_group: subjectgroup,
+                sub_create: 0,
             };
 
             const optionsPost = {
                 method: 'POST',
                 url: `${BASE_URL}/subjects/create-subject/`,
-                headers: { Authorization: `Bearer ${tokenCookies}` },
+                headers: { 'Authorization': `Bearer ${tokenCookies}`},
                 data: form_data,
             };
 
             const optionsGetID = {
                 method: 'GET',
                 url:`${BASE_URL}/subjects/getid/${subjectname}/${subjectgroup}`,
-                headers: { Authorization: `Bearer ${tokenCookies}` },
+                headers: { 
+                    'Access-Control-Allow-Origin' : '*',
+                    'Authorization': `Bearer ${tokenCookies}` 
+                },
             };
 
             /* Create Subject */
@@ -115,7 +120,7 @@ const Subjects = ({ getActivate, sid }) => {
 
             /* Patch Subject.*/
             const optionsPatch = {
-                method: 'PATCH',
+                method: 'PUT',
                 url: `${BASE_URL}/subjects/update-subject/${subjectid}/${subjectname}/${subjectgroup}`,
                 headers: { Authorization: `Bearer ${tokenCookies}` }
             };

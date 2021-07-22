@@ -14,10 +14,10 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-import axios from 'axios';
 import { BASE_URL } from '../../service';
 import Cookies from 'js-cookie';
-import { setScheduler } from 'bluebird';
+import axios from 'axios';
+import qs from 'qs';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,7 +54,7 @@ const System = () => {
     const [ansfile, setAnsfile] = useState([]);
     const [examfile, setExamfile] = useState([]);
     const [datafile, setDatafile] = useState([]);
-    const [subID , setSubID] = useState(0);
+    const [subID, setSubID] = useState(0);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -91,11 +91,17 @@ const System = () => {
 
     /* Post */
     const handleSubmit = async () => {
-        const postData = {
+        const url = `${BASE_URL}/upload-data/${subID}`;
+
+        const PostData = {
             method: 'POST',
-            url: `${BASE_URL}/upload-data/${subID}`,
-            headers: { Authorization: `Bearer ${tokenCookies}` },
-            data: datafile,
+            url:`${BASE_URL}/upload-data/${subID}`,
+            headers: { 
+                'accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${tokenCookies}` 
+            },
+            datafile: datafile,
         };
 
         const postAnswer = {
@@ -106,7 +112,10 @@ const System = () => {
 
         };
 
-        // await axios();
+        await axios(PostData)
+        .then(res => {
+            console.log(res);
+        });
     };
 
     useEffect(() => {
@@ -120,7 +129,7 @@ const System = () => {
                     <Paper className={classes.paper}>
                         {/* Subject name and Subject group. */}
                         <Grid item xs={12}>
-                            <Subjects getActivate={(s) => setActivate(s)} sid={(id)=>setSubID(id)}/>
+                            <Subjects getActivate={(s) => setActivate(s)} sid={(id) => setSubID(id)} />
                             {/* <Divider light/> */}
                         </Grid>
 
@@ -156,14 +165,24 @@ const System = () => {
                                             >
                                                 ย้อนกลับ
                                             </Button>
-                                            <Button
-                                                disabled={stepStatus === false}
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={handleNext}
-                                            >
-                                                {activeStep === steps.length - 1 ? 'ดาวน์โหลด' : 'ถัดไป'}
-                                            </Button>
+                                            {activeStep !== 0 ?
+                                                <Button
+                                                    disabled={stepStatus === false}
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={handleNext}
+                                                >
+                                                    ถัดไป
+                                                </Button>
+                                                : <Button
+                                                    disabled={stepStatus === false}
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={handleSubmit}
+                                                >
+                                                    ตรวจข้อสอบ
+                                                </Button>
+                                            }
                                         </Grid>
                                     </Grid>
                                 )}

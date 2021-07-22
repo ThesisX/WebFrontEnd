@@ -34,6 +34,7 @@ const Datastudents = ({ stepData, toStorage, dataList }) => {
 
     const onAdd = (f) => {
         if (f.length > 0) {
+            console.log(f);
             toStorage(f);
             stepData(true);
         }

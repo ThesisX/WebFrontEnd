@@ -31,8 +31,8 @@ import Select from '@material-ui/core/Select';
 import { OutlinedInput } from '@material-ui/core';
 
 
-// const FormControt = withStyles({
-//   root: {
+// const margin = withStyles({
+//   textField: {
 //     '& label.Mui-focused': {
 //       color: 'green',
 //     },
@@ -101,44 +101,44 @@ const Signup = () => {
 
 
 
-  const BootstrapInput = withStyles((theme) => ({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing(5),
-        display: 'auto',
-        borderRadius: 15,
-        paddingTop: '270px',
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.common.white,
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      width: 'auto',
-      padding: '10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-      '&:focus': {
-        boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-        borderColor: theme.palette.primary.main,
-      },
+  // const BootstrapInput = withStyles((theme) => ({
+  //   root: {
+  //     'label + &': {
+  //       marginTop: theme.spacing(5),
+  //       display: 'auto',
+  //       borderRadius: 15,
+  //       paddingTop: '270px',
+  //     },
+  //   },
+  //   input: {
+  //     borderRadius: 4,
+  //     position: 'relative',
+  //     backgroundColor: theme.palette.common.white,
+  //     border: '1px solid #ced4da',
+  //     fontSize: 16,
+  //     width: 'auto',
+  //     padding: '10px 12px',
+  //     transition: theme.transitions.create(['border-color', 'box-shadow']),
+  //     // Use the system font instead of the default Roboto font.
+  //     fontFamily: [
+  //       '-apple-system',
+  //       'BlinkMacSystemFont',
+  //       '"Segoe UI"',
+  //       'Roboto',
+  //       '"Helvetica Neue"',
+  //       'Arial',
+  //       'sans-serif',
+  //       '"Apple Color Emoji"',
+  //       '"Segoe UI Emoji"',
+  //       '"Segoe UI Symbol"',
+  //     ].join(','),
+  //     '&:focus': {
+  //       boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+  //       borderColor: theme.palette.primary.main,
+  //     },
 
-    },
-  }))(InputBase);
+  //   },
+  // }))(InputBase);
 
   // const useStylesReddit = makeStyles((theme) => ({
   //   root: {
@@ -162,7 +162,7 @@ const Signup = () => {
   // function RedditTextField(props) {
   //   const classes = useStylesReddit();
 
-  //   return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
+    // return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
   // }
 
   const useStyles = makeStyles((theme) => ({
@@ -205,11 +205,19 @@ const Signup = () => {
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    withoutLabel: {
+      marginTop: theme.spacing(3),
+    },
+    textField: {
+      width: '30ch',
+      
+    },
 
   }));
 
-  const formControl = withStyles({
-   margin: {
+  
+  const OutlinedInput = withStyles({
+    margin: {
       '& input:valid + fieldset': {
         borderColor: 'green',
         borderWidth: 2,
@@ -218,34 +226,10 @@ const Signup = () => {
         borderColor: 'red',
         borderWidth: 2,
       },
-      '& input:valid:focus + fieldset': {
-        borderLeftWidth: 6,
-        padding: '4px !important', // override inline-style
+      
       },
-    },
-  })(TextField);
-
-  // const FormHelperText = withStyles({
-  //   root: {
-  //     '& label.Mui-focused': {
-  //       color: 'green',
-  //     },
-  //     '& .MuiInput-underline:after': {
-  //       borderBottomColor: 'green',
-  //     },
-  //     '& .MuiOutlinedInput-root': {
-  //       '& fieldset': {
-  //         borderColor: 'red',
-  //       },
-  //       '&:hover fieldset': {
-  //         borderColor: 'yellow',
-  //       },
-  //       '&.Mui-focused fieldset': {
-  //         borderColor: 'green',
-  //       },
-  //     },
-  //   },
-  // })(TextField);
+    
+  })();
 
   const theme = createMuiTheme({
     palette: {
@@ -304,8 +288,10 @@ const Signup = () => {
 <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
+          className={classes.outlined}
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
+            required
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -325,29 +311,7 @@ const Signup = () => {
           />
         </FormControl>
 
-{/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            label="ConfirmPASSWORD"
 
-            onChange={(e) =>
-              setPassword(e.target.value)}
-            value={Password}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={70}
-          /> */}
 
         
         <TextField

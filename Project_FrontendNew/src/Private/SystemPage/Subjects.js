@@ -27,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Subjects = ({ getActivate }) => {
+const Subjects = ({ getActivate, sid }) => {
     const tokenCookies = Cookies.get("token");
 
     const [open, setOpen] = useState(true);
-    const [lableDialog, setLableDialog] = useState("สร้างรายวิชา")
-    const [subjectname, setSubjectname] = useState("")
-    const [subjectgroup, setSubjectgroup] = useState("")
-    const [submitStatus, setSubmitStatus] = useState(true)
+    const [lableDialog, setLableDialog] = useState("สร้างรายวิชา");
+    const [subjectid, setSubjectid] = useState(0);
+    const [subjectname, setSubjectname] = useState("");
+    const [subjectgroup, setSubjectgroup] = useState("");
+    const [submitStatus, setSubmitStatus] = useState(true);
 
     const classes = useStyles();
 
@@ -77,24 +78,56 @@ const Subjects = ({ getActivate }) => {
     }
 
     const handelSubmit = async () => {
-        const form_data = {
-            sub_name: subjectname,
-            sub_group: subjectgroup,
-        };
         
-        const options = {
-            method: 'POST',
-            url: BASE_URL + '/subjects/create-subject/',
-            headers: { Authorization: `Bearer ${tokenCookies}` },
-            data: form_data,
-        };
+        if(subjectid === 0){
+            const form_data = {
+                sub_name: subjectname,
+                sub_group: subjectgroup,
+            };
 
-        await axios(options)
-        .then(res => {
-            console.log(res)
-        });
+            const optionsPost = {
+                method: 'POST',
+                url: `${BASE_URL}/subjects/create-subject/`,
+                headers: { Authorization: `Bearer ${tokenCookies}` },
+                data: form_data,
+            };
+
+            const optionsGetID = {
+                method: 'GET',
+                url:`${BASE_URL}/subjects/getid/${subjectname}/${subjectgroup}`,
+                headers: { Authorization: `Bearer ${tokenCookies}` },
+            };
+
+            /* Create Subject */
+            await axios(optionsPost)
+            .then(res => {
+                console.log('Create Subject :'+res.data)
+            });
+
+            /* Get Subject ID.*/
+            await axios(optionsGetID)
+            .then(res => {
+                sid(res.data);
+                setSubjectid(res.data);
+            });
+
+        }else{
+
+            /* Patch Subject.*/
+            const optionsPatch = {
+                method: 'PATCH',
+                url: `${BASE_URL}/subjects/update-subject/${subjectid}/${subjectname}/${subjectgroup}`,
+                headers: { Authorization: `Bearer ${tokenCookies}` }
+            };
+
+            await axios(optionsPatch)
+            .then(res => {
+                console.log('Patch Subject :'+res.data);
+            });
+        }
+
         setOpen(false);
-    }
+    };
 
     useEffect(() => {
         if (subjectname !== "" && subjectgroup !== "") {

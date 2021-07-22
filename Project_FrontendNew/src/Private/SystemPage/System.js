@@ -4,7 +4,6 @@ import Exams from './Exams';
 import Result from './Result';
 import Subjects from './Subjects';
 import Datastudents from './Datastudents';
-import Cookies from 'js-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -12,16 +11,16 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import axios from 'axios';
-import { Divider, Grid } from '@material-ui/core';
+import { BASE_URL } from '../../service';
+import Cookies from 'js-cookie';
+import { setScheduler } from 'bluebird';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // padding: 50,
-        // width: '100%',
         flexGrow: 1,
     },
     paper: {
@@ -55,10 +54,12 @@ const System = () => {
     const [ansfile, setAnsfile] = useState([]);
     const [examfile, setExamfile] = useState([]);
     const [datafile, setDatafile] = useState([]);
+    const [subID , setSubID] = useState(0);
 
     const classes = useStyles();
     const steps = getSteps();
-
+    const tokenCookies = Cookies.get("token");
+    /* Set Step */
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -71,15 +72,15 @@ const System = () => {
         switch (stepIndex) {
             case 0:
                 return <Datastudents stepData={(s) => setStepStatus(s)}
-                    toStorage={(f)=>setDatafile(f)}
+                    toStorage={(f) => setDatafile(f)}
                     dataList={datafile} />;
             case 1:
-                return <Answer stepAns={(s) => setStepStatus(s)} 
-                    toStorage={(f)=>setAnsfile(f)}
+                return <Answer stepAns={(s) => setStepStatus(s)}
+                    toStorage={(f) => setAnsfile(f)}
                     ansList={ansfile} />;
             case 2:
-                return <Exams stepExam={(s) => setStepStatus(s)} 
-                    toStorage={(f)=>setExamfile(f)}
+                return <Exams stepExam={(s) => setStepStatus(s)}
+                    toStorage={(f) => setExamfile(f)}
                     examList={examfile} />;
             case 3:
                 return <Result />;
@@ -88,9 +89,29 @@ const System = () => {
         }
     }
 
+    /* Post */
+    const handleSubmit = async () => {
+        const postData = {
+            method: 'POST',
+            url: `${BASE_URL}/upload-data/${subID}`,
+            headers: { Authorization: `Bearer ${tokenCookies}` },
+            data: datafile,
+        };
+
+        const postAnswer = {
+
+        };
+
+        const postExams = {
+
+        };
+
+        // await axios();
+    };
+
     useEffect(() => {
         console.log("datafile :", datafile);
-    },[]);
+    }, []);
 
     return (
         <div className={classes.root}>
@@ -99,7 +120,7 @@ const System = () => {
                     <Paper className={classes.paper}>
                         {/* Subject name and Subject group. */}
                         <Grid item xs={12}>
-                            <Subjects getActivate={(s)=>setActivate(s)} />
+                            <Subjects getActivate={(s) => setActivate(s)} sid={(id)=>setSubID(id)}/>
                             {/* <Divider light/> */}
                         </Grid>
 
@@ -155,4 +176,4 @@ const System = () => {
     )
 }
 
-export default System
+export default System;

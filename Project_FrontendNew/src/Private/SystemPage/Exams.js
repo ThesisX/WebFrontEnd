@@ -68,7 +68,7 @@ const Exams = ({ stepExam, toStorage, examList }) => {
                         }}
 
                         showPreviewsInDropzone={false}
-                        filesLimit={1}
+                        filesLimit={80}
                         showAlerts={false}
                     />
                 </Grid>

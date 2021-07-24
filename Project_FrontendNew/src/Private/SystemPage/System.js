@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { BASE_URL } from '../../service';
 import Cookies from 'js-cookie';
-import axios from 'axios';
+import axios, { post } from 'axios';
 import qs from 'qs';
 
 const useStyles = makeStyles((theme) => ({
@@ -91,36 +91,51 @@ const System = () => {
 
     /* Post */
     const handleSubmit = async () => {
-        const url = `${BASE_URL}/upload-data/${subID}`;
+        const url_datafile = `${BASE_URL}/datastudent/upload-data/${subID}`;
+        const url_answerfile = `${BASE_URL}/answer/upload-answer/${subID}`;
+        const url_examsfile = `${BASE_URL}/exams/upload-exams/${subID}`;
 
-        const PostData = {
-            method: 'POST',
-            url:`${BASE_URL}/upload-data/${subID}`,
-            headers: { 
-                'accept': 'application/json',
-                'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${tokenCookies}` 
-            },
-            datafile: datafile,
-        };
+        const FormDataFile = new FormData();
+        const FormAnswerFile = new FormData();
+        const FormExamsFile = new FormData();
 
-        const postAnswer = {
-
-        };
-
-        const postExams = {
-
-        };
-
-        await axios(PostData)
-        .then(res => {
-            console.log(res);
+        await FormDataFile.append('data_file', datafile[0]);
+        await FormAnswerFile.append('ans_file', ansfile[0]);
+        
+        // for(let i=0; i >= examfile.length ; i++){
+        //     FormExamsFile.append('exms_file', examfile[i]);
+        // };
+        await examfile.forEach(f => {
+            FormExamsFile.append('exm_files', f);
         });
+
+        const config = {
+            headers: {
+                'accept': 'application/json',
+                'Authorization': `Bearer ${tokenCookies}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+
+        await post(url_datafile, FormDataFile, config)
+            .then(res => {
+                console.log("data_file : ", res.data);
+            });
+
+        await post(url_answerfile, FormAnswerFile, config)
+            .then(res => {
+                console.log("ans_file : ", res.data);
+            });
+
+        await post(url_examsfile, FormExamsFile, config)
+            .then(res => {
+                console.log("exms_file : ", res.data);
+            });
     };
 
-    useEffect(() => {
-        console.log("datafile :", datafile);
-    }, []);
+    // useEffect(() => {
+    //     console.log("datafile :", datafile);
+    // }, []);
 
     return (
         <div className={classes.root}>
@@ -165,7 +180,7 @@ const System = () => {
                                             >
                                                 ย้อนกลับ
                                             </Button>
-                                            {activeStep !== 0 ?
+                                            {activeStep !== 2 ?
                                                 <Button
                                                     disabled={stepStatus === false}
                                                     variant="contained"

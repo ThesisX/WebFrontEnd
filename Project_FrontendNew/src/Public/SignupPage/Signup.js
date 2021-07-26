@@ -7,6 +7,7 @@ import {
   withStyles,
   makeStyles,
   createMuiTheme,
+  createStyles,
 } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -31,8 +32,8 @@ import Select from '@material-ui/core/Select';
 import { OutlinedInput } from '@material-ui/core';
 
 
-// const margin = withStyles({
-//   textField: {
+// const useStyles = makeStyles((theam) => ({
+//   inputlabel: {
 //     '& label.Mui-focused': {
 //       color: 'green',
 //     },
@@ -51,7 +52,7 @@ import { OutlinedInput } from '@material-ui/core';
 //       },
 //     },
 //   },
-// })(TextField);
+// }));
 
 
 // user pass mail name lname
@@ -162,7 +163,7 @@ const Signup = () => {
   // function RedditTextField(props) {
   //   const classes = useStylesReddit();
 
-    // return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
+  // return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
   // }
 
   const useStyles = makeStyles((theme) => ({
@@ -208,28 +209,35 @@ const Signup = () => {
     withoutLabel: {
       marginTop: theme.spacing(3),
     },
-    textField: {
+    inputlabel: {
       width: '30ch',
-      
+
     },
 
   }));
 
-  
-  const OutlinedInput = withStyles({
-    margin: {
-      '& input:valid + fieldset': {
-        borderColor: 'green',
-        borderWidth: 2,
-      },
-      '& input:invalid + fieldset': {
-        borderColor: 'red',
-        borderWidth: 2,
-      },
-      
-      },
-    
-  })();
+
+  // const OutlinedInput = withStyles ({
+  //   inputlabel: {
+  //     '& label.Mui-focused': {
+  //       color: 'green',
+  //     },
+  //     // '& .MuiInput-underline:after': {
+  //     //   borderBottomColor: 'green',
+  //     // },
+  //     '& .MuiOutlinedInput-root': {
+  //       '& fieldset': {
+  //         borderColor: 'red',
+  //       },
+  //       '&:hover fieldset': {
+  //         borderColor: 'yellow',
+  //       },
+  //       '&.Mui-focused fieldset': {
+  //         borderColor: 'green',
+  //     },
+  //   },
+  // }
+  // })(TextField);
 
   const theme = createMuiTheme({
     palette: {
@@ -239,7 +247,7 @@ const Signup = () => {
 
 
   const classes = useStyles();
-   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
+  // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
 
   return (
 
@@ -259,7 +267,7 @@ const Signup = () => {
             setUser(e.target.value)}
           value={User} />
 
-         {/* <CssTextField
+        {/* <CssTextField
         className={classes.margin}
         variant="outlined"
         id="custom-css-outlined-input"
@@ -285,10 +293,10 @@ const Signup = () => {
           
         /> */}
 
-<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <FormControl className={classes.margin, classes.TextField} variant="outlined" >
+          <InputLabel htmlFor="outlined-adornment-password" >Password</InputLabel>
           <OutlinedInput
-          className={classes.outlined}
+            error={true}
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
             required
@@ -313,7 +321,7 @@ const Signup = () => {
 
 
 
-        
+
         <TextField
           className={classes.margin}
           type="password"

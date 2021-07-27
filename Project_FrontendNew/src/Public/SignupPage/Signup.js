@@ -21,6 +21,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 
 // import FormHelperText from '@material-ui/core/FormHelperText';
@@ -62,18 +64,34 @@ const Signup = () => {
 
   // const [data, setData] = useState({})
 
-  let [User, setUser] = useState("")
-  let [Password, setPassword] = useState("")
-  let [ConfirmPassword, setConfirmPassword] = useState("")
-  let [Email, setEmail] = useState("")
-  let [Name, setName] = useState("")
-  let [Lname, setLname] = useState("")
-  let [Schollname, setSchollname] = useState("")
+  const [User, setUser] = useState("")
+  const [Password, setPassword] = useState("")
+  const [ConfirmPassword, setConfirmPassword] = useState("")
+  const [Email, setEmail] = useState("")
+  const [Name, setName] = useState("")
+  const [Lname, setLname] = useState("")
+  const [Schollname, setSchollname] = useState("")
   // let [Province, setProvince] = useState("")
   const [showPassword, setShowPassword] = useState(false);
+  const [errpwd, setErrpwd] = useState(true)
+  const [helpTextPassword, setHelpTextPassword] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const validate = (v) => {
+    if (v.length > 8) {
+      setErrpwd(false);
+      setHelpTextPassword('ถูกต้อง');
+    } else {
+      setErrpwd(true);
+      setHelpTextPassword('รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร');
+    }
+
+    setPassword(v);
+  };
+
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -170,22 +188,22 @@ const Signup = () => {
     root: {
       '& input:valid + fieldset': {
         borderColor: 'green',
-        borderWidth: 2,
+        borderWidth: 5,
       },
       '& input:invalid + fieldset': {
         borderColor: 'red',
-        borderWidth: 2,
+        borderWidth: 3,
       },
       '& input:valid:focus + fieldset': {
         borderLeftWidth: 2,
-        padding: '2px !important', // override inline-style
+        padding: '5px !important', // override inline-style
       },
 
       display: 'flex',
       flexWrap: 'wrap',
     },
     margin: {
-      margin: theme.spacing(3),
+      margin: theme.spacing(5),
     },
     formControl: {
       margin: theme.spacing(3),
@@ -216,15 +234,35 @@ const Signup = () => {
 
   }));
 
+  // const OutlinedInput = withStyles({
+  //   /* Add a green text color and a checkmark when the requirements are right */
+  //   .TextField {
+  //   color: green;
+  // }
 
-  // const OutlinedInput = withStyles ({
+  //   .valid: before {
+  //     position: relative;
+  //     left: -35px;
+  //     content: "✔";
+  //   }
+
+  //   /* Add a red text color and an "x" when the requirements are wrong */
+  //   .invalid {
+  //     color: red;
+  //   }
+
+  //   .invalid: before {
+  //   position: relative;
+  //   left: -35px;
+  //   content: "✖";
+  // }
   //   inputlabel: {
   //     '& label.Mui-focused': {
   //       color: 'green',
   //     },
-  //     // '& .MuiInput-underline:after': {
-  //     //   borderBottomColor: 'green',
-  //     // },
+  //     '& .MuiInput-underline:after': {
+  //       borderBottomColor: 'green',
+  //     },
   //     '& .MuiOutlinedInput-root': {
   //       '& fieldset': {
   //         borderColor: 'red',
@@ -239,12 +277,13 @@ const Signup = () => {
   // }
   // })(TextField);
 
-  const theme = createMuiTheme({
-    palette: {
-      primary: green,
-    },
-  });
+  // const theme = createMuiTheme({
+  //   palette: {
+  //     primary: green,
+  //   },
+  // });
 
+  const theme = createMuiTheme({});
 
   const classes = useStyles();
   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
@@ -267,39 +306,18 @@ const Signup = () => {
             setUser(e.target.value)}
           value={User} />
 
-        {/* <CssTextField
-        className={classes.margin}
-        variant="outlined"
-        id="custom-css-outlined-input"
-          type={showPassword ? 'text' : 'password'}
-          label="PASSWORD"
-          required
-          helperText="ERROR"
-          onChange={(e) =>
-            setPassword(e.target.value)}
-          value={Password}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                // aria-label="สลับการมองเห็นรหัสผ่าน"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          }
-          
-        /> */}
 
-        <FormControl className={classes.margin, classes.TextField} variant="outlined" >
-          <InputLabel htmlFor="outlined-adornment-password" >Password</InputLabel>
+        <FormControl variant="outlined" >
+          <InputLabel htmlFor="component-outlined">Password</InputLabel>
           <OutlinedInput
-            error={true}
-            id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
-            required
+            id="component-outlined"
+            label="Password"
+            error={errpwd}
+            variant="outlined"
+            onChange={(e) => validate(e.target.value)}
+            value={Password}
+            labelWidth={66}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -315,12 +333,38 @@ const Signup = () => {
                 </IconButton>
               </InputAdornment>
             }
-            labelWidth={70}
+            required
           />
+           <FormHelperText id="filled-weight-helper-text">{helpTextPassword}</FormHelperText>
+
         </FormControl>
+        {/* <abel htmlFor="component-outlined-helptext">{helpTextPassword}</abel> */}
 
-
-
+        {/* <CssTextField
+            className={classes.margin}
+            variant="outlined"
+            id="custom-css-outlined-input"
+              type={showPassword ? 'text' : 'password'}
+              label="PASSWORD"
+              required
+              helperText="ERROR"
+              onChange={(e) =>
+                setPassword(e.target.value)}
+              value={Password}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    // aria-label="สลับการมองเห็นรหัสผ่าน"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              
+            /> */}
 
         <TextField
           className={classes.margin}
@@ -340,7 +384,7 @@ const Signup = () => {
           type="email"
           label="EMAIL"
           required
-          variant="outlined"
+
           id="validation-outlined-input"
           helperText="ERROR"
           onChange={(e) =>
@@ -348,6 +392,7 @@ const Signup = () => {
           value={Email} />
 
         <ThemeProvider theme={theme}>
+
 
           <TextField
             className={classes.margin}
@@ -376,7 +421,7 @@ const Signup = () => {
         </ThemeProvider>
 
         <FormControl variant="standard" className={classes.formControl}>
-          <InputLabel htmlFor="outlined-age-native-simple">province</InputLabel>
+          <InputLabel htmlFor="outlined-age-native-simple">PROVINCE</InputLabel>
           <Select
             native
             label="Age"

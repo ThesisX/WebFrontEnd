@@ -18,7 +18,6 @@ const Dashboard = () => {
                 let info = res.data;
                 // console.log(info)
                 setData(info)
-                Cookies.set("uid", info.id)
             });
 
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Answer from './Answer';
 import Exams from './Exams';
-import Result from './Result';
+import Process from './Process';
 import Subjects from './Subjects';
 import Datastudents from './Datastudents';
 
@@ -55,6 +55,12 @@ const System = () => {
     const [examfile, setExamfile] = useState([]);
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
+    const [process, setProcess] = useState("กำลังอัปโหลดข้อมูล")
+    const [fileUpload, setFileUpload] = useState({
+        ans: [],
+        exm: [],
+        data: [],
+    })
 
     const classes = useStyles();
     const steps = getSteps();
@@ -83,7 +89,7 @@ const System = () => {
                     toStorage={(f) => setExamfile(f)}
                     examList={examfile} />;
             case 3:
-                return <Result />;
+                return <Process/>;
             default:
                 return '';
         }
@@ -91,6 +97,9 @@ const System = () => {
 
     /* Post */
     const handleSubmit = async () => {
+        handleNext();
+        setStepStatus(false);
+        
         const url_datafile = `${BASE_URL}/datastudent/upload-data/${subID}`;
         const url_answerfile = `${BASE_URL}/answer/upload-answer/${subID}`;
         const url_examsfile = `${BASE_URL}/exams/upload-exams/${subID}`;
@@ -102,9 +111,6 @@ const System = () => {
         await FormDataFile.append('data_file', datafile[0]);
         await FormAnswerFile.append('ans_file', ansfile[0]);
         
-        // for(let i=0; i >= examfile.length ; i++){
-        //     FormExamsFile.append('exms_file', examfile[i]);
-        // };
         await examfile.forEach(f => {
             FormExamsFile.append('exm_files', f);
         });
@@ -117,20 +123,27 @@ const System = () => {
             },
         };
 
+        setProcess("กำลังอัปโหลดข้อมูล กรุณารอสักครู่...");
+
         await post(url_datafile, FormDataFile, config)
             .then(res => {
                 console.log("data_file : ", res.data);
+                setFileUpload({data: res.data});
             });
 
         await post(url_answerfile, FormAnswerFile, config)
             .then(res => {
                 console.log("ans_file : ", res.data);
+                setFileUpload({ans: res.data});
             });
 
         await post(url_examsfile, FormExamsFile, config)
             .then(res => {
                 console.log("exms_file : ", res.data);
+                setFileUpload({exm: res.data});
             });
+        
+        setProcess("การอัปโหลดข้อมูล สำเร็จ!!");
     };
 
     // useEffect(() => {

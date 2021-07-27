@@ -34,7 +34,7 @@ const Subjects = ({ getActivate, sid }) => {
     const [lableDialog, setLableDialog] = useState("สร้างรายวิชา");
     const [subjectid, setSubjectid] = useState(0);
     const [subjectname, setSubjectname] = useState("");
-    const [subjectgroup, setSubjectgroup] = useState("");
+    const [subjectgroup, setSubjectgroup] = useState("1");
     const [submitStatus, setSubmitStatus] = useState(true);
 
     const classes = useStyles();
@@ -49,13 +49,11 @@ const Subjects = ({ getActivate, sid }) => {
     };
 
     const handelAutomate = () => {
-        let uid = Cookies.get('uid');
         let n = new Date();
         let t = n.getTime();
-        let sname = `A-${uid}-${t}`;
+        let sname = `A-${t}`;
 
         setSubjectname(sname);
-        setSubjectgroup(uid);
         setLableDialog("แก้ไขรายวิชา");
 
     };
@@ -172,6 +170,7 @@ const Subjects = ({ getActivate, sid }) => {
                         }}
                         variant="filled"
                         size="small"
+                        min="1"
                     />
                     <Button
                         className={classes.Subjects}

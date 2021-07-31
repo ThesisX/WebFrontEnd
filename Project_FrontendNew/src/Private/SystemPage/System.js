@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Answer from './Answer';
 import Exams from './Exams';
-import Process from './Process';
 import Subjects from './Subjects';
 import Datastudents from './Datastudents';
 
@@ -13,10 +12,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { BASE_URL } from '../../service';
 import Cookies from 'js-cookie';
-import axios, { post } from 'axios';
+import axios, { post, get } from 'axios';
 import qs from 'qs';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
     },
     step: {
         marginRight: 0,
+    },
+    CenterObj: {
+        marginTop: 50,
+        alignItems: 'center',
+        textAlign: 'center'
     }
 }));
 
@@ -55,12 +59,13 @@ const System = () => {
     const [examfile, setExamfile] = useState([]);
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
-    const [process, setProcess] = useState("กำลังอัปโหลดข้อมูล")
+    const [TxtProcessing, setTxtProcessing] = useState("กำลังรอการป้อนข้อมูล")
     const [fileUpload, setFileUpload] = useState({
         ans: [],
         exm: [],
         data: [],
-    })
+    });
+    const [Loadding, setLoadding] = useState(false);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -89,7 +94,7 @@ const System = () => {
                     toStorage={(f) => setExamfile(f)}
                     examList={examfile} />;
             case 3:
-                return <Process/>;
+                return "";
             default:
                 return '';
         }
@@ -97,9 +102,8 @@ const System = () => {
 
     /* Post */
     const handleSubmit = async () => {
-        handleNext();
-        setStepStatus(false);
-        
+        setLoadding(true);
+        setTxtProcessing("กำลังอัปโหลดข้อมูล");
         const url_datafile = `${BASE_URL}/datastudent/upload-data/${subID}`;
         const url_answerfile = `${BASE_URL}/answer/upload-answer/${subID}`;
         const url_examsfile = `${BASE_URL}/exams/upload-exams/${subID}`;
@@ -110,7 +114,7 @@ const System = () => {
 
         await FormDataFile.append('data_file', datafile[0]);
         await FormAnswerFile.append('ans_file', ansfile[0]);
-        
+
         await examfile.forEach(f => {
             FormExamsFile.append('exm_files', f);
         });
@@ -123,100 +127,121 @@ const System = () => {
             },
         };
 
-        setProcess("กำลังอัปโหลดข้อมูล กรุณารอสักครู่...");
-
         await post(url_datafile, FormDataFile, config)
             .then(res => {
                 console.log("data_file : ", res.data);
-                setFileUpload({data: res.data});
             });
 
         await post(url_answerfile, FormAnswerFile, config)
             .then(res => {
                 console.log("ans_file : ", res.data);
-                setFileUpload({ans: res.data});
             });
 
         await post(url_examsfile, FormExamsFile, config)
             .then(res => {
                 console.log("exms_file : ", res.data);
-                setFileUpload({exm: res.data});
+            });
+
+        await setTxtProcessing("อัปโหลดข้อมูล สำเร็จ!!");
+        await setTxtProcessing("กำลังตรวจข้อสอบ");
+
+        const headers = {
+            Authorization: `Bearer ${tokenCookies}`,
+        };
+
+        const URL_PredictAns = `${BASE_URL}/predictor/predict-ans?current_subject=${subID}`;
+        const URL_PredictExms = `${BASE_URL}/predictor/predict-exm?current_subject=${subID}`;
+
+        await get(URL_PredictAns, { headers })
+            .then(res => {
+                console.log("Predict Ans return : ", res.data);
+            });
+
+        await get(URL_PredictExms, { headers })
+            .then(res => {
+                console.log("Predict Exams return : ", res.data);
             });
         
-        setProcess("การอัปโหลดข้อมูล สำเร็จ!!");
+        await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
     };
-
-    // useEffect(() => {
-    //     console.log("datafile :", datafile);
-    // }, []);
 
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>
-                        {/* Subject name and Subject group. */}
-                        <Grid item xs={12}>
-                            <Subjects getActivate={(s) => setActivate(s)} sid={(id) => setSubID(id)} />
-                            {/* <Divider light/> */}
-                        </Grid>
-
-                        {/* Systems */}
-                        {activate ? (
-                            <div>
-                                <Grid item xs={12}>
-                                    <Stepper activeStep={activeStep} alternativeLabel>
-                                        {steps.map((label) => (
-                                            <Step key={label}>
-                                                <StepLabel>{label}</StepLabel>
-                                            </Step>
-                                        ))}
-                                    </Stepper>
-                                </Grid>
-                                {activeStep === steps.length ? (
+                    {!Loadding ? (
+                        <Paper className={classes.paper}>
+                            {/* Subject name and Subject group. */}
+                            <Grid item xs={12}>
+                                <Subjects getActivate={(s) => setActivate(s)} sid={(id) => setSubID(id)} />
+                                {/* <Divider light/> */}
+                            </Grid>
+                            {/* Systems */}
+                            {activate ? (
+                                <div>
                                     <Grid item xs={12}>
-                                        <Typography className={classes.instructions}>All steps completed</Typography>
-                                        <Button onClick={() => setActiveStep(0)}>Reset</Button>
+                                        <Stepper activeStep={activeStep} alternativeLabel>
+                                            {steps.map((label) => (
+                                                <Step key={label}>
+                                                    <StepLabel>{label}</StepLabel>
+                                                </Step>
+                                            ))}
+                                        </Stepper>
                                     </Grid>
-                                ) : (
-                                    <Grid item xs={12}>
+                                    {activeStep === steps.length ? (
                                         <Grid item xs={12}>
-                                            <Typography className={classes.instructions}>
-                                                {getStepContent(activeStep)}
-                                            </Typography>
+                                            <Typography className={classes.instructions}>All steps completed</Typography>
+                                            <Button onClick={() => setActiveStep(0)}>Reset</Button>
                                         </Grid>
-                                        <Grid item xs={12} className={classes.step}>
-                                            <Button
-                                                disabled={activeStep === 0}
-                                                onClick={handleBack}
-                                                className={classes.backButton}
-                                            >
-                                                ย้อนกลับ
-                                            </Button>
-                                            {activeStep !== 2 ?
+                                    ) : (
+                                        <Grid item xs={12}>
+                                            <Grid item xs={12}>
+                                                <Typography className={classes.instructions}>
+                                                    {getStepContent(activeStep)}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} className={classes.step}>
                                                 <Button
-                                                    disabled={stepStatus === false}
-                                                    variant="contained"
-                                                    color="primary"
-                                                    onClick={handleNext}
+                                                    disabled={activeStep === 0}
+                                                    onClick={handleBack}
+                                                    className={classes.backButton}
                                                 >
-                                                    ถัดไป
+                                                    ย้อนกลับ
                                                 </Button>
-                                                : <Button
-                                                    disabled={stepStatus === false}
-                                                    variant="contained"
-                                                    color="primary"
-                                                    onClick={handleSubmit}
-                                                >
-                                                    ตรวจข้อสอบ
-                                                </Button>
-                                            }
+                                                {activeStep !== 2 ?
+                                                    <Button
+                                                        disabled={stepStatus === false}
+                                                        variant="contained"
+                                                        color="primary"
+                                                        onClick={handleNext}
+                                                    >
+                                                        ถัดไป
+                                                    </Button>
+                                                    : <Button
+                                                        disabled={stepStatus === false}
+                                                        variant="contained"
+                                                        color="primary"
+                                                        onClick={handleSubmit}
+                                                    >
+                                                        ตรวจข้อสอบ
+                                                    </Button>
+                                                }
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                )}
-                            </div>
-                        ) : (<div></div>)}
-                    </Paper >
+                                    )}
+                                </div>
+                            ) : (
+                                <div className={classes.CenterObj}>
+                                    <CircularProgress />
+                                    <h5>{TxtProcessing}</h5>
+                                </div>)}
+                        </Paper >
+                    ) : (
+                        <div className={classes.CenterObj}>
+                            <CircularProgress />
+                            <h5>{TxtProcessing}</h5>
+                        </div>
+                    )}
                 </Grid>
             </Grid>
         </div>

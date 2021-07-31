@@ -25,8 +25,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 5,
         width: '40%',
     },
+    LeftItem: {
+        alignItems: 'left',
+    }
 }));
-
 const Subjects = ({ getActivate, sid }) => {
     const tokenCookies = Cookies.get("token");
 
@@ -76,10 +78,10 @@ const Subjects = ({ getActivate, sid }) => {
     }
 
     const handelSubmit = async () => {
-        
-        if(subjectid === 0){
+
+        if (subjectid === 0) {
             const form_data = {
-                sub_id : 0,
+                sub_id: 0,
                 sub_name: subjectname,
                 sub_group: subjectgroup,
                 sub_create: 0,
@@ -88,33 +90,33 @@ const Subjects = ({ getActivate, sid }) => {
             const optionsPost = {
                 method: 'POST',
                 url: `${BASE_URL}/subjects/create-subject/`,
-                headers: { 'Authorization': `Bearer ${tokenCookies}`},
+                headers: { 'Authorization': `Bearer ${tokenCookies}` },
                 data: form_data,
             };
 
             const optionsGetID = {
                 method: 'GET',
-                url:`${BASE_URL}/subjects/getid/${subjectname}/${subjectgroup}`,
-                headers: { 
-                    'Access-Control-Allow-Origin' : '*',
-                    'Authorization': `Bearer ${tokenCookies}` 
+                url: `${BASE_URL}/subjects/getid/${subjectname}/${subjectgroup}`,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `Bearer ${tokenCookies}`
                 },
             };
 
             /* Create Subject */
             await axios(optionsPost)
-            .then(res => {
-                console.log('Create Subject :'+res.data)
-            });
+                .then(res => {
+                    console.log('Create Subject :' + res.data)
+                });
 
             /* Get Subject ID.*/
             await axios(optionsGetID)
-            .then(res => {
-                sid(res.data);
-                setSubjectid(res.data);
-            });
+                .then(res => {
+                    sid(res.data);
+                    setSubjectid(res.data);
+                });
 
-        }else{
+        } else {
 
             /* Patch Subject.*/
             const optionsPatch = {
@@ -124,9 +126,9 @@ const Subjects = ({ getActivate, sid }) => {
             };
 
             await axios(optionsPatch)
-            .then(res => {
-                console.log('Patch Subject :'+res.data);
-            });
+                .then(res => {
+                    console.log('Patch Subject :' + res.data);
+                });
         }
 
         setOpen(false);
@@ -136,11 +138,12 @@ const Subjects = ({ getActivate, sid }) => {
         if (subjectname !== "" && subjectgroup !== "") {
             getActivate(true);
             setSubmitStatus(false);
-        }else{
+        } else {
             getActivate(false);
             setSubmitStatus(true);
         }
     });
+
     
     return (
         <Grid container>
@@ -183,46 +186,46 @@ const Subjects = ({ getActivate, sid }) => {
                     </Button>
                 </Grid>
             </Grid>
-                <Dialog open={open} aria-labelledby="form-dialog-title" >
-                    <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            คุณสามารถสร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น หากคุณไม่ได้ตั้งชื่อรายวิชาระบบจะทำการตั้งชื่อให้อัตโนมัติ
-                        </DialogContentText>
-                        <TextField
-                            type="text"
-                            autoFocus
-                            className={classes.SubjectsDialog}
-                            label="ชื่อรายวิชา"
-                            placeholder="วิชาคอมพิวเตอร์"
-                            value={subjectname}
-                            required
-                            onChange={handleChangeSubjectname}
+            <Dialog open={open} aria-labelledby="form-dialog-title" >
+                <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        คุณสามารถสร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น หากคุณไม่ได้ตั้งชื่อรายวิชาระบบจะทำการตั้งชื่อให้อัตโนมัติ
+                    </DialogContentText>
+                    <TextField
+                        type="text"
+                        autoFocus
+                        className={classes.SubjectsDialog}
+                        label="ชื่อรายวิชา"
+                        placeholder="วิชาคอมพิวเตอร์"
+                        value={subjectname}
+                        required
+                        onChange={handleChangeSubjectname}
 
-                        />
-                        <TextField
-                            type="number"
-                            className={classes.SubjectsDialog}
-                            label="กลุ่ม"
-                            placeholder="9"
-                            value={subjectgroup}
-                            required
-                            onChange={handleChangeSubjectgroup}
-                        />
-                    </DialogContent>
-                    <DialogActions>
+                    />
+                    <TextField
+                        type="number"
+                        className={classes.SubjectsDialog}
+                        label="กลุ่ม"
+                        placeholder="9"
+                        value={subjectgroup}
+                        required
+                        onChange={handleChangeSubjectgroup}
+                    />
+                </DialogContent>
+                <DialogActions>
 
-                        <Button onClick={onReset} color="secondary" >
-                            ล้าง
-                        </Button>
-                        <Button onClick={handelAutomate} color="primary" >
-                            สร้างอัตโนมัติ
-                        </Button>
-                        <Button onClick={handelSubmit} color="primary" disabled={submitStatus}>
-                            ยืนยัน
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                    <Button onClick={onReset} color="secondary" className={classes.LeftItem}>
+                        ล้าง
+                    </Button>
+                    <Button onClick={handelAutomate} color="primary" >
+                        สร้างอัตโนมัติ
+                    </Button>
+                    <Button onClick={handelSubmit} color="primary" disabled={submitStatus}>
+                        ยืนยัน
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Grid>
     );
 }

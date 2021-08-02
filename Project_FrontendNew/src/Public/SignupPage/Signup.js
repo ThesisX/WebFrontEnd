@@ -73,11 +73,20 @@ const Signup = () => {
   const [Schollname, setSchollname] = useState("")
   // let [Province, setProvince] = useState("")
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
+
   const [errpwd, setErrpwd] = useState(true)
+  const [errpwd1, setErrpwd1] = useState(true)
+
   const [helpTextPassword, setHelpTextPassword] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
+  const [helpTextPassword1, setHelpTextPassword1] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
+
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+  const handleClickShowPassword1 = () => {
+    setShowPassword1(!showPassword1);
   };
 
   const validate = (v) => {
@@ -90,14 +99,31 @@ const Signup = () => {
     }
 
     setPassword(v);
+    
+  };
+
+  const validates = (v) => {
+    if (v.length > 8) {
+      setErrpwd1(false);
+      setHelpTextPassword1('ถูกต้อง');
+    } else {
+      setErrpwd1(true);
+      setHelpTextPassword1('รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร');
+    }
+
+    setConfirmPassword(v);
   };
 
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const handleMouseDownPassword1 = (event) => {
+    event.preventDefault();
+  };
 
   const handleSignup = async (e) => {
+    
     e.preventDefault()
 
 
@@ -340,33 +366,40 @@ const Signup = () => {
         </FormControl>
         {/* <abel htmlFor="component-outlined-helptext">{helpTextPassword}</abel> */}
 
-        {/* <CssTextField
-            className={classes.margin}
+       
+        <FormControl variant="outlined" >
+          <InputLabel htmlFor="component-outlined">ConfirmPassword</InputLabel>
+          <OutlinedInput
+            type={showPassword1 ? 'text' : 'password'}
+            id="component-outlined"
+            label="ConfirmPASSWORD"
+            error={errpwd1}
             variant="outlined"
-            id="custom-css-outlined-input"
-              type={showPassword ? 'text' : 'password'}
-              label="PASSWORD"
-              required
-              helperText="ERROR"
-              onChange={(e) =>
-                setPassword(e.target.value)}
-              value={Password}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    // aria-label="สลับการมองเห็นรหัสผ่าน"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              
-            /> */}
+            onChange={(e) => validates(e.target.value)}
+            value={ConfirmPassword}
+            labelWidth={66}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onChange={(e) =>
+                    setConfirmPassword(e.target.value)}
+                  value={ConfirmPassword}
+                  onClick={handleClickShowPassword1}
+                  onMouseDown={handleMouseDownPassword1}
+                  edge="end"
+                >
+                  {showPassword1 ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            required
+          />
+           <FormHelperText id="filled-weight-helper-text">{helpTextPassword1}</FormHelperText>
 
-        <TextField
+        </FormControl>
+
+        {/* <TextField
           className={classes.margin}
           type="password"
           label="ConfirmPASSWORD"
@@ -376,7 +409,7 @@ const Signup = () => {
           helperText="ERROR"
           onChange={(e) =>
             setConfirmPassword(e.target.value)}
-          value={ConfirmPassword} />
+          value={ConfirmPassword} /> */}
 
 
         <TextField

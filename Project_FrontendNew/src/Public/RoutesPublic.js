@@ -19,14 +19,14 @@ const RoutesPublic = () => {
   return (
     <BrowserRouter>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
 
             <li><Link to="/">เข้าสู่ระบบ</Link></li>
             <Button variant="outlined" color="secondary"><Link to="/sign-up">สมัครสมาชิก</Link></Button>
           </ul>
-        </nav>
-        <Publics /> 
+        </nav> */}
+        {/* <Publics />  */}
       </div>
       <TabbarPublic/>
     </BrowserRouter>

@@ -13,6 +13,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,77 +27,94 @@ import RoutesPublic from '../RoutesPublic';
 import Singin from '../SigninPage/Signin';
 import Signup from '../SignupPage/Signup';
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    maxWidth: 500,
-    marginTop: '1%'
-  },
-  container: {
-    width: '100%',
-
-  },
-  toolbar: {
-    marginTop: '3%',
-    left: '-2%',
-  }
-});
-
-
-
-export default function IconLabelTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Router>
-      {/* <BrowserRouter>     */}
-      <div>
-        <Container className={classes.container} >
-          {/* <AppBar position="fixed"> */}
-          <Toolbar className={classes.toolbar}>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              MANU
-            </Typography>
-          </Toolbar>
-          {/* </AppBar> */}
-          <div> <center>
-            <Paper square className={classes.root}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                variant="fullWidth"
-                indicatorColor="secondary"
-                textColor="secondary"
-                aria-label="icon label tabs example"
-              >
-                {/* <Button variant="outlined" color="secondary">
-                 Secondary
-              </Button> */}
-
-                <Tab icon={<FavoriteIcon />} label="LOGIN" >
-                  <Link to="/sign-up"></Link>
-                </Tab>
-
-                <Tab icon={<PersonPinIcon />} label="SINGIN" >
-                  <Link to="/">HI</Link>
-                </Tab>
-
-              </Tabs>
-            </Paper>
-          </center>
-          </div>
-          {/* <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '70vh' }} /> */}
-        </Container>
-      </div >
-      {/* </BrowserRouter> */}
-    </Router>
-  );
-}
+                  function TabPanel(props) {
+                    const { children, value, index, ...other } = props;
+                  
+                    return (
+                      <div
+                        role="tabpanel"
+                        hidden={value !== index}
+                        id={`scrollable-force-tabpanel-${index}`}
+                        aria-labelledby={`scrollable-force-tab-${index}`}
+                        {...other}
+                      >
+                        {value === index && (
+                          <Box p={3}>
+                            <Typography>{children}</Typography>
+                          </Box>
+                        )}
+                      </div>
+                    );
+                  }
+                  
+                  TabPanel.propTypes = {
+                    children: PropTypes.node,
+                    index: PropTypes.any.isRequired,
+                    value: PropTypes.any.isRequired,
+                  };
+                  
+                  function a11yProps(index) {
+                    return {
+                      id: `scrollable-force-tab-${index}`,
+                      'aria-controls': `scrollable-force-tabpanel-${index}`,
+                    };
+                  }
+                  
+                  const useStyles = makeStyles((theme) => ({
+                    root: {
+                      flexGrow: 1,
+                      width: '100%',
+                      backgroundColor: theme.palette.background.paper,
+                    },
+                  }));
+                  
+                  export default function ScrollableTabsButtonForce() {
+                    const classes = useStyles();
+                    const [value, setValue] = React.useState(0);
+                  
+                    const handleChange = (event, newValue) => {
+                      setValue(newValue);
+                    };
+                  
+                    return (
+                      <div className={classes.root}>
+                        <AppBar position="static" color="default">
+                          <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            variant="scrollable"
+                            scrollButtons="on"
+                            indicatorColor="primary"
+                            textColor="primary"
+                            aria-label="scrollable force tabs example"
+                          >
+                           
+                            <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(0)} />
+                            <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(1)} />
+                            
+                          </Tabs>
+                        </AppBar>
+                        <TabPanel value={value} index={0}>
+                          <Singin />
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                         <Signup/>
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                          Item Three
+                        </TabPanel>
+                        {/* <TabPanel value={value} index={3}>
+                          Item Four
+                        </TabPanel>
+                        <TabPanel value={value} index={4}>
+                          Item Five
+                        </TabPanel>
+                        <TabPanel value={value} index={5}>
+                          Item Six
+                        </TabPanel>
+                        <TabPanel value={value} index={6}>
+                          Item Seven
+                        </TabPanel> */}
+                      </div>
+                    );
+                  }

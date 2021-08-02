@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
-
 import {
-  fade,
   ThemeProvider,
-  withStyles,
   makeStyles,
   createMuiTheme,
-  createStyles,
+  // createStyles,
 } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-
 // import FormHelperText from '@material-ui/core/FormHelperText';
-import { green } from '@material-ui/core/colors';
 import axios from 'axios'
 // import qs from 'qs';
 import Button from '@material-ui/core/Button';
@@ -243,10 +232,10 @@ const Signup = () => {
       backgroundColor: '#fce4ec',
       padding: '60px',
     },
-    formControl: {
-      margin: theme.spacing(3),
-      minWidth: 200,
-    },
+    // formControl: {
+    //   margin: theme.spacing(3),
+    //   minWidth: 200,
+    // },
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
@@ -398,18 +387,6 @@ const Signup = () => {
            <FormHelperText id="filled-weight-helper-text">{helpTextPassword1}</FormHelperText>
 
         </FormControl>
-
-        {/* <TextField
-          className={classes.margin}
-          type="password"
-          label="ConfirmPASSWORD"
-          required
-          variant="outlined"
-          id="validation-outlined-input"
-          helperText="ERROR"
-          onChange={(e) =>
-            setConfirmPassword(e.target.value)}
-          value={ConfirmPassword} /> */}
 
 
         <TextField

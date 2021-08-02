@@ -1,18 +1,13 @@
 import React from "react";
-import Tab from '@material-ui/core/Tab';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Button from '@material-ui/core/Button';
-
-
 import {
   BrowserRouter,
-  Switch,
-  Route,
-  Link,
+  // Switch,
+  // Route,
+  // Link,
 } from "react-router-dom";
 
-import Signin from "./SigninPage/Signin";
-import Signup from "./SignupPage/Signup";
+// import Signin from "./SigninPage/Signin";
+// import Signup from "./SignupPage/Signup";
 import TabbarPublic from "./Tabbar/TabbarPublic";
 
 const RoutesPublic = () => {
@@ -33,19 +28,19 @@ const RoutesPublic = () => {
   );
 };
 
-const Publics = () => {
-  return (
-    <div>
-      <Switch>
-        <Route exact path="/">
-          <Signin />
-        </Route>
-        <Route path="/sign-up">
-          <Signup />
-        </Route>
-      </Switch>
-    </div>
-  );
-}
+// const Publics = () => {
+//   return (
+//     <div>
+//       <Switch>
+//         <Route exact path="/">
+//           <Signin />
+//         </Route>
+//         <Route path="/sign-up">
+//           <Signup />
+//         </Route>
+//       </Switch>
+//     </div>
+//   );
+// }
 
 export default RoutesPublic

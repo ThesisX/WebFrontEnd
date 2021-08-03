@@ -16,7 +16,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { BASE_URL } from '../../service';
 import Cookies from 'js-cookie';
 import axios, { post, get } from 'axios';
-import qs from 'qs';
+import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: 50,
     },
-    backButton: {
+    HandleBackButton: {
         marginRight: theme.spacing(1),
     },
     instructions: {
@@ -43,7 +45,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 50,
         alignItems: 'center',
         textAlign: 'center'
-    }
+    },
+    HandleButton:{
+        float: 'right',
+    },
 }));
 
 const getSteps = () => {
@@ -204,24 +209,29 @@ const System = () => {
                                                 <Button
                                                     disabled={activeStep === 0}
                                                     onClick={handleBack}
-                                                    className={classes.backButton}
+                                                    className={classes.HandleBackButton}
+                                                    startIcon={<ArrowBackIosIcon/>}
                                                 >
                                                     ย้อนกลับ
                                                 </Button>
                                                 {activeStep !== 2 ?
                                                     <Button
+                                                        className={classes.HandleButton}
                                                         disabled={stepStatus === false}
                                                         variant="contained"
                                                         color="primary"
                                                         onClick={handleNext}
+                                                        startIcon={<QueuePlayNextIcon/>}
                                                     >
                                                         ถัดไป
                                                     </Button>
                                                     : <Button
+                                                        className={classes.HandleButton}
                                                         disabled={stepStatus === false}
                                                         variant="contained"
                                                         color="primary"
                                                         onClick={handleSubmit}
+                                                        startIcon={<CheckCircleIcon/>}
                                                     >
                                                         ตรวจข้อสอบ
                                                     </Button>

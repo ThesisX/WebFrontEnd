@@ -66,11 +66,11 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
                     <DropzoneArea
                         dropzoneText={
                             <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางเฉลยข้อสอบที่นี่ รองรับเฉพาะ .csv .jpeg .png เท่านั้น
+                                คลิก หรือวางเฉลยข้อสอบที่นี่ รองรับเฉพาะ .csv .jpeg .jpg .png เท่านั้น
                             </Typography>
                         }
                         onChange={(f) => onAdd(f)}
-                        acceptedFiles={['.csv', '.jpeg', '.png']}
+                        acceptedFiles={['.csv', '.jpeg', 'jpg', '.png']}
                         maxFileSize={5000000}
                         alertSnackbarProps={{
                             autoHideDuration: 5000,

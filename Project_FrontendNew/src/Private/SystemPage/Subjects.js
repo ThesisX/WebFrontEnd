@@ -14,6 +14,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import CasinoIcon from '@material-ui/icons/Casino';
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
+import cyan from '@material-ui/core/colors/cyan';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -25,8 +29,23 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 5,
         width: '40%',
     },
-    LeftItem: {
-        alignItems: 'left',
+    fRight: {
+        float: 'right',
+        marginRight: 10,
+        marginBottom: 10,
+    },
+    AutoFieldButton:{
+        float: 'right',
+        marginRight: 10,
+        marginBottom: 10,
+        color: '#fff',
+        backgroundColor: cyan[500],
+        '&:hover': {
+            backgroundColor: cyan[500],
+          },
+    },
+    ClearButtton:{
+        marginLeft:10,
     }
 }));
 const Subjects = ({ getActivate, sid }) => {
@@ -36,7 +55,7 @@ const Subjects = ({ getActivate, sid }) => {
     const [lableDialog, setLableDialog] = useState("สร้างรายวิชา");
     const [subjectid, setSubjectid] = useState(0);
     const [subjectname, setSubjectname] = useState("");
-    const [subjectgroup, setSubjectgroup] = useState("1");
+    const [subjectgroup, setSubjectgroup] = useState("");
     const [submitStatus, setSubmitStatus] = useState(true);
 
     const classes = useStyles();
@@ -50,12 +69,13 @@ const Subjects = ({ getActivate, sid }) => {
         setSubjectgroup("");
     };
 
-    const handelAutomate = () => {
+    const handleAutoField = () => {
         let n = new Date();
         let t = n.getTime();
         let sname = `A-${t}`;
 
         setSubjectname(sname);
+        setSubjectgroup("1");
         setLableDialog("แก้ไขรายวิชา");
 
     };
@@ -77,7 +97,7 @@ const Subjects = ({ getActivate, sid }) => {
         setSubjectgroup(gname);
     }
 
-    const handelSubmit = async () => {
+    const handleSubmit = async () => {
 
         if (subjectid === 0) {
             const form_data = {
@@ -144,7 +164,7 @@ const Subjects = ({ getActivate, sid }) => {
         }
     });
 
-    
+
     return (
         <Grid container>
             <Grid container item xs={12} spacing={3}>
@@ -190,7 +210,7 @@ const Subjects = ({ getActivate, sid }) => {
                 <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        คุณสามารถสร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น หากคุณไม่ได้ตั้งชื่อรายวิชาระบบจะทำการตั้งชื่อให้อัตโนมัติ
+                        คำแนะนำ: สร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น และตั้งกลุ่มเรียนเป็นตัวเลขเช่น 1 30 567 เป็นต้น ทั้งนี้คุณสามารถสร้างรายวิชาได้โดยอัตโนมัติเพียงคลิกที่ปุ่ม "สร้างอัตโนมัติ"
                     </DialogContentText>
                     <TextField
                         type="text"
@@ -214,16 +234,36 @@ const Subjects = ({ getActivate, sid }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-
-                    <Button onClick={onReset} color="secondary" className={classes.LeftItem}>
-                        ล้าง
-                    </Button>
-                    <Button onClick={handelAutomate} color="primary" >
-                        สร้างอัตโนมัติ
-                    </Button>
-                    <Button onClick={handelSubmit} color="primary" disabled={submitStatus}>
-                        ยืนยัน
-                    </Button>
+                    <Grid container item xs={12} >
+                        <Grid item xs={4}>
+                            <Button className={classes.ClearButtton}
+                                onClick={onReset} 
+                                variant="contained"
+                                color="secondary" 
+                                startIcon={<DeleteIcon />}
+                            >
+                                ล้าง
+                            </Button>
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Button onClick={handleSubmit}
+                                variant="contained"
+                                color="primary"
+                                disabled={submitStatus}
+                                className={classes.fRight}
+                                startIcon={<SaveIcon />}
+                            >
+                                ยืนยัน
+                            </Button>
+                            <Button onClick={handleAutoField}
+                                variant="contained"
+                                className={classes.AutoFieldButton}
+                                startIcon={<CasinoIcon />}
+                            >
+                                สร้างอัตโนมัติ
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </DialogActions>
             </Dialog>
         </Grid>

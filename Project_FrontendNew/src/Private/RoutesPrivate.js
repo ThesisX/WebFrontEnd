@@ -11,6 +11,8 @@ import {
 
 import Dashboard from './Dashboard/Dashboard';
 import System from './SystemPage/System';
+import MyAppBar from "../Components/Appbar/MyAppBar";
+
 
 const RoutesPrivate = () => {
 
@@ -30,10 +32,10 @@ const RoutesPrivate = () => {
                         </ul>
                     </nav>
                     <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
-
-                    <Privates />
+                    <MyAppBar/>
                 </div>
             </BrowserRouter>
+                    <Privates />
         </div>
     )
 }

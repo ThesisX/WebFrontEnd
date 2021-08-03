@@ -88,8 +88,8 @@ import Signup from '../SignupPage/Signup';
                             aria-label="scrollable force tabs example"
                           >
                            
-                            <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(0)} />
-                            <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(1)} />
+                            <Tab label="เข้าสู่ระบบ" icon={<FavoriteIcon />} {...a11yProps(0)} />
+                            <Tab label="สมัครสมาชิก" icon={<PersonPinIcon />} {...a11yProps(1)} />
                             
                           </Tabs>
                         </AppBar>

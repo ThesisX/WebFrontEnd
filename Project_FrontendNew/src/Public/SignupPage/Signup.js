@@ -70,6 +70,7 @@ const Signup = () => {
   const [helpTextPassword, setHelpTextPassword] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
   const [helpTextPassword1, setHelpTextPassword1] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
 
+  // const [pwdnotThis, setPwdnotThis] = useState ("รหัสผ่านไม่ตรงกัน")
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -112,7 +113,12 @@ const Signup = () => {
   };
 
   const handleSignup = async (e) => {
-    
+  //   if (typeof ["Password"] !== "undefined" && typeof ["ConfirmPassword"] !== "undefined") {
+  //     if (["Password"] != ["ConfirmPassword"]) {
+  //       pwdnotThis(false);
+  //       setHelpTextPassword ('Passwords dont match.');
+  //     }
+  // }
     e.preventDefault()
 
 

@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: 36,
     backgroundColor: '#FFB6C1',
+    // textColor: '#000000'
 
   },
   hide: {
@@ -106,16 +107,19 @@ const useStyles = makeStyles((theme) => ({
   },
   ulList: {
     margin: 18,
+    borderRadius: 15,
+
     backgroundColor: '#FFFACD	',
 
   },
   listitem: {
     padding: 13,
   },
-  // closeicon: {
+  closeicon: {
   //  margin: 18,
+  backgroundColor: '#FFB6C1',
 
-  // }
+  }
   
 }));
 
@@ -153,7 +157,7 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap color="textSecondary">
             Mini variant drawer
           </Typography>
         </Toolbar>
@@ -178,7 +182,7 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List className={classes.ulList}>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['หน้าหลัก', 'ระบบตรวจข้อสอบ', 'วิธีการใช้งาน', 'เกี่ยวกับ'].map((text, index) => (
             <ListItem className={classes.listitem} button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />

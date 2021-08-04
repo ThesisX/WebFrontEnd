@@ -15,9 +15,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Grid } from '@material-ui/core';
+
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Grid } from '@material-ui/core';
+import HouseIcon from '@material-ui/icons/House';
+import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+
 
 const drawerWidth = 240;
 
@@ -44,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: 36,
     backgroundColor: '#FFB6C1',
+    
     // textColor: '#000000'
 
   },
@@ -118,6 +124,7 @@ const useStyles = makeStyles((theme) => ({
   closeicon: {
   //  margin: 18,
   backgroundColor: '#FFB6C1',
+  borderRadius: 15,
 
   }
   
@@ -147,7 +154,7 @@ export default function MiniDrawer() {
       >
         <Toolbar className={classes.toolbartab}>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -158,7 +165,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap color="textSecondary">
-            Mini variant drawer
+          ระบบตรวจข้อสอบปรนัย 
           </Typography>
         </Toolbar>
       </AppBar>
@@ -176,7 +183,11 @@ export default function MiniDrawer() {
         }}
       >
         <div className={classes.toolbar}>
-          <IconButton className={classes.closeicon} onClick={handleDrawerClose}> <b> CLOSE</b>
+          <IconButton 
+          className={classes.closeicon} 
+          onClick={handleDrawerClose} 
+          position="end"> 
+            <b> CLOSE</b>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
@@ -184,20 +195,25 @@ export default function MiniDrawer() {
         <List className={classes.ulList}>
           {['หน้าหลัก', 'ระบบตรวจข้อสอบ', 'วิธีการใช้งาน', 'เกี่ยวกับ'].map((text, index) => (
             <ListItem className={classes.listitem} button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+              {/* < fontSize="large"/>  */}
+               
+                {index % 2 === 0 ? <HouseIcon /> :  <ImportantDevicesIcon/> // , <AssignmentIcon/>//
+                 }
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        <List>
+          {['ผู้จัดทำ', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List> */}
+        </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

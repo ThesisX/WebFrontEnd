@@ -28,8 +28,11 @@ const Datastudents = ({ stepData, toStorage, dataList }) => {
     const classes = useStyles();
 
     const onDelete = () => {
-        toStorage([]);
-        stepData(false);
+        let c = window.confirm("ต้องการลบ หรือไม่");
+        if(c){
+            toStorage([]);
+            stepData(false);
+        }
     };
 
     const onAdd = (f) => {

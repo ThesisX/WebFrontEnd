@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CasinoIcon from '@material-ui/icons/Casino';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
-import cyan from '@material-ui/core/colors/cyan';
+import blue from '@material-ui/core/colors/blue';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme) => ({
         float: 'right',
         marginRight: 10,
         marginBottom: 10,
-        color: '#fff',
-        backgroundColor: cyan[500],
-        '&:hover': {
-            backgroundColor: cyan[500],
-          },
+        color: blue[500],
+        // backgroundColor: blue[500],
+        // '&:hover': {
+        //     backgroundColor: blue[500],
+        //   },
     },
     ClearButtton:{
         marginLeft:10,
@@ -238,7 +238,6 @@ const Subjects = ({ getActivate, sid }) => {
                         <Grid item xs={4}>
                             <Button className={classes.ClearButtton}
                                 onClick={onReset} 
-                                variant="contained"
                                 color="secondary" 
                                 startIcon={<DeleteIcon />}
                             >
@@ -247,7 +246,6 @@ const Subjects = ({ getActivate, sid }) => {
                         </Grid>
                         <Grid item xs={8}>
                             <Button onClick={handleSubmit}
-                                variant="contained"
                                 color="primary"
                                 disabled={submitStatus}
                                 className={classes.fRight}
@@ -256,7 +254,6 @@ const Subjects = ({ getActivate, sid }) => {
                                 ยืนยัน
                             </Button>
                             <Button onClick={handleAutoField}
-                                variant="contained"
                                 className={classes.AutoFieldButton}
                                 startIcon={<CasinoIcon />}
                             >

@@ -37,8 +37,11 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
     };
 
     const onDelete = () => {
-        toStorage([]);
-        stepAns(false);
+        let c = window.confirm("ต้องการลบ หรือไม่");
+        if(c){
+            toStorage([]);
+            stepAns(false);
+        }
     };
 
     const onAdd = (f) => {

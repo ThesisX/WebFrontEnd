@@ -32,10 +32,10 @@ const RoutesPrivate = () => {
                         </ul>
                     </nav>
                     <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
-                    <MyAppBar/>
+                    {/* <MyAppBar /> */}
+                    <Privates />
                 </div>
             </BrowserRouter>
-                    <Privates />
         </div>
     )
 }

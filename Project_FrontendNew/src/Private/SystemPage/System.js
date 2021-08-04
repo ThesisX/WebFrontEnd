@@ -12,13 +12,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { BASE_URL } from '../../service';
 import Cookies from 'js-cookie';
-import axios, { post, get } from 'axios';
+import { post, get } from 'axios';
 import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         textAlign: 'center'
     },
-    HandleButton:{
+    HandleButton: {
         float: 'right',
     },
 }));
@@ -65,11 +65,6 @@ const System = () => {
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
     const [TxtProcessing, setTxtProcessing] = useState("กำลังรอการป้อนข้อมูล")
-    const [fileUpload, setFileUpload] = useState({
-        ans: [],
-        exm: [],
-        data: [],
-    });
     const [Loadding, setLoadding] = useState(false);
 
     const classes = useStyles();
@@ -98,8 +93,6 @@ const System = () => {
                 return <Exams stepExam={(s) => setStepStatus(s)}
                     toStorage={(f) => setExamfile(f)}
                     examList={examfile} />;
-            case 3:
-                return "";
             default:
                 return '';
         }
@@ -166,7 +159,6 @@ const System = () => {
             .then(res => {
                 console.log("Predict Exams return : ", res.data);
             });
-        
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
     };
 
@@ -210,7 +202,7 @@ const System = () => {
                                                     disabled={activeStep === 0}
                                                     onClick={handleBack}
                                                     className={classes.HandleBackButton}
-                                                    startIcon={<ArrowBackIosIcon/>}
+                                                    startIcon={<ArrowBackIosIcon />}
                                                 >
                                                     ย้อนกลับ
                                                 </Button>
@@ -221,7 +213,7 @@ const System = () => {
                                                         variant="contained"
                                                         color="primary"
                                                         onClick={handleNext}
-                                                        startIcon={<QueuePlayNextIcon/>}
+                                                        startIcon={<QueuePlayNextIcon />}
                                                     >
                                                         ถัดไป
                                                     </Button>
@@ -231,7 +223,7 @@ const System = () => {
                                                         variant="contained"
                                                         color="primary"
                                                         onClick={handleSubmit}
-                                                        startIcon={<CheckCircleIcon/>}
+                                                        startIcon={<CheckCircleIcon />}
                                                     >
                                                         ตรวจข้อสอบ
                                                     </Button>

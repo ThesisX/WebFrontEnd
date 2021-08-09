@@ -12,6 +12,7 @@ import {
 import Dashboard from './Dashboard/Dashboard';
 import System from './SystemPage/System';
 import MyAppBar from "../Components/Appbar/MyAppBar";
+import Download from './DownLoad/Download';
 
 
 const RoutesPrivate = () => {
@@ -24,7 +25,7 @@ const RoutesPrivate = () => {
     return (
         <div>
             <BrowserRouter>
-                <div>
+                {/* <div>
                     <nav>
                         <ul>
                             <li><Link to="/">หน้าแรก</Link></li>
@@ -32,10 +33,11 @@ const RoutesPrivate = () => {
                         </ul>
                     </nav>
                     <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
-                    {/* <MyAppBar /> */}
                     <Privates />
-                </div>
-            </BrowserRouter>
+                </div> */}
+                    <MyAppBar />
+                    <Download/>
+                </BrowserRouter>
         </div>
     )
 }

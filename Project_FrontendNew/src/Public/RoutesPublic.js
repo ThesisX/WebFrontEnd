@@ -21,9 +21,9 @@ const RoutesPublic = () => {
             <Button variant="outlined" color="secondary"><Link to="/sign-up">สมัครสมาชิก</Link></Button>
           </ul>
         </nav> */}
-        <Signin /> 
+        {/* <Signin />  */}
       </div>
-      {/* <TabbarPublic/> */}
+      <TabbarPublic/>
     </BrowserRouter>
   );
 };

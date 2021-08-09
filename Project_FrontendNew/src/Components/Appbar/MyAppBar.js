@@ -16,15 +16,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Grid } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import HouseIcon from '@material-ui/icons/House';
-import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
+
+import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded'; import MailIcon from '@material-ui/icons/Mail';
+import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone'; import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import NaturePeopleTwoToneIcon from '@material-ui/icons/NaturePeopleTwoTone';
+import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
+import MeetingRoomTwoToneIcon from '@material-ui/icons/MeetingRoomTwoTone';
 
-
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: 36,
     backgroundColor: '#FFB6C1',
-    
+
     // textColor: '#000000'
 
   },
@@ -68,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,  
+      duration: theme.transitions.duration.enteringScreen,
     }),
     backgroundColor: '#EEDD82',
   },
@@ -78,9 +82,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(5) + 1,
+    width: theme.spacing(6) + 1,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(11) + 1,
+      width: theme.spacing(10.9) + 1,
       backgroundColor: '#EEDD82',
 
     },
@@ -94,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     marginBottom: 50,
     // content: {
-    //   flexGrow: 1,
+    // flexGrow: -1,
     //   padding: theme.spacing(3),
     // },
 
@@ -108,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(16),
-    
+
     // marginTop:60,
   },
   ulList: {
@@ -116,18 +120,29 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
 
     backgroundColor: '#FFFACD	',
-
   },
   listitem: {
     padding: 13,
   },
   closeicon: {
-  //  margin: 18,
-  backgroundColor: '#FFB6C1',
-  borderRadius: 15,
+    //  margin: 18,
+    backgroundColor: '#FFB6C1',
+    borderRadius: 15,
+
+  },
+  iconLogout: {
+    // marginInline: 550,
+    borderRadius: 15,
+
+  },
+  h6text: {
+    // marginTop: -40,
+    // marginLeft: 100,
+
+    // border: 50,
 
   }
-  
+
 }));
 
 export default function MiniDrawer() {
@@ -152,7 +167,10 @@ export default function MiniDrawer() {
           [classes.appBarShift]: open,
         })}
       >
+
+
         <Toolbar className={classes.toolbartab}>
+
           <IconButton
             color="primary"
             aria-label="open drawer"
@@ -164,11 +182,20 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap color="textSecondary">
-          ระบบตรวจข้อสอบปรนัย 
+          <Typography
+            className={classes.h6text}
+            variant="h6"
+            noWrap
+            color="textSecondary"
+            edge="start"
+          >
+            ระบบตรวจข้อสอบปรนัย
           </Typography>
+
         </Toolbar>
+
       </AppBar>
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -183,44 +210,57 @@ export default function MiniDrawer() {
         }}
       >
         <div className={classes.toolbar}>
-          <IconButton 
-          className={classes.closeicon} 
-          onClick={handleDrawerClose} 
-          position="end"> 
+          <IconButton
+            className={classes.closeicon}
+            onClick={handleDrawerClose}
+            position="end">
             <b> CLOSE</b>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
-        <List className={classes.ulList}>
-          {['หน้าหลัก', 'ระบบตรวจข้อสอบ', 'วิธีการใช้งาน', 'เกี่ยวกับ'].map((text, index) => (
-            <ListItem className={classes.listitem} button key={text}>
+        <List className={classes.ulList} position="end">
+          {[['หน้าหลัก', <DashboardRoundedIcon />],
+          ['ระบบตรวจข้อสอบ', <ImportantDevicesIcon />],
+          ['วิธีการใช้งาน', <BallotTwoToneIcon />],
+
+          ].map((text, index) => (
+            <ListItem className={classes.listitem} button key={index}>
               <ListItemIcon>
-              {/* < fontSize="large"/>  */}
-               
-                {index % 2 === 0 ? <HouseIcon /> :  <ImportantDevicesIcon/> // , <AssignmentIcon/>//
-                 }
+                {text[1]}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text[0]} />
             </ListItem>
+
           ))}
         </List>
         <Divider />
-        <List>
-          {['ผู้จัดทำ', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+        <List className={classes.ulList}>
+          {['เกี่ยวกับ', 'ผู้จัดทำ'].map((text, index) => (
+            <ListItem button key={text} className={classes.listitem}>
+              <ListItemIcon>{index % 2 === 0 ? <DnsRoundedIcon /> : <NaturePeopleTwoToneIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
+
+          <IconButton
+            fontSize="large"
+            className={classes.iconLogout}
+            color="primary"
+          >
+            <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
+            <MeetingRoomTwoToneIcon />
+          </IconButton>
+
+
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid container>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
         </Grid>
-       
+
       </main>
     </div>
   );

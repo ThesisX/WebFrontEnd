@@ -28,7 +28,7 @@ import NaturePeopleTwoToneIcon from '@material-ui/icons/NaturePeopleTwoTone';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import MeetingRoomTwoToneIcon from '@material-ui/icons/MeetingRoomTwoTone';
 
-const drawerWidth = 260;
+const drawerWidth = 290;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -75,8 +75,10 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     backgroundColor: '#EEDD82',
+    
   },
   drawerClose: {
+    // width: 28,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -86,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(10.9) + 1,
       backgroundColor: '#EEDD82',
+      display: 'flex',
 
     },
   },
@@ -96,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    marginBottom: 50,
+    marginBottom: 28,
     // content: {
     // flexGrow: -1,
     //   padding: theme.spacing(3),
@@ -107,32 +110,41 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 50,
     padding: theme.spacing(4, 4),
     backgroundColor: '#EEDD82',
+    justifyContent: 'space-between',
 
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(16),
+    padding: theme.spacing(20),
 
     // marginTop:60,
   },
   ulList: {
     margin: 18,
     borderRadius: 15,
-
+    justifyContent: 'space-between',
     backgroundColor: '#FFFACD	',
   },
   listitem: {
     padding: 13,
+    justifyContent: 'space-between',
+
   },
   closeicon: {
     //  margin: 18,
     backgroundColor: '#FFB6C1',
-    borderRadius: 15,
+    borderRadius: 25,
+    marginTop: '30px',
+    // marginBottom: '10px',
 
   },
   iconLogout: {
     // marginInline: 550,
     borderRadius: 15,
+    backgroundColor: '#FFB6C1',
+
+    // justifycontent: 'space-between',
+    // justifyContent: ,
 
   },
   h6text: {
@@ -192,6 +204,16 @@ export default function MiniDrawer() {
             ระบบตรวจข้อสอบปรนัย
           </Typography>
 
+          <IconButton
+           
+            fontSize="large"
+            className={classes.iconLogout}
+            color="primary"
+          >
+            <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
+            <MeetingRoomTwoToneIcon />
+          </IconButton>
+
         </Toolbar>
 
       </AppBar>
@@ -243,14 +265,6 @@ export default function MiniDrawer() {
             </ListItem>
           ))}
 
-          <IconButton
-            fontSize="large"
-            className={classes.iconLogout}
-            color="primary"
-          >
-            <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
-            <MeetingRoomTwoToneIcon />
-          </IconButton>
 
 
         </List>

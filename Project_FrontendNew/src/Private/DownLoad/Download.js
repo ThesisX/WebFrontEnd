@@ -61,11 +61,11 @@ export default function CustomizedTables() {
       <Table className={classes.table}  aria-label="customized table">
         <TableHead>
           <TableRow className={classes.tablerow}  >
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell  align="center">Calories</StyledTableCell>
-            <StyledTableCell align="center">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="center">Carbs&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>ชื่อวิชา</StyledTableCell>
+            <StyledTableCell  align="center">กลุ่ม</StyledTableCell>
             <StyledTableCell align="center">Download&nbsp;(g)</StyledTableCell>
+            {/* <StyledTableCell align="center">&nbsp;(g)</StyledTableCell> */}
+            {/* <StyledTableCell align="center">Carbs&nbsp;(g)</StyledTableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -76,8 +76,8 @@ export default function CustomizedTables() {
               </StyledTableCell>
               <StyledTableCell align="center">{row.calories}</StyledTableCell>
               <StyledTableCell align="center">{row.fat}</StyledTableCell>
-              <StyledTableCell align="center">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="center">{row.protein}</StyledTableCell>
+              {/* <StyledTableCell align="center">{row.carbs}</StyledTableCell>
+              <StyledTableCell align="center">{row.protein}</StyledTableCell> */}
             </StyledTableRow>
           ))}
         </TableBody>

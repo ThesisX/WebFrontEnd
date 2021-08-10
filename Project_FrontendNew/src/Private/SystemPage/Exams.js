@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types';
 
 import { DropzoneArea } from 'material-ui-dropzone'
-
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,99 +15,96 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Divider, Paper } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const useStyles = makeStyles((theme) => ({
-    filelist: {
+    PaperList: {
         padding: 20,
         width: '100%',
+        backgroundColor: theme.palette.background.paper,
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 250,
     },
-    dropzone: {
-        marginBottom:20,
+    listSection: {
+        backgroundColor: 'inherit',
+    },
+    ul: {
+        listStyleType: 'none',
+        backgroundColor: 'inherit',
+        padding: 0,
+    },
+    GridDropzone:{
+        margin: 'auto',
     },
 }));
 
 const Exams = ({ stepExam, toStorage, examList }) => {
-
+    const [filelist, setFilelist] = useState([...examList]);
     const classes = useStyles();
 
-    const HandleAdd = (f) => {
-        if (f.length > 0) {
-            toStorage(f);
-            stepExam(true);
-        }
+    const HandleAdd = newFiles => {
+        setFilelist(newFiles);
+        toStorage(newFiles);
+    };
 
+    const HandleRemove = index => {
+        if (index !== -1) {
+            let c = window.confirm("คุณต้องการลบ หรือไม่");
+            if (c) {
+                let newArr = [...filelist];
+                newArr.splice(index, 1);
+                setFilelist(newArr);
+                toStorage(newArr);
+            }
+        }
     };
 
     useEffect(() => {
-        if (examList.length > 0) {
-            // console.log("data zone is:", true);
+        if (filelist.length > 0) {
             stepExam(true);
         } else {
-            // console.log("data zone is:", false);
             stepExam(false);
         }
+    });
 
-    }, []);
+    console.log("In List: ", filelist);
 
     return (
-        <div className={classes.dropzone}>
-            <Grid container spacing={1}>
-                <Grid container item xs={12} md={12} sm={12} >
+
+
+        < div >
+            <Grid container spacing={1} >
+                <Grid container item xs={12} md={8} sm={12} className={classes.GridDropzone}>
                     <DropzoneArea
                         dropzoneText={
                             <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางข้อสอบที่นี่ รองรับเฉพาะ .jpeg .png เท่านั้น
+                                คลิก หรือวางข้อสอบที่นี่ รองรับเฉพาะ .jpeg .jpg .png เท่านั้น
                             </Typography>
                         }
-                        onChange={(f) => HandleAdd(f)}
-                        acceptedFiles={['.jpeg', '.png']}
+                        // initialFiles={filelist}
+                        fileObjects={filelist}
+                        onChange={HandleAdd}
+                        acceptedFiles={['.jpeg', '.jpg', '.png']}
                         maxFileSize={5000000}
                         alertSnackbarProps={{
                             autoHideDuration: 5000,
                         }}
                         showPreviewsInDropzone={false}
                         filesLimit={80}
-                        showAlerts={true}
-                        
+                        showAlerts={false}
+                        onDelete={HandleRemove} 
                         showPreviews={true}
                         useChipsForPreview
                         previewGridProps={{ container: { spacing: 1, direction: 'row' } }}
                         previewChipProps={{ classes: { root: classes.previewChip } }}
-                        previewText="รายการอัปโหลด"
+                        previewText="รายการที่อัปโหลด"
                     />
                 </Grid>
-                {/* <Grid container item xs={12} md sm={12} >
-                    <Paper className={classes.filelist}>
-                        <Typography variant="h6" color="textPrimary" display="block">
-                            รายการที่อัปโหลด
-                        </Typography>
-                        <Divider />
-                        <List dense={false}>
-                            {arr.map((f, index) => (
-                                <ListItem key={index.toString()}>
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <ImageIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-
-                                    <ListItemText primary={f.name} />
-                                    <ListItemSecondaryAction>
-                                        <Button
-                                            className={classes.DeleteButton}
-                                            color="secondary"
-                                            onClick={() => handleDelete(index)}
-                                            startIcon={<DeleteIcon />}
-                                        >
-                                        </Button>
-                                    </ListItemSecondaryAction>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Paper>
-                </Grid> */}
-            </Grid>
-        </div>
+            </Grid >
+        </div >
     )
 }
 

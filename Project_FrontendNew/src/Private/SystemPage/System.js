@@ -64,7 +64,7 @@ const System = () => {
     const [examfile, setExamfile] = useState([]);
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
-    const [TxtProcessing, setTxtProcessing] = useState("กำลังรอการป้อนข้อมูล")
+    const [TxtProcessing, setTxtProcessing] = useState("กำลังรอการป้อนข้อมูล");
     const [Loadding, setLoadding] = useState(false);
 
     const classes = useStyles();
@@ -174,7 +174,7 @@ const System = () => {
                                 {/* <Divider light/> */}
                             </Grid>
                             {/* Systems */}
-                            {activate ? (
+                            {!activate ? (
                                 <div>
                                     <Grid item xs={12}>
                                         <Stepper activeStep={activeStep} alternativeLabel>

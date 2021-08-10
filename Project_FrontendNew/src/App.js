@@ -28,7 +28,7 @@ const App = () => {
         {!auth ? <RoutesPublic />
           : <RoutesPrivate />
         }
-       
+       {/* <RoutesPrivate /> */}
       </Router>
     </div>
   )

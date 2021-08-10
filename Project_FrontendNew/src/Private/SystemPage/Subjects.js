@@ -156,10 +156,10 @@ const Subjects = ({ getActivate, sid }) => {
 
     useEffect(() => {
         if (subjectname !== "" && subjectgroup !== "") {
-            getActivate(true);
+            getActivate(false);
             setSubmitStatus(false);
         } else {
-            getActivate(false);
+            getActivate(true);
             setSubmitStatus(true);
         }
     });

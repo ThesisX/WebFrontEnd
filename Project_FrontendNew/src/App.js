@@ -25,10 +25,15 @@ const App = () => {
   return (
     <div>
       <Router>
-        {!auth ? <RoutesPublic />
+        {/* {!auth ? <RoutesPublic />
           : <RoutesPrivate />
+<<<<<<< HEAD
         }
        {/* <RoutesPrivate /> */}
+=======
+        } */}
+       <RoutesPrivate />
+>>>>>>> 0499175232189b42d453ff44f618bcc2b1a9b42b
       </Router>
     </div>
   )

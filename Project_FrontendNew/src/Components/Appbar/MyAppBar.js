@@ -93,9 +93,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   toolbartab: {
-    flexGrow: 50,
+    flexGrow: 40,
     padding: theme.spacing(4, 4),
     backgroundColor: '#EEDD82',
     justifyContent: 'space-between',
@@ -127,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
   },
   listitem: {
     padding: 13,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-',
 
   },
   closeicon: {
@@ -157,10 +157,18 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
+
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const Drawer = () => {
+    const itemList = {
+
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -208,7 +216,7 @@ export default function MiniDrawer() {
            
             fontSize="large"
             className={classes.iconLogout}
-            color="primary"
+            color="black"
           >
             <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
             <MeetingRoomTwoToneIcon />
@@ -241,6 +249,8 @@ export default function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
+
+        
         <List className={classes.ulList} position="end">
           {[['หน้าหลัก', <DashboardRoundedIcon />],
           ['ระบบตรวจข้อสอบ', <ImportantDevicesIcon />],

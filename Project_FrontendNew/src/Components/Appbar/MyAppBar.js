@@ -17,6 +17,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import { withRouter } from "react-router-dom";
+
 
 import FormHelperText from '@material-ui/core/FormHelperText';
 
@@ -159,16 +161,32 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function MiniDrawer() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+// export default function MiniDrawer() {
+  const Drawer = props => {
+    const { history } = props;
+    const classes = useStyles();
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
 
-  const Drawer = () => {
-    const itemList = {
+    const itemList = [
+      {
+        text: "หน้าหลัก",
+        icon: <DashboardRoundedIcon />,
+        onClick: () => history.push("/Dashboard")
+      },
+      {
+        text: "ระบบตรวจข้อสอบ",
+        icon: <ImportantDevicesIcon />,
+        onClick: () => history.push("/system")
+      },
+      // {
+      //   text: "วิธีการใช้งาน",
+      //   icon: <BallotTwoToneIcon />,
+      //   onClick: () => history.push("/contact")
+      // },
+    ]
 
-    }
-  }
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -250,9 +268,18 @@ export default function MiniDrawer() {
         </div>
         <Divider />
 
-        
         <List className={classes.ulList} position="end">
-          {[['หน้าหลัก', <DashboardRoundedIcon />],
+        {itemsList.map((item, index) => {
+          const { text, icon, onClick } = item;
+          return (
+            <ListItem button key={text} onClick={onClick}>
+              {icon && <ListItemIcon>{icon}</ListItemIcon>}
+              <ListItemText primary={text} />
+            </ListItem>
+          );
+        })}
+
+          {/* {[['หน้าหลัก', <DashboardRoundedIcon />],
           ['ระบบตรวจข้อสอบ', <ImportantDevicesIcon />],
           ['วิธีการใช้งาน', <BallotTwoToneIcon />],
 
@@ -264,18 +291,16 @@ export default function MiniDrawer() {
               <ListItemText primary={text[0]} />
             </ListItem>
 
-          ))}
+          ))} */}
         </List>
         <Divider />
         <List className={classes.ulList}>
-          {['เกี่ยวกับ', 'ผู้จัดทำ'].map((text, index) => (
+          {/* {['เกี่ยวกับ', 'ผู้จัดทำ'].map((text, index) => (
             <ListItem button key={text} className={classes.listitem}>
               <ListItemIcon>{index % 2 === 0 ? <DnsRoundedIcon /> : <NaturePeopleTwoToneIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
-          ))}
-
-
+          ))} */}
 
         </List>
       </Drawer>
@@ -288,4 +313,6 @@ export default function MiniDrawer() {
       </main>
     </div>
   );
-}
+ };
+
+export default withRouter(Drawer);

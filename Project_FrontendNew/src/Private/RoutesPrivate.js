@@ -34,28 +34,14 @@ const RoutesPrivate = () => {
                         </ul>
                     </nav>
                     <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
-                    <Privates />
                 </div> */}
-                    <MyAppBar />
-                    <Download/>
-                </BrowserRouter>
+              
+                <MyAppBar />
+                <Download/>
+            </BrowserRouter>
         </div>
     )
 }
 
-const Privates = () => {
-    return (
-        <div>
-            <Switch>
-                <Route exact path="/">
-                    <Dashboard />
-                </Route>
-                <Route path="/system">
-                    <System />
-                </Route>
-            </Switch>
-        </div>
-    );
-}
 
 export default RoutesPrivate;

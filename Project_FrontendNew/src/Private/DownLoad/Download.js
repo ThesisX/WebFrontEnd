@@ -46,6 +46,7 @@ const useStyles = makeStyles({
     minWidth: 400,
     // width: 1400,
     textAlign: 'center',
+
   },
  
 });

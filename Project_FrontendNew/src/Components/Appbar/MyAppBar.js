@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { withRouter } from "react-router-dom";
+import Private from './Private';
 
 
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     backgroundColor: '#EEDD82',
-    
+
   },
   drawerClose: {
     // width: 28,
@@ -116,8 +117,9 @@ const useStyles = makeStyles((theme) => ({
 
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(20),
+    flexGrow: 0,
+    padding: theme.spacing(10, 20),
+
 
     // marginTop:60,
   },
@@ -162,29 +164,29 @@ const useStyles = makeStyles((theme) => ({
 
 
 // export default function MiniDrawer() {
-  const Drawer = props => {
-    const { history } = props;
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+const MyAppBar = props => {
+  const { history } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-    const itemList = [
-      {
-        text: "หน้าหลัก",
-        icon: <DashboardRoundedIcon />,
-        onClick: () => history.push("/Dashboard")
-      },
-      {
-        text: "ระบบตรวจข้อสอบ",
-        icon: <ImportantDevicesIcon />,
-        onClick: () => history.push("/system")
-      },
-      // {
-      //   text: "วิธีการใช้งาน",
-      //   icon: <BallotTwoToneIcon />,
-      //   onClick: () => history.push("/contact")
-      // },
-    ]
+  const itemList = [
+    {
+      text: "หน้าหลัก",
+      icon: <DashboardRoundedIcon />,
+      onClick: () => history.push("/")
+    },
+    {
+      text: "ระบบตรวจข้อสอบ",
+      icon: <ImportantDevicesIcon />,
+      onClick: () => history.push("/system")
+    },
+    // {
+    //   text: "วิธีการใช้งาน",
+    //   icon: <BallotTwoToneIcon />,
+    //   onClick: () => history.push("/contact")
+    // },
+  ]
 
 
 
@@ -231,7 +233,7 @@ const useStyles = makeStyles((theme) => ({
           </Typography>
 
           <IconButton
-           
+
             fontSize="large"
             className={classes.iconLogout}
             color="black"
@@ -243,7 +245,7 @@ const useStyles = makeStyles((theme) => ({
         </Toolbar>
 
       </AppBar>
-
+     
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -269,15 +271,15 @@ const useStyles = makeStyles((theme) => ({
         <Divider />
 
         <List className={classes.ulList} position="end">
-        {itemsList.map((item, index) => {
-          const { text, icon, onClick } = item;
-          return (
-            <ListItem button key={text} onClick={onClick}>
-              {icon && <ListItemIcon>{icon}</ListItemIcon>}
-              <ListItemText primary={text} />
-            </ListItem>
-          );
-        })}
+          {itemList.map((item, index) => {
+            const { text, icon, onClick } = item;
+            return (
+              <ListItem button key={text} onClick={onClick}>
+                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                <ListItemText primary={text} />
+              </ListItem>
+            );
+          })}
 
           {/* {[['หน้าหลัก', <DashboardRoundedIcon />],
           ['ระบบตรวจข้อสอบ', <ImportantDevicesIcon />],
@@ -304,15 +306,12 @@ const useStyles = makeStyles((theme) => ({
 
         </List>
       </Drawer>
-      <main className={classes.content}>
+      <Grid xs={12} md={8} sm={12} className={classes.content}>
         <div className={classes.toolbar} />
-        <Grid container>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-        </Grid>
-
-      </main>
+          <Private/>
+      </Grid>
     </div>
   );
- };
+};
 
-export default withRouter(Drawer);
+export default withRouter(MyAppBar);

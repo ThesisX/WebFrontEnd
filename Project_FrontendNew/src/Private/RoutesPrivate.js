@@ -38,7 +38,7 @@ const RoutesPrivate = () => {
                 </div> */}
                 <MyAppBar />
               {/* <Test/> */}
-                <Download/>
+                {/* <Download/> */}
             </BrowserRouter>
         </div>
     )

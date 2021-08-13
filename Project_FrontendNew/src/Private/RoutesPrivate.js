@@ -13,6 +13,7 @@ import Dashboard from './Dashboard/Dashboard';
 import System from './SystemPage/System';
 import MyAppBar from "../Components/Appbar/MyAppBar";
 import Download from './DownLoad/Download';
+import Test from '../Components/Appbar/Test';
 
 
 
@@ -35,8 +36,8 @@ const RoutesPrivate = () => {
                     </nav>
                     <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
                 </div> */}
-              
                 <MyAppBar />
+              {/* <Test/> */}
                 <Download/>
             </BrowserRouter>
         </div>

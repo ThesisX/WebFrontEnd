@@ -82,10 +82,10 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerClose: {
     // width: 28,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    // transition: theme.transitions.create('width', {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
     overflowX: 'hidden',
     width: theme.spacing(6) + 1,
     [theme.breakpoints.up('sm')]: {
@@ -208,7 +208,6 @@ const MyAppBar = props => {
         })}
       >
 
-
         <Toolbar className={classes.toolbartab}>
 
           <IconButton
@@ -313,5 +312,7 @@ const MyAppBar = props => {
     </div>
   );
 };
+
+
 
 export default withRouter(MyAppBar);

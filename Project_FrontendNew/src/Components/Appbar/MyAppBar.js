@@ -121,7 +121,10 @@ const useStyles = makeStyles((theme) => ({
     // margin: 10,
     width: 260,
     backgroundColor: '#ffcdd2',
-    backgroundHover: '#ffab91',
+    // hover: '#ffab91',
+    '&:hover': {
+      backgroundColor: '#ffab91',
+    },
     // backgroundColor: '#ffab91' ,
     flexDirection: 'column',
     alignItems: 'center',

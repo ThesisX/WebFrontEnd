@@ -30,57 +30,116 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import NaturePeopleTwoToneIcon from '@material-ui/icons/NaturePeopleTwoTone';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import MeetingRoomTwoToneIcon from '@material-ui/icons/MeetingRoomTwoTone';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
+import ListRoundedIcon from '@material-ui/icons/ListRounded';
+import CloudQueueIcon from '@material-ui/icons/CloudQueue';
 
-const drawerWidth = 262;
+import  './MyAppBar';
+
+const drawerWidth = 292;
 
 
 const useStyles = makeStyles((theme) => ({
 
   root: {
     display: 'flex',
-    
+
   },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    height: 100,
-    alignItems: 'stretch',
+    // width: `calc(100% - ${drawerWidth}px)`,
+    width: 1400,
+    marginRight: 160,
+    height: 140,
+    // alignItems: 'stretch',
+    borderRadius: 45,
+    marginTop: 45,
     justifyContent: 'center',
+    minWidth: 700,
+    backgroundColor: '#f0f4c3',
   },
   // drawer: {
   //   width: drawerWidth,
   //   backgroundColor: '#f8bbd0',
-    
+
   //   flexShrink: 0,
   // },
   drawerPaper: {
     width: drawerWidth,
   },
   ulList: {
-    width: 260,
-    backgroundColor: '#bbdefb',
-    borderRadius: 25,
+    width: 290,
+    marginTop: 30,
+    marginBottom: 30,
+
+    // borderRadius: 25,
+    // spacing: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   ulListTwo: {
-    width: 260,
-    marginTop: 25,
-    backgroundColor: '#bbdefb',
-    borderRadius: 25,
+    width: 290,
+    marginTop: 35,
+    // backgroundColor: '#bbdefb',
+    // borderRadius: 25,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   toolbar: {
-    height: 100,
+    height: 140,
+    alignItems: 'center',
+
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(10, 50),
-    
+
   },
-  
+
   toolbartab: {
     justifyContent: 'space-between',
+
+  },
+
+  litsItem: {
+    // margin: 10,
+    width: 260,
+    backgroundColor: '#ffcdd2',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 35,
+    marginTop: 10,
+    marginBottom: 10,
+    // position: 5,
+  },
+  litsItemTwo: {
+    // margin: 10,
+    width: 260,
+    backgroundColor: '#b2dfdb',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 35,
+    marginTop: 10,
+    marginBottom: 10,
+    // position: 5,
+  },
+  h6text: {
+    marginLeft: 20,
+  },
+  icontoolbar: {
+    marginTop: 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  appbarroot: {
+    display: 'flex',
   }
 }));
 
@@ -235,7 +294,7 @@ const MyAppBar = props => {
     },
     {
       text: "วิธีการใช้งาน",
-      icon: <BallotTwoToneIcon />,
+      icon: <ListRoundedIcon />,
       onClick: () => history.push("/manual")
     },
     {
@@ -243,11 +302,11 @@ const MyAppBar = props => {
       icon: <ImportantDevicesIcon />,
       onClick: () => history.push("/system")
     },
-    // {
-    //   text: "วิธีการใช้งาน",
-    //   icon: <BallotTwoToneIcon />,
-    //   onClick: () => history.push("/contact")
-    // },
+    {
+      text: "ดาวน์โหลด",
+      icon: <GetAppRoundedIcon />,
+      onClick: () => history.push("/download")
+    },
   ]
 
   const itemListtwo = [
@@ -255,6 +314,11 @@ const MyAppBar = props => {
       text: "เกี่ยวกับ",
       icon: <DnsRoundedIcon />,
       onClick: () => history.push("/info")
+    },
+    {
+      text: "ผู้จัดทำ",
+      icon: <EmojiPeopleIcon />,
+      onClick: () => history.push("/manager")
     },
   ]
 
@@ -269,15 +333,17 @@ const MyAppBar = props => {
 
   return (
     <div className={classes.root}>
+
       <CssBaseline />
+
+      {/* <div className={classes.appbarroot}> */}
       <AppBar
-        position="fixed"
+        position="absolute"
         className={clsx(classes.appBar, {
           // [classes.appBarShift]: open,
         })}
       >
         <Toolbar className={classes.toolbartab}>
-
           {/* <IconButton
             color="primary"
             aria-label="open drawer"
@@ -308,6 +374,7 @@ const MyAppBar = props => {
           </IconButton>
         </Toolbar>
       </AppBar>
+      {/* </div> */}
 
       <Drawer
         variant="permanent"
@@ -323,21 +390,26 @@ const MyAppBar = props => {
         }}
       >
         <div className={classes.toolbar}>
-          {/* <IconButton
-            className={classes.closeicon}
-            onClick={handleDrawerClose}
-            position="end">
-            <b> CLOSE</b>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton> */}
-        </div>
-        <Divider />
 
-        <List className={classes.ulList} position="end">
+          <Grid className={classes.icontoolbar}>
+            <CloudQueueIcon fontSize="large" />
+            <NaturePeopleTwoToneIcon fontSize="large" />
+          </Grid>
+          {/* <IconButton 
+             className={classes.closeicon}
+             onClick={handleDrawerClose}
+             position="end">
+             <b> CLOSE</b>
+             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+         </IconButton> */}
+          {/* <Divider /> */}
+        </div>
+
+        <List className={classes.ulList} position="end" >
           {itemList.map((item, index) => {
             const { text, icon, onClick } = item;
             return (
-              <ListItem button key={text} onClick={onClick}>
+              <ListItem className={classes.litsItem} button key={text} onClick={onClick}>
                 {icon && <ListItemIcon>{icon}</ListItemIcon>}
                 <ListItemText primary={text} />
               </ListItem>
@@ -346,12 +418,12 @@ const MyAppBar = props => {
         </List>
         <Divider />
 
-        <List className={classes.ulListTwo}>
+        <List className={classes.ulListTwo} position="end" >
 
-        {itemListtwo.map((item, index) => {
+          {itemListtwo.map((item, index) => {
             const { text, icon, onClick } = item;
             return (
-              <ListItem button key={text} onClick={onClick}>
+              <ListItem className={classes.litsItemTwo} button key={text} onClick={onClick}>
                 {icon && <ListItemIcon>{icon}</ListItemIcon>}
                 <ListItemText primary={text} />
               </ListItem>

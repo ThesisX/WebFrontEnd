@@ -35,9 +35,10 @@ import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import ListRoundedIcon from '@material-ui/icons/ListRounded';
 import CloudQueueIcon from '@material-ui/icons/CloudQueue';
 
-import  './MyAppBar';
+import './MyAppBar';
 
 const drawerWidth = 292;
+const drawerspace = drawerWidth + 50;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,24 +47,32 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
 
   },
+  // appbarContainer: {
+  //   padding: 30,
+  //   justifyContent: 'center',
+  //   overflowX: 'hidden',
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   marginLeft: drawerspace,
+  // },
+
   appBar: {
-    // width: `calc(100% - ${drawerWidth}px)`,
-    width: 1400,
-    marginRight: 160,
+    overflowX: 'hidden',
+    width: `calc(100% - ${drawerspace}px)`,
+    marginLeft: drawerspace,
+    // width: 1400,
+    marginRight: 50,
     height: 140,
     // alignItems: 'stretch',
     borderRadius: 45,
     marginTop: 45,
     justifyContent: 'center',
-    minWidth: 700,
+    // minWidth: 700,
     backgroundColor: '#f0f4c3',
   },
-  // drawer: {
-  //   width: drawerWidth,
-  //   backgroundColor: '#f8bbd0',
+  drawer: {
+    marginRight: 50,
 
-  //   flexShrink: 0,
-  // },
+  },
   drawerPaper: {
     width: drawerWidth,
   },
@@ -77,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
   },
   ulListTwo: {
     width: 290,
@@ -98,8 +108,8 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(10, 50),
-
+    padding: theme.spacing(0, 50, 0, 80),
+    
   },
 
   toolbartab: {
@@ -111,11 +121,14 @@ const useStyles = makeStyles((theme) => ({
     // margin: 10,
     width: 260,
     backgroundColor: '#ffcdd2',
+    backgroundHover: '#ffab91',
+    // backgroundColor: '#ffab91' ,
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: 35,
     marginTop: 10,
     marginBottom: 10,
+    justifyContent: 'center',
     // position: 5,
   },
   litsItemTwo: {
@@ -127,20 +140,46 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 35,
     marginTop: 10,
     marginBottom: 10,
+    textAlign: 'center',
+    justifyContent: '',
+
+
     // position: 5,
   },
   h6text: {
     marginLeft: 20,
+    fontFamily: 'Kanit-sans-serif',
   },
   icontoolbar: {
     marginTop: 30,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
   },
   appbarroot: {
     display: 'flex',
-  }
+  },
+  paper: {
+    backgroundColor: '#f0f4c3',
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    marginTop: 15,
+    borderRadius: 35,
+    height: 140,
+
+  },
+  container: {
+    // marginTop: 30,
+    display: 'flex',
+    // alignItems: 'center',
+    justifyContent: 'auto',
+    // marginLeft: 700,
+  },
+  litsItemicon: {
+    justifyContent: 'center',
+    margin: 4,
+  },
 }));
 
 //   root: {
@@ -336,114 +375,123 @@ const MyAppBar = props => {
 
       <CssBaseline />
 
-      {/* <div className={classes.appbarroot}> */}
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, {
-          // [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar className={classes.toolbartab}>
-          {/* <IconButton
-            color="primary"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton> */}
-          <Typography
-            className={classes.h6text}
-            variant="h6"
-            color="textSecondary"
-          // edge="start"
-          >
-            ระบบตรวจข้อสอบปรนัย
-          </Typography>
+      <Grid className={classes.content} >
 
-          <IconButton
-            fontSize="large"
-            className={classes.iconLogout}
-            color="black"
-          >
-            <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
-            <MeetingRoomTwoToneIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      {/* </div> */}
+        <Grid container className={classes.container} >
+          <Grid item xs={12}>
+          <Paper className={classes.paper}>
+          ระบบตรวจข้อสอบปรนัย
+            {/* <AppBar
+              position="absolute"
+              // className={clsx(classes.paper, {
+                // [classes.appBarShift]: open,
+              // })}
+            > 
+              <Toolbar className={classes.toolbartab}>
+                <IconButton
+                  color="primary"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  className={clsx(classes.menuButton, {
+                    [classes.hide]: open,
+                  })}
+                >
+                  <MenuIcon />
+                </IconButton>
 
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          // [classes.drawerOpen]: open,
-          // [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
+                <Typography
+                  className={classes.h6text}
+                  variant="h6"
+                  color="textSecondary"
+                // edge="start"
+                >
+                  ระบบตรวจข้อสอบปรนัย
+                </Typography>
+
+                <IconButton
+                  fontSize="large"
+                  className={classes.iconLogout}
+                  color="black"
+                >
+                  <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
+                  <MeetingRoomTwoToneIcon />
+                </IconButton>
+              </Toolbar>
+            </AppBar> */}
+
+          </Paper>
+          </Grid>
+        </Grid>
+
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             // [classes.drawerOpen]: open,
             // [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-
-          <Grid className={classes.icontoolbar}>
-            <CloudQueueIcon fontSize="large" />
-            <NaturePeopleTwoToneIcon fontSize="large" />
-          </Grid>
-          {/* <IconButton 
-             className={classes.closeicon}
-             onClick={handleDrawerClose}
-             position="end">
-             <b> CLOSE</b>
-             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-         </IconButton> */}
-          {/* <Divider /> */}
-        </div>
-
-        <List className={classes.ulList} position="end" >
-          {itemList.map((item, index) => {
-            const { text, icon, onClick } = item;
-            return (
-              <ListItem className={classes.litsItem} button key={text} onClick={onClick}>
-                {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                <ListItemText primary={text} />
-              </ListItem>
-            );
           })}
-        </List>
-        <Divider />
+          classes={{
+            paper: clsx({
+              // [classes.drawerOpen]: open,
+              // [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar} >
 
-        <List className={classes.ulListTwo} position="end" >
+            <Grid className={classes.icontoolbar}>
+              <CloudQueueIcon fontSize="large" />
+              <NaturePeopleTwoToneIcon fontSize="large" />
+            </Grid>
+            {/* <IconButton 
+     className={classes.closeicon}
+     onClick={handleDrawerClose}
+     position="end">
+     <b> CLOSE</b>
+     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+ </IconButton> */}
+            {/* <Divider /> */}
+          </div>
 
-          {itemListtwo.map((item, index) => {
-            const { text, icon, onClick } = item;
-            return (
-              <ListItem className={classes.litsItemTwo} button key={text} onClick={onClick}>
-                {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                <ListItemText primary={text} />
-              </ListItem>
-            );
-          })}
-          {/* {['เกี่ยวกับ', 'ผู้จัดทำ'].map((text, index) => (
-            <ListItem button key={text} className={classes.listitem}>
-              <ListItemIcon>{index % 2 === 0 ? <DnsRoundedIcon /> : <NaturePeopleTwoToneIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
-        </List>
-      </Drawer>
+          <List className={classes.ulList} position="end" >
+            {itemList.map((item, index) => {
+              const { text, icon, onClick } = item;
+              return (
+                <ListItem className={classes.litsItem} button key={text} onClick={onClick}
+                >
+                  {icon && <ListItemIcon className={classes.litsItemicon} >{icon}</ListItemIcon>}
+                  <ListItemText primary={text} />
+                </ListItem>
+              );
+            })}
+          </List>
+          <Divider />
 
-      <Grid className={classes.content}>
+          <List className={classes.ulListTwo} position="end" >
+
+            {itemListtwo.map((item, index) => {
+              const { text, icon, onClick } = item;
+              return (
+                <ListItem className={classes.litsItemTwo} button key={text} onClick={onClick}>
+                  {icon && <ListItemIcon className={classes.litsItemicon}>{icon}</ListItemIcon>}
+                  <ListItemText primary={text} />
+                </ListItem>
+              );
+            })}
+            {/* {['เกี่ยวกับ', 'ผู้จัดทำ'].map((text, index) => (
+    <ListItem button key={text} className={classes.listitem}>
+      <ListItemIcon>{index % 2 === 0 ? <DnsRoundedIcon /> : <NaturePeopleTwoToneIcon />}</ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItem>
+  ))} */}
+          </List>
+        </Drawer >
+
         <div className={classes.toolbar} />
         <Private />
 
       </Grid>
-    </div>
+    </div >
   );
 };
 

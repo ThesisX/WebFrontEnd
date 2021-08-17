@@ -10,6 +10,16 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import myimage from '../../imagetest/180.jpg';
 
+const DashboardLayoutRoot = experimentalStyled('div')(
+  ({ theme }) => ({
+    backgroundColor: theme.palette.background.default,
+    display: 'flex',
+    height: '100%',
+    overflow: 'hidden',
+    width: '100%'
+  })
+);
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -41,6 +51,14 @@ export default function Tester() {
   const theme = useTheme();
 
   return (
+
+    <DashboardLayoutRoot>
+      <DashboardNavbar onMobileNavOpen={() => setMobileNavOpen(true)} />
+      <DashboardSidebar
+        onMobileClose={() => setMobileNavOpen(false)}
+        openMobile={isMobileNavOpen}
+      />
+
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -67,7 +85,8 @@ export default function Tester() {
         className={classes.cover}
         image={myimage}
         title="Live from space album cover"
-      />
+        />
     </Card>
+        </DashboardLayoutRoot>
   );
 }

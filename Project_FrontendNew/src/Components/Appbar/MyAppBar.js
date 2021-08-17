@@ -17,6 +17,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import { withRouter } from "react-router-dom";
+import Private from './Private';
+
 
 import FormHelperText from '@material-ui/core/FormHelperText';
 
@@ -27,128 +30,171 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import NaturePeopleTwoToneIcon from '@material-ui/icons/NaturePeopleTwoTone';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import MeetingRoomTwoToneIcon from '@material-ui/icons/MeetingRoomTwoTone';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
+import ListRoundedIcon from '@material-ui/icons/ListRounded';
+import CloudQueueIcon from '@material-ui/icons/CloudQueue';
 
-const drawerWidth = 260;
+import './MyAppBar';
+
+const drawerWidth = 292;
+const drawerspace = drawerWidth + 50;
 
 
 const useStyles = makeStyles((theme) => ({
+
   root: {
     display: 'flex',
+
   },
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginLeft: drawerspace,
+    marginRight: 50,
+  },
+
+  paperAppBar: {
+    backgroundColor: '#f0f4c3',
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 50,
+    borderRadius: 35,
+    height: 100,
+
+  },
+
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-    backgroundColor: '#FFB6C1',
-
-    // textColor: '#000000'
-
-  },
-  hide: {
-    display: 'none',
-
+    overflowX: 'hidden',
+    width: `calc(100% - ${drawerspace}px)`,
+    marginLeft: drawerspace,
+    marginRight: 50,
+    height: 140,
+    borderRadius: 45,
+    marginTop: 45,
+    justifyContent: 'center',
+    backgroundColor: '#f0f4c3',
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    transparent: "50%",
+    marginRight: 50,
 
   },
-  drawerOpen: {
+  drawerPaper: {
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    backgroundColor: '#EEDD82',
   },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(6) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(10.9) + 1,
-      backgroundColor: '#EEDD82',
 
-    },
-  },
+  toolbar: theme.mixins.toolbar,
+
   toolbar: {
-    display: 'flex',
+    height: 140,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    marginBottom: 50,
-    // content: {
-    // flexGrow: -1,
-    //   padding: theme.spacing(3),
-    // },
 
   },
+
   toolbartab: {
-    flexGrow: 50,
-    padding: theme.spacing(4, 4),
-    backgroundColor: '#EEDD82',
+    justifyContent: 'space-between',
 
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(16),
 
-    // marginTop:60,
-  },
   ulList: {
-    margin: 18,
-    borderRadius: 15,
-
-    backgroundColor: '#FFFACD	',
+    width: 290,
+    marginTop: 30,
+    marginBottom: 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-  listitem: {
-    padding: 13,
+
+  ulListTwo: {
+    width: 290,
+    marginTop: 35,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-  closeicon: {
-    //  margin: 18,
-    backgroundColor: '#FFB6C1',
-    borderRadius: 15,
+
+  litsItem: {
+    width: 260,
+    backgroundColor: '#ffcdd2',
+    '&:hover': {
+      backgroundColor: '#ffab91',
+    },
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 35,
+    marginTop: 10,
+    marginBottom: 10,
+    justifyContent: 'center',
+  },
+
+  litsItemTwo: {
+    width: 260,
+    backgroundColor: '#b2dfdb',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: 35,
+    marginTop: 10,
+    marginBottom: 10,
+    textAlign: 'center',
+    justifyContent: '',
+  },
+
+  litsItemicon: {
+    justifyContent: 'center',
+    margin: 4,
+  },
+
+  icontoolbar: {
+    marginTop: 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
 
   },
-  iconLogout: {
-    // marginInline: 550,
-    borderRadius: 15,
-
-  },
-  h6text: {
-    // marginTop: -40,
-    // marginLeft: 100,
-
-    // border: 50,
-
-  }
-
 }));
 
-export default function MiniDrawer() {
+const MyAppBar = props => {
+  const { history } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const itemList = [
+    {
+      text: "หน้าหลัก",
+      icon: <DashboardRoundedIcon />,
+      onClick: () => history.push("/")
+    },
+    {
+      text: "วิธีการใช้งาน",
+      icon: <ListRoundedIcon />,
+      onClick: () => history.push("/manual")
+    },
+    {
+      text: "ระบบตรวจข้อสอบ",
+      icon: <ImportantDevicesIcon />,
+      onClick: () => history.push("/system")
+    },
+    {
+      text: "ดาวน์โหลด",
+      icon: <GetAppRoundedIcon />,
+      onClick: () => history.push("/download")
+    },
+  ]
+
+  const itemListtwo = [
+    {
+      text: "เกี่ยวกับ",
+      icon: <DnsRoundedIcon />,
+      onClick: () => history.push("/info")
+    },
+    {
+      text: "ผู้จัดทำ",
+      icon: <EmojiPeopleIcon />,
+      onClick: () => history.push("/manager")
+    },
+  ]
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -161,107 +207,78 @@ export default function MiniDrawer() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
 
 
-        <Toolbar className={classes.toolbartab}>
-
-          <IconButton
-            color="primary"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            className={classes.h6text}
-            variant="h6"
-            noWrap
-            color="textSecondary"
-            edge="start"
-          >
+      <Grid container className={classes.container} xs={12} md={12} sm={12} >
+        <Grid item xs={12}>
+          <Paper className={classes.paperAppBar}>
             ระบบตรวจข้อสอบปรนัย
-          </Typography>
+          </Paper>
 
-        </Toolbar>
-
-      </AppBar>
-
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton
-            className={classes.closeicon}
-            onClick={handleDrawerClose}
-            position="end">
-            <b> CLOSE</b>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List className={classes.ulList} position="end">
-          {[['หน้าหลัก', <DashboardRoundedIcon />],
-          ['ระบบตรวจข้อสอบ', <ImportantDevicesIcon />],
-          ['วิธีการใช้งาน', <BallotTwoToneIcon />],
-
-          ].map((text, index) => (
-            <ListItem className={classes.listitem} button key={index}>
-              <ListItemIcon>
-                {text[1]}
-              </ListItemIcon>
-              <ListItemText primary={text[0]} />
-            </ListItem>
-
-          ))}
-        </List>
-        <Divider />
-        <List className={classes.ulList}>
-          {['เกี่ยวกับ', 'ผู้จัดทำ'].map((text, index) => (
-            <ListItem button key={text} className={classes.listitem}>
-              <ListItemIcon>{index % 2 === 0 ? <DnsRoundedIcon /> : <NaturePeopleTwoToneIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-
-          <IconButton
-            fontSize="large"
-            className={classes.iconLogout}
-            color="primary"
+          <Drawer
+            variant="permanent"
+            className={clsx(classes.drawer, {
+              // [classes.drawerOpen]: open,
+              // [classes.drawerClose]: !open,
+            })}
+            classes={{
+              paper: clsx({
+                // [classes.drawerOpen]: open,
+                // [classes.drawerClose]: !open,
+              }),
+            }}
           >
-            <FormHelperText id="filled-weight-helper-text">LogOut</FormHelperText>
-            <MeetingRoomTwoToneIcon />
-          </IconButton>
+            <div className={classes.toolbar} >
 
+              <div className={classes.icontoolbar}>
+                <CloudQueueIcon fontSize="large" />
+                <NaturePeopleTwoToneIcon fontSize="large" />
+              </div>
+              {/* <IconButton 
+                  className={classes.closeicon}
+                  onClick={handleDrawerClose}
+                  position="end">
+                  <b> CLOSE</b>
+                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              </IconButton> */}
+            </div>
 
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Grid container>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
+            <List className={classes.ulList} position="end" >
+              {itemList.map((item, index) => {
+                const { text, icon, onClick } = item;
+                return (
+                  <ListItem className={classes.litsItem} button key={text} onClick={onClick}
+                  >
+                    {icon && <ListItemIcon className={classes.litsItemicon} >{icon}</ListItemIcon>}
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+              })}
+            </List>
+            <Divider />
+
+            <List className={classes.ulListTwo} position="end" >
+
+              {itemListtwo.map((item, index) => {
+                const { text, icon, onClick } = item;
+                return (
+                  <ListItem className={classes.litsItemTwo} button key={text} onClick={onClick}>
+                    {icon && <ListItemIcon className={classes.litsItemicon}>{icon}</ListItemIcon>}
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Drawer >
+
+          <Private />
+
         </Grid>
-
-      </main>
-    </div>
+      </Grid>
+    </div >
   );
-}
+};
+
+
+
+export default withRouter(MyAppBar);

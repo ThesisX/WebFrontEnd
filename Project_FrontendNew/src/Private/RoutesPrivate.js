@@ -25,7 +25,7 @@ const RoutesPrivate = () => {
     return (
         <div>
             <BrowserRouter>
-                {/* <div>
+                <div>
                     <nav>
                         <ul>
                             <li><Link to="/">หน้าแรก</Link></li>
@@ -34,10 +34,10 @@ const RoutesPrivate = () => {
                     </nav>
                     <Button color="secondary" onClick={handleSignout}>ออกจากระบบ</Button>
                     <Privates />
-                </div> */}
-                    <MyAppBar />
-                    <Download/>
-                </BrowserRouter>
+                </div>
+                {/* <MyAppBar />
+                <Download/> */}
+            </BrowserRouter>
         </div>
     )
 }

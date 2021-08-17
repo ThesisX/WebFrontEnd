@@ -73,7 +73,7 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
                             </Typography>
                         }
                         onChange={(f) => onAdd(f)}
-                        acceptedFiles={['.csv', '.jpeg', 'jpg', '.png']}
+                        acceptedFiles={['.csv', '.jpeg', '.jpg', '.png']}
                         maxFileSize={5000000}
                         alertSnackbarProps={{
                             autoHideDuration: 5000,

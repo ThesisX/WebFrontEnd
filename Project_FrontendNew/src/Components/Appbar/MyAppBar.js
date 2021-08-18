@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -29,11 +30,15 @@ import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone'; import Importa
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import NaturePeopleTwoToneIcon from '@material-ui/icons/NaturePeopleTwoTone';
 import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import MeetingRoomTwoToneIcon from '@material-ui/icons/MeetingRoomTwoTone';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoomTwoTone';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import ListRoundedIcon from '@material-ui/icons/ListRounded';
+import TransferWithinAStationRoundedIcon from '@material-ui/icons/TransferWithinAStationRounded';
 import CloudQueueIcon from '@material-ui/icons/CloudQueue';
+import '@fontsource/roboto';
+import '@fontsource/sarabun';
+
 
 import './MyAppBar';
 
@@ -45,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     display: 'flex',
+    fontFamily: "sarabun",
 
   },
   container: {
@@ -58,10 +64,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f0f4c3',
     padding: theme.spacing(2),
     textAlign: 'center',
-    marginTop: 15,
+    fontSize: 26,
+    marginTop: 50,
     marginBottom: 50,
     borderRadius: 35,
     height: 100,
+    // width: 1000,
 
   },
 
@@ -99,8 +107,8 @@ const useStyles = makeStyles((theme) => ({
 
   ulList: {
     width: 290,
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 25,
+    marginBottom: 25,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -108,7 +116,9 @@ const useStyles = makeStyles((theme) => ({
 
   ulListTwo: {
     width: 290,
-    marginTop: 35,
+    marginTop: 25,
+    marginBottom: 25,
+
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -118,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
     width: 260,
     backgroundColor: '#ffcdd2',
     '&:hover': {
-      backgroundColor: '#ffab91',
+      backgroundColor: '#f89eb4',
     },
     flexDirection: 'column',
     alignItems: 'center',
@@ -131,6 +141,9 @@ const useStyles = makeStyles((theme) => ({
   litsItemTwo: {
     width: 260,
     backgroundColor: '#b2dfdb',
+    '&:hover': {
+    backgroundColor: '#79D2AE'
+  },
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: 35,
@@ -138,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: 'center',
     justifyContent: '',
+
   },
 
   litsItemicon: {
@@ -146,12 +160,40 @@ const useStyles = makeStyles((theme) => ({
   },
 
   icontoolbar: {
-    marginTop: 30,
+    marginTop: 50,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
 
   },
+
+  iconLogout: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: 25,
+    // fontSize: '86px',
+    color: '#00000',
+    marginBottom: 25,
+
+  },
+
+  text: {
+    marginTop: 15,
+    display: "flex",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logout: {
+    // backgroundColor: '#E5D0B3',
+    backgroundColor: '#d4c4fb',
+    // color: '#D2C779',
+  },
+  buttonLogout: {
+    color: '#00000',
+    backgroundColor: '#fad0c3',
+    borderWidth: 3,
+    borderRadius: 15,
+  }
 }));
 
 const MyAppBar = props => {
@@ -212,7 +254,7 @@ const MyAppBar = props => {
       <Grid container className={classes.container} xs={12} md={12} sm={12} >
         <Grid item xs={12}>
           <Paper className={classes.paperAppBar}>
-            ระบบตรวจข้อสอบปรนัย
+            <b className={classes.text} > ระบบตรวจข้อสอบปรนัย</b>
           </Paper>
 
           <Drawer
@@ -269,9 +311,23 @@ const MyAppBar = props => {
                 );
               })}
             </List>
-          </Drawer >
+            <Divider />
+            <div className={classes.logout} >
+              <div className={classes.iconLogout}  >
+                <TransferWithinAStationRoundedIcon fontSize="large" />
+                <MeetingRoomIcon fontSize="large" />
+                <br />
+              </div>
+              <div className={classes.iconLogout} >
+                <Button className={classes.buttonLogout} variant="outlined"  fontSize="large" href="#outlined-buttons">
+                  Logout 
+                </Button>
+              </div>
+            </div>
 
+          </Drawer >
           <Private />
+
 
         </Grid>
       </Grid>

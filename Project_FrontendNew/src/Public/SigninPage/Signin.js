@@ -26,40 +26,39 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-
-    display: 'auto',
-    // width: '380px',
-    // height: '200',
-    // margin: theme.spacing(1),
-    // marginTop: '180px',
-    // marginLeft: '230px',
-    margin: '70px',
-    backgroundColor: '#fce4ec',
-    contrastText: '#000',
-    borderRadius: 15,
-    padding: '70px',
-    // paddingLeft: '150px',
-    // paddingTop: '60px',
-    boxShadow: '10px 7px 14px 8px rgba(255, 175, 145, .6)',
+    display: 'flex',
+    maxWidth: '20rem',
+    width: 800,
+    margin: '0, auto' ,
+    borderRadius: 35,
+    alignItems: 'center',
+    backgroundColor: ' #f9fbe7',
+    contrastText: '#f0f4c3',
+    flexDirection: 'column',
+    // marginLeft: '50',
+    boxShadow: '6px 0px 14px 2px rgba(36, 45, 5, 0.6)',
   },
   button: {
     margin: '50px',
-
+    // backgroundColor: '#dce775',
+    // transparency: '50%',
   },
   password: {
-    marginTop: '50px',
+    marginTop: '20px',
   },
   user: {
-    marginTop: '15px',
+    marginTop: '45px',
+    
   },
   form: {
-    //  display: 'flexGrow',
-    // float: 'display',
-    // backgroundColor: '#fffcdc',
-    // transparency: '20%',
-    //  height: '700px',
-    width: '650px',
-    // margin: '80px',
+    display: 'flex',
+    maxWidth: '30rem',
+    // height: '400',
+    // margin: 20,
+    borderRadius: 35,
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     // marginLeft: '380px',
     // padding: '80px',
     // borderRadius: 15,
@@ -119,12 +118,16 @@ const Singin = ({ setToken }) => {
     <Container alignItems="center" className={classes.form} >
       <div className={classes.margin} >
           {/* Username Input */}
-          <Grid className={classes.user} spacing={3} alignItems="flex-end" >
+          <Grid 
+           className={classes.user}
+          //  spacing={3}
+           alignItems="flex-end"
+            >
             <Grid className={classes.icon} ><AccountCircle /></Grid>
             <Grid >
+            <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
               <TextField
                 id="input-with-icon-grid"
-                label="ชื่อผู้เข้าใช้งาน"
                 onChange={(e) =>
                   setUsername(e.target.value)}
                 value={Username}
@@ -133,7 +136,7 @@ const Singin = ({ setToken }) => {
           </Grid>
 
           {/* Password Input */}
-          <Grid className={classes.password} spacing={3} alignItems="flex-end">
+          <Grid className={classes.password}  alignItems="flex-end">
             <Grid className={classes.icon} ><AccountCircle /></Grid>
             <Grid  >
               <InputLabel htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
@@ -156,7 +159,7 @@ const Singin = ({ setToken }) => {
               />
             </Grid>
           </Grid>
-          <Button className={classes.button} type="button" onClick={handleSignin} variant="outlined" color="secondary">
+          <Button className={classes.button} type="button" onClick={handleSignin} variant="outlined" >
             เข้าสู่ระบบ
           </Button>
       </div>

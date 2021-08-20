@@ -79,13 +79,13 @@ export default function Download() {
     Authorization: `Bearer ${tokenCookies}`,
   }
 
-  const GetFile = async (API_PATH) => {
+  const GetFile = async (API_PATH, FileName) => {
     await axios
     .get(BASE_URL+API_PATH, { headers, responseType: 'blob' })
     .then(res => {
       let info = res.data;
-      console.log("files : ", info)
-      FileDownload(info, 'report.csv');
+      console.log("files : ", info);
+      FileDownload(info, FileName);
     });
   };
 
@@ -114,14 +114,14 @@ export default function Download() {
   const DowloadnCSVButton = (sub_id) => {
     
     const API_PATH = `/download/subject/csv/${sub_id}` ;
-
+    const FileName = `DataStudent-Subject-${sub_id}.csv`;
     return (
       <Button
         variant="contained"
         color="default"
         className={classes.button}
         startIcon={<DescriptionIcon />}
-        onClick={()=>GetFile(API_PATH)}
+        onClick={()=>GetFile(API_PATH, FileName)}
       >
         ดาวน์โหลด
       </Button>
@@ -131,6 +131,7 @@ export default function Download() {
   const DowloadnExamsButton = (sub_id) => {
     
     const API_PATH = `/download/subject/exams/${sub_id}` ;
+    const FileName = `Exams-Subject-${sub_id}.zip`;
 
     return (
       <Button
@@ -138,7 +139,7 @@ export default function Download() {
         color="default"
         className={classes.button}
         startIcon={<PhotoLibraryIcon />}
-        onClick={()=>GetFile(API_PATH)}
+        onClick={()=>GetFile(API_PATH, FileName)}
       >
         ดาวน์โหลด
       </Button>

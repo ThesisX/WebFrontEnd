@@ -206,7 +206,7 @@ const Subjects = ({ getActivate, sid }) => {
                     </Button>
                 </Grid>
             </Grid>
-            <Dialog open={open} aria-labelledby="form-dialog-title" >
+            <Dialog open={open} aria-labelledby="form-dialog-title" onClose={()=>setOpen(false)}>
                 <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
                 <DialogContent>
                     <DialogContentText>

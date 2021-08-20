@@ -30,7 +30,7 @@ import Signup from '../SignupPage/Signup';
                     const { children, value, index, ...other } = props;
                   
                     return (
-                      <div
+                      <div 
                         role="tabpanel"
                         hidden={value !== index}
                         id={`scrollable-force-tabpanel-${index}`}
@@ -61,10 +61,35 @@ import Signup from '../SignupPage/Signup';
                   
                   const useStyles = makeStyles((theme) => ({
                     root: {
-                      flexGrow: 1,
-                      width: '100%',
+                      // flexGrow: 1,
+                      // width: '800rem',
+                      display: 'felx',
+                      maxWidth: '800rem',
+                      margin: '0 auto' ,
                       backgroundColor: theme.palette.background.paper,
+                      justifyContent: 'center',
                     },
+
+                    tabs: {
+                      maxWidth: '60rem',
+                      // width: '50rem',
+                      margin: '0 auto',
+                      marginTop: 85,
+                      display: 'grid',
+                      justifyContent: 'center',
+                      backgroundColor: '#B8C85E',
+                      color: '#242812',
+                      indicatorColor:' #08db80',
+                      textColor: "#242812",
+                      borderRadius: 45,
+                      alignItems: 'center',
+                      // backgroundColor: theme.palette.background.paper,
+                      // flexWrap: ''
+                    },
+                    tablabel: {
+                      margin: 20,
+                      borderRadius: 35,
+                    }
                   }));
                   
                   export default function ScrollableTabsButtonForce() {
@@ -77,31 +102,34 @@ import Signup from '../SignupPage/Signup';
                   
                     return (
                       <div className={classes.root}>
-                        <AppBar position="static" color="default">
+                        {/* <AppBar position="static" color="default"> */}
                           <Tabs
+                            className={classes.tabs}
                             value={value}
                             onChange={handleChange}
                             variant="scrollable"
                             scrollButtons="on"
-                            indicatorColor="primary"
-                            textColor="primary"
+                            indicatorColor="#08db80"
+                            // textColor="primary"
                             aria-label="scrollable force tabs example"
                           >
                            
-                            <Tab label="เข้าสู่ระบบ" icon={<FavoriteIcon />} {...a11yProps(0)} />
-                            <Tab label="สมัครสมาชิก" icon={<PersonPinIcon />} {...a11yProps(1)} />
+                            <Tab className={classes.tablabel} label="เข้าสู่ระบบ" icon={<FavoriteIcon />} {...a11yProps(0)} />
+                            <Tab className={classes.tablabel} label="สมัครสมาชิก" icon={<PersonPinIcon />} {...a11yProps(1)} />
                             
                           </Tabs>
-                        </AppBar>
+                        {/* </AppBar> */}
+
                         <TabPanel value={value} index={0}>
-                          <Singin />
-                        </TabPanel>
-                        <TabPanel value={value} index={1}>
-                         <Signup/>
-                        </TabPanel>
-                        <TabPanel value={value} index={2}>
-                          Item Three
-                        </TabPanel>
+                      <Singin />
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                     <Signup/>
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
+                      Item Three
+                    </TabPanel>
+                       
                         {/* <TabPanel value={value} index={3}>
                           Item Four
                         </TabPanel>

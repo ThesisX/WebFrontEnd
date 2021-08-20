@@ -19,6 +19,7 @@ import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +50,13 @@ const useStyles = makeStyles((theme) => ({
     HandleButton: {
         float: 'right',
     },
+    AddIcon: {
+        fontSize: 80,
+        color: '#eceff1',
+    },
+    TxtProcessing: {
+        color: '#eceff1',
+    },
 }));
 
 const getSteps = () => {
@@ -64,7 +72,7 @@ const System = () => {
     const [examfile, setExamfile] = useState([]);
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
-    const [TxtProcessing, setTxtProcessing] = useState("กำลังรอการป้อนข้อมูล");
+    const [TxtProcessing, setTxtProcessing] = useState("กรุณาสร้างรายวิชา");
     const [Loadding, setLoadding] = useState(false);
 
     const classes = useStyles();
@@ -98,10 +106,30 @@ const System = () => {
         }
     }
 
+    const CalculateTime = (AnsName, ExmCount) => {
+        // console.log(AnsName);
+        let anstime = 25;
+        let exmtime = 25;
+        let slow_time = 0;
+        let fast_time = 0;
+
+        if (AnsName.slice(-4) == '.csv') {
+            fast_time = ExmCount * exmtime;
+        } else {
+            fast_time = (ExmCount * exmtime) + anstime;
+        }
+
+
+        slow_time = fast_time + 20;
+
+        return `${fast_time}-${slow_time} วินาที` ;
+    };
+
     /* Post */
     const handleSubmit = async () => {
         setLoadding(true);
         setTxtProcessing("กำลังอัปโหลดข้อมูล");
+
         const url_datafile = `${BASE_URL}/datastudent/upload-data/${subID}`;
         const url_answerfile = `${BASE_URL}/answer/upload-answer/${subID}`;
         const url_examsfile = `${BASE_URL}/exams/upload-exams/${subID}`;
@@ -141,7 +169,8 @@ const System = () => {
             });
 
         await setTxtProcessing("อัปโหลดข้อมูล สำเร็จ!!");
-        await setTxtProcessing("กำลังตรวจข้อสอบ");
+        const ntime = await CalculateTime(ansfile[0].name, examfile.length)
+        await setTxtProcessing(`กำลังตรวจข้อสอบใช้เวลา ${ntime} โดยประมาณ`);
 
         const headers = {
             Authorization: `Bearer ${tokenCookies}`,
@@ -160,6 +189,8 @@ const System = () => {
                 console.log("Predict Exams return : ", res.data);
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
+
+        window.location = '/download';
     };
 
     return (
@@ -234,14 +265,14 @@ const System = () => {
                                 </div>
                             ) : (
                                 <div className={classes.CenterObj}>
-                                    <CircularProgress />
-                                    <h5>{TxtProcessing}</h5>
+                                    <AddCircleOutlineIcon className={classes.AddIcon} />
+                                    <h2 className={classes.TxtProcessing}>{TxtProcessing}</h2>
                                 </div>)}
                         </Paper >
                     ) : (
                         <div className={classes.CenterObj}>
                             <CircularProgress />
-                            <h5>{TxtProcessing}</h5>
+                            <h3>{TxtProcessing}</h3>
                         </div>
                     )}
                 </Grid>

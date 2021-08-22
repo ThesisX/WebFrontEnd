@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function FullWidthGrid() {
   const classes = useStyles();
 
@@ -22,9 +24,10 @@ export default function FullWidthGrid() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.paper}><h1>เกี่ยวกับ นะน้องนะ</h1></Paper>
-          
+
+        
         </Grid>
-       
+
       </Grid>
     </div>
   );

@@ -7,6 +7,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import '@fontsource/sarabun';
+
 
 // import Container from '@material-ui/core/Container';
 // import IconButton from '@material-ui/core/IconButton';
@@ -70,17 +72,19 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     backgroundColor: theme.palette.background.paper,
     justifyContent: 'center',
+    fontFamily: "sarabun",
   },
 
   tabs: {
     maxWidth: '60rem',
     // width: '50rem',
     margin: '0 auto',
-    marginTop: 85,
+    marginTop: 43,
     display: 'grid',
     justifyContent: 'center',
     // backgroundColor: '#B8C85E',
     color: '#242812',
+    // color: '#4DA0B0',
     // textColor: "#242812",
     borderRadius: 45,
     alignItems: 'center',
@@ -91,7 +95,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '60rem',
     margin: 20,
     borderRadius: 35,
-    backgroundColor: '#B8C85E',
+    // backgroundColor: '#B8C85E',
+    backgroundColor:'#4db6ac ',
     color: '#242812',
     // indicatorColor:' #08db80',
   }

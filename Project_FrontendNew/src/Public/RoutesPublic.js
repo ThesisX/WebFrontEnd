@@ -6,8 +6,8 @@ import {
   // Link,
 } from "react-router-dom";
 
-import Signin from "./SigninPage/Signin";
-// import Signup from "./SignupPage/Signup";
+// import Signin from "./SigninPage/Signin";
+import Signup from "./SignupPage/Signup";
 import TabbarPublic from "./Tabbar/TabbarPublic";
 
 const RoutesPublic = () => {
@@ -22,6 +22,7 @@ const RoutesPublic = () => {
           </ul>
         </nav> */}
         {/* <Signin />  */}
+        {/* <Signup/> */}
       </div>
       <TabbarPublic/>
     </BrowserRouter>

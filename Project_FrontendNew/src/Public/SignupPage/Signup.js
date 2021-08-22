@@ -207,51 +207,66 @@ const Signup = () => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
+     
       '& input:valid + fieldset': {
         borderColor: 'green',
-        borderWidth: 5,
+        borderWidth: 1,
       },
       '& input:invalid + fieldset': {
         borderColor: 'red',
-        borderWidth: 3,
+        borderWidth: 1,
       },
+     
       '& input:valid:focus + fieldset': {
-        borderLeftWidth: 2,
-        padding: '5px !important', // override inline-style
+        borderLeftWidth: 5,
+        padding: '8px !important', // override inline-style
       },
-
-      display: 'flex',
-      flexWrap: 'wrap',
+      // flexWrap: 'wrap',
     },
-    margin: {
-      margin: theme.spacing(5),
-    },
-    formControl: {
-      margin: theme.spacing(3),
-
-    },
+  
     button: {
-      height: 50,
-      margin: theme.spacing(5),
+    fontFamily: "sarabun",
+    fontSize: 17,
+    // margin: '30px',
+    // marginLeft: 60,
+    marginTop: 40,
     },
+
     divform: {
-      backgroundColor: '#fce4ec',
-      padding: '60px',
+      backgroundColor: '#fcf1d4',
+      padding: '40px',
+      maxWidth: '25rem',
+
+      border: 50,
+      borderRadius: 35,
+      display:'grid',
+      justifyContent: 'center',
+      // alignItems: 'baseline',
+      justifyItems: 'stretch',
+      // marginTop: 50,
+      // paddingTop: 50,
     },
     // formControl: {
     //   margin: theme.spacing(3),
     //   minWidth: 200,
     // },
     selectEmpty: {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(3),
     },
     withoutLabel: {
       marginTop: theme.spacing(3),
     },
-    inputlabel: {
-      width: '30ch',
-
+    TextFieldmargin: {
+      margin: 10,
     },
+    FormControlmargin: {
+      margin: 10,
+
+    }
+    // inputlabel: {
+    //   width: '10',
+
+    // },
 
   }));
 
@@ -313,11 +328,11 @@ const Signup = () => {
 
 
 
-    <Container alignItems="center" className={classes.root} style={{ height: 'auto', width: '150vh' }}>
+    <Container alignItems="center" className={classes.root} style={{ width: '50vh' }}>
       <div className={classes.divform} >
 
         <TextField
-          className={classes.margin}
+          className={classes.FormControlmargin}
           label="USER"
           required
           variant="outlined"
@@ -328,7 +343,8 @@ const Signup = () => {
           value={User} />
 
 
-        <FormControl variant="outlined" >
+        <FormControl variant="outlined" className={classes.FormControlmargin} >
+          
           <InputLabel htmlFor="component-outlined">Password</InputLabel>
           <OutlinedInput
             type={showPassword ? 'text' : 'password'}
@@ -362,7 +378,7 @@ const Signup = () => {
         {/* <abel htmlFor="component-outlined-helptext">{helpTextPassword}</abel> */}
 
        
-        <FormControl variant="outlined" >
+        <FormControl variant="outlined"  className={classes.FormControlmargin}>
           <InputLabel htmlFor="component-outlined">ConfirmPassword</InputLabel>
           <OutlinedInput
             type={showPassword1 ? 'text' : 'password'}
@@ -396,13 +412,13 @@ const Signup = () => {
 
 
         <TextField
-          className={classes.margin}
+          className={classes.TextFieldmargin}
           type="email"
           label="EMAIL"
           required
 
           id="validation-outlined-input"
-          helperText="ERROR"
+          // helperText="ERROR"
           onChange={(e) =>
             setEmail(e.target.value)}
           value={Email} />
@@ -411,7 +427,7 @@ const Signup = () => {
 
 
           <TextField
-            className={classes.margin}
+            className={classes.TextFieldmargin}
             label="NAME"
             id="mui-theme-provider-standard-input"
             onChange={(e) =>
@@ -420,7 +436,7 @@ const Signup = () => {
 
 
           <TextField
-            className={classes.margin}
+            className={classes.TextFieldmargin}
             label="LAST NAME"
             id="mui-theme-provider-standard-input"
             onChange={(e) =>
@@ -428,7 +444,7 @@ const Signup = () => {
             value={Lname} />
 
           <TextField
-            className={classes.margin}
+            className={classes.TextFieldmargin}
             label="SCHOOL"
             id="mui-theme-provider-standard-input"
             onChange={(e) =>
@@ -436,7 +452,7 @@ const Signup = () => {
             value={Schollname} />
         </ThemeProvider>
 
-        <FormControl variant="standard" className={classes.formControl}>
+        <FormControl variant="standard" className={classes.TextFieldmargin}>
           <InputLabel htmlFor="outlined-age-native-simple">PROVINCE</InputLabel>
           <Select
             native
@@ -454,7 +470,12 @@ const Signup = () => {
         </FormControl>
 
 
-        <Button className={classes.button} type="Submit" onClick={handleSignup} variant="outlined" color="secondary">
+        <Button className={classes.button} 
+        type="Submit" 
+        onClick={handleSignup} 
+        variant="outlined" 
+        color="inherit"
+        >
           Submit
         </Button>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import './MyAppBar.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -20,6 +21,7 @@ import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { withRouter } from "react-router-dom";
 import Private from './Private';
+import Cookies from 'js-cookie'
 
 
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -46,12 +48,14 @@ const drawerWidth = 292;
 const drawerspace = drawerWidth + 50;
 
 
-const useStyles = makeStyles((theme) => ({
 
+
+const useStyles = makeStyles((theme) => ({
+  
   root: {
     display: 'flex',
     fontFamily: "sarabun",
-
+    
   },
   container: {
     display: 'flex',
@@ -59,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: drawerspace,
     marginRight: 50,
   },
-
+  
   paperAppBar: {
     backgroundColor: '#f0f4c3',
     padding: theme.spacing(2),
@@ -70,9 +74,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 35,
     height: 100,
     // width: 1000,
-
+    
   },
-
+  
   appBar: {
     overflowX: 'hidden',
     width: `calc(100% - ${drawerspace}px)`,
@@ -86,25 +90,25 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     marginRight: 50,
-
+    
   },
   drawerPaper: {
     width: drawerWidth,
   },
-
+  
   toolbar: theme.mixins.toolbar,
-
+  
   toolbar: {
     height: 140,
     alignItems: 'center',
-
+    
   },
-
+  
   toolbartab: {
     justifyContent: 'space-between',
-
+    
   },
-
+  
   ulList: {
     width: 290,
     marginTop: 25,
@@ -113,17 +117,17 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-
+  
   ulListTwo: {
     width: 290,
     marginTop: 25,
     marginBottom: 25,
-
+    
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-
+  
   litsItem: {
     width: 260,
     backgroundColor: '#ffcdd2',
@@ -137,13 +141,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     justifyContent: 'center',
   },
-
+  
   litsItemTwo: {
     width: 260,
     backgroundColor: '#b2dfdb',
     '&:hover': {
-    backgroundColor: '#79D2AE'
-  },
+      backgroundColor: '#79D2AE'
+    },
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: 35,
@@ -151,22 +155,22 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: 'center',
     justifyContent: '',
-
+    
   },
-
+  
   litsItemicon: {
     justifyContent: 'center',
     margin: 4,
   },
-
+  
   icontoolbar: {
     marginTop: 50,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-
+    
   },
-
+  
   iconLogout: {
     display: 'flex',
     justifyContent: 'center',
@@ -174,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
     // fontSize: '86px',
     color: '#00000',
     marginBottom: 25,
-
+    
   },
 
   text: {
@@ -201,6 +205,11 @@ const MyAppBar = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  
+  const handleSignout = () => {
+    Cookies.remove("token");
+    window.location = '/';
+  }
 
   const itemList = [
     {
@@ -319,7 +328,10 @@ const MyAppBar = props => {
                 <br />
               </div>
               <div className={classes.iconLogout} >
-                <Button className={classes.buttonLogout} variant="outlined"  fontSize="large" href="#outlined-buttons">
+                <Button className={classes.buttonLogout} 
+                variant="outlined" 
+                fontSize="large" 
+                onClick={handleSignout}>
                   Logout 
                 </Button>
               </div>
@@ -332,6 +344,8 @@ const MyAppBar = props => {
         </Grid>
       </Grid>
     </div >
+
+    
   );
 };
 

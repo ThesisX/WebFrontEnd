@@ -16,6 +16,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import FaceIcon from '@material-ui/icons/Face';
+import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
 // import { Link } from "react-router-dom";
 
 
@@ -57,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     display: 'flex',
     maxWidth: '25rem',
-    backgroundColor: '#fcf1d4',
+    backgroundColor: '#d2f798',
     padding: 40,
     paddingLeft: 83,
     // margin: 50,
@@ -102,6 +104,7 @@ const Singin = ({ setToken }) => {
 
   const handleSignin = async (e) => {
     e.preventDefault()
+    let values = true;
 
     let form_data = {
       username: Username,
@@ -109,33 +112,41 @@ const Singin = ({ setToken }) => {
     };
 
 
-    // if (form_data == "") {
-    //   alert("กรุณากรอกให้ครบ");
-    //   return false;
-    // }
+    if (form_data.username === "") {
+      alert("กรุณากรอก ชื่อผู้เข้าใช้งาน");
+      values = false;
+      // return false;
+    } else if (form_data.password === "") {
+      alert("กรุณากรอก รหัสผ่าน");
+      values = false;
+
+    }
 
     // document.getElementById("username").disabled = true;
     // document.getElementById("password").disabled = true;
     // document.getElementById("submit").disabled = true;
     // return false;
+    if (values) {
 
-    let options = {
-      method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      data: qs.stringify(form_data),
-      url: BASE_URL + '/token',
-    };
 
-    console.log("log");
+      let options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: qs.stringify(form_data),
+        url: BASE_URL + '/token',
+      };
 
-    await axios(options)
-      .then(res => {
-        // console.log(res)
-        // console.log(res.data.access_token)
-        Cookies.set("token", res.data.access_token);
-        // setToken(res.data.access_token)
-        window.location.reload();
-      });
+      console.log("log");
+
+      await axios(options)
+        .then(res => {
+          // console.log(res)
+          // console.log(res.data.access_token)
+          Cookies.set("token", res.data.access_token);
+          // setToken(res.data.access_token)
+          window.location.reload();
+        });
+    }
   }
   return (
 
@@ -143,9 +154,7 @@ const Singin = ({ setToken }) => {
       {/* <div className={classes.margin} > */}
       {/* Username Input */}
       <Grid className={classes.griduserpass} alignItems="flex-end">
-        {/* <Grid className={classes.icon} > */}
-        <AccountCircle />
-        {/* </Grid> */}
+        <FaceIcon />
         <Grid >
           <InputLabel className={classes.label} htmlFor="standard-adornment-password"> ชื่อผู้ใช้งาน </InputLabel>
           <TextField
@@ -160,9 +169,7 @@ const Singin = ({ setToken }) => {
 
       {/* Password Input */}
       <Grid className={classes.griduserpass} alignItems="flex-end">
-        {/* <Grid className={classes.icon} > */}
-        <AccountCircle />
-        {/* </Grid> */}
+        <VpnKeyRoundedIcon />
         <Grid >
           <InputLabel className={classes.label} htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
           <Input
@@ -184,11 +191,11 @@ const Singin = ({ setToken }) => {
           />
         </Grid>
       </Grid>
-      <Button className={classes.button} 
-      type="button"
-       onClick={handleSignin} 
-       variant="outlined" 
-       color="inherit">
+      <Button className={classes.button}
+        type="button"
+        onClick={handleSignin}
+        variant="outlined"
+        color="inherit">
         เข้าสู่ระบบ
       </Button>
 

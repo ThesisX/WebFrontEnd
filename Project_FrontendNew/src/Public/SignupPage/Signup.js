@@ -233,7 +233,7 @@ const Signup = () => {
     },
 
     divform: {
-      backgroundColor: '#fcf1d4',
+      backgroundColor: '#d2f798',
       padding: '40px',
       maxWidth: '25rem',
 
@@ -328,9 +328,8 @@ const Signup = () => {
 
 
 
-    <Container alignItems="center" className={classes.root} style={{ width: '50vh' }}>
+    <Container alignItems="center" className={classes.root} style={{ width: '70vh' }}>
       <div className={classes.divform} >
-
         <TextField
           className={classes.FormControlmargin}
           label="USER"

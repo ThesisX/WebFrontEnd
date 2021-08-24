@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-import RoutesPublic from "./Public/RoutesPublic";
+// import RoutesPublic from "./Public/RoutesPublic";
 import RoutesPrivate from "./Private/RoutesPrivate";
 
 const App = () => {
@@ -25,10 +25,10 @@ const App = () => {
   return (
     <div>
       <Router>
-        {!auth ? <RoutesPublic />
+        {/* {!auth ? <RoutesPublic />
           : <RoutesPrivate />
-        }
-       {/* <RoutesPrivate /> */}
+        } */}
+       <RoutesPrivate />
       </Router>
     </div>
   )

@@ -197,13 +197,13 @@ export default function Download() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+        //  rowsPerPageOptions={[10, 25, 100]}
+        //  component="div"
+        //  count={rows.length}
+        //  rowsPerPage={rowsPerPage}
+        //  page={page}
+        //  onPageChange={handleChangePage}
+        //  onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
   );

@@ -19,7 +19,7 @@ import Cookies from 'js-cookie'
 
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-
+import IconButton from '@material-ui/core/IconButton';
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded'; import MailIcon from '@material-ui/icons/Mail';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone'; import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -31,6 +31,11 @@ import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import ListRoundedIcon from '@material-ui/icons/ListRounded';
 import TransferWithinAStationRoundedIcon from '@material-ui/icons/TransferWithinAStationRounded';
 import CloudQueueIcon from '@material-ui/icons/CloudQueue';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
 import '@fontsource/roboto';
 import '@fontsource/sarabun';
 
@@ -47,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
   
   root: {
     display: 'flex',
+    // maxWidth: '80rem',
+    margin: '0 auto',
     fontFamily: "sarabun",
     
   },
@@ -65,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
     marginBottom: 50,
     borderRadius: 35,
-    height: 100,
+    height: '6.25rem',
     // width: 1000,
     
   },
@@ -94,16 +101,20 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     height: 140,
     alignItems: 'center',
-    
+    maxWidth: 290,
+    margin: '0 auto',
   },
   
   toolbartab: {
     justifyContent: 'space-between',
-    
+    left: '-100%',
+    opacity: 0,
   },
   
   ulList: {
-    width: 290,
+    // width: 290,
+    maxWidth: 290,
+    margin: '0 auto',
     marginTop: 25,
     marginBottom: 25,
     display: 'flex',
@@ -112,7 +123,9 @@ const useStyles = makeStyles((theme) => ({
   },
   
   ulListTwo: {
-    width: 290,
+    // width: 290,
+    maxWidth: 290,
+    margin: '0 auto',
     marginTop: 25,
     marginBottom: 25,
     
@@ -184,6 +197,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: '#E5D0B3',
     backgroundColor: '#d4c4fb',
     // color: '#D2C779',
+
   },
   buttonLogout: {
     color: '#00000',
@@ -197,7 +211,7 @@ const MyAppBar = props => {
   const { history } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [click, setClick] = React.useState(false);
   
   const handleSignout = () => {
     Cookies.remove("token");
@@ -241,11 +255,11 @@ const MyAppBar = props => {
   ]
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setClick(!click);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setClick(false);
   };
 
   return (
@@ -253,10 +267,11 @@ const MyAppBar = props => {
       <CssBaseline />
 
 
-      <Grid container className={classes.container} xs={12} md={12} sm={12} >
+      <Grid container className={classes.container}  >
         <Grid item xs={12}>
           <Paper className={classes.paperAppBar}>
             <b className={classes.text} > ระบบตรวจข้อสอบปรนัย</b>
+           
           </Paper>
 
           <Drawer
@@ -278,16 +293,17 @@ const MyAppBar = props => {
                 <CloudQueueIcon fontSize="large" />
                 <NaturePeopleTwoToneIcon fontSize="large" />
               </div>
-              {/* <IconButton 
-                  className={classes.closeicon}
-                  onClick={handleDrawerClose}
-                  position="end">
-                  <b> CLOSE</b>
-                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-              </IconButton> */}
+              <div className="mobile-menu" onClick={handleDrawerOpen}>
+                        {click ? (
+                            <MenuIcon />
+                        ) : (
+                            <ArrowBackIosIcon />
+                        )}
+                    </div>
+            
             </div>
 
-            <List className={classes.ulList} position="end" >
+            <List className={click ? "manu active" : classes.ulList} >
               {itemList.map((item, index) => {
                 const { text, icon, onClick } = item;
                 return (

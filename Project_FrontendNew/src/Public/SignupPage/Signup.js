@@ -87,7 +87,6 @@ const Signup = () => {
       setErrpwd(true);
       setHelpTextPassword('รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร');
     }
-
     setPassword(v);
     
   };
@@ -324,6 +323,15 @@ const Signup = () => {
   const classes = useStyles();
   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
 
+  React.useEffect(()=>{
+    // if (Password.length >= 8 && ConfirmPassword.length >= 8) {
+    //   if (Password === ConfirmPassword) {
+    //     alert('รหัสตรงกัน');
+    //   }else{
+    //     alert('รหัสไม่ตรงกัน');
+    //   }
+    // }
+  });
   return (
 
 

@@ -35,7 +35,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Hidden from '@material-ui/core/Hidden';
 
+import Typography from '@material-ui/core/Typography';
 import '@fontsource/roboto';
 import '@fontsource/sarabun';
 
@@ -49,13 +53,13 @@ const drawerspace = drawerWidth + 50;
 
 
 const useStyles = makeStyles((theme) => ({
-  
+
   root: {
     display: 'flex',
     // maxWidth: '80rem',
     margin: '0 auto',
     fontFamily: "sarabun",
-    
+
   },
   container: {
     display: 'flex',
@@ -63,54 +67,92 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: drawerspace,
     marginRight: 50,
   },
-  
+
   paperAppBar: {
     backgroundColor: '#f0f4c3',
     padding: theme.spacing(2),
+    display: "flex",
     textAlign: 'center',
+    justifyContent: 'space-around',
+    alignItems: 'baseline',
     fontSize: 26,
     marginTop: 50,
     marginBottom: 50,
     borderRadius: 35,
     height: '6.25rem',
     // width: 1000,
-    
+
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
-  
-  appBar: {
-    overflowX: 'hidden',
-    width: `calc(100% - ${drawerspace}px)`,
-    marginLeft: drawerspace,
-    marginRight: 50,
-    height: 140,
-    borderRadius: 45,
-    marginTop: 45,
-    justifyContent: 'center',
-    backgroundColor: '#f0f4c3',
+
+  // appBar: {
+  //   overflowX: 'hidden',
+  //   width: `calc(100% - ${drawerspace}px)`,
+  //   marginLeft: drawerspace,
+  //   marginRight: 50,
+  //   height: 140,
+  //   borderRadius: 45,
+  //   marginTop: 45,
+  //   justifyContent: 'center',
+  //   backgroundColor: '#f0f4c3',
+  // },
+  // appBar: {
+  //   overflowX: 'hidden',
+  //   width: `calc(100% - ${drawerspace}px)`,
+  //   marginLeft: drawerspace,
+  //   marginRight: 50,
+  //   height: 140,
+  //   borderRadius: 45,
+  //   marginTop: 45,
+  //   justifyContent: 'center',
+  //   backgroundColor: '#f0f4c3',
+  //   transition: theme.transitions.create(['margin', 'width'], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.leavingScreen,
+  //   }),
+  // },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   drawer: {
     marginRight: 50,
-    
+    width: drawerWidth,
+    flexShrink: 0,
   },
   drawerPaper: {
     width: drawerWidth,
   },
-  
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
   toolbar: theme.mixins.toolbar,
-  
+
   toolbar: {
     height: 140,
     alignItems: 'center',
     maxWidth: 290,
     margin: '0 auto',
   },
-  
+
   toolbartab: {
     justifyContent: 'space-between',
     left: '-100%',
     opacity: 0,
   },
-  
+
   ulList: {
     // width: 290,
     maxWidth: 290,
@@ -121,19 +163,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  
+
   ulListTwo: {
     // width: 290,
     maxWidth: 290,
     margin: '0 auto',
     marginTop: 25,
     marginBottom: 25,
-    
+
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  
+
   litsItem: {
     width: 260,
     backgroundColor: '#ffcdd2',
@@ -147,7 +189,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     justifyContent: 'center',
   },
-  
+
   litsItemTwo: {
     width: 260,
     backgroundColor: '#b2dfdb',
@@ -161,22 +203,22 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: 'center',
     justifyContent: '',
-    
+
   },
-  
+
   litsItemicon: {
     justifyContent: 'center',
     margin: 4,
   },
-  
+
   icontoolbar: {
     marginTop: 50,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    
+
   },
-  
+
   iconLogout: {
     display: 'flex',
     justifyContent: 'center',
@@ -184,7 +226,7 @@ const useStyles = makeStyles((theme) => ({
     // fontSize: '86px',
     color: '#00000',
     marginBottom: 25,
-    
+
   },
 
   text: {
@@ -211,8 +253,8 @@ const MyAppBar = props => {
   const { history } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [click, setClick] = React.useState(false);
-  
+  const [click, setClick] = React.useState(true);
+
   const handleSignout = () => {
     Cookies.remove("token");
     window.location = '/';
@@ -256,105 +298,155 @@ const MyAppBar = props => {
 
   const handleDrawerOpen = () => {
     setClick(!click);
+    console.log(click);
   };
 
   const handleDrawerClose = () => {
     setClick(false);
   };
 
+  const content = (
+    <div>
+      <div className={classes.toolbar}>
+        <div className={classes.icontoolbar}>
+          <CloudQueueIcon fontSize="large" />
+          <NaturePeopleTwoToneIcon fontSize="large" />
+        </div>
+      </div>
+
+      <List className={click ? "manu active" : classes.ulList} >
+        {itemList.map((item, index) => {
+          const { text, icon, onClick } = item;
+          return (
+            <ListItem className={classes.litsItem} button key={text} onClick={onClick}
+            >
+              {icon && <ListItemIcon className={classes.litsItemicon} >{icon}</ListItemIcon>}
+              <ListItemText primary={text} />
+            </ListItem>
+          );
+        })}
+      </List>
+      <Divider />
+
+      <List className={classes.ulListTwo} position="end" >
+
+        {itemListtwo.map((item, index) => {
+          const { text, icon, onClick } = item;
+          return (
+            <ListItem className={classes.litsItemTwo} button key={text} onClick={onClick}>
+              {icon && <ListItemIcon className={classes.litsItemicon}>{icon}</ListItemIcon>}
+              <ListItemText primary={text} />
+            </ListItem>
+          );
+        })}
+      </List>
+      <Divider />
+      <div className={classes.logout} >
+        <div className={classes.iconLogout}  >
+          <TransferWithinAStationRoundedIcon fontSize="large" />
+          <MeetingRoomIcon fontSize="large" />
+          <br />
+        </div>
+        <div className={classes.iconLogout} >
+          <Button className={classes.buttonLogout}
+            variant="outlined"
+            fontSize="large"
+            onClick={handleSignout}>
+            Logout
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className={classes.root}>
       <CssBaseline />
 
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: click,
+        })}
+      >
+        <Toolbar>
+          {!click ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, click && classes.hide)}
+            >
+
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+            >
+              <ArrowBackIosIcon />
+            </IconButton>
+          )}
+          <b className={classes.text} >
+            ระบบตรวจข้อสอบปรนัย
+          </b>
+        </Toolbar>
+      </AppBar>
 
       <Grid container className={classes.container}  >
         <Grid item xs={12}>
-          <Paper className={classes.paperAppBar}>
-            <b className={classes.text} > ระบบตรวจข้อสอบปรนัย</b>
-           
-          </Paper>
+          <Hidden smUp>
+            <Drawer
+              anchor="left"
+              className={classes.drawer}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              onClose={()=>setClick(false)}
+              open={click}
+              variant="temporary"
+              PaperProps={{
+                sx: {
+                  width: 256
+                }
+              }}
+            >
+              {content}
+            </Drawer >
+            <Private />
+          </Hidden>
 
-          <Drawer
-            variant="permanent"
-            className={clsx(classes.drawer, {
-              // [classes.drawerOpen]: open,
-              // [classes.drawerClose]: !open,
-            })}
-            classes={{
-              paper: clsx({
-                // [classes.drawerOpen]: open,
-                // [classes.drawerClose]: !open,
-              }),
-            }}
-          >
-            <div className={classes.toolbar} >
-
-              <div className={classes.icontoolbar}>
-                <CloudQueueIcon fontSize="large" />
-                <NaturePeopleTwoToneIcon fontSize="large" />
-              </div>
-              <div className="mobile-menu" onClick={handleDrawerOpen}>
-                        {click ? (
-                            <MenuIcon />
-                        ) : (
-                            <ArrowBackIosIcon />
-                        )}
-                    </div>
-            
-            </div>
-
-            <List className={click ? "manu active" : classes.ulList} >
-              {itemList.map((item, index) => {
-                const { text, icon, onClick } = item;
-                return (
-                  <ListItem className={classes.litsItem} button key={text} onClick={onClick}
-                  >
-                    {icon && <ListItemIcon className={classes.litsItemicon} >{icon}</ListItemIcon>}
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-              })}
-            </List>
-            <Divider />
-
-            <List className={classes.ulListTwo} position="end" >
-
-              {itemListtwo.map((item, index) => {
-                const { text, icon, onClick } = item;
-                return (
-                  <ListItem className={classes.litsItemTwo} button key={text} onClick={onClick}>
-                    {icon && <ListItemIcon className={classes.litsItemicon}>{icon}</ListItemIcon>}
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-              })}
-            </List>
-            <Divider />
-            <div className={classes.logout} >
-              <div className={classes.iconLogout}  >
-                <TransferWithinAStationRoundedIcon fontSize="large" />
-                <MeetingRoomIcon fontSize="large" />
-                <br />
-              </div>
-              <div className={classes.iconLogout} >
-                <Button className={classes.buttonLogout} 
-                variant="outlined" 
-                fontSize="large" 
-                onClick={handleSignout}>
-                  Logout 
-                </Button>
-              </div>
-            </div>
-
-          </Drawer >
-          <Private />
-
-
+          <Hidden smDown>
+            <Drawer
+              className={classes.drawer}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              open
+              anchor="left"
+              variant="persistent"
+              onPointerEnter
+              PaperProps={{
+                sx: {
+                  width: 256,
+                  top: 64,
+                  height: 'calc(100% - 100px)'
+                }
+              }}
+            >
+              {content}
+            </Drawer >
+            <Private />
+          </Hidden>
         </Grid>
       </Grid>
     </div >
 
-    
+
   );
 };
 

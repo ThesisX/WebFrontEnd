@@ -91,7 +91,7 @@ const Manager = () => {
 
     <Container maxWidth="sm">
       <div className={classes.h1} ><h1 >
-        THEAM
+        TEAM
       </h1></div>
 
       <Grid container className={classes.root} spacing={2}>

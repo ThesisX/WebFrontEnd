@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 20,
     borderRadius: 35,
     // backgroundColor: '#B8C85E',
-    backgroundColor:'#6e8300 ',
+    backgroundColor:'#8aab8f ',
     color: '#242812',
     // indicatorColor:' #08db80',
   }

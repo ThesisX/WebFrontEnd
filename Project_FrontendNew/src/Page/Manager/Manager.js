@@ -26,7 +26,7 @@ import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: 30,
+    marginTop: 6,
     flexGrow: 1,
     // width: '1085px',
     display: 'flex',
@@ -38,13 +38,13 @@ const useStyles = makeStyles((theme) => ({
     width: 220,
     float: 'left',
     marginRight: 50,
-    marginBottom: 30,
+    marginBottom: 20,
   },
   control: {
     padding: theme.spacing(2),
   },
   h1: {
-    marginTop: 50,
+    marginTop: 20,
     border: "5px solid #f8bbd0",
   },
   img: {

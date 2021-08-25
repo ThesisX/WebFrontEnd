@@ -34,6 +34,7 @@ const Info = () => {
     if (clickimg === true) {
       setClickimg(false);
     }
+    return (clickimg)
   };
 
   const reset = () => {
@@ -48,17 +49,17 @@ const Info = () => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>เกี่ยวกับ นะน้องนะ</h1>
-          <h1 className={classes.text}>{count}</h1>
+          {/* <h1 className={classes.text}>{count}</h1>
           {clickimg === true ? (
             <img className={classes.img} src={myimage0} />
-          ) : (
+            ) : (
             <img className={classes.img} src={myimage1} />
           )}
           {console.log(`clickimg`, clickimg)}
           <button onKeyDown={adding} onChange={adding}>
             click
           </button>
-          <button onClick={reset}>Reset</button>
+          <button onClick={reset}>Reset</button> */}
           </Paper>
         </Grid>
       </Grid>

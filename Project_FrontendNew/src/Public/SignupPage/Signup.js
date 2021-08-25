@@ -220,35 +220,53 @@ const Signup = () => {
         borderLeftWidth: 5,
         padding: '8px !important', // override inline-style
       },
+      justifyContent: 'space-around',
+      maxWidth: '25rem',
+      backgroundColor: '#d3e8d6',
+      padding: 40,
+      borderRadius: 35,
+      justifyContent: 'center',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      display:'grid',
       // flexWrap: 'wrap',
     },
-  
+
     button: {
     fontFamily: "sarabun",
     fontSize: 17,
     // margin: '30px',
     // marginLeft: 60,
     marginTop: 40,
+    
     },
 
     divform: {
-      backgroundColor: '#d2f798',
-      padding: '40px',
-      maxWidth: '25rem',
-
-      border: 50,
-      borderRadius: 35,
-      display:'grid',
+      // display: 'flex',
+      maxWidth: '45rem',
+      // width: 480,
+      // backgroundColor: '#d3e8d6',
+      // padding: 40,
+      // margin: 50,
+      // height: '400'
+      // borderRadius: 35,
       justifyContent: 'center',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      display:'grid',
+      // backgroundColor: '#d3e8d6',
+      // marginLeft: 80,
+      border: 50,
+      // borderRadius: 35,
+      // justifyContent: 'space-around',
+      // flexDirection: 'column',
+      // alignItems: 'flex-start',
       // alignItems: 'baseline',
-      justifyItems: 'stretch',
+      // justifyItems: 'stretch',
       // marginTop: 50,
       // paddingTop: 50,
     },
-    // formControl: {
-    //   margin: theme.spacing(3),
-    //   minWidth: 200,
-    // },
+    
     selectEmpty: {
       marginTop: theme.spacing(3),
     },
@@ -336,7 +354,8 @@ const Signup = () => {
 
 
 
-    <Container alignItems="center" className={classes.root} style={{ width: '70vh' }}>
+    <Container alignItems="center" className={classes.root} style={{ width: '190vh' }} >
+
       <div className={classes.divform} >
         <TextField
           className={classes.FormControlmargin}

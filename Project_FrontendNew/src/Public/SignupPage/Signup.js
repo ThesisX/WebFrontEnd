@@ -221,7 +221,7 @@ const Signup = () => {
         padding: '8px !important', // override inline-style
       },
       justifyContent: 'space-around',
-      maxWidth: '25rem',
+      maxWidth: '30rem',
       backgroundColor: '#d3e8d6',
       padding: 40,
       borderRadius: 35,
@@ -244,7 +244,7 @@ const Signup = () => {
     divform: {
       // display: 'flex',
       maxWidth: '45rem',
-      // width: 480,
+      // width: 490,
       // backgroundColor: '#d3e8d6',
       // padding: 40,
       // margin: 50,

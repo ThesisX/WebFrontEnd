@@ -49,6 +49,8 @@ const Info = () => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>เกี่ยวกับ นะน้องนะ</h1>
+            CPE RMUTI ©2020 Created by CPE Group 61231
+      
           {/* <h1 className={classes.text}>{count}</h1>
           {clickimg === true ? (
             <img className={classes.img} src={myimage0} />
@@ -61,6 +63,9 @@ const Info = () => {
           </button>
           <button onClick={reset}>Reset</button> */}
           </Paper>
+
+         
+     
         </Grid>
       </Grid>
     </div>

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   // control: {
   //   padding: theme.spacing(2),
   // },
-  
+
   // img: {
   //   width: 220,
   //   height: 300,
@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
   // }
   root: {
     flexGrow: 1,
-
   },
   paper: {
     padding: theme.spacing(2),
@@ -132,6 +131,7 @@ const Manager = () => {
             </Grid>
           </Grid>
         </Paper>
+
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             <Grid item>
@@ -146,7 +146,7 @@ const Manager = () => {
                     ผู้จัดทำ
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                  Backend-Deverloper
+                    Backend-Deverloper
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     • นายสถาพร มณีบุญ
@@ -167,10 +167,10 @@ const Manager = () => {
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                   <Typography gutterBottom variant="subtitle1">
-                  ผู้จัดทำ
+                    ผู้จัดทำ
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                  Frontend-Deverloper
+                    Frontend-Deverloper
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     • นางสาวเบญจพร กิตติวิเชียรชัย

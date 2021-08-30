@@ -57,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "sarabun",
   },
   container: {
-    marginTop: 190,
+    marginTop: 175,
     display: "flex",
     justifyContent: "center",
     marginLeft: drawerspace,
-    marginRight: 50,
+    marginRight: 70,
   },
 
   paperAppBar: {
@@ -95,7 +95,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     backgroundColor: "#f0f4c3",
     color: "black",
-    fontSize: 25,
+    // fontSize:  `calc(60% + 1.3vmin)`,
+  
   },
   // appBar: {
   //   overflowX: 'hidden',
@@ -155,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
 
   ulList: {
     // width: 290,
-    maxWidth: 290,
+    maxWidth: "18.125rem",
     margin: "0 auto",
     marginTop: 25,
     marginBottom: 25,
@@ -166,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
 
   ulListTwo: {
     // width: 290,
-    maxWidth: 290,
+    maxWidth: "18.125rem",
     margin: "0 auto",
     marginTop: 25,
     marginBottom: 25,
@@ -176,7 +177,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   litsItem: {
-    width: 260,
+    maxWidth: "16.25rem",
     backgroundColor: "#ffcdd2",
     "&:hover": {
       backgroundColor: "#f89eb4",
@@ -187,10 +188,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 10,
     justifyContent: "center",
+    fontSize:  `calc(60% + 1.3vmin)`,
+    color: '#111',
   },
 
   litsItemTwo: {
-    width: 260,
+    maxWidth: "16.25rem",
     backgroundColor: "#b2dfdb",
     "&:hover": {
       backgroundColor: "#79D2AE",
@@ -202,11 +205,16 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: "center",
     justifyContent: "",
+    fontSize:  `calc(60% + 1.3vmin)`,
+    color: '#111',
+
   },
 
   litsItemicon: {
     justifyContent: "center",
     margin: 4,
+    color: '#111',
+
   },
 
   icontoolbar: {
@@ -231,6 +239,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 35, 
+    fontSize:  `calc(60% + 1.3vmin)`,
   },
   logout: {
     // backgroundColor: '#E5D0B3',
@@ -249,8 +258,20 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: 3,
     borderRadius: 15,
     borderColor: "#ff9800  #111",
-    fontSize: 16,
+    // fontSize: 16,
+    fontSize:  `calc(60% + 0.8vmin)`,
+
   },
+  litsItemText: {
+    fontSize:  `calc(60% + 1.3vmin)`,
+
+  },
+  // ulListGrid: {
+  //   fontSize:  `calc(60% + 1.3vmin)`,
+  //   maxWidth: `calc(40% + 1.3vmin)`,
+  //   margin: "0 auto",
+  // }
+  
 }));
 
 const MyAppBar = (props) => {
@@ -310,7 +331,7 @@ const MyAppBar = (props) => {
   };
 
   const content = (
-    <div>
+    <Grid className={classes.ulListGrid}>
       <div className={classes.toolbar}>
         <div className={classes.icontoolbar}>
           <CloudQueueIcon fontSize="large" />
@@ -318,7 +339,7 @@ const MyAppBar = (props) => {
         </div>
       </div>
 
-      <List className={classes.ulList}>
+      <List className={classes.ulList} >
         {itemList.map((item, index) => {
           const { text, icon, onClick } = item;
           return (
@@ -333,7 +354,7 @@ const MyAppBar = (props) => {
                   {icon}
                 </ListItemIcon>
               )}
-              <ListItemText primary={text} />
+              <ListItemText className={classes.litsItemText} primary={text} />
             </ListItem>
           );
         })}
@@ -379,7 +400,7 @@ const MyAppBar = (props) => {
           </Button>
         </div>
       </div>
-    </div>
+    </Grid>
   );
 
   return (
@@ -418,8 +439,13 @@ const MyAppBar = (props) => {
       </AppBar>
 
       <Grid container className={classes.container}>
-        <Grid item xs={12}>
-          <Hidden only="xl" >
+        <Grid item xs={12}
+        //  className={classes.activeLi}
+        >
+          <Hidden
+          //  xl="12"
+           only="xl" 
+           >
             <Drawer
               anchor="left"
               className={classes.drawer}
@@ -428,7 +454,7 @@ const MyAppBar = (props) => {
               }}
               onClose={() => setClick(false)}
               open={click}
-              // variant="temporary"
+              variant="temporary"
               // PaperProps={{
               //   sx: {
               //     width: 200,
@@ -437,10 +463,10 @@ const MyAppBar = (props) => {
             >
               {content}
             </Drawer>
-            <Private />
+            {/* <Private /> */}
           </Hidden>
 
-          <Hidden only="xs">
+          <Hidden xs="1" >
             <Drawer
               className={classes.drawer}
               classes={{

@@ -443,8 +443,8 @@ const MyAppBar = (props) => {
         //  className={classes.activeLi}
         >
           <Hidden
-          //  xl="12"
-           only="xl" 
+          mdUp
+          //  only="lg" 
            >
             <Drawer
               anchor="left"
@@ -466,7 +466,7 @@ const MyAppBar = (props) => {
             {/* <Private /> */}
           </Hidden>
 
-          <Hidden xs="1" >
+          <Hidden xs >
             <Drawer
               className={classes.drawer}
               classes={{

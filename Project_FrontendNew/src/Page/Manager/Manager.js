@@ -23,58 +23,82 @@ import myimage2 from "../../Page/Manager/1.jpg";
 import myimage3 from "../../Page/Manager/2.jpg";
 import myimage4 from "../../Page/Manager/3.jpg";
 
+import "@fontsource/sarabun";
+
+
 // import { OutlinedInput } from '@material-ui/core';
 import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   marginTop: 6,
-  //   flexGrow: 1,
-  //   // width: '1085px',
-  //   display: 'flex',
-  //   // marginLeft: '620px'
-  // },
-  // paper: {
-  //   backgroundColor: '#ddd6f3',
-  //   height: 300,
-  //   width: 220,
-  //   float: 'left',
-  //   marginRight: 50,
-  //   marginBottom: 20,
-  // },
-  // control: {
-  //   padding: theme.spacing(2),
-  // },
 
-  // img: {
-  //   width: 220,
-  //   height: 300,
-
-  // }
   root: {
     flexGrow: 1,
+
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    // maxWidth: "50rem",
+    marginLeft: 260,
+    // alignItems: 'st'
   },
   paper: {
     padding: theme.spacing(2),
     margin: 10,
-    maxWidth: 430,
+    // marginLeft: 100,
+    maxWidth: "35rem",
     padding: 25,
+    backgroundColor: '#f4ecfd',
+    borderRadius: 15,
+  },
+  gridimage: {
+    display: 'flex',
+    alignItems: 'center',
+
   },
   image: {
     width: 128,
     height: 128,
+    
   },
   img: {
     margin: "auto",
     display: "block",
     maxWidth: "100%",
     maxHeight: "100%",
+    borderRadius: 12,
   },
-  // h1: {
-  //   marginTop: 5,
-  //   border: "5px  #f8bbd0",
-  // },
-  // variant: outlined,
+  text: {
+    fontSize:  `calc(90% + 0.7vmin)`,
+    fontFamily: "sarabun",
+    fontWeight: 600,
+   
+  },
+  text2: {
+    fontSize:  `calc(90% + 0.5vmin)`,
+    fontFamily: "sarabun",
+    margin: 13,
+    marginLeft: 30, 
+    
+  },
+  gridItem: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // justifyContent: 'space-evenly',
+    margin: 16,
+  },
+  h1: {
+    fontSize:  `calc(90% + 1vmin)`,
+    // marginTop: 30,
+    marginLeft: -200,
+    marginRight: 130,
+    // borderColor: '#eeeeff',
+  
+  },
+  h1text: {
+    border: "10px solid #eeeeff",
+  }
+  
 }));
 
 const Manager = () => {
@@ -83,9 +107,9 @@ const Manager = () => {
   const theme = useTheme();
 
   return (
-    <Container maxWidth="sm">
+    <Container className={classes.container} maxWidth="lg">
       <div className={classes.h1}>
-        <h1>TEAM</h1>
+        <h1 className={classes.h1text}>TEAM</h1>
       </div>
 
       <div className={classes.root}>
@@ -98,11 +122,11 @@ const Manager = () => {
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
+                <Grid item xs className={classes.gridItem} >
+                  <Typography className={classes.text} gutterBottom variant="subtitle1">
                     อาจารย์ที่ปรึกษา
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
+                  <Typography className={classes.text2} variant="body2" gutterBottom>
                     • อาจารย์วิทยา ศรีกุล
                   </Typography>
                 </Grid>
@@ -119,11 +143,11 @@ const Manager = () => {
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
+                <Grid item xs className={classes.gridItem}>
+                  <Typography className={classes.text} gutterBottom variant="subtitle1">
                     อาจารย์ที่ปรึกษา
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
+                  <Typography className={classes.text2} variant="body2" gutterBottom>
                     • อาจารย์เกตุกาญจน์ ไชยขันธุ์
                   </Typography>
                 </Grid>
@@ -134,21 +158,21 @@ const Manager = () => {
 
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
-            <Grid item>
+            <Grid item className={classes.gridimage}>
               <ButtonBase className={classes.image}>
                 <img className={classes.img} src={myimage3} alt="complex" />
               </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
+                <Grid item xs className={classes.gridItem}>
+                  <Typography className={classes.text} gutterBottom variant="subtitle1">
                     ผู้จัดทำ
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Backend-Deverloper
+                  <Typography variant="body2" className={classes.text2} gutterBottom>
+                   <b>Backend-Deverloper</b> 
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
+                  <Typography variant="body2" className={classes.text2} gutterBottom>
                     • นายสถาพร มณีบุญ
                   </Typography>
                 </Grid>
@@ -158,21 +182,21 @@ const Manager = () => {
         </Paper>
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
-            <Grid item>
+            <Grid item className={classes.gridItem}>
               <ButtonBase className={classes.image}>
                 <img className={classes.img} src={myimage4} alt="complex" />
               </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
+                <Grid item xs className={classes.gridItem}>
+                  <Typography className={classes.text} gutterBottom variant="subtitle1">
                     ผู้จัดทำ
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Frontend-Deverloper
+                  <Typography className={classes.text2} variant="body2" gutterBottom>
+                   <b> Frontend-Deverloper </b>
                   </Typography>
-                  <Typography variant="body2" gutterBottom>
+                  <Typography className={classes.text2} variant="body2" gutterBottom>
                     • นางสาวเบญจพร กิตติวิเชียรชัย
                   </Typography>
                 </Grid>
@@ -182,34 +206,7 @@ const Manager = () => {
         </Paper>
       </div>
 
-      {/* <Grid container className={classes.root} spacing={2}>
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" spacing={spacing}>
-            <Grid item>
-              <Paper className={classes.paper}>
-                <img className={classes.img} src={myimage} />
-              </Paper>
-              <Paper className={classes.paper} >
-                <img className={classes.img} src={myimage2} />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Grid>
-
-
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" spacing={spacing}>
-            <Grid item>
-              <Paper className={classes.paper}  >
-                <img className={classes.img} src={myimage3} />
-              </Paper>
-              <Paper className={classes.paper} >
-                <img className={classes.img} src={myimage4} />
-              </Paper> 
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid> */}
+     
     </Container>
   );
 };

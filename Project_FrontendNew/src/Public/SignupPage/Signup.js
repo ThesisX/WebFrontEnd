@@ -21,7 +21,7 @@ import axios from 'axios'
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import { OutlinedInput } from '@material-ui/core';
-
+import { BASE_URL } from '../../service';
 
 // const useStyles = makeStyles((theam) => ({
 //   inputlabel: {
@@ -119,9 +119,6 @@ const Signup = () => {
   //     }
   // }
     e.preventDefault()
-
-
-    let BASE_URL = "http://172.18.41.124:8000"
 
     let form_data = {
       username: User,

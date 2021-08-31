@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import '@fontsource/sarabun';
 
 
-
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -26,6 +25,7 @@ import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
 // import clsx from 'clsx';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
+import { BASE_URL } from '../../service';
 // import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
@@ -83,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Singin = ({ setToken }) => {
   const classes = useStyles();
-  let BASE_URL = "http://127.0.0.1:8000"
   let [Username, setUsername] = useState("")
   let [Password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false);

@@ -7,7 +7,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import '@fontsource/sarabun';
+// import '@fontsource/sarabun';
 
 
 // import Container from '@material-ui/core/Container';
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     backgroundColor: theme.palette.background.paper,
     justifyContent: 'center',
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
   },
 
   tabs: {

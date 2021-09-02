@@ -23,7 +23,7 @@ import myimage2 from "../../Page/Manager/1.jpg";
 import myimage3 from "../../Page/Manager/2.jpg";
 import myimage4 from "../../Page/Manager/3.jpg";
 
-import "@fontsource/sarabun";
+// import "@fontsource/sarabun";
 
 
 // import { OutlinedInput } from '@material-ui/core';
@@ -70,13 +70,13 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize:  `calc(90% + 0.7vmin)`,
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
     fontWeight: 600,
    
   },
   text2: {
     fontSize:  `calc(90% + 0.5vmin)`,
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
     margin: 13,
     marginLeft: 30, 
     

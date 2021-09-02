@@ -230,7 +230,7 @@ const Signup = () => {
     },
 
     button: {
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
     fontSize: 17,
     // margin: '30px',
     // marginLeft: 60,

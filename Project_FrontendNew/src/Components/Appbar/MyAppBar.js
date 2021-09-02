@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import "./MyAppBar.css";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
@@ -41,10 +40,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Hidden from "@material-ui/core/Hidden";
 
 import Typography from "@material-ui/core/Typography";
-import "@fontsource/roboto";
-import "@fontsource/sarabun";
-
-import "./MyAppBar";
+// import "@fontsource/roboto";
+// import "@fontsource/sarabun";
 
 const drawerWidth = 292;
 const drawerspace = drawerWidth + 50;
@@ -54,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     // maxWidth: '80rem',
     margin: "0 auto",
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
   },
   container: {
     marginTop: 175,

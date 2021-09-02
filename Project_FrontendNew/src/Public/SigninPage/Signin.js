@@ -3,7 +3,7 @@ import axios from 'axios'
 import qs from 'qs';
 import Cookies from 'js-cookie';
 import Container from '@material-ui/core/Container';
-import '@fontsource/sarabun';
+// import '@fontsource/sarabun';
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   // },
   button: {
     // padding: 10,
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
     fontSize: 17,
     margin: '30px',
     marginLeft: 60,
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
   label: {
     fontSize: 16.5,
-    fontFamily: "sarabun",
+    // fontFamily: "sarabun",
   }
 
 }));

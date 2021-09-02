@@ -147,21 +147,11 @@ export default function Download() {
   };
 
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-
   useEffect(() => {
     GetAllSubject();
   }, [])
 
-  return (
+  const list = (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -196,15 +186,15 @@ export default function Download() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        //  rowsPerPageOptions={[10, 25, 100]}
-        //  component="div"
-        //  count={rows.length}
-        //  rowsPerPage={rowsPerPage}
-        //  page={page}
-        //  onPageChange={handleChangePage}
-        //  onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
+
+  const notlist = (
+    <div align="center">
+      <h2>ไม่พบรายวิชา</h2>
+      <p>คุณต้องสร้างรายวิชาที่เมนู <a href="/system">ระบบตรวจข้อสอบ</a></p>      
+    </div>
+  );
+
+  return rows.length > 0 ? list : notlist;
 }

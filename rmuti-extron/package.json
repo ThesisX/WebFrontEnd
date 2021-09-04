@@ -43,5 +43,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://20.194.53.85"
+  "start_url": ".",
+  "homepage": "."
 }

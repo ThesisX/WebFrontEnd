@@ -15,23 +15,26 @@ const Private = () => {
     return (
         <div>
             <Switch>
-                <Route exact path="/">
+                <Route exact path={`${process.env.PUBLIC_URL}/`}>
                     <Dashboard />
                 </Route>
-                <Route path="/system">
+                <Route path={`${process.env.PUBLIC_URL}/system`}>
                     <System />
                 </Route>
-                <Route exact path="/info">
+                <Route path={`${process.env.PUBLIC_URL}/info`}>
                     <Info />
                 </Route>
-                <Route exact path="/manual">
+                <Route path={`${process.env.PUBLIC_URL}/manual`}>
                     <Manual />
                 </Route>
-                <Route exact path="/download">
+                <Route path={`${process.env.PUBLIC_URL}/download`}>
                     <Download />
                 </Route>
-                <Route exact path="/manager">
+                <Route path={`${process.env.PUBLIC_URL}/manager`}>
                     <Manager />
+                </Route>
+                <Route path="*">
+                    <Dashboard />
                 </Route>
 
             </Switch>

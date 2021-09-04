@@ -3,6 +3,7 @@ import Answer from './Answer';
 import Exams from './Exams';
 import Subjects from './Subjects';
 import Datastudents from './Datastudents';
+import {Redirect} from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -189,8 +190,10 @@ const System = () => {
                 console.log("Predict Exams return : ", res.data);
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
-
-        window.location = '/download';
+        
+        // window.history.push("/download");
+        // window.history.back();
+        <Redirect to="/download" />
     };
 
     return (

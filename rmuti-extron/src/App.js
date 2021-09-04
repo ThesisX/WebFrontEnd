@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <div>
-      <Router>
+      <Router basename={'/'}>
         {!auth ? <RoutesPublic />
           : <RoutesPrivate />
         }

@@ -16,6 +16,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { BASE_URL } from '../../service';
 import Cookies, { set } from 'js-cookie';
+import { ContactsOutlined } from '@material-ui/icons';
 
 const columns = [
   { id: 'Subject', label: 'ชื่อรายวิชา', minWidth: 170 },
@@ -94,8 +95,8 @@ export default function Download() {
       .get(BASE_URL + '/download/subject', { headers })
       .then(res => {
         let info = res.data;
-
-        info.map(d => console.log(d));
+        console.log("info : ", info.length);
+        // info.map(d => console.log(d));
 
         setRows(info.map(d => {
           return {
@@ -149,6 +150,7 @@ export default function Download() {
 
   useEffect(() => {
     GetAllSubject();
+    console.log("rows : ", rows.length);
   }, [])
 
   const list = (
@@ -169,9 +171,9 @@ export default function Download() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.map((row) => {
               return (
-                <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <StyledTableRow hover key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (

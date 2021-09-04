@@ -130,76 +130,16 @@ const Signup = () => {
 
     await axios.post(BASE_URL + "/sign-up", form_data)
       .then(res => {
-        console.log(res)
-        // console.log(res.data)
+        console.log(res.data);
+        
+        if(res.statusText === "OK"){
+          window.history.go(0);
+        }else{
+          alert("กรุณาลองอีกครั้ง..");
+        }
       });
   }
 
-
-
-  // const BootstrapInput = withStyles((theme) => ({
-  //   root: {
-  //     'label + &': {
-  //       marginTop: theme.spacing(5),
-  //       display: 'auto',
-  //       borderRadius: 15,
-  //       paddingTop: '270px',
-  //     },
-  //   },
-  //   input: {
-  //     borderRadius: 4,
-  //     position: 'relative',
-  //     backgroundColor: theme.palette.common.white,
-  //     border: '1px solid #ced4da',
-  //     fontSize: 16,
-  //     width: 'auto',
-  //     padding: '10px 12px',
-  //     transition: theme.transitions.create(['border-color', 'box-shadow']),
-  //     // Use the system font instead of the default Roboto font.
-  //     fontFamily: [
-  //       '-apple-system',
-  //       'BlinkMacSystemFont',
-  //       '"Segoe UI"',
-  //       'Roboto',
-  //       '"Helvetica Neue"',
-  //       'Arial',
-  //       'sans-serif',
-  //       '"Apple Color Emoji"',
-  //       '"Segoe UI Emoji"',
-  //       '"Segoe UI Symbol"',
-  //     ].join(','),
-  //     '&:focus': {
-  //       boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-  //       borderColor: theme.palette.primary.main,
-  //     },
-
-  //   },
-  // }))(InputBase);
-
-  // const useStylesReddit = makeStyles((theme) => ({
-  //   root: {
-  //     border: '1px solid #e2e2e1',
-  //     overflow: 'hidden',
-  //     borderRadius: 4,
-  //     backgroundColor: '#fcfcfb',
-  //     transition: theme.transitions.create(['border-color', 'box-shadow']),
-  //     '&:hover': {
-  //       backgroundColor: '#fff',
-  //     },
-  //     '&$focused': {
-  //       backgroundColor: '#fff',
-  //       boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
-  //       borderColor: theme.palette.primary.main,
-  //     },
-  //   },
-  //   focused: {},
-  // }));
-
-  // function RedditTextField(props) {
-  //   const classes = useStylesReddit();
-
-  // return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
-  // }
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -284,73 +224,12 @@ const Signup = () => {
 
   }));
 
-  // const OutlinedInput = withStyles({
-  //   /* Add a green text color and a checkmark when the requirements are right */
-  //   .TextField {
-  //   color: green;
-  // }
-
-  //   .valid: before {
-  //     position: relative;
-  //     left: -35px;
-  //     content: "✔";
-  //   }
-
-  //   /* Add a red text color and an "x" when the requirements are wrong */
-  //   .invalid {
-  //     color: red;
-  //   }
-
-  //   .invalid: before {
-  //   position: relative;
-  //   left: -35px;
-  //   content: "✖";
-  // }
-  //   inputlabel: {
-  //     '& label.Mui-focused': {
-  //       color: 'green',
-  //     },
-  //     '& .MuiInput-underline:after': {
-  //       borderBottomColor: 'green',
-  //     },
-  //     '& .MuiOutlinedInput-root': {
-  //       '& fieldset': {
-  //         borderColor: 'red',
-  //       },
-  //       '&:hover fieldset': {
-  //         borderColor: 'yellow',
-  //       },
-  //       '&.Mui-focused fieldset': {
-  //         borderColor: 'green',
-  //     },
-  //   },
-  // }
-  // })(TextField);
-
-  // const theme = createMuiTheme({
-  //   palette: {
-  //     primary: green,
-  //   },
-  // });
-
   const theme = createMuiTheme({});
 
   const classes = useStyles();
   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
 
-  React.useEffect(()=>{
-    // if (Password.length >= 8 && ConfirmPassword.length >= 8) {
-    //   if (Password === ConfirmPassword) {
-    //     alert('รหัสตรงกัน');
-    //   }else{
-    //     alert('รหัสไม่ตรงกัน');
-    //   }
-    // }
-  });
   return (
-
-
-
     <Container alignItems="center" className={classes.root} style={{ width: '190vh' }} >
 
       <div className={classes.divform} >

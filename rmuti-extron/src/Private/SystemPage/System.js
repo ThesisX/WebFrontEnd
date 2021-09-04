@@ -3,7 +3,6 @@ import Answer from './Answer';
 import Exams from './Exams';
 import Subjects from './Subjects';
 import Datastudents from './Datastudents';
-import {Redirect} from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -13,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { BASE_URL } from '../../service';
+import { BASE_URL, ROOT_URL } from '../../service';
 import Cookies from 'js-cookie';
 import { post, get } from 'axios';
 import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext';
@@ -191,9 +190,8 @@ const System = () => {
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
         
-        // window.history.push("/download");
         // window.history.back();
-        <Redirect to="/download" />
+        window.location.href = `${ROOT_URL}/download`;
     };
 
     return (

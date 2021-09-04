@@ -20,6 +20,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import  {BrowserRouter as Route, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,6 +75,7 @@ const System = () => {
     const [subID, setSubID] = useState(0);
     const [TxtProcessing, setTxtProcessing] = useState("กรุณาสร้างรายวิชา");
     const [Loadding, setLoadding] = useState(false);
+    const [process, setProcess] = useState(false);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -122,7 +124,7 @@ const System = () => {
 
         slow_time = fast_time + 20;
 
-        return `${fast_time}-${slow_time} วินาที` ;
+        return `${fast_time}-${slow_time} วินาที`;
     };
 
     /* Post */
@@ -189,12 +191,12 @@ const System = () => {
                 console.log("Predict Exams return : ", res.data);
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
-        
-        // window.history.back();
-        window.location.href = `${ROOT_URL}/download`;
+
+        setProcess(true);
+        window.history.back();
     };
 
-    return (
+    const SystemsComponent = (
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -279,7 +281,10 @@ const System = () => {
                 </Grid>
             </Grid>
         </div>
-    )
+    );
+
+    return SystemsComponent;
+
 }
 
 export default System;

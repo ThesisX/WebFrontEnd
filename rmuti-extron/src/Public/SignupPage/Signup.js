@@ -53,13 +53,13 @@ const Signup = () => {
 
   // const [data, setData] = useState({})
 
-  const [User, setUser] = useState("")
-  const [Password, setPassword] = useState("")
-  const [ConfirmPassword, setConfirmPassword] = useState("")
-  const [Email, setEmail] = useState("")
-  const [Name, setName] = useState("")
-  const [Lname, setLname] = useState("")
-  const [Schollname, setSchollname] = useState("")
+  const [User, setUser] = useState("ben_x1")
+  const [Password, setPassword] = useState("999999999")
+  const [ConfirmPassword, setConfirmPassword] = useState("999999999")
+  const [Email, setEmail] = useState("benzaaze@gmail.com")
+  const [Name, setName] = useState("benha")
+  const [Lname, setLname] = useState("kitti")
+  const [Schollname, setSchollname] = useState("rmuti")
   // let [Province, setProvince] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
@@ -135,9 +135,17 @@ const Signup = () => {
         if(res.statusText === "OK"){
           window.history.go(0);
         }else{
+         console.log(res) ;
           alert("กรุณาลองอีกครั้ง..");
         }
-      });
+      }
+      )
+      .catch((error)=> {
+        console.log(error.response.data.detail);
+        alert(error.response.data.detail);
+
+      }
+      );
   }
 
 
@@ -242,7 +250,7 @@ const Signup = () => {
           helperText="ERROR"
           onChange={(e) =>
             setUser(e.target.value)}
-          value={User} />
+          value={User}  />
 
 
         <FormControl variant="outlined" className={classes.FormControlmargin} >

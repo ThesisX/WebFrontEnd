@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import qs from 'qs';
-import Cookies from 'js-cookie';
-import Container from '@material-ui/core/Container';
+import React, { useState } from "react";
+import axios from "axios";
+import qs from "qs";
+import Cookies from "js-cookie";
+import Container from "@material-ui/core/Container";
 // import '@fontsource/sarabun';
 
-
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Button from '@material-ui/core/Button';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import FaceIcon from '@material-ui/icons/Face';
-import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Button from "@material-ui/core/Button";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import FaceIcon from "@material-ui/icons/Face";
+import VpnKeyRoundedIcon from "@material-ui/icons/VpnKeyRounded";
+import Snackbar from "@material-ui/core/Snackbar";
+// import MuiAlert from "@material-ui/lab/Alert";
 // import { Link } from "react-router-dom";
-
 
 // import Alert from '@material-ui/lab/Alert';
 
 // import clsx from 'clsx';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import { BASE_URL } from '../../service';
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import { BASE_URL } from "../../service";
 // import FormControl from '@material-ui/core/FormControl';
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
 
 const useStyles = makeStyles((theme) => ({
   // margin: {
@@ -52,52 +50,54 @@ const useStyles = makeStyles((theme) => ({
     // padding: 10,
     // fontFamily: "sarabun",
     fontSize: 17,
-    margin: '30px',
+    margin: "30px",
     marginLeft: 60,
     marginTop: 50,
     // backgroundColor: '#79955a',
     // transparency: '50%',
   },
   griduserpass: {
-    marginTop: '30px',
+    marginTop: "30px",
   },
 
   form: {
-    display: 'flex',
-    maxWidth: '25rem',
-    backgroundColor: '#d3e8d6',
+    display: "flex",
+    maxWidth: "25rem",
+    backgroundColor: "#d3e8d6",
     padding: 40,
     paddingLeft: 83,
     // margin: 50,
     // height: '400',
     // margin: 20,
     borderRadius: 35,
-    justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     // marginLeft: '380px',
     // padding: '80px',
     // borderRadius: 15,
-
   },
   label: {
     fontSize: 16.5,
     // fontFamily: "sarabun",
-  }
-
+  },
 }));
 
 const Singin = ({ setToken }) => {
   const classes = useStyles();
-  let [Username, setUsername] = useState("")
-  let [Password, setPassword] = useState("")
+  let [Username, setUsername] = useState("ben_x1");
+  let [Password, setPassword] = useState("88888");
   const [showPassword, setShowPassword] = useState(false);
   const [checkSnackbar, setcheckSnackbar] = useState(false);
-  const [open, setOpen] = React.useState(false);
-
+  const [textSnackbar, setTextSnackbar] = useState("พบข้อผิดพลาด");
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
 
   const handleChange = (event) => {
-    setPassword(event.target.value)
+    setPassword(event.target.value);
   };
 
   const handleClickShowPassword = () => {
@@ -108,107 +108,126 @@ const Singin = ({ setToken }) => {
     event.preventDefault();
   };
 
-
-
   const handleSignin = async (e) => {
-    e.preventDefault()
-    setOpen(true)
+    e.preventDefault();
+    // setOpen(true);
     let values = true;
 
-    let form_data = {
-      username: Username,
-      password: Password,
-    };
+    if (Username === "") {
+      setTextSnackbar("กรุณากรอก ชื่อผู้เข้าใช้งาน");
+      setcheckSnackbar(true);
 
-
-    // if (form_data.username === "") {
-    //   setcheckSnackbar(true)
-    //   // alert("กรุณากรอก ชื่อผู้เข้าใช้งาน");
-    //   // values = false;
-    //   // return false;
-    // } else if (form_data.password === "") {
-    //   setcheckSnackbar(false)
-
-    //   // alert("กรุณากรอก รหัสผ่าน");
-    //   // values = false;
-
-    // }
-
-    if (Username === "king") {
-      setcheckSnackbar(true)
       // alert("กรุณากรอก ชื่อผู้เข้าใช้งาน");
       // values = false;
       // return false;
-    } 
-    // else if (Password === "king") {
-    //   setcheckSnackbar(false)
+    } else if (Password === "") {
+      setTextSnackbar("กรุณากรอก รหัสผ่าน");
+      setcheckSnackbar(true);
 
-    //   // alert("กรุณากรอก รหัสผ่าน");
-    //   // values = false;
+      // alert("กรุณากรอก รหัสผ่าน");
+      // values = false;
+    } else {
+      let form_data = {
+        username: Username,
+        password: Password,
+      };
 
-    // }
-    // document.getElementById("username").disabled = true;
-    // document.getElementById("password").disabled = true;
-    // document.getElementById("submit").disabled = true;
-    // return false;
+      // if (Username === "") {
+      // alert("กรุณากรอก ชื่อผู้เข้าใช้งาน");
+      // values = false;
+      // return false;
+      // }
+      // else if (Password === "king") {
+      //   setcheckSnackbar(false)
 
-    // if (values) {
+      //   // alert("กรุณากรอก รหัสผ่าน");
+      //   // values = false;
 
+      // }
+      // document.getElementById("username").disabled = true;
+      // document.getElementById("password").disabled = true;
+      // document.getElementById("submit").disabled = true;
+      // return false;
 
-    //   let options = {
-    //     method: 'POST',
-    //     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    //     data: qs.stringify(form_data),
-    //     url: BASE_URL + '/token',
-    //   };
+      // if (values) {
 
-    //   console.log("log");
+      let options = {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        data: qs.stringify(form_data),
+        url: BASE_URL + "/token",
+      };
 
-    //   await axios(options)
-    //     .then(res => {
-    //       // console.log(res)
-    //       // console.log(res.data.access_token)
-    //       Cookies.set("token", res.data.access_token);
-    //       // setToken(res.data.access_token)
-    //       window.location.reload();
-    //     })
-    //     .catch((error)=> {
-    //       console.log(error.response.data.detail);
-    //       alert(error.response.data.detail);
-  
-    //     })
-    //     ;
-    // }
-  }
+      console.log("log");
 
-  const handleClose = (reason) => {
-    if (reason === 'clickaway') {
+      await axios(options)
+        .then((res) => {
+          // console.log(res)
+          // console.log(res.data.access_token)
+          Cookies.set("token", res.data.access_token);
+          // setToken(res.data.access_token)
+          window.location.reload();
+        })
+        .catch((error) => {
+          setTextSnackbar(error.response.data.detail);
+          setcheckSnackbar(true);
+          // setState({ open: true, ...newState });
+          console.log(error.response.data.detail);
+          // alert(error.response.data.detail);
+        });
+      console.log(textSnackbar);
+    }
+  };
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
       return;
     }
 
-    setOpen(false);
+    // setOpen(false);
   };
 
   return (
-
-    <Container alignItems="center" className={classes.form} >
+    <Container alignItems="center" className={classes.form}>
       {/* <div className={classes.margin} > */}
       {/* Username Input */}
       <Grid className={classes.griduserpass} alignItems="flex-end">
         <FaceIcon />
-        <Grid >
-        {checkSnackbar == true ? (<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          This is a success message!
-        </Alert>
-      </Snackbar>) : <> </> }
-          <InputLabel className={classes.label} htmlFor="standard-adornment-password"> ชื่อผู้ใช้งาน </InputLabel>
+        <Grid>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={checkSnackbar}
+            onClose={handleClose}
+            message={textSnackbar}
+            key={vertical + horizontal}
+          />
+
+          {/* {checkSnackbar == true ? (
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              {textSnackbar}
+
+              <Alert onClose={handleClose} severity="error"></Alert>
+            </Snackbar>
+          ) : (
+            <> </>
+          )} */}
+          <InputLabel
+            className={classes.label}
+            htmlFor="standard-adornment-password"
+          >
+            {" "}
+            ชื่อผู้ใช้งาน{" "}
+          </InputLabel>
           <TextField
             id="input-with-icon-grid"
             type="user"
             required
-            onChange={(e) =>
-              setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             value={Username}
           />
         </Grid>
@@ -217,11 +236,16 @@ const Singin = ({ setToken }) => {
       {/* Password Input */}
       <Grid className={classes.griduserpass} alignItems="flex-end">
         <VpnKeyRoundedIcon />
-        <Grid >
-          <InputLabel className={classes.label} htmlFor="standard-adornment-password">รหัสผ่าน</InputLabel>
+        <Grid>
+          <InputLabel
+            className={classes.label}
+            htmlFor="standard-adornment-password"
+          >
+            รหัสผ่าน
+          </InputLabel>
           <Input
             id="standard-adornment-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             value={Password}
             onChange={handleChange}
             required
@@ -239,21 +263,21 @@ const Singin = ({ setToken }) => {
           />
         </Grid>
       </Grid>
-      <Button className={classes.button}
+      <Button
+        className={classes.button}
         type="button"
         onClick={handleSignin}
         variant="outlined"
-        color="inherit">
+        color="inherit"
+      >
         เข้าสู่ระบบ
       </Button>
 
-      <div>
-
-      </div>
+      <div></div>
 
       {/* </div> */}
     </Container>
   );
-}
+};
 
 export default Singin;

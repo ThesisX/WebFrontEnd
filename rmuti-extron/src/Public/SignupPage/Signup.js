@@ -243,11 +243,11 @@ const Signup = () => {
       <div className={classes.divform} >
         <TextField
           className={classes.FormControlmargin}
-          label="USER"
+          label="ชื่อผู้ใช้"
           required
           variant="outlined"
           id="validation-outlined-input"
-          helperText="ERROR"
+          helperText=""
           onChange={(e) =>
             setUser(e.target.value)}
           value={User}  />
@@ -255,11 +255,11 @@ const Signup = () => {
 
         <FormControl variant="outlined" className={classes.FormControlmargin} >
           
-          <InputLabel htmlFor="component-outlined">Password</InputLabel>
+          <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
           <OutlinedInput
             type={showPassword ? 'text' : 'password'}
             id="component-outlined"
-            label="Password"
+            label="รหัสผ่าน"
             error={errpwd}
             variant="outlined"
             onChange={(e) => validate(e.target.value)}
@@ -289,11 +289,11 @@ const Signup = () => {
 
        
         <FormControl variant="outlined"  className={classes.FormControlmargin}>
-          <InputLabel htmlFor="component-outlined">ConfirmPassword</InputLabel>
+          <InputLabel htmlFor="component-outlined">ยืนยันรหัสผ่าน</InputLabel>
           <OutlinedInput
             type={showPassword1 ? 'text' : 'password'}
             id="component-outlined"
-            label="ConfirmPASSWORD"
+            label="ยืนยันรหัสผ่าน"
             error={errpwd1}
             variant="outlined"
             onChange={(e) => validates(e.target.value)}
@@ -363,7 +363,7 @@ const Signup = () => {
         </ThemeProvider>
 
         <FormControl variant="standard" className={classes.TextFieldmargin}>
-          <InputLabel htmlFor="outlined-age-native-simple">PROVINCE</InputLabel>
+          <InputLabel htmlFor="outlined-age-native-simple">จังหวัด</InputLabel>
           <Select
             native
             label="Age"

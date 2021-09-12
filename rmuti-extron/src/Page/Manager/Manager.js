@@ -70,16 +70,16 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize:  `calc(90% + 0.7vmin)`,
-    // fontFamily: "sarabun",
+    fontFamily: "sarabun",
     fontWeight: 600,
    
   },
   text2: {
     fontSize:  `calc(90% + 0.5vmin)`,
-    // fontFamily: "sarabun",
+    fontFamily: "sarabun",
     margin: 13,
     marginLeft: 30, 
-    
+
   },
   gridItem: {
     // display: 'flex',
@@ -180,9 +180,10 @@ const Manager = () => {
             </Grid>
           </Grid>
         </Paper>
+
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
-            <Grid item className={classes.gridItem}>
+            <Grid item className={classes.gridimage}>
               <ButtonBase className={classes.image}>
                 <img className={classes.img} src={myimage4} alt="complex" />
               </ButtonBase>

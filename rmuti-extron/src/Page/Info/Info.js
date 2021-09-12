@@ -9,6 +9,7 @@ import { TramRounded } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+
   },
   paper: {
     padding: theme.spacing(2),
@@ -21,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: 80,
-  }
+  },
+  h1text: {
+    border: "10px solid #eeeeff",
+    
+  },
 }));
 
 const Info = () => {
@@ -34,7 +39,7 @@ const Info = () => {
     if (clickimg === true) {
       setClickimg(false);
     }
-    return (clickimg)
+    return clickimg;
   };
 
   const reset = () => {
@@ -43,15 +48,20 @@ const Info = () => {
 
   const classes = useStyles();
 
+  const themeInstance = {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+  };
+
   return (
     <div className={classes.root}>
+      {/* <h1 className={classes.h1text}>เกี่ยวกับ</h1> */}
+
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>เกี่ยวกับ นะน้องนะ</h1>
             CPE RMUTI ©2021 Created by CPE Group 61231
-      
-          {/* <h1 className={classes.text}>{count}</h1>
+            {/* <h1 className={classes.text}>{count}</h1>
           {clickimg === true ? (
             <img className={classes.img} src={myimage0} />
             ) : (
@@ -63,9 +73,6 @@ const Info = () => {
           </button>
           <button onClick={reset}>Reset</button> */}
           </Paper>
-
-         
-     
         </Grid>
       </Grid>
     </div>

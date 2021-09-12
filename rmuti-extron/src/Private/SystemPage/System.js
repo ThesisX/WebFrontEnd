@@ -20,7 +20,8 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import  {BrowserRouter as Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import ProgressBar from '../../Components/ProgressBar/ProgressBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,6 +77,7 @@ const System = () => {
     const [TxtProcessing, setTxtProcessing] = useState("กรุณาสร้างรายวิชา");
     const [Loadding, setLoadding] = useState(false);
     const [process, setProcess] = useState(false);
+    const [percent, setPercent] = useState(0);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -128,7 +130,12 @@ const System = () => {
     };
 
     /* Post */
+    const UploadAnswer = () => {
+
+    };
+
     const handleSubmit = async () => {
+        let conut_file = 2; // datafile and ansfile sum is 2 file
         setLoadding(true);
         setTxtProcessing("กำลังอัปโหลดข้อมูล");
 
@@ -143,9 +150,12 @@ const System = () => {
         await FormDataFile.append('data_file', datafile[0]);
         await FormAnswerFile.append('ans_file', ansfile[0]);
 
-        await examfile.forEach(f => {
-            FormExamsFile.append('exm_files', f);
-        });
+        // await examfile.forEach(f => {
+        //     conut_file++;
+        //     FormExamsFile.append('exm_files', f);
+        // });
+        conut_file += examfile.length;
+        let sum_percent = 100 / conut_file;
 
         const config = {
             headers: {
@@ -158,17 +168,25 @@ const System = () => {
         await post(url_datafile, FormDataFile, config)
             .then(res => {
                 console.log("data_file : ", res.data);
+                setPercent(percent + sum_percent);
             });
 
         await post(url_answerfile, FormAnswerFile, config)
             .then(res => {
                 console.log("ans_file : ", res.data);
+                setPercent(percent + sum_percent);
+
             });
 
-        await post(url_examsfile, FormExamsFile, config)
-            .then(res => {
-                console.log("exms_file : ", res.data);
-            });
+        await examfile.forEach(f => {
+            FormExamsFile.append('exm_files', f);
+            post(url_examsfile, FormExamsFile, config)
+                .then(res => {
+                    console.log("exms_file : ", res.data);
+                    setPercent(percent + sum_percent);
+                    FormExamsFile.delete('exm_files');
+                });
+        });
 
         await setTxtProcessing("อัปโหลดข้อมูล สำเร็จ!!");
         const ntime = await CalculateTime(ansfile[0].name, examfile.length)
@@ -274,7 +292,9 @@ const System = () => {
                         </Paper >
                     ) : (
                         <div className={classes.CenterObj}>
-                            <CircularProgress />
+                            {/* <CircularProgress /> */}
+                            <ProgressBar percent={percent} />
+                            <h3>percent {percent}</h3>
                             <h3>{TxtProcessing}</h3>
                         </div>
                     )}

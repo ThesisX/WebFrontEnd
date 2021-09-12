@@ -30,6 +30,7 @@ const Dashboard = () => {
     return (
         <div>
             <h2>สวัสดีคุณ : {data.full_name}</h2>
+            {/* <button onClick={()=>setCount(count+10)}>click</button> */}
         </div>
     );
 }

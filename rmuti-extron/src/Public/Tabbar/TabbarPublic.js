@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     backgroundColor: theme.palette.background.paper,
     justifyContent: 'center',
-    // fontFamily: "sarabun",
+    fontFamily: "sarabun",
   },
 
   tabs: {

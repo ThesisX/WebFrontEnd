@@ -28,7 +28,8 @@ export default function ProgressBar({percent}) {
 
   return (
     <div className={classes.root}>
-      <BorderLinearProgress variant="determinate" value={percent} />
+      {/* <BorderLinearProgress variant="determinate" value={percent} /> */}
+      <BorderLinearProgress variant="indeterminate" value={percent} />
       
     </div>
   );

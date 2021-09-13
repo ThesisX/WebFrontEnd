@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { BASE_URL, ROOT_URL } from '../../service';
+import { BASE_URL, F_PORT, ROOT_URL } from '../../service';
 import Cookies from 'js-cookie';
 import { post, get } from 'axios';
 import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext';
@@ -75,9 +75,14 @@ const System = () => {
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
     const [TxtProcessing, setTxtProcessing] = useState("กรุณาสร้างรายวิชา");
+    const [clickSubmit, setClickSubmit] = useState(false);
     const [Loadding, setLoadding] = useState(false);
     const [process, setProcess] = useState(false);
     const [percent, setPercent] = useState(0);
+    const [count, setCount] = useState(0);
+    const [lenghtfile, setLenghtfile] = useState(0);
+    const [sumpercent, setSumpercent] = useState(0);
+    const [postStatus, setPostStatus] = useState(false);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -124,18 +129,60 @@ const System = () => {
         }
 
 
-        slow_time = fast_time + 20;
+        slow_time = fast_time + 30;
 
         return `${fast_time}-${slow_time} วินาที`;
     };
 
-    /* Post */
-    const UploadAnswer = () => {
+    /* Post Data */
+    const PostData = async(thisfile, url, file) => {
+        const config = {
+            headers: {
+                'accept': 'application/json',
+                'Authorization': `Bearer ${tokenCookies}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        };
 
+        const form = new FormData();
+        file.forEach(f => {
+            form.append(thisfile, f);
+        });
+
+        await post(url, form, config)
+            .then(res => {
+                console.log(thisfile, res.data);
+
+            }).catch(err => {
+                console.log(err.response.data.detail);
+                window.alert(`มีปัญหาการอัปโหลด ${thisfile} กรุณาลองใหม่อีกครั้ง`);
+                window.location.reload();
+
+            });
     };
 
-    const handleSubmit = async () => {
-        let conut_file = 2; // datafile and ansfile sum is 2 file
+    /* Predictions */
+    const PredictData = async() => {
+        const headers = {
+            Authorization: `Bearer ${tokenCookies}`,
+        };
+
+        const URL_PredictAns = `${BASE_URL}/predictor/predict-ans?current_subject=${subID}`;
+        const URL_PredictExms = `${BASE_URL}/predictor/predict-exm?current_subject=${subID}`;
+
+        await get(URL_PredictAns, { headers })
+            .then(res => {
+                console.log("Predict Ans return : ", res.data);
+            });
+
+        await get(URL_PredictExms, { headers })
+            .then(res => {
+                console.log("Predict Exams return : ", res.data);
+            });
+        await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
+    };
+
+    const handleSubmit = async() => {
         setLoadding(true);
         setTxtProcessing("กำลังอัปโหลดข้อมูล");
 
@@ -150,12 +197,9 @@ const System = () => {
         await FormDataFile.append('data_file', datafile[0]);
         await FormAnswerFile.append('ans_file', ansfile[0]);
 
-        // await examfile.forEach(f => {
-        //     conut_file++;
-        //     FormExamsFile.append('exm_files', f);
-        // });
-        conut_file += examfile.length;
-        let sum_percent = 100 / conut_file;
+        await examfile.forEach(f => {
+            FormExamsFile.append('exm_files', f);
+        });
 
         const config = {
             headers: {
@@ -168,25 +212,17 @@ const System = () => {
         await post(url_datafile, FormDataFile, config)
             .then(res => {
                 console.log("data_file : ", res.data);
-                setPercent(percent + sum_percent);
             });
 
         await post(url_answerfile, FormAnswerFile, config)
             .then(res => {
                 console.log("ans_file : ", res.data);
-                setPercent(percent + sum_percent);
-
             });
 
-        await examfile.forEach(f => {
-            FormExamsFile.append('exm_files', f);
-            post(url_examsfile, FormExamsFile, config)
-                .then(res => {
-                    console.log("exms_file : ", res.data);
-                    setPercent(percent + sum_percent);
-                    FormExamsFile.delete('exm_files');
-                });
-        });
+        await post(url_examsfile, FormExamsFile, config)
+            .then(res => {
+                console.log("exms_file : ", res.data);
+            });
 
         await setTxtProcessing("อัปโหลดข้อมูล สำเร็จ!!");
         const ntime = await CalculateTime(ansfile[0].name, examfile.length)
@@ -209,9 +245,9 @@ const System = () => {
                 console.log("Predict Exams return : ", res.data);
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
-
-        setProcess(true);
-        window.history.back();
+        
+        // window.history.back();
+        window.location = `${ROOT_URL}:${F_PORT}/download`;
     };
 
     const SystemsComponent = (
@@ -294,7 +330,7 @@ const System = () => {
                         <div className={classes.CenterObj}>
                             {/* <CircularProgress /> */}
                             <ProgressBar percent={percent} />
-                            <h3>percent {percent}</h3>
+                            {/* <h3>percent {percent}</h3> */}
                             <h3>{TxtProcessing}</h3>
                         </div>
                     )}

@@ -85,8 +85,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Singin = ({ setToken }) => {
   const classes = useStyles();
-  let [Username, setUsername] = useState("ben_x1");
-  let [Password, setPassword] = useState("88888");
+  let [Username, setUsername] = useState("");
+  let [Password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [checkSnackbar, setcheckSnackbar] = useState(false);
   const [textSnackbar, setTextSnackbar] = useState("พบข้อผิดพลาด");

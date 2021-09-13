@@ -53,13 +53,13 @@ const Signup = () => {
 
   // const [data, setData] = useState({})
 
-  const [User, setUser] = useState("ben_x1")
-  const [Password, setPassword] = useState("999999999")
-  const [ConfirmPassword, setConfirmPassword] = useState("999999999")
-  const [Email, setEmail] = useState("benzaaze@gmail.com")
-  const [Name, setName] = useState("benha")
-  const [Lname, setLname] = useState("kitti")
-  const [Schollname, setSchollname] = useState("rmuti")
+  const [User, setUser] = useState("");
+  const [Password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Name, setName] = useState("");
+  const [Lname, setLname] = useState("");
+  const [Schollname, setSchollname] = useState("");
   // let [Province, setProvince] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
@@ -68,11 +68,11 @@ const Signup = () => {
   // let errors = {};
   // let isValid = true;
 
-  const [errpwd, setErrpwd] = useState(true)
-  const [errpwd1, setErrpwd1] = useState(true)
+  const [errpwd, setErrpwd] = useState(true);
+  const [errpwd1, setErrpwd1] = useState(true);
 
-  const [helpTextPassword, setHelpTextPassword] = useState()
-  const [helpTextPassword1, setHelpTextPassword1] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
+  const [helpTextPassword, setHelpTextPassword] = useState(false);
+  const [helpTextPassword1, setHelpTextPassword1] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร");
 
   // const [pwdnotThis, setPwdnotThis] = useState ("รหัสผ่านไม่ตรงกัน")
 
@@ -129,10 +129,10 @@ const Signup = () => {
 
     };
 
-    if (Password >= 8 && ConfirmPassword >= 8 && Password === ConfirmPassword) {
-      setHelpTextPassword(true)
+    if (Password >= 8 && ConfirmPassword >= 8 && Password !== ConfirmPassword) {
+      setHelpTextPassword(true);
     } else {
-      setHelpTextPassword(false)
+      setHelpTextPassword(false);
       await axios.post(BASE_URL + "/sign-up", form_data)
         .then(res => {
           console.log(res.data);
@@ -309,7 +309,7 @@ const Signup = () => {
             }
             required
           />
-          {helpTextPassword === true ? (<p>correct</p>) : (<p>error</p>)}
+          {helpTextPassword !== true ? (<p>correct</p>) : (<p>error</p>)}
           <FormHelperText id="filled-weight-helper-text">{helpTextPassword}</FormHelperText>
 
         </FormControl>

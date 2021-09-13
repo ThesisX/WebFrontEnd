@@ -64,10 +64,14 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
 
+  // let input = this.state.input;
+  // let errors = {};
+  // let isValid = true;
+
   const [errpwd, setErrpwd] = useState(true)
   const [errpwd1, setErrpwd1] = useState(true)
 
-  const [helpTextPassword, setHelpTextPassword] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
+  const [helpTextPassword, setHelpTextPassword] = useState()
   const [helpTextPassword1, setHelpTextPassword1] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร")
 
   // const [pwdnotThis, setPwdnotThis] = useState ("รหัสผ่านไม่ตรงกัน")
@@ -87,8 +91,11 @@ const Signup = () => {
       setErrpwd(true);
       setHelpTextPassword('รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร');
     }
+
+
+
     setPassword(v);
-    
+
   };
 
   const validates = (v) => {
@@ -112,12 +119,6 @@ const Signup = () => {
   };
 
   const handleSignup = async (e) => {
-  //   if (typeof ["Password"] !== "undefined" && typeof ["ConfirmPassword"] !== "undefined") {
-  //     if (["Password"] != ["ConfirmPassword"]) {
-  //       pwdnotThis(false);
-  //       setHelpTextPassword ('Passwords dont match.');
-  //     }
-  // }
     e.preventDefault()
 
     let form_data = {
@@ -128,30 +129,56 @@ const Signup = () => {
 
     };
 
-    await axios.post(BASE_URL + "/sign-up", form_data)
-      .then(res => {
-        console.log(res.data);
-        
-        if(res.statusText === "OK"){
-          window.history.go(0);
-        }else{
-         console.log(res) ;
-          alert("กรุณาลองอีกครั้ง..");
-        }
-      }
-      )
-      .catch((error)=> {
-        console.log(error.response.data.detail);
-        alert(error.response.data.detail);
+    if (Password >= 8 && ConfirmPassword >= 8 && Password === ConfirmPassword) {
+      setHelpTextPassword(true)
+    } else {
+      setHelpTextPassword(false)
+      await axios.post(BASE_URL + "/sign-up", form_data)
+        .then(res => {
+          console.log(res.data);
 
-      }
-      );
+          if (res.statusText === "OK") {
+            window.history.go(0);
+          } else {
+            console.log(res);
+            alert("กรุณาลองอีกครั้ง..");
+          }
+        }
+        )
+        .catch((error) => {
+          console.log(error.response.data.detail);
+          alert(error.response.data.detail);
+
+        }
+        );
+    }
+
+
+
+    // await axios.post(BASE_URL + "/sign-up", form_data)
+    //   .then(res => {
+    //     console.log(res.data);
+
+    //     if(res.statusText === "OK"){
+    //       window.history.go(0);
+    //     }else{
+    //      console.log(res) ;
+    //       alert("กรุณาลองอีกครั้ง..");
+    //     }
+    //   }
+    //   )
+    //   .catch((error)=> {
+    //     console.log(error.response.data.detail);
+    //     alert(error.response.data.detail);
+
+    //   }
+    //   );
   }
 
 
   const useStyles = makeStyles((theme) => ({
     root: {
-     
+
       '& input:valid + fieldset': {
         borderColor: 'green',
         borderWidth: 1,
@@ -160,7 +187,7 @@ const Signup = () => {
         borderColor: 'red',
         borderWidth: 1,
       },
-     
+
       '& input:valid:focus + fieldset': {
         borderLeftWidth: 5,
         padding: '8px !important', // override inline-style
@@ -173,17 +200,17 @@ const Signup = () => {
       justifyContent: 'center',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      display:'grid',
+      display: 'grid',
       // flexWrap: 'wrap',
     },
 
     button: {
-    // fontFamily: "sarabun",
-    fontSize: 17,
-    // margin: '30px',
-    // marginLeft: 60,
-    marginTop: 40,
-    
+      // fontFamily: "sarabun",
+      fontSize: 17,
+      // margin: '30px',
+      // marginLeft: 60,
+      marginTop: 40,
+
     },
 
     divform: {
@@ -198,7 +225,7 @@ const Signup = () => {
       justifyContent: 'center',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      display:'grid',
+      display: 'grid',
       // backgroundColor: '#d3e8d6',
       // marginLeft: 80,
       border: 50,
@@ -211,7 +238,7 @@ const Signup = () => {
       // marginTop: 50,
       // paddingTop: 50,
     },
-    
+
     selectEmpty: {
       marginTop: theme.spacing(3),
     },
@@ -250,11 +277,11 @@ const Signup = () => {
           helperText=""
           onChange={(e) =>
             setUser(e.target.value)}
-          value={User}  />
+          value={User} />
 
 
         <FormControl variant="outlined" className={classes.FormControlmargin} >
-          
+
           <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
           <OutlinedInput
             type={showPassword ? 'text' : 'password'}
@@ -282,13 +309,14 @@ const Signup = () => {
             }
             required
           />
-           <FormHelperText id="filled-weight-helper-text">{helpTextPassword}</FormHelperText>
+          {helpTextPassword === true ? (<p>correct</p>) : (<p>error</p>)}
+          <FormHelperText id="filled-weight-helper-text">{helpTextPassword}</FormHelperText>
 
         </FormControl>
         {/* <abel htmlFor="component-outlined-helptext">{helpTextPassword}</abel> */}
 
-       
-        <FormControl variant="outlined"  className={classes.FormControlmargin}>
+
+        <FormControl variant="outlined" className={classes.FormControlmargin}>
           <InputLabel htmlFor="component-outlined">ยืนยันรหัสผ่าน</InputLabel>
           <OutlinedInput
             type={showPassword1 ? 'text' : 'password'}
@@ -316,7 +344,7 @@ const Signup = () => {
             }
             required
           />
-           <FormHelperText id="filled-weight-helper-text">{helpTextPassword1}</FormHelperText>
+          <FormHelperText id="filled-weight-helper-text">{helpTextPassword1}</FormHelperText>
 
         </FormControl>
 
@@ -380,11 +408,11 @@ const Signup = () => {
         </FormControl>
 
 
-        <Button className={classes.button} 
-        type="Submit" 
-        onClick={handleSignup} 
-        variant="outlined" 
-        color="inherit"
+        <Button className={classes.button}
+          type="Submit"
+          onClick={handleSignup}
+          variant="outlined"
+          color="inherit"
         >
           Submit
         </Button>

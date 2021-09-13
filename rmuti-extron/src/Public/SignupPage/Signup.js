@@ -53,6 +53,7 @@ const Signup = () => {
 
   // const [data, setData] = useState({})
 
+<<<<<<< HEAD
   const [User, setUser] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
@@ -60,6 +61,15 @@ const Signup = () => {
   const [Name, setName] = useState("");
   const [Lname, setLname] = useState("");
   const [Schollname, setSchollname] = useState("");
+=======
+  const [User, setUser] = useState("")
+  const [Password, setPassword] = useState("")
+  const [ConfirmPassword, setConfirmPassword] = useState("")
+  const [Email, setEmail] = useState("")
+  const [Name, setName] = useState("")
+  const [Lname, setLname] = useState("")
+  const [Schollname, setSchollname] = useState("")
+>>>>>>> 12079d810f9342992a7c0b866e57af0c00f4dcd2
   // let [Province, setProvince] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);

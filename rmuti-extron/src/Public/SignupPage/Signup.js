@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   ThemeProvider,
   makeStyles,
   createMuiTheme,
   // createStyles,
-} from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Container from '@material-ui/core/Container';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import FormHelperText from '@material-ui/core/FormHelperText';
+} from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import Container from "@material-ui/core/Container";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 // import FormHelperText from '@material-ui/core/FormHelperText';
-import axios from 'axios'
+import axios from "axios";
 // import qs from 'qs';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import { OutlinedInput } from '@material-ui/core';
-import { BASE_URL } from '../../service';
+import Button from "@material-ui/core/Button";
+import Select from "@material-ui/core/Select";
+import { OutlinedInput } from "@material-ui/core";
+import { BASE_URL } from "../../service";
 
 // const useStyles = makeStyles((theam) => ({
 //   inputlabel: {
@@ -45,15 +45,12 @@ import { BASE_URL } from '../../service';
 //   },
 // }));
 
-
 // user pass mail name lname
-// ชื่อรร จังหวัด 
+// ชื่อรร จังหวัด
 
 const Signup = () => {
-
   // const [data, setData] = useState({})
 
-<<<<<<< HEAD
   const [User, setUser] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
@@ -61,15 +58,6 @@ const Signup = () => {
   const [Name, setName] = useState("");
   const [Lname, setLname] = useState("");
   const [Schollname, setSchollname] = useState("");
-=======
-  const [User, setUser] = useState("")
-  const [Password, setPassword] = useState("")
-  const [ConfirmPassword, setConfirmPassword] = useState("")
-  const [Email, setEmail] = useState("")
-  const [Name, setName] = useState("")
-  const [Lname, setLname] = useState("")
-  const [Schollname, setSchollname] = useState("")
->>>>>>> 12079d810f9342992a7c0b866e57af0c00f4dcd2
   // let [Province, setProvince] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
@@ -82,7 +70,9 @@ const Signup = () => {
   const [errpwd1, setErrpwd1] = useState(true);
 
   const [helpTextPassword, setHelpTextPassword] = useState(false);
-  const [helpTextPassword1, setHelpTextPassword1] = useState("กรุณาเพิ่มรหัสผ่านมากกว่า 8 ตัวอักษร");
+  const [helpTextPassword1, setHelpTextPassword1] = useState(false);
+
+  const [check, setCheck] = useState(false);
 
   // const [pwdnotThis, setPwdnotThis] = useState ("รหัสผ่านไม่ตรงกัน")
 
@@ -94,32 +84,33 @@ const Signup = () => {
   };
 
   const validate = (v) => {
-    if (v.length > 8) {
+    if (v.length >= 8) {
       setErrpwd(false);
-      setHelpTextPassword('ถูกต้อง');
+      setHelpTextPassword(true);
+      // setErrpwd1(false);
+      // setHelpTextPassword1(true);
     } else {
       setErrpwd(true);
-      setHelpTextPassword('รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร');
+      setHelpTextPassword(false);
+      // setErrpwd1(true);
+      // setHelpTextPassword1(false);
     }
 
-
-
     setPassword(v);
-
   };
 
   const validates = (v) => {
-    if (v.length > 8) {
+    if (v.length >= 8) {
       setErrpwd1(false);
-      setHelpTextPassword1('ถูกต้อง');
+      setHelpTextPassword1(true);
     } else {
       setErrpwd1(true);
-      setHelpTextPassword1('รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร');
+      setHelpTextPassword1(false);
     }
 
+    // "รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร ถูกต้อง
     setConfirmPassword(v);
   };
-
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -129,22 +120,25 @@ const Signup = () => {
   };
 
   const handleSignup = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     let form_data = {
       username: User,
       email: Email,
       full_name: Name + " " + Lname,
       hashed_password: Password,
-
     };
 
-    if (Password >= 8 && ConfirmPassword >= 8 && Password !== ConfirmPassword) {
-      setHelpTextPassword(true);
+    if (
+      (Password >= 8 && ConfirmPassword >= 8) ||
+      Password === ConfirmPassword
+    ) {
+      setCheck(true); // True for pass
     } else {
-      setHelpTextPassword(false);
-      await axios.post(BASE_URL + "/sign-up", form_data)
-        .then(res => {
+      setCheck(false);
+      await axios
+        .post(BASE_URL + "/sign-up", form_data)
+        .then((res) => {
           console.log(res.data);
 
           if (res.statusText === "OK") {
@@ -153,17 +147,12 @@ const Signup = () => {
             console.log(res);
             alert("กรุณาลองอีกครั้ง..");
           }
-        }
-        )
+        })
         .catch((error) => {
           console.log(error.response.data.detail);
           alert(error.response.data.detail);
-
-        }
-        );
+        });
     }
-
-
 
     // await axios.post(BASE_URL + "/sign-up", form_data)
     //   .then(res => {
@@ -183,34 +172,32 @@ const Signup = () => {
 
     //   }
     //   );
-  }
-
+  };
 
   const useStyles = makeStyles((theme) => ({
     root: {
-
-      '& input:valid + fieldset': {
-        borderColor: 'green',
+      "& input:valid + fieldset": {
+        borderColor: "green",
         borderWidth: 1,
       },
-      '& input:invalid + fieldset': {
-        borderColor: 'red',
+      "& input:invalid + fieldset": {
+        borderColor: "red",
         borderWidth: 1,
       },
 
-      '& input:valid:focus + fieldset': {
+      "& input:valid:focus + fieldset": {
         borderLeftWidth: 5,
-        padding: '8px !important', // override inline-style
+        padding: "8px !important", // override inline-style
       },
-      justifyContent: 'space-around',
-      maxWidth: '30rem',
-      backgroundColor: '#d3e8d6',
+      justifyContent: "space-around",
+      maxWidth: "30rem",
+      backgroundColor: "#d3e8d6",
       padding: 40,
       borderRadius: 35,
-      justifyContent: 'center',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      display: 'grid',
+      justifyContent: "center",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      display: "grid",
       // flexWrap: 'wrap',
     },
 
@@ -220,22 +207,21 @@ const Signup = () => {
       // margin: '30px',
       // marginLeft: 60,
       marginTop: 40,
-
     },
 
     divform: {
       // display: 'flex',
-      maxWidth: '45rem',
+      maxWidth: "45rem",
       // width: 490,
       // backgroundColor: '#d3e8d6',
       // padding: 40,
       // margin: 50,
       // height: '400'
       // borderRadius: 35,
-      justifyContent: 'center',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      display: 'grid',
+      justifyContent: "center",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      display: "grid",
       // backgroundColor: '#d3e8d6',
       // marginLeft: 80,
       border: 50,
@@ -260,14 +246,22 @@ const Signup = () => {
     },
     FormControlmargin: {
       margin: 10,
-
-    }
+    },
+    passwordcheckTrue: {
+      color: "#005700",
+    },
+    passwordcheckFalse: {
+      color: "#d10000",
+    },
     // inputlabel: {
     //   width: '10',
 
     // },
-
   }));
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
   const theme = createMuiTheme({});
 
@@ -275,163 +269,188 @@ const Signup = () => {
   // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
 
   return (
-    <Container alignItems="center" className={classes.root} style={{ width: '190vh' }} >
-
-      <div className={classes.divform} >
-        <TextField
-          className={classes.FormControlmargin}
-          label="ชื่อผู้ใช้"
-          required
-          variant="outlined"
-          id="validation-outlined-input"
-          helperText=""
-          onChange={(e) =>
-            setUser(e.target.value)}
-          value={User} />
-
-
-        <FormControl variant="outlined" className={classes.FormControlmargin} >
-
-          <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
-          <OutlinedInput
-            type={showPassword ? 'text' : 'password'}
-            id="component-outlined"
-            label="รหัสผ่าน"
-            error={errpwd}
-            variant="outlined"
-            onChange={(e) => validate(e.target.value)}
-            value={Password}
-            labelWidth={66}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onChange={(e) =>
-                    setPassword(e.target.value)}
-                  value={Password}
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
+    <form onSubmit={handleSubmit}>
+      <Container
+        alignItems="center"
+        className={classes.root}
+        style={{ width: "190vh" }}
+        required
+      >
+        <div className={classes.divform}>
+          <TextField
+            className={classes.FormControlmargin}
+            label="ชื่อผู้ใช้"
             required
-          />
-          {helpTextPassword !== true ? (<p>correct</p>) : (<p>error</p>)}
-          <FormHelperText id="filled-weight-helper-text">{helpTextPassword}</FormHelperText>
-
-        </FormControl>
-        {/* <abel htmlFor="component-outlined-helptext">{helpTextPassword}</abel> */}
-
-
-        <FormControl variant="outlined" className={classes.FormControlmargin}>
-          <InputLabel htmlFor="component-outlined">ยืนยันรหัสผ่าน</InputLabel>
-          <OutlinedInput
-            type={showPassword1 ? 'text' : 'password'}
-            id="component-outlined"
-            label="ยืนยันรหัสผ่าน"
-            error={errpwd1}
             variant="outlined"
-            onChange={(e) => validates(e.target.value)}
-            value={ConfirmPassword}
-            labelWidth={66}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onChange={(e) =>
-                    setConfirmPassword(e.target.value)}
-                  value={ConfirmPassword}
-                  onClick={handleClickShowPassword1}
-                  onMouseDown={handleMouseDownPassword1}
-                  edge="end"
-                >
-                  {showPassword1 ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            required
+            id="validation-outlined-input"
+            helperText=""
+            onChange={(e) => setUser(e.target.value)}
+            value={User}
           />
-          <FormHelperText id="filled-weight-helper-text">{helpTextPassword1}</FormHelperText>
 
-        </FormControl>
+          <FormControl variant="outlined" className={classes.FormControlmargin}>
+            <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
+            <OutlinedInput
+              type={showPassword ? "text" : "password"}
+              id="component-outlined"
+              label="รหัสผ่าน"
+              required
+              error={errpwd}
+              variant="outlined"
+              onChange={(e) => validate(e.target.value)}
+              value={Password}
+              labelWidth={66}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={Password}
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              required
+            />
+            <FormHelperText id="filled-weight-helper-text">
+              {helpTextPassword !== false ? (
+                <></>
+              ) : (
+                // <p className={classes.passwordcheckTrue}>ถูกต้อง</p>
+                <p className={classes.passwordcheckFalse}>
+                  รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร
+                </p>
+              )}
+            </FormHelperText>
+          </FormControl>
+          {/* <abel htmlFor="component-outlined-helptext">{helpTextPassword}</abel> */}
 
+          <FormControl variant="outlined" className={classes.FormControlmargin}>
+            <InputLabel htmlFor="component-outlined">ยืนยันรหัสผ่าน</InputLabel>
+            <OutlinedInput
+              type={showPassword1 ? "text" : "password"}
+              id="component-outlined"
+              label="ยืนยันรหัสผ่าน"
+              required
+              error={errpwd1}
+              variant="outlined"
+              onChange={(e) => validates(e.target.value)}
+              value={ConfirmPassword}
+              labelWidth={66}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={ConfirmPassword}
+                    onClick={handleClickShowPassword1}
+                    onMouseDown={handleMouseDownPassword1}
+                    edge="end"
+                  >
+                    {showPassword1 ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              required
+            />
 
-        <TextField
-          className={classes.TextFieldmargin}
-          type="email"
-          label="EMAIL"
-          required
+            <FormHelperText id="filled-weight-helper-text">
+              {helpTextPassword1 !== false ? (
+                <></>
+              ) : (
+                // <p className={classes.passwordcheckTrue}>ถูกต้อง</p>
+                <p className={classes.passwordcheckFalse}>
+                  รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร
+                </p>
+              )}
+            </FormHelperText>
 
-          id="validation-outlined-input"
-          // helperText="ERROR"
-          onChange={(e) =>
-            setEmail(e.target.value)}
-          value={Email} />
-
-        <ThemeProvider theme={theme}>
-
+            {check === true ? (
+              <></>
+            ) : (
+              <p className={classes.passwordcheckFalse}>
+               * รหัสผ่านไม่ตรงกัน
+              </p>
+            )}
+          </FormControl>
 
           <TextField
             className={classes.TextFieldmargin}
-            label="NAME"
-            id="mui-theme-provider-standard-input"
-            onChange={(e) =>
-              setName(e.target.value)}
-            value={Name} />
+            type="email"
+            label="EMAIL"
+            required
+            id="validation-outlined-input"
+            // helperText="ERROR"
+            onChange={(e) => setEmail(e.target.value)}
+            value={Email}
+          />
 
+          <ThemeProvider theme={theme}>
+            <TextField
+              className={classes.TextFieldmargin}
+              label="NAME"
+              required
+              id="mui-theme-provider-standard-input"
+              onChange={(e) => setName(e.target.value)}
+              value={Name}
+            />
 
-          <TextField
-            className={classes.TextFieldmargin}
-            label="LAST NAME"
-            id="mui-theme-provider-standard-input"
-            onChange={(e) =>
-              setLname(e.target.value)}
-            value={Lname} />
+            <TextField
+              className={classes.TextFieldmargin}
+              label="LAST NAME"
+              required
+              id="mui-theme-provider-standard-input"
+              onChange={(e) => setLname(e.target.value)}
+              value={Lname}
+            />
 
-          <TextField
-            className={classes.TextFieldmargin}
-            label="SCHOOL"
-            id="mui-theme-provider-standard-input"
-            onChange={(e) =>
-              setSchollname(e.target.value)}
-            value={Schollname} />
-        </ThemeProvider>
+            <TextField
+              className={classes.TextFieldmargin}
+              label="SCHOOL"
+              required
+              id="mui-theme-provider-standard-input"
+              onChange={(e) => setSchollname(e.target.value)}
+              value={Schollname}
+            />
+          </ThemeProvider>
 
-        <FormControl variant="standard" className={classes.TextFieldmargin}>
-          <InputLabel htmlFor="outlined-age-native-simple">จังหวัด</InputLabel>
-          <Select
-            native
-            label="Age"
-            inputProps={{
-              name: 'age',
-              id: 'outlined-age-native-simple',
-            }}
+          <FormControl variant="standard" className={classes.TextFieldmargin}>
+            <InputLabel htmlFor="outlined-age-native-simple">
+              จังหวัด
+            </InputLabel>
+            <Select
+              native
+              label="Age"
+              required
+              inputProps={{
+                name: "age",
+                id: "outlined-age-native-simple",
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value={10}>นครราชสีมา</option>
+              <option value={20}>กรุงเทพ</option>
+              <option value={30}>ภูเก็ต</option>
+            </Select>
+          </FormControl>
+
+          <Button
+            className={classes.button}
+            type="Submit"
+            // onClick={handleSignup}
+            variant="outlined"
+            color="inherit"
           >
-            <option aria-label="None" value="" />
-            <option value={10}>นครราชสีมา</option>
-            <option value={20}>กรุงเทพ</option>
-            <option value={30}>ภูเก็ต</option>
-          </Select>
-        </FormControl>
-
-
-        <Button className={classes.button}
-          type="Submit"
-          onClick={handleSignup}
-          variant="outlined"
-          color="inherit"
-        >
-          Submit
-        </Button>
-
-      </div>
-    </Container>
-
+            Submit
+          </Button>
+        </div>
+      </Container>
+    </form>
   );
-}
-
+};
 
 export default Signup;

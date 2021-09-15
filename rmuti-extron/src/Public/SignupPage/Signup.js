@@ -87,11 +87,17 @@ const Signup = () => {
     if (v.length >= 8) {
       setErrpwd(false);
       setHelpTextPassword(true);
+      if (v === ConfirmPassword) {
+        setCheck(true);
+      }
       // setErrpwd1(false);
       // setHelpTextPassword1(true);
     } else {
       setErrpwd(true);
       setHelpTextPassword(false);
+      if (v !== ConfirmPassword) {
+        setCheck(false);
+      }
       // setErrpwd1(true);
       // setHelpTextPassword1(false);
     }
@@ -103,9 +109,15 @@ const Signup = () => {
     if (v.length >= 8) {
       setErrpwd1(false);
       setHelpTextPassword1(true);
+      if (v === Password) {
+        setCheck(true);
+      }
     } else {
       setErrpwd1(true);
       setHelpTextPassword1(false);
+      if (v !== Password) {
+        setCheck(false);
+      }
     }
 
     // "รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร ถูกต้อง
@@ -119,60 +131,59 @@ const Signup = () => {
     event.preventDefault();
   };
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
+  // const handleSignup = async (e) => {
+  //   e.preventDefault();
 
-    let form_data = {
-      username: User,
-      email: Email,
-      full_name: Name + " " + Lname,
-      hashed_password: Password,
-    };
+  //   let form_data = {
+  //     username: User,
+  //     email: Email,
+  //     full_name: Name + " " + Lname,
+  //     hashed_password: Password,
+  //   };
 
-    if (
-      (Password >= 8 && ConfirmPassword >= 8) ||
-      Password === ConfirmPassword
-    ) {
-      setCheck(true); // True for pass
-    } else {
-      setCheck(false);
-      await axios
-        .post(BASE_URL + "/sign-up", form_data)
-        .then((res) => {
-          console.log(res.data);
+  //   if (
+  //     (Password >= 8 && ConfirmPassword >= 8) ||
+  //     Password === ConfirmPassword
+  //   ) {
+  //     setCheck(true); // True for pass
+  //   } else {
+  //     setCheck(false);
+  //     await axios
+  //       .post(BASE_URL + "/sign-up", form_data)
+  //       .then((res) => {
+  //         console.log(res.data);
 
-          if (res.statusText === "OK") {
-            window.history.go(0);
-          } else {
-            console.log(res);
-            alert("กรุณาลองอีกครั้ง..");
-          }
-        })
-        .catch((error) => {
-          console.log(error.response.data.detail);
-          alert(error.response.data.detail);
-        });
-    }
+  //         if (res.statusText === "OK") {
+  //           window.history.go(0);
+  //         } else {
+  //           console.log(res);
+  //           alert("กรุณาลองอีกครั้ง..");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error.response.data.detail);
+  //         alert(error.response.data.detail);
+  //       });
+  //   }
 
-    // await axios.post(BASE_URL + "/sign-up", form_data)
-    //   .then(res => {
-    //     console.log(res.data);
+  // await axios.post(BASE_URL + "/sign-up", form_data)
+  //   .then(res => {
+  //     console.log(res.data);
 
-    //     if(res.statusText === "OK"){
-    //       window.history.go(0);
-    //     }else{
-    //      console.log(res) ;
-    //       alert("กรุณาลองอีกครั้ง..");
-    //     }
-    //   }
-    //   )
-    //   .catch((error)=> {
-    //     console.log(error.response.data.detail);
-    //     alert(error.response.data.detail);
+  //     if(res.statusText === "OK"){
+  //       window.history.go(0);
+  //     }else{
+  //      console.log(res) ;
+  //       alert("กรุณาลองอีกครั้ง..");
+  //     }
+  //   }
+  //   )
+  //   .catch((error)=> {
+  //     console.log(error.response.data.detail);
+  //     alert(error.response.data.detail);
 
-    //   }
-    //   );
-  };
+  //   }
+  //   );
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -259,8 +270,41 @@ const Signup = () => {
     // },
   }));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let form_data = {
+      username: User,
+      email: Email,
+      full_name: Name + " " + Lname,
+      hashed_password: Password,
+    };
+
+    if (
+      (Password >= 8 && ConfirmPassword >= 8) ||
+      Password === ConfirmPassword
+    ) {
+      setCheck(true); // True for pass
+      await axios
+        .post(BASE_URL + "/sign-up", form_data)
+        .then((res) => {
+          console.log(res.data);
+
+          if (res.statusText === "OK") {
+            window.history.go(0);
+          } else {
+            console.log(res);
+            alert("กรุณาลองอีกครั้ง..");
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data.detail);
+          alert(error.response.data.detail);
+        });
+    } else {
+      setCheck(false);
+      // console.log('hi', check)
+    }
   };
 
   const theme = createMuiTheme({});
@@ -314,7 +358,6 @@ const Signup = () => {
                   </IconButton>
                 </InputAdornment>
               }
-              required
             />
             <FormHelperText id="filled-weight-helper-text">
               {helpTextPassword !== false ? (
@@ -355,7 +398,6 @@ const Signup = () => {
                   </IconButton>
                 </InputAdornment>
               }
-              required
             />
 
             <FormHelperText id="filled-weight-helper-text">
@@ -372,9 +414,7 @@ const Signup = () => {
             {check === true ? (
               <></>
             ) : (
-              <p className={classes.passwordcheckFalse}>
-               * รหัสผ่านไม่ตรงกัน
-              </p>
+              <p className={classes.passwordcheckFalse}>* รหัสผ่านไม่ตรงกัน</p>
             )}
           </FormControl>
 
@@ -440,7 +480,7 @@ const Signup = () => {
 
           <Button
             className={classes.button}
-            type="Submit"
+            type="submit"
             // onClick={handleSignup}
             variant="outlined"
             color="inherit"

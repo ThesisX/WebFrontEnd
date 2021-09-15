@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import myimage0 from "../../Page/Manager/nn2.jpg";
 import myimage1 from "../../Page/Manager/nn1.jpg";
 import { TramRounded } from "@material-ui/icons";
+import myimage from "../Info/dinosaur.png";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,6 +62,9 @@ const Info = () => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>เกี่ยวกับ นะน้องนะ</h1>
+
+            <img className={classes.img} src={myimage} alt="complex" />
+
             CPE RMUTI ©2021 Created by CPE Group 61231
             {/* <h1 className={classes.text}>{count}</h1>
           {clickimg === true ? (

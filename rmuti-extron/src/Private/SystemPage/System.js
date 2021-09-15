@@ -130,8 +130,14 @@ const System = () => {
 
 
         slow_time = fast_time + 30;
+        
+        if( fast_time > 0|| slow_time > 0){
+            fast_time /= 60;
+            slow_time /= 60;
+        }
+        
 
-        return `${fast_time}-${slow_time} วินาที`;
+        return `${fast_time}-${slow_time} นาที`;
     };
 
     /* Post Data */

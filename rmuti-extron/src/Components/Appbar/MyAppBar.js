@@ -39,6 +39,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Hidden from "@material-ui/core/Hidden";
 
+import image from "../Appbar/landingpage.png";
+
 import Typography from "@material-ui/core/Typography";
 // import "@fontsource/roboto";
 import "@fontsource/sarabun";
@@ -434,6 +436,8 @@ const MyAppBar = (props) => {
             </IconButton>
           )}
           <b className={classes.text}>ระบบตรวจข้อสอบปรนัย</b>
+          {/* <img className={classes.img} src={image} alt="complex" /> */}
+
         </Toolbar>
       </AppBar>
 

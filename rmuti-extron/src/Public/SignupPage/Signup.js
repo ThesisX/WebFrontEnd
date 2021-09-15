@@ -421,7 +421,7 @@ const Signup = () => {
           <TextField
             className={classes.TextFieldmargin}
             type="email"
-            label="EMAIL"
+            label="อีเมล"
             required
             id="validation-outlined-input"
             // helperText="ERROR"
@@ -432,7 +432,7 @@ const Signup = () => {
           <ThemeProvider theme={theme}>
             <TextField
               className={classes.TextFieldmargin}
-              label="NAME"
+              label="ชื่อจริง"
               required
               id="mui-theme-provider-standard-input"
               onChange={(e) => setName(e.target.value)}
@@ -441,7 +441,7 @@ const Signup = () => {
 
             <TextField
               className={classes.TextFieldmargin}
-              label="LAST NAME"
+              label="นามสกุล"
               required
               id="mui-theme-provider-standard-input"
               onChange={(e) => setLname(e.target.value)}
@@ -450,7 +450,7 @@ const Signup = () => {
 
             <TextField
               className={classes.TextFieldmargin}
-              label="SCHOOL"
+              label="มหาวิทยาลัย/โรงเรียน"
               required
               id="mui-theme-provider-standard-input"
               onChange={(e) => setSchollname(e.target.value)}

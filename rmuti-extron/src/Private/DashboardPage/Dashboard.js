@@ -6,12 +6,18 @@ import axios from 'axios'
 import Cookies from "js-cookie";
 import { BASE_URL } from '../../service';
 
+import myimage from "../DashboardPage/check-list.png";
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
         },
     },
+    img: {
+        paddingLeft:' 50',
+    }
 }));
 
 
@@ -45,12 +51,13 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h2>สวัสดีคุณ : {data.full_name}</h2>
+            <h1>สวัสดีคุณ : {data.full_name}</h1>
             {/* <button onClick={()=>setCount(count+10)}>click</button> */}
 
             <Button variant="contained" color="primary" href="/manual">
             วิธีการใช้งาน
             </Button>
+            {/* <img className={classes.img} src={myimage} alt="complex" /> */}
         </div>
 
     );

@@ -54,9 +54,9 @@ const Dashboard = () => {
             <h1>สวัสดีคุณ : {data.full_name}</h1>
             {/* <button onClick={()=>setCount(count+10)}>click</button> */}
 
-            <Button variant="contained" color="primary" href="/manual">
+            {/* <Button variant="contained" color="primary" href="/manual">
             วิธีการใช้งาน
-            </Button>
+            </Button> */}
             {/* <img className={classes.img} src={myimage} alt="complex" /> */}
         </div>
 

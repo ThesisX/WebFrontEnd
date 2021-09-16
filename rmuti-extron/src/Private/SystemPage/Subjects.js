@@ -210,7 +210,7 @@ const Subjects = ({ getActivate, sid }) => {
                 <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        คำแนะนำ: สร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น และตั้งกลุ่มเรียนเป็นตัวเลขเช่น 1 30 567 เป็นต้น ทั้งนี้คุณสามารถสร้างรายวิชาได้โดยอัตโนมัติเพียงคลิกที่ปุ่ม "สร้างอัตโนมัติ"
+                        คำแนะนำ: สร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น และตั้งกลุ่มเรียนเป็นตัวเลขเช่น 1 ,30 ,567 เป็นต้น
                     </DialogContentText>
                     <TextField
                         type="text"
@@ -253,12 +253,12 @@ const Subjects = ({ getActivate, sid }) => {
                             >
                                 ยืนยัน
                             </Button>
-                            <Button onClick={handleAutoField}
+                            {/* <Button onClick={handleAutoField}
                                 className={classes.AutoFieldButton}
                                 startIcon={<CasinoIcon />}
                             >
                                 สร้างอัตโนมัติ
-                            </Button>
+                            </Button> */}
                         </Grid>
                     </Grid>
                 </DialogActions>

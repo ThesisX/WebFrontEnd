@@ -252,8 +252,8 @@ const System = () => {
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
         
-        // window.history.back();
-        window.location = `${ROOT_URL}:${F_PORT}/download`;
+        window.history.reload();
+        // window.location = `${ROOT_URL}:${F_PORT}/download`;
     };
 
     const SystemsComponent = (

@@ -118,7 +118,7 @@ const System = () => {
     const CalculateTime = (AnsName, ExmCount) => {
         // console.log(AnsName);
         let anstime = 25;
-        let exmtime = 25;
+        let exmtime = 30;
         let slow_time = 0;
         let fast_time = 0;
 
@@ -137,7 +137,7 @@ const System = () => {
         }
         
 
-        return `${fast_time}-${slow_time} นาที`;
+        return `${fast_time.toFixed(2)}-${slow_time.toFixed(2)} นาที`;
     };
 
     /* Post Data */

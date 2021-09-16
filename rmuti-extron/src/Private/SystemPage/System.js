@@ -252,7 +252,7 @@ const System = () => {
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
         
-        window.history.reload();
+        window.location.reload();
         // window.location = `${ROOT_URL}:${F_PORT}/download`;
     };
 

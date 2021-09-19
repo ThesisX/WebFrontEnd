@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
         padding: 20,
         width: '100%',
     },
+    DropzoneAreaText: {
+        color: 'red'
+    },
 }));
 
 const Datastudents = ({ stepData, toStorage, dataList }) => {
@@ -29,7 +32,7 @@ const Datastudents = ({ stepData, toStorage, dataList }) => {
 
     const onDelete = () => {
         let c = window.confirm("ต้องการลบ หรือไม่");
-        if(c){
+        if (c) {
             toStorage([]);
             stepData(false);
         }
@@ -37,7 +40,7 @@ const Datastudents = ({ stepData, toStorage, dataList }) => {
 
     const onAdd = (f) => {
         if (f.length > 0) {
-            console.log(f);
+            // console.log(f);
             toStorage(f);
             stepData(true);
         }
@@ -45,24 +48,29 @@ const Datastudents = ({ stepData, toStorage, dataList }) => {
 
     useEffect(() => {
         if (dataList.length > 0) {
-            console.log("data zone is:", true);
+            // console.log("data zone is:", true);
             stepData(true);
         } else {
-            console.log("data zone is:", false);
+            // console.log("data zone is:", false);
             stepData(false);
         }
 
-    },[]);
+    }, []);
 
     return (
         <div>
             <Grid container spacing={1}>
-                <Grid container item xs={12} md={8} sm={12} className={classes.dropzone} >
+                <Grid container item xs={7} md={7} sm={7} className={classes.dropzone} >
                     <DropzoneArea
                         dropzoneText={
-                            <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางข้อมูลผู้เข้าสอบที่นี่ รองรับเฉพาะ .csv เท่านั้น
-                            </Typography>
+                            <div>
+                                <Typography Typography variant="h6" color="textPrimary" display="block">
+                                    คลิก หรือวางข้อมูลผู้เข้าสอบที่นี่
+                                </Typography>
+                                <Typography Typography variant="subtitle1" color="error" display="block">
+                                    ** รองรับเฉพาะ .csv เท่านั้น **
+                                </Typography>
+                            </div>
                         }
                         onChange={(f) => onAdd(f)}
                         acceptedFiles={['.csv']}
@@ -76,7 +84,7 @@ const Datastudents = ({ stepData, toStorage, dataList }) => {
                         showAlerts={false}
                     />
                 </Grid>
-                <Grid container item xs={12} md sm={12} >
+                <Grid container item xs={5} md sm={5} >
                     <Paper className={classes.filelist}>
                         <Typography variant="h6" color="textPrimary" display="block">
                             รายการที่อัปโหลด

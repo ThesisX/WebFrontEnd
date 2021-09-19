@@ -57,7 +57,15 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     HandleButton: {
+        '&:disabled' : {
+            background: 'linear-gradient( 95deg,rgb(242, 242, 242) 0%,rgb(224, 224, 224) 50%,rgb(201, 201, 201) 100%)',
+        },
         float: 'right',
+        background: 'linear-gradient( 95deg,rgb(144, 202, 249) 0%,rgb(47, 154, 247) 50%,rgb(103, 58, 183) 100%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: '0 3px 5px 2px rgba(103, 58, 183, .3)',
+        color: 'white',
     },
     AddIcon: {
         fontSize: 80,
@@ -75,13 +83,13 @@ const ColorlibConnector = withStyles({
     active: {
         '& $line': {
             backgroundImage:
-                'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+                'linear-gradient( 95deg,rgb(144, 202, 249) 0%,rgb(47, 154, 247) 50%,rgb(103, 58, 183) 100%)',
         },
     },
     completed: {
         '& $line': {
             backgroundImage:
-                'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+                'linear-gradient( 95deg,rgb(144, 202, 249) 0%,rgb(47, 154, 247) 50%,rgb(103, 58, 183) 100%)',
         },
     },
     line: {
@@ -106,12 +114,12 @@ const useColorlibStepIconStyles = makeStyles({
     },
     active: {
         backgroundImage:
-            'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+            'linear-gradient( 136deg, rgb(144, 202, 249) 0%, rgb(47, 154, 247) 50%, rgb(103, 58, 183) 100%)',
         boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
     },
     completed: {
         backgroundImage:
-            'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+            'linear-gradient( 136deg, rgb(144, 202, 249) 0%, rgb(47, 154, 247) 50%, rgb(103, 58, 183) 100%)',
     },
 });
 
@@ -366,15 +374,15 @@ const System = () => {
                                         <Stepper activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
                                             {steps.map((label) => (
                                                 <Step key={label}>
-                                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                                                    <StepLabel StepIconComponent={ColorlibStepIcon}><b>{label}</b></StepLabel>
                                                 </Step>
                                             ))}
                                         </Stepper>
                                     </Grid>
                                     {activeStep === steps.length ? (
                                         <Grid item xs={12}>
-                                            <Typography className={classes.instructions}>All steps completed</Typography>
-                                            <Button onClick={() => setActiveStep(0)}>Reset</Button>
+                                            <Typography className={classes.instructions}>สำเร็จทุกขั้นตอน</Typography>
+                                            <Button onClick={() => window.location.reload()}>เริ่มใหม่อีกครั้ง</Button>
                                         </Grid>
                                     ) : (
                                         <Grid item xs={12}>

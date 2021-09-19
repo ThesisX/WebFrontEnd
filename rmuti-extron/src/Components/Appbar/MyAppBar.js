@@ -56,62 +56,31 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "sarabun",
   },
   container: {
-    marginTop: 175,
+    marginTop: 150,
+    marginLeft:20,
+    marginRight:20,
     display: "flex",
     justifyContent: "center",
-    marginLeft: drawerspace,
-    marginRight: 70,
   },
 
-  paperAppBar: {
-    backgroundColor: "#f0f4c3",
-    padding: theme.spacing(2),
-    display: "flex",
-    textAlign: "center",
-    justifyContent: "space-around",
-    alignItems: "baseline",
-    fontSize: 26,
-    marginTop: 50,
-    marginBottom: 50,
-    borderRadius: 35,
-    height: "6.25rem",
-    // width: 1000,
-
+  containerShift:{
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
     }),
   },
 
   appBar: {
-    // overflowX: 'hidden',
-    // width: `calc(110% - ${drawerspace}px)`,
     marginLeft: drawerspace,
-    // marginRight: 150,
     height: 130,
-    // borderRadius: 45,
-    // marginTop: 45,
     justifyContent: 'center',
     backgroundColor: "#f0f4c3",
     color: "black",
-    // fontSize:  `calc(60% + 1.3vmin)`,
-  
+
   },
-  // appBar: {
-  //   overflowX: 'hidden',
-  //   width: `calc(100% - ${drawerspace}px)`,
-  //   marginLeft: drawerspace,
-  //   marginRight: 50,
-  //   height: 140,
-  //   borderRadius: 45,
-  //   marginTop: 45,
-  //   justifyContent: 'center',
-  //   backgroundColor: '#f0f4c3',
-  //   transition: theme.transitions.create(['margin', 'width'], {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.leavingScreen,
-  //   }),
-  // },
+
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
@@ -120,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+
   drawer: {
     marginRight: 50,
     width: drawerWidth,
@@ -187,7 +157,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 10,
     justifyContent: "center",
-    fontSize:  `calc(60% + 1.3vmin)`,
+    fontSize: `calc(60% + 1.3vmin)`,
     color: '#111',
   },
 
@@ -204,7 +174,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: "center",
     justifyContent: "",
-    fontSize:  `calc(60% + 1.3vmin)`,
+    fontSize: `calc(60% + 1.3vmin)`,
     color: '#111',
 
   },
@@ -237,8 +207,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 35, 
-    fontSize:  `calc(60% + 1.3vmin)`,
+    paddingLeft: 35,
+    fontSize: `calc(60% + 1.3vmin)`,
   },
   logout: {
     // backgroundColor: '#E5D0B3',
@@ -258,11 +228,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
     borderColor: "#ff9800  #111",
     // fontSize: 16,
-    fontSize:  `calc(60% + 0.8vmin)`,
+    fontSize: `calc(60% + 0.8vmin)`,
 
   },
   litsItemText: {
-    fontSize:  `calc(60% + 1.3vmin)`,
+    fontSize: `calc(60% + 1.3vmin)`,
 
   },
   // ulListGrid: {
@@ -270,7 +240,7 @@ const useStyles = makeStyles((theme) => ({
   //   maxWidth: `calc(40% + 1.3vmin)`,
   //   margin: "0 auto",
   // }
-  
+
 }));
 
 const MyAppBar = (props) => {
@@ -329,8 +299,8 @@ const MyAppBar = (props) => {
     setClick(false);
   };
 
-  const content = (
-      
+  const MenuLists = (
+
     <Grid className={classes.ulListGrid}>
       <div className={classes.toolbar}>
         <div className={classes.icontoolbar}>
@@ -430,7 +400,7 @@ const MyAppBar = (props) => {
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
-              // edge="end"
+            // edge="end"
             >
               <ArrowBackIosIcon />
             </IconButton>
@@ -441,34 +411,13 @@ const MyAppBar = (props) => {
         </Toolbar>
       </AppBar>
 
-      <Grid container className={classes.container}>
+      <Grid container
+        className={clsx(classes.container, {
+          [classes.containerShift]: click,
+        })}
+      >
         <Grid item xs={12}
-        //  className={classes.activeLi}
         >
-          <Hidden
-          mdUp
-          //  only="lg" 
-           >
-            <Drawer
-              anchor="left"
-              className={classes.drawer}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              onClose={() => setClick(false)}
-              open={click}
-              variant="temporary"
-              // PaperProps={{
-              //   sx: {
-              //     width: 200,
-              //   },
-              // }}
-            >
-              {content}
-            </Drawer>
-            {/* <Private /> */}
-          </Hidden>
-
           <Hidden xs >
             <Drawer
               className={classes.drawer}
@@ -479,15 +428,8 @@ const MyAppBar = (props) => {
               anchor="left"
               variant="persistent"
               onPointerEnter
-              // PaperProps={{
-              //   sx: {
-              //     width: 300,
-              //     top: 64,
-              //     height: "calc(100% - 100px)",
-              //   },
-              // }}
             >
-              {content}
+              {MenuLists}
             </Drawer>
             <Private />
           </Hidden>

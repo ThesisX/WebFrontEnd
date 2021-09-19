@@ -80,9 +80,14 @@ const Exams = ({ stepExam, toStorage, examList }) => {
                 <Grid container item xs={12} md={8} sm={12} className={classes.GridDropzone}>
                     <DropzoneArea
                         dropzoneText={
-                            <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางข้อสอบที่นี่ รองรับเฉพาะ .jpeg .jpg .png เท่านั้น
-                            </Typography>
+                            <div>
+                                <Typography Typography variant="h6" color="textPrimary" display="block">
+                                    คลิก หรือวางข้อสอบที่นี่
+                                </Typography>
+                                <Typography Typography variant="subtitle1" color="error" display="block">
+                                    ** รองรับเฉพาะ .jpeg .jpg .png เท่านั้น **
+                                </Typography>
+                            </div>
                         }
                         // initialFiles={filelist}
                         fileObjects={filelist}

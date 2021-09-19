@@ -38,7 +38,7 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
 
     const onDelete = () => {
         let c = window.confirm("ต้องการลบ หรือไม่");
-        if(c){
+        if (c) {
             toStorage([]);
             stepAns(false);
         }
@@ -61,16 +61,21 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
         }
 
     }, []);
-    
+
     return (
         <div>
             <Grid container spacing={1}>
-                <Grid container item xs={12} md={8} sm={12} className={classes.dropzone} >
+                <Grid container item xs={7} md={7} sm={7} className={classes.dropzone} >
                     <DropzoneArea
                         dropzoneText={
-                            <Typography Typography variant="h6" color="textPrimary" display="block">
-                                คลิก หรือวางเฉลยข้อสอบที่นี่ รองรับเฉพาะ .csv .jpeg .jpg .png เท่านั้น
-                            </Typography>
+                            <div>
+                                <Typography Typography variant="h6" color="textPrimary" display="block">
+                                    คลิก หรือลากวางเฉลยข้อสอบที่นี่
+                                </Typography>
+                                <Typography Typography variant="subtitle1" color="error" display="block">
+                                    ** รองรับเฉพาะ .csv .jpeg .jpg .png เท่านั้น **
+                                </Typography>
+                            </div>
                         }
                         onChange={(f) => onAdd(f)}
                         acceptedFiles={['.csv', '.jpeg', '.jpg', '.png']}
@@ -84,7 +89,7 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
                         showAlerts={false}
                     />
                 </Grid>
-                <Grid container item xs={12} md sm={12} >
+                <Grid container item xs={5} md sm={5} >
                     <Paper className={classes.filelist}>
                         <Typography variant="h6" color="textPrimary" display="block">
                             รายการที่อัปโหลด

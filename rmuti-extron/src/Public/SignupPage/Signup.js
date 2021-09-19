@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ThemeProvider,
   makeStyles,
@@ -14,67 +14,35 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import FormHelperText from "@material-ui/core/FormHelperText";
-
-// import FormHelperText from '@material-ui/core/FormHelperText';
-import axios from "axios";
-// import qs from 'qs';
+import { post, get } from "axios";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
-import { OutlinedInput } from "@material-ui/core";
+import { ListSubheader, MenuItem, OutlinedInput } from "@material-ui/core";
 import { BASE_URL } from "../../service";
-
-// const useStyles = makeStyles((theam) => ({
-//   inputlabel: {
-//     '& label.Mui-focused': {
-//       color: 'green',
-//     },
-//     '& .MuiInput-underline:after': {
-//       borderBottomColor: 'green',
-//     },
-//     '& .MuiOutlinedInput-root': {
-//       '& fieldset': {
-//         borderColor: 'red',
-//       },
-//       '&:hover fieldset': {
-//         borderColor: 'yellow',
-//       },
-//       '&.Mui-focused fieldset': {
-//         borderColor: 'green',
-//       },
-//     },
-//   },
-// }));
-
-// user pass mail name lname
-// ชื่อรร จังหวัด
+import { keys } from "@material-ui/core/styles/createBreakpoints";
+import { StoreMallDirectoryRounded } from "@material-ui/icons";
 
 const Signup = () => {
-  // const [data, setData] = useState({})
-
   const [User, setUser] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
   const [Lname, setLname] = useState("");
-  const [Schollname, setSchollname] = useState("");
-  // let [Province, setProvince] = useState("")
+  const [SchoolName, setSchoolName] = useState("");
+  const [province, setProvince] = useState("");
+  const [locations, setLocations] = useState([]);
+
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
 
-  // let input = this.state.input;
-  // let errors = {};
-  // let isValid = true;
+  const [check, setCheck] = useState(false);
 
   const [errpwd, setErrpwd] = useState(true);
   const [errpwd1, setErrpwd1] = useState(true);
 
   const [helpTextPassword, setHelpTextPassword] = useState(false);
   const [helpTextPassword1, setHelpTextPassword1] = useState(false);
-
-  const [check, setCheck] = useState(false);
-
-  // const [pwdnotThis, setPwdnotThis] = useState ("รหัสผ่านไม่ตรงกัน")
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -130,60 +98,6 @@ const Signup = () => {
   const handleMouseDownPassword1 = (event) => {
     event.preventDefault();
   };
-
-  // const handleSignup = async (e) => {
-  //   e.preventDefault();
-
-  //   let form_data = {
-  //     username: User,
-  //     email: Email,
-  //     full_name: Name + " " + Lname,
-  //     hashed_password: Password,
-  //   };
-
-  //   if (
-  //     (Password >= 8 && ConfirmPassword >= 8) ||
-  //     Password === ConfirmPassword
-  //   ) {
-  //     setCheck(true); // True for pass
-  //   } else {
-  //     setCheck(false);
-  //     await axios
-  //       .post(BASE_URL + "/sign-up", form_data)
-  //       .then((res) => {
-  //         console.log(res.data);
-
-  //         if (res.statusText === "OK") {
-  //           window.history.go(0);
-  //         } else {
-  //           console.log(res);
-  //           alert("กรุณาลองอีกครั้ง..");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.response.data.detail);
-  //         alert(error.response.data.detail);
-  //       });
-  //   }
-
-  // await axios.post(BASE_URL + "/sign-up", form_data)
-  //   .then(res => {
-  //     console.log(res.data);
-
-  //     if(res.statusText === "OK"){
-  //       window.history.go(0);
-  //     }else{
-  //      console.log(res) ;
-  //       alert("กรุณาลองอีกครั้ง..");
-  //     }
-  //   }
-  //   )
-  //   .catch((error)=> {
-  //     console.log(error.response.data.detail);
-  //     alert(error.response.data.detail);
-
-  //   }
-  //   );
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -256,6 +170,9 @@ const Signup = () => {
       margin: 10,
     },
     FormControlmargin: {
+      "&:invalid": {
+        borderColor: "red",
+      },
       margin: 10,
     },
     passwordcheckTrue: {
@@ -285,8 +202,7 @@ const Signup = () => {
       Password === ConfirmPassword
     ) {
       setCheck(true); // True for pass
-      await axios
-        .post(BASE_URL + "/sign-up", form_data)
+      await post(BASE_URL + "/sign-up", form_data)
         .then((res) => {
           console.log(res.data);
 
@@ -303,14 +219,28 @@ const Signup = () => {
         });
     } else {
       setCheck(false);
-      // console.log('hi', check)
     }
   };
 
   const theme = createMuiTheme({});
 
   const classes = useStyles();
-  // user(ชื่อผู้เข้าใช้)  pass  email  ชื่อจริง-นามสกุล
+  const getAllLocations = async () => {
+    await get(BASE_URL + '/locations')
+      .then(res => {
+        // console.log("locations : ", res.data);
+        setLocations(res.data);
+
+      })
+      .catch(res => {
+        console.log("ไม่พบข้อมูลจังหวัด");
+
+      })
+  };
+
+  useEffect(() => {
+    getAllLocations();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -321,17 +251,26 @@ const Signup = () => {
         required
       >
         <div className={classes.divform}>
-          <TextField
-            className={classes.FormControlmargin}
-            label="ชื่อผู้ใช้"
-            required
-            variant="outlined"
-            id="validation-outlined-input"
-            helperText=""
-            onChange={(e) => setUser(e.target.value)}
-            value={User}
-          />
+          <FormControl className={classes.FormControlmargin}>
+            <TextField
+              label="ชื่อผู้ใช้"
+              required
+              variant="outlined"
+              id="validation-outlined-input"
+              helperText=""
+              onChange={(e) => setUser(e.target.value)}
+              value={User}
+              inputProps={{
+                pattern: "[a-z0-9]{1,15}"
+              }}
+            />
 
+            {User !== "" ? (<></>) : (
+              <FormHelperText id="filled-weight-helper-text">
+                <p style={{ color: "#d10000", textAlign:'center'}}>รองรับเฉพาะภาษาอังกฤษ และตัวเลขเท่านั้น</p>
+              </FormHelperText>
+            )}
+          </FormControl>
           <FormControl variant="outlined" className={classes.FormControlmargin}>
             <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
             <OutlinedInput
@@ -414,7 +353,10 @@ const Signup = () => {
             {check === true ? (
               <></>
             ) : (
-              <p className={classes.passwordcheckFalse}>* รหัสผ่านไม่ตรงกัน</p>
+
+              <FormHelperText id="filled-weight-helper-text">
+                <p className={classes.passwordcheckFalse}>* รหัสผ่านไม่ตรงกัน</p>
+              </FormHelperText>
             )}
           </FormControl>
 
@@ -453,28 +395,36 @@ const Signup = () => {
               label="มหาวิทยาลัย/โรงเรียน"
               required
               id="mui-theme-provider-standard-input"
-              onChange={(e) => setSchollname(e.target.value)}
-              value={Schollname}
+              onChange={(e) => setSchoolName(e.target.value)}
+              value={SchoolName}
             />
           </ThemeProvider>
 
           <FormControl variant="standard" className={classes.TextFieldmargin}>
-            <InputLabel htmlFor="outlined-age-native-simple">
-              จังหวัด
-            </InputLabel>
-            <Select
-              native
-              label="Age"
-              required
-              inputProps={{
-                name: "age",
-                id: "outlined-age-native-simple",
-              }}
-            >
-              <option aria-label="None" value="" />
-              <option value={10}>นครราชสีมา</option>
-              <option value={20}>กรุงเทพ</option>
-              <option value={30}>ภูเก็ต</option>
+            <InputLabel htmlFor="grouped-select">จังหวัด</InputLabel>
+            <Select defaultValue="" id="grouped-select" onChange={e => setProvince(e.target.value)}>
+              <MenuItem value="">
+                <em>-- ว่าง --</em>
+              </MenuItem>
+              <ListSubheader>-- ภาคกลาง --</ListSubheader>
+              {locations.filter(z => z.location_zone === 1).map(p => (
+                <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
+              ))}
+
+              <ListSubheader>-- ภาคอีสาน --</ListSubheader>
+              {locations.filter(z => z.location_zone === 2).map(p => (
+                <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
+              ))}
+
+              <ListSubheader>-- ภาคเหนือ --</ListSubheader>
+              {locations.filter(z => z.location_zone === 3).map(p => (
+                <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
+              ))}
+
+              <ListSubheader>-- ภาคใต้ --</ListSubheader>
+              {locations.filter(z => z.location_zone === 4).map(p => (
+                <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
 
@@ -485,7 +435,7 @@ const Signup = () => {
             variant="outlined"
             color="inherit"
           >
-            Submit
+            สมัครสมาชิก
           </Button>
         </div>
       </Container>

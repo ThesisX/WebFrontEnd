@@ -29,7 +29,7 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
   const [Lname, setLname] = useState("");
-  const [SchoolName, setSchoolName] = useState("");
+  const [school, setSchool] = useState("");
   const [province, setProvince] = useState("");
   const [locations, setLocations] = useState([]);
 
@@ -194,6 +194,8 @@ const Signup = () => {
       username: User,
       email: Email,
       full_name: Name + " " + Lname,
+      school: school,
+      province: province,
       hashed_password: Password,
     };
 
@@ -267,13 +269,14 @@ const Signup = () => {
 
             {User !== "" ? (<></>) : (
               <FormHelperText id="filled-weight-helper-text">
-                <p style={{ color: "#d10000", textAlign:'center'}}>รองรับเฉพาะภาษาอังกฤษ และตัวเลขเท่านั้น</p>
+                <p style={{ color: "#d10000", textAlign: 'center' }}>รองรับเฉพาะภาษาอังกฤษ และตัวเลขเท่านั้น</p>
               </FormHelperText>
             )}
           </FormControl>
           <FormControl variant="outlined" className={classes.FormControlmargin}>
             <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
             <OutlinedInput
+              name="password"
               type={showPassword ? "text" : "password"}
               id="component-outlined"
               label="รหัสผ่าน"
@@ -314,6 +317,7 @@ const Signup = () => {
           <FormControl variant="outlined" className={classes.FormControlmargin}>
             <InputLabel htmlFor="component-outlined">ยืนยันรหัสผ่าน</InputLabel>
             <OutlinedInput
+              name="password"
               type={showPassword1 ? "text" : "password"}
               id="component-outlined"
               label="ยืนยันรหัสผ่าน"
@@ -361,6 +365,7 @@ const Signup = () => {
           </FormControl>
 
           <TextField
+            name="email"
             className={classes.TextFieldmargin}
             type="email"
             label="อีเมล"
@@ -373,6 +378,7 @@ const Signup = () => {
 
           <ThemeProvider theme={theme}>
             <TextField
+              name="surename"
               className={classes.TextFieldmargin}
               label="ชื่อจริง"
               required
@@ -382,6 +388,7 @@ const Signup = () => {
             />
 
             <TextField
+              name="lastname"
               className={classes.TextFieldmargin}
               label="นามสกุล"
               required
@@ -391,40 +398,42 @@ const Signup = () => {
             />
 
             <TextField
+              name="school"
               className={classes.TextFieldmargin}
               label="มหาวิทยาลัย/โรงเรียน"
               required
               id="mui-theme-provider-standard-input"
-              onChange={(e) => setSchoolName(e.target.value)}
-              value={SchoolName}
+              onChange={(e) => setSchool(e.target.value)}
+              value={school}
             />
           </ThemeProvider>
 
           <FormControl variant="standard" className={classes.TextFieldmargin}>
             <InputLabel htmlFor="grouped-select">จังหวัด</InputLabel>
-            <Select defaultValue="" id="grouped-select" onChange={e => setProvince(e.target.value)}>
+            <Select defaultValue="" id="grouped-select" onChange={e => setProvince(e.target.value)} required>
               <MenuItem value="">
-                <em>-- ว่าง --</em>
+                <em>-- เลือกจังหวัดของคุณ --</em>
               </MenuItem>
-              <ListSubheader>-- ภาคกลาง --</ListSubheader>
-              {locations.filter(z => z.location_zone === 1).map(p => (
+              <ListSubheader ListSubheader style={{ backgroundColor: 'white' }}><b>-- ภาคกลาง --</b></ListSubheader>
+              {locations && locations.filter(z => z.location_zone === 1).map(p => (
                 <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
               ))}
 
-              <ListSubheader>-- ภาคอีสาน --</ListSubheader>
-              {locations.filter(z => z.location_zone === 2).map(p => (
+              <ListSubheader style={{ backgroundColor: 'white' }}><b>-- ภาคอีสาน --</b></ListSubheader>
+              {locations && locations.filter(z => z.location_zone === 2).map(p => (
                 <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
               ))}
 
-              <ListSubheader>-- ภาคเหนือ --</ListSubheader>
-              {locations.filter(z => z.location_zone === 3).map(p => (
+              <ListSubheader style={{ backgroundColor: 'white' }}><b>-- ภาคเหนือ --</b></ListSubheader>
+              {locations && locations.filter(z => z.location_zone === 3).map(p => (
                 <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
               ))}
 
-              <ListSubheader>-- ภาคใต้ --</ListSubheader>
-              {locations.filter(z => z.location_zone === 4).map(p => (
+              <ListSubheader style={{ backgroundColor: 'white' }}><b>-- ภาคใต้ --</b></ListSubheader>
+              {locations && locations.filter(z => z.location_zone === 4).map(p => (
                 <MenuItem value={p.location_name}>{p.location_name}</MenuItem>
               ))}
+
             </Select>
           </FormControl>
 
@@ -438,8 +447,8 @@ const Signup = () => {
             สมัครสมาชิก
           </Button>
         </div>
-      </Container>
-    </form>
+      </Container >
+    </form >
   );
 };
 

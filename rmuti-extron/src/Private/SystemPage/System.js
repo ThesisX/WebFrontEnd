@@ -18,10 +18,17 @@ import { post, get } from 'axios';
 import QueuePlayNextIcon from '@material-ui/icons/QueuePlayNext';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { BrowserRouter as Route, Redirect } from 'react-router-dom';
 import ProgressBar from '../../Components/ProgressBar/ProgressBar';
+
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import StepConnector from '@material-ui/core/StepConnector';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,6 +67,91 @@ const useStyles = makeStyles((theme) => ({
         color: '#eceff1',
     },
 }));
+
+const ColorlibConnector = withStyles({
+    alternativeLabel: {
+        top: 22,
+    },
+    active: {
+        '& $line': {
+            backgroundImage:
+                'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        },
+    },
+    completed: {
+        '& $line': {
+            backgroundImage:
+                'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        },
+    },
+    line: {
+        height: 3,
+        border: 0,
+        backgroundColor: '#eaeaf0',
+        borderRadius: 1,
+    },
+})(StepConnector);
+
+const useColorlibStepIconStyles = makeStyles({
+    root: {
+        backgroundColor: '#ccc',
+        zIndex: 1,
+        color: '#fff',
+        width: 50,
+        height: 50,
+        display: 'flex',
+        borderRadius: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    active: {
+        backgroundImage:
+            'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+        boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+    },
+    completed: {
+        backgroundImage:
+            'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    },
+});
+
+function ColorlibStepIcon(props) {
+    const classes = useColorlibStepIconStyles();
+    const { active, completed } = props;
+
+    const icons = {
+        1: <AssignmentInd />,
+        2: <PlaylistAddCheckIcon />,
+        3: <LibraryAddIcon />,
+        4: <FindInPageIcon/>
+    };
+
+    return (
+        <div
+            className={clsx(classes.root, {
+                [classes.active]: active,
+                [classes.completed]: completed,
+            })}
+        >
+            {icons[String(props.icon)]}
+        </div>
+    );
+}
+
+ColorlibStepIcon.propTypes = {
+    /**
+     * Whether this step is active.
+     */
+    active: PropTypes.bool,
+    /**
+     * Mark the step as completed. Is passed to child components.
+     */
+    completed: PropTypes.bool,
+    /**
+     * The label displayed in the step icon.
+     */
+    icon: PropTypes.node,
+};
 
 const getSteps = () => {
     return ['อัปโหลดข้อมูลผู้เข้าสอบ', 'อัปโหลดเฉลยข้อสอบ', 'อัปโหลดกระดาษคำตอบ', 'ตรวจข้อสอบ'];
@@ -130,18 +222,18 @@ const System = () => {
 
 
         slow_time = fast_time + 30;
-        
-        if( fast_time > 0|| slow_time > 0){
+
+        if (fast_time > 0 || slow_time > 0) {
             fast_time /= 60;
             slow_time /= 60;
         }
-        
+
 
         return `${fast_time.toFixed(2)}-${slow_time.toFixed(2)} นาที`;
     };
 
     /* Post Data */
-    const PostData = async(thisfile, url, file) => {
+    const PostData = async (thisfile, url, file) => {
         const config = {
             headers: {
                 'accept': 'application/json',
@@ -168,7 +260,7 @@ const System = () => {
     };
 
     /* Predictions */
-    const PredictData = async() => {
+    const PredictData = async () => {
         const headers = {
             Authorization: `Bearer ${tokenCookies}`,
         };
@@ -188,7 +280,7 @@ const System = () => {
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
     };
 
-    const handleSubmit = async() => {
+    const handleSubmit = async () => {
         setLoadding(true);
         setTxtProcessing("กำลังอัปโหลดข้อมูล");
 
@@ -251,7 +343,7 @@ const System = () => {
                 console.log("Predict Exams return : ", res.data);
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
-        
+
         // window.location.reload();
         window.location = ROOT_URL;
     };
@@ -271,10 +363,10 @@ const System = () => {
                             {!activate ? (
                                 <div>
                                     <Grid item xs={12}>
-                                        <Stepper activeStep={activeStep} alternativeLabel>
+                                        <Stepper activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
                                             {steps.map((label) => (
                                                 <Step key={label}>
-                                                    <StepLabel>{label}</StepLabel>
+                                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
                                                 </Step>
                                             ))}
                                         </Stepper>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-import axios from 'axios'
+import { get } from 'axios';
 import Cookies from "js-cookie";
 import { BASE_URL } from '../../service';
 
@@ -31,8 +31,7 @@ const Dashboard = () => {
         Authorization: `Bearer ${tokenCookies}`,
     };
     const getMe = async () => {
-        await axios
-            .get(BASE_URL + '/users/info', { headers })
+        await get(BASE_URL + '/users/info', { headers })
             .then(res => {
                 let info = res.data;
                 // console.log(info)

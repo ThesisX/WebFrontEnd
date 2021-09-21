@@ -352,8 +352,8 @@ const System = () => {
             });
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
 
-        // window.location.reload();
-        window.location = ROOT_URL;
+        window.history.go(0);
+        // window.location = ROOT_URL;
     };
 
     const SystemsComponent = (

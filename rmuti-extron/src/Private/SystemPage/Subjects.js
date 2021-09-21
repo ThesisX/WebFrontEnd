@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 const Subjects = ({ getActivate, sid }) => {
     const tokenCookies = Cookies.get("token");
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [lableDialog, setLableDialog] = useState("สร้างรายวิชา");
     const [subjectid, setSubjectid] = useState(0);
     const [subjectname, setSubjectname] = useState("");

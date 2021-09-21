@@ -10,19 +10,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Grid } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
 import { withRouter } from "react-router-dom";
 import Private from "./Private";
 import Cookies from "js-cookie";
 
-import FormHelperText from "@material-ui/core/FormHelperText";
 
 import IconButton from "@material-ui/core/IconButton";
 import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
-import MailIcon from "@material-ui/icons/Mail";
-import BallotTwoToneIcon from "@material-ui/icons/BallotTwoTone";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import NaturePeopleTwoToneIcon from "@material-ui/icons/NaturePeopleTwoTone";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoomTwoTone";
@@ -31,18 +26,11 @@ import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
 import TransferWithinAStationRoundedIcon from "@material-ui/icons/TransferWithinAStationRounded";
 import CloudQueueIcon from "@material-ui/icons/CloudQueue";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import MenuIcon from "@material-ui/icons/Menu";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Hidden from "@material-ui/core/Hidden";
-
-import image from "../Appbar/landingpage.png";
-
-import Typography from "@material-ui/core/Typography";
-// import "@fontsource/roboto";
 import "@fontsource/sarabun";
 
 const drawerWidth = 292;
@@ -56,16 +44,16 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "sarabun",
   },
   container: {
-    marginTop: 150,
-    marginLeft:20,
-    marginRight:20,
+    marginTop: 180,
+    marginLeft:50,
+    marginRight:50,
     display: "flex",
     justifyContent: "center",
   },
 
   containerShift:{
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    marginLeft: drawerspace,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,

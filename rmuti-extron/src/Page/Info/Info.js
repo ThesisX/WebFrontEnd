@@ -108,16 +108,16 @@ const Info = () => {
               <Grid>
                 <img className={classes.img} src={myimage} alt="complex"></img>
                 <h2>เว็บมีปัญหาติดต่อ</h2>
-                <a href="https://www.facebook.com/sathaphorn.ma" >
+                {/* <link href="https://www.facebook.com/sathaphorn.ma" >
                   <img src={myimage3}  /> 
                   <p>สถาพร</p>
-                </a>
-                <a href="https://www.facebook.com/bentohanashi" >
+                </link>
+                <link href="https://www.facebook.com/bentohanashi" >
                   <img src={myimage3}  /> 
                   <p>เบญจพร</p>
-                </a>
+                </link> */}
               </Grid>
-              <img className={classes.img2} src={myimage2} alt="complex" />
+              {/* <img className={classes.img2} src={myimage2} alt="complex" /> */}
               <br />
             </Grid>
             <br />

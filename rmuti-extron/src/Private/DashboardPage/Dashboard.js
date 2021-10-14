@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 import { get } from 'axios';
 import Cookies from "js-cookie";
 import { BASE_URL } from '../../service';
-
-import myimage from "../DashboardPage/check-list.png";
-
 
 const useStyles = makeStyles((theme) => ({
     root: {

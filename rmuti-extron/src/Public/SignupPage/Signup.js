@@ -198,6 +198,31 @@ const Signup = () => {
       province: province,
       hashed_password: Password,
     };
+    
+
+    // for (let i = 0; i < 30; i++) {
+    //   let form_data = {
+    //     username: "sathaphornma"+i.toString(),
+    //     email: "sathaphornma@gmail.com"+i.toString(),
+    //     full_name: "สถาพร มณีบุญ"+i.toString(),
+    //     school: "มทร.อีสาน"+i.toString(),
+    //     province: "กรุงเทพมหานคร",
+    //     hashed_password: "Saaqlp07845"+i.toString(),
+    //   }
+  
+    //   await post(BASE_URL + "/sign-up", form_data)
+    //     .then((res) => {
+    //       if (res.statusText === "OK") {
+    //         console.log(1, res.data.detail);
+    //       } else {
+    //         console.log("faild");
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log("faild");
+    //     });
+
+    // }
 
     if (
       (Password >= 8 && ConfirmPassword >= 8) ||

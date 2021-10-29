@@ -317,17 +317,17 @@ const System = () => {
 
         await post(url_datafile, FormDataFile, config)
             .then(res => {
-                console.log("data_file : ", res.data);
+                // console.log("data_file : ", res.data);
             });
 
         await post(url_answerfile, FormAnswerFile, config)
             .then(res => {
-                console.log("ans_file : ", res.data);
+                // console.log("ans_file : ", res.data);
             });
 
         await post(url_examsfile, FormExamsFile, config)
             .then(res => {
-                console.log("exms_file : ", res.data);
+                // console.log("exms_file : ", res.data);
             });
 
         await setTxtProcessing("อัปโหลดข้อมูล สำเร็จ!!");
@@ -343,16 +343,25 @@ const System = () => {
 
         await get(URL_PredictAns, { headers })
             .then(res => {
-                console.log("Predict Ans return : ", res.data);
+                // console.log("Predict Ans return : ", res.data);
+            })
+            .catch(err => {
+                alert('การบันทึกเฉลยผิดพลาด โปรดลองใหม่อีกครั้ง');
+                window.location.reload();
             });
 
         await get(URL_PredictExms, { headers })
             .then(res => {
-                console.log("Predict Exams return : ", res.data);
+                // console.log("Predict Exams return : ", res.data);
+            })
+            .catch(err => {
+                alert('การตรวจข้อสอบผิดพลาด โปรดลองใหม่อีกครั้ง');
+                window.location.reload();
             });
+
         await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
 
-        window.history.go(0);
+        // window.history.go(0);
         // window.location = ROOT_URL;
     };
 

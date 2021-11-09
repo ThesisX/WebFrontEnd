@@ -4,72 +4,51 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import myimage0 from "../../Page/Manager/nn2.jpg";
 import myimage1 from "../../Page/Manager/nn1.jpg";
-import { TramRounded } from "@material-ui/icons";
+import { CallReceived, TramRounded } from "@material-ui/icons";
 import myimage from "../Info/dinosaur.png";
 import myimage2 from "../Info/info.png";
 import myimage3 from "../Info/facebook-logo.png";
+import myimage4 from "../Info/title.jpg";
 import Box from "@material-ui/core/Box";
 import Link from '@material-ui/core/Link';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
+    // fontSize: "1rem",
+    fontSize: `calc(30% + 1.3vmin)`,
   },
   paper: {
-    padding: theme.spacing(2),
+    // padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    // fontSize: `calc(30% + 1.5vmin)`,
+    fontSize: "1rem",
   },
   box: {
-    margin: 50,
-  },
-  gridimg: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowwrap",
-    alignItems: "center",
-    marginLeft: 120,
-    marginBottom: 55,
-    // marginTop: 20,
-  },
-  img: {
-    // quality: 0.5,
-    width: "18rem",
-  },
-  img2: {
-    marginLeft: 100,
-    borderRadius: 62,
-    width: "55rem",
-  },
-  boxtext: {
-    backgroundColor: '#9bd093',
-    width: 190,
-    height: 50,
-    borderRadius: 62,
+    margin: 0,
+    fontSize: `calc(60% + 0.8vmin)`,
 
-  }
-  // h1text: {
-  //   border: "10px solid #eeeeff",
-  // },
+  },
+ 
+  img: {
+    // marginLeft: 100,
+    borderRadius: 62,
+    width: `calc(100% + 0.7vmin)`,
+
+  },
+  
+  h1text: {
+    textAlign: "center",
+    // height: 250,
+    // border: "50px  #eeeeff",
+    padding: "5rem",
+    width: `calc(60% + 0.6vmin)`,
+  },
 }));
 
 const Info = () => {
-  const [count, setCount] = useState(0);
-  const [clickimg, setClickimg] = useState(false);
-
-  const adding = () => {
-    setClickimg(true);
-    setCount(count + 1);
-    if (clickimg === true) {
-      setClickimg(false);
-    }
-    return clickimg;
-  };
-
-  const reset = () => {
-    setCount(0);
-  };
 
   const classes = useStyles();
 
@@ -86,28 +65,29 @@ const Info = () => {
   };
 
   return (
-    <div className={classes.root}>
-      {/* <h1 className={classes.h1text}>เกี่ยวกับ</h1> */}
+    <div className={classes.root}  >
 
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid container spacing={3} >
+
+        <Grid item xs={12} >
+          <header style= {{ 
+            background: 'url('+myimage4+')',
+            backgroundSize: "cover",
+            height: "58vh",
+            overflow: "hidden",
+            backgroundRepeat: "no-repeat",
+          }}
+          > 
+      <h1 className={classes.h1text}>เกี่ยวกับ</h1>
+          {/* <img className={classes.img} src={myimage4} alt="complex"></img> */}
+          </header>
           <Paper className={classes.paper}>
+
             {/* <box letterSpacing={6}>เกี่ยวกับ</box> */}
-            <Box
-              className={classes.box}
-              letterSpacing={8}
-              fontSize="h4.fontSize"
-              fontWeight="fontWeightBold"
-              m={1}
-            >
-              <center>
-              <p className={classes.boxtext}>เกี่ยวกับ</p>
-              </center>
-            </Box>
-            <Grid className={classes.gridimg}>
-              <Grid>
+           
+              {/* <Grid>
                 <img className={classes.img} src={myimage} alt="complex"></img>
-                <h2>เว็บมีปัญหาติดต่อ</h2>
+                <h2>เว็บมีปัญหาติดต่อ</h2> */}
                 {/* <link href="https://www.facebook.com/sathaphorn.ma" >
                   <img src={myimage3}  /> 
                   <p>สถาพร</p>
@@ -116,23 +96,13 @@ const Info = () => {
                   <img src={myimage3}  /> 
                   <p>เบญจพร</p>
                 </link> */}
-              </Grid>
+              {/* </Grid> */}
               {/* <img className={classes.img2} src={myimage2} alt="complex" /> */}
               <br />
-            </Grid>
+            {/* </Grid> */}
             <br />
             CPE RMUTI ©2021 Created by CPE Group 61231
-            {/* <h1 className={classes.text}>{count}</h1>
-          {clickimg === true ? (
-            <img className={classes.img} src={myimage0} />
-            ) : (
-            <img className={classes.img} src={myimage1} />
-          )}
-          {console.log(`clickimg`, clickimg)}
-          <button onKeyDown={adding} onChange={adding}>
-            click
-          </button>
-          <button onClick={reset}>Reset</button> */}
+        
           </Paper>
         </Grid>
       </Grid>

@@ -14,7 +14,6 @@ import { withRouter } from "react-router-dom";
 import Private from "./Private";
 import Cookies from "js-cookie";
 
-
 import IconButton from "@material-ui/core/IconButton";
 import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
@@ -45,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: 180,
-    marginLeft:50,
-    marginRight:50,
+    marginLeft: 50,
+    marginRight: 50,
     display: "flex",
     justifyContent: "center",
   },
 
-  containerShift:{
+  containerShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerspace,
     transition: theme.transitions.create(["margin", "width"], {
@@ -63,10 +62,9 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     marginLeft: drawerspace,
     height: 130,
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "#f0f4c3",
     color: "black",
-
   },
 
   appBarShift: {
@@ -146,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     justifyContent: "center",
     fontSize: `calc(60% + 1.3vmin)`,
-    color: '#111',
+    color: "#111",
   },
 
   litsItemTwo: {
@@ -163,15 +161,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     justifyContent: "",
     fontSize: `calc(60% + 1.3vmin)`,
-    color: '#111',
-
+    color: "#111",
   },
 
   litsItemicon: {
     justifyContent: "center",
     margin: 4,
-    color: '#111',
-
+    color: "#111",
   },
 
   icontoolbar: {
@@ -217,18 +213,15 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "#ff9800  #111",
     // fontSize: 16,
     fontSize: `calc(60% + 0.8vmin)`,
-
   },
   litsItemText: {
     fontSize: `calc(60% + 1.3vmin)`,
-
   },
   // ulListGrid: {
   //   fontSize:  `calc(60% + 1.3vmin)`,
   //   maxWidth: `calc(40% + 1.3vmin)`,
   //   margin: "0 auto",
   // }
-
 }));
 
 const MyAppBar = (props) => {
@@ -288,7 +281,6 @@ const MyAppBar = (props) => {
   };
 
   const MenuLists = (
-
     <Grid className={classes.ulListGrid}>
       <div className={classes.toolbar}>
         <div className={classes.icontoolbar}>
@@ -297,8 +289,7 @@ const MyAppBar = (props) => {
         </div>
       </div>
 
-
-      <List className={classes.ulList} >
+      <List className={classes.ulList}>
         {itemList.map((item, index) => {
           const { text, icon, onClick } = item;
           return (
@@ -388,25 +379,24 @@ const MyAppBar = (props) => {
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
-            // edge="end"
+              // edge="end"
             >
               <ArrowBackIosIcon />
             </IconButton>
           )}
           <b className={classes.text}>ระบบตรวจข้อสอบปรนัย</b>
           {/* <img className={classes.img} src={image} alt="complex" /> */}
-
         </Toolbar>
       </AppBar>
 
-      <Grid container
+      <Grid
+        container
         className={clsx(classes.container, {
           [classes.containerShift]: click,
         })}
       >
-        <Grid item xs={12}
-        >
-          <Hidden xs >
+        <Grid item xs={12}>
+          <Hidden xs>
             <Drawer
               className={classes.drawer}
               classes={{

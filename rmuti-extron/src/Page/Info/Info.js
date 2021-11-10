@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import Cardinfo from "./Cardinfo";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -10,14 +13,14 @@ import myimage2 from "../Info/info.png";
 import myimage3 from "../Info/facebook-logo.png";
 import myimage4 from "../Info/title.jpg";
 import Box from "@material-ui/core/Box";
-import Link from '@material-ui/core/Link';
-
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // flexGrow: 1,
+    flexGrow: 1,
+
     // fontSize: "1rem",
-    fontSize: `calc(30% + 1.3vmin)`,
+    fontSize: `calc(60% + 0.8vmin)`,
   },
   paper: {
     // padding: theme.spacing(2),
@@ -29,27 +32,39 @@ const useStyles = makeStyles((theme) => ({
   box: {
     margin: 0,
     fontSize: `calc(60% + 0.8vmin)`,
-
   },
- 
+
+  grid: {
+    // padding: "92.688rem",
+    width: `calc(90% + 0.8vmin)`,
+    fontSize: `calc(110% + 0.6vmin)`,
+    textAlign: "center",
+    fontFamily: "sarabun",
+    // width: "90.688rem",
+  },
+
   img: {
     // marginLeft: 100,
-    borderRadius: 62,
-    width: `calc(100% + 0.7vmin)`,
+    width: "21.688rem",
 
+    // width: `calc(60% + 0.6vmin)`,
   },
-  
+
   h1text: {
     textAlign: "center",
     // height: 250,
-    // border: "50px  #eeeeff",
-    padding: "5rem",
-    width: `calc(60% + 0.6vmin)`,
+    border: "#eeeeff",
+    // padding: "506",
+    paddingTop: "9rem",
+    paddingRight: "50rem",
+    // backgroundColor: "#00000",
+    // width: "80.688rem",
+
+    // fontSize: `calc(110% + 0.8vmin)`,
   },
 }));
 
 const Info = () => {
-
   const classes = useStyles();
 
   const themeInstance = {
@@ -65,30 +80,31 @@ const Info = () => {
   };
 
   return (
-    <div className={classes.root}  >
-
-      <Grid container spacing={3} >
-
-        <Grid item xs={12} >
-          <header style= {{ 
-            background: 'url('+myimage4+')',
-            backgroundSize: "cover",
-            height: "58vh",
-            overflow: "hidden",
-            backgroundRepeat: "no-repeat",
-          }}
-          > 
-      <h1 className={classes.h1text}>เกี่ยวกับ</h1>
-          {/* <img className={classes.img} src={myimage4} alt="complex"></img> */}
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid className={classes.grid}>
+          <header
+            style={{
+              background: "url(" + myimage4 + ")",
+              backgroundSize: "contain",
+              height: "34vh",
+              // overflow: "hidden",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <p className={classes.h1text}>
+              <b>เกี่ยวกับ</b>{" "}
+            </p>
+            {/* <h1 className={classes.h1text}>เกี่ยวกับ</h1> */}
+            {/* <img className={classes.img} src={myimage4} alt="complex"></img> */}
           </header>
           <Paper className={classes.paper}>
-
-            {/* <box letterSpacing={6}>เกี่ยวกับ</box> */}
-           
-              {/* <Grid>
+            
+            <Cardinfo></Cardinfo>
+            {/* <Grid>
                 <img className={classes.img} src={myimage} alt="complex"></img>
                 <h2>เว็บมีปัญหาติดต่อ</h2> */}
-                {/* <link href="https://www.facebook.com/sathaphorn.ma" >
+            {/* <link href="https://www.facebook.com/sathaphorn.ma" >
                   <img src={myimage3}  /> 
                   <p>สถาพร</p>
                 </link>
@@ -96,15 +112,14 @@ const Info = () => {
                   <img src={myimage3}  /> 
                   <p>เบญจพร</p>
                 </link> */}
-              {/* </Grid> */}
-              {/* <img className={classes.img2} src={myimage2} alt="complex" /> */}
-              <br />
+            {/* </Grid> */}
+            {/* <img className={classes.img2} src={myimage2} alt="complex" /> */}
+            <br />
             {/* </Grid> */}
             <br />
-            CPE RMUTI ©2021 Created by CPE Group 61231
-        
           </Paper>
         </Grid>
+            CPE RMUTI ©2021 Created by CPE Group 61231
       </Grid>
     </div>
   );

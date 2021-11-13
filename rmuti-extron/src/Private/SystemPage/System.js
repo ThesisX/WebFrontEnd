@@ -215,29 +215,38 @@ const System = () => {
         }
     }
 
-    const CalculateTime = (AnsName, ExmCount) => {
-        // console.log(AnsName);
-        let anstime = 25;
-        let exmtime = 30;
-        let slow_time = 0;
-        let fast_time = 0;
+    const FormatTime = time => {
+        
+        let hrs = ~~(time / 3600);
+        let mins = ~~((time % 3600) / 60);
+        let secs = ~~time % 60;
 
-        if (AnsName.slice(-4) == '.csv') {
-            fast_time = ExmCount * exmtime;
-        } else {
-            fast_time = (ExmCount * exmtime) + anstime;
+        // Output like "1:01" or "4:03:59" or "123:03:59"
+        let ret = "";
+        if (hrs > 0) {
+            ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
         }
 
+        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+        ret += "" + secs;
 
-        slow_time = fast_time + 30;
+        return ret
+    }
 
-        if (fast_time > 0 || slow_time > 0) {
-            fast_time /= 60;
-            slow_time /= 60;
-        }
+    const CalculateTime = (AnsName, ExmCount, AnsUseTime) => {
+        let endTime = 0;
+
+        if(AnsUseTime < 10)
+            endTime = ExmCount * 30
+        else
+            endTime = ExmCount * AnsUseTime
 
 
-        return `${fast_time.toFixed(2)}-${slow_time.toFixed(2)} นาที`;
+        console.log(`"endTime" : ${endTime}`);
+        let FastTime = FormatTime(endTime)
+        let SlowTime = FormatTime(endTime+60)
+
+        return `${FastTime}-${SlowTime} นาที`;
     };
 
     /* Post Data */
@@ -318,21 +327,32 @@ const System = () => {
         await post(url_datafile, FormDataFile, config)
             .then(res => {
                 // console.log("data_file : ", res.data);
+            })
+            .catch(err => {
+                alert('การอัปโหลดผิดพลาด โปรดลองใหม่อีกครั้ง');
+                window.location.reload();
             });
 
         await post(url_answerfile, FormAnswerFile, config)
             .then(res => {
                 // console.log("ans_file : ", res.data);
+            })
+            .catch(err => {
+                alert('การอัปโหลดผิดพลาด โปรดลองใหม่อีกครั้ง');
+                window.location.reload();
             });
 
         await post(url_examsfile, FormExamsFile, config)
             .then(res => {
                 // console.log("exms_file : ", res.data);
+            })
+            .catch(err => {
+                alert('การอัปโหลดผิดพลาด โปรดลองใหม่อีกครั้ง');
+                window.location.reload();
             });
 
         await setTxtProcessing("อัปโหลดข้อมูล สำเร็จ!!");
-        const ntime = await CalculateTime(ansfile[0].name, examfile.length)
-        await setTxtProcessing(`กำลังตรวจข้อสอบใช้เวลา ${ntime} โดยประมาณ`);
+        await setTxtProcessing("กำลังเตรียมการตรวจข้อสอบ รอสักครู่...");
 
         const headers = {
             Authorization: `Bearer ${tokenCookies}`,
@@ -341,14 +361,19 @@ const System = () => {
         const URL_PredictAns = `${BASE_URL}/predictor/predict-ans?current_subject=${subID}`;
         const URL_PredictExms = `${BASE_URL}/predictor/predict-exm?current_subject=${subID}`;
 
+        let AnsPredTime = 0
         await get(URL_PredictAns, { headers })
             .then(res => {
                 // console.log("Predict Ans return : ", res.data);
+                AnsPredTime = res.data;
             })
             .catch(err => {
                 alert('การบันทึกเฉลยผิดพลาด โปรดลองใหม่อีกครั้ง');
                 window.location.reload();
             });
+        
+        const ntime = await CalculateTime(ansfile[0].name, examfile.length, AnsPredTime)
+        await setTxtProcessing(`กำลังตรวจข้อสอบใช้เวลา ${ntime} โดยประมาณ`);
 
         await get(URL_PredictExms, { headers })
             .then(res => {
@@ -359,7 +384,9 @@ const System = () => {
                 window.location.reload();
             });
 
-        await setTxtProcessing("การตรวจข้อสอบ สำเร็จ!!");
+        await setTxtProcessing("ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!");
+        await alert('ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!');
+        window.location.reload();
 
         // window.history.go(0);
         // window.location = ROOT_URL;

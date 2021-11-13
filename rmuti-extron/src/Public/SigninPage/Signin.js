@@ -112,44 +112,23 @@ const Singin = ({ setToken }) => {
     e.preventDefault();
     // setOpen(true);
     let values = true;
+    
+    setTextSnackbar("กรุณารอสักครู่...");
+    setcheckSnackbar(true);
 
     if (Username === "") {
       setTextSnackbar("กรุณากรอก ชื่อผู้เข้าใช้งาน");
       setcheckSnackbar(true);
 
-      // alert("กรุณากรอก ชื่อผู้เข้าใช้งาน");
-      // values = false;
-      // return false;
     } else if (Password === "") {
       setTextSnackbar("กรุณากรอก รหัสผ่าน");
       setcheckSnackbar(true);
 
-      // alert("กรุณากรอก รหัสผ่าน");
-      // values = false;
     } else {
       let form_data = {
         username: Username,
         password: Password,
       };
-
-      // if (Username === "") {
-      // alert("กรุณากรอก ชื่อผู้เข้าใช้งาน");
-      // values = false;
-      // return false;
-      // }
-      // else if (Password === "king") {
-      //   setcheckSnackbar(false)
-
-      //   // alert("กรุณากรอก รหัสผ่าน");
-      //   // values = false;
-
-      // }
-      // document.getElementById("username").disabled = true;
-      // document.getElementById("password").disabled = true;
-      // document.getElementById("submit").disabled = true;
-      // return false;
-
-      // if (values) {
 
       let options = {
         method: "POST",
@@ -158,24 +137,16 @@ const Singin = ({ setToken }) => {
         url: BASE_URL + "/token",
       };
 
-      console.log("log");
-
       await axios(options)
         .then((res) => {
-          // console.log(res)
-          // console.log(res.data.access_token)
           Cookies.set("token", res.data.access_token);
-          // setToken(res.data.access_token)
           window.location.reload();
         })
         .catch((error) => {
-          setTextSnackbar(error.response.data.detail);
+          setTextSnackbar('ไม่สามารถเข้าสู่ระบบได้ โปรดลองใหม่อีกครั้ง');
           setcheckSnackbar(true);
-          // setState({ open: true, ...newState });
-          console.log(error.response.data.detail);
-          // alert(error.response.data.detail);
         });
-      console.log(textSnackbar);
+    
     }
   };
   const { vertical, horizontal, open } = state;
@@ -188,8 +159,6 @@ const Singin = ({ setToken }) => {
     if (reason === "clickaway") {
       return;
     }
-
-    // setOpen(false);
   };
 
   return (

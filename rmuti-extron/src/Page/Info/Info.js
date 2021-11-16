@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
 
     // fontSize: "1rem",
-    fontSize: `calc(60% + 0.8vmin)`,
+    // fontSize: `calc(60% + 0.8vmin)`,
   },
   paper: {
     // padding: theme.spacing(2),
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     // padding: "92.688rem",
     width: `calc(90% + 0.8vmin)`,
-    fontSize: `calc(110% + 0.6vmin)`,
+    // fontSize: `calc(110% + 0.6vmin)`,
     textAlign: "center",
     fontFamily: "sarabun",
     // width: "90.688rem",
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "50rem",
     // backgroundColor: "#00000",
     // width: "80.688rem",
-
+    fontSize: "1.3rem",
     // fontSize: `calc(110% + 0.8vmin)`,
   },
 }));
@@ -92,8 +92,10 @@ const Info = () => {
               backgroundRepeat: "no-repeat",
             }}
           >
-            <p className={classes.h1text}>
-              <b>เกี่ยวกับ</b>{" "}
+            <p className={classes.h1text} style={{
+              backgroundRepeat: "repeat-y"
+            }} >
+              <b>เกี่ยวกับ</b>
             </p>
             {/* <h1 className={classes.h1text}>เกี่ยวกับ</h1> */}
             {/* <img className={classes.img} src={myimage4} alt="complex"></img> */}
@@ -117,9 +119,9 @@ const Info = () => {
             <br />
             {/* </Grid> */}
             <br />
+            CPE RMUTI ©2021 Created by CPE Group 61231
           </Paper>
         </Grid>
-            CPE RMUTI ©2021 Created by CPE Group 61231
       </Grid>
     </div>
   );

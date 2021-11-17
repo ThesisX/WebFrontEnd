@@ -26,22 +26,26 @@ const useStyles = makeStyles((theme) => ({
     // padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    // fontSize: `calc(30% + 1.5vmin)`,
+    fontSize: `calc(30% + 1.5vmin)`,
     fontSize: "1rem",
   },
   box: {
     margin: 0,
-    fontSize: `calc(60% + 0.8vmin)`,
+    // fontSize: `calc(80% + 0.8vmin)`,
   },
 
   grid: {
     // padding: "92.688rem",
-    width: `calc(90% + 0.8vmin)`,
+    width: `calc(90% + 0.6vmin)`,
     // fontSize: `calc(110% + 0.6vmin)`,
     textAlign: "center",
     fontFamily: "sarabun",
     // width: "90.688rem",
   },
+
+  // paperHeader: {
+  //   width: `calc(100% + 0.8vmin)`,
+  // },
 
   img: {
     // marginLeft: 100,
@@ -60,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: "#00000",
     // width: "80.688rem",
     fontSize: "1.3rem",
-    // fontSize: `calc(110% + 0.8vmin)`,
+    // fontSize: `calc(110% + 0.1vmin)`,
   },
 }));
 
@@ -83,26 +87,30 @@ const Info = () => {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid className={classes.grid}>
-          <header
-            style={{
-              background: "url(" + myimage4 + ")",
-              backgroundSize: "contain",
-              height: "34vh",
-              // overflow: "hidden",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <p className={classes.h1text} style={{
-              backgroundRepeat: "repeat-y"
-            }} >
-              <b>เกี่ยวกับ</b>
-            </p>
-            {/* <h1 className={classes.h1text}>เกี่ยวกับ</h1> */}
-            {/* <img className={classes.img} src={myimage4} alt="complex"></img> */}
-          </header>
+          <Paper className={classes.paperHeader}>
+            <header
+              style={{
+                background: "url(" + myimage4 + ")",
+                backgroundSize: "contain",
+                height: "34vh",
+                // overflow: "hidden",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <p
+                className={classes.h1text}
+                style={{
+                  // backgroundRepeat: "repeat-y",
+                }}
+              >
+                <b>เกี่ยวกับ</b>
+              </p>
+              {/* <h1 className={classes.h1text}>เกี่ยวกับ</h1> */}
+              {/* <img className={classes.img} src={myimage4} alt="complex"></img> */}
+            </header>
+          </Paper>
+          <Cardinfo></Cardinfo>
           <Paper className={classes.paper}>
-            
-            <Cardinfo></Cardinfo>
             {/* <Grid>
                 <img className={classes.img} src={myimage} alt="complex"></img>
                 <h2>เว็บมีปัญหาติดต่อ</h2> */}
@@ -114,12 +122,12 @@ const Info = () => {
                   <img src={myimage3}  /> 
                   <p>เบญจพร</p>
                 </link> */}
+            <br />
+            CPE RMUTI ©2021 Created by CPE Group 61231
             {/* </Grid> */}
             {/* <img className={classes.img2} src={myimage2} alt="complex" /> */}
             <br />
             {/* </Grid> */}
-            <br />
-            CPE RMUTI ©2021 Created by CPE Group 61231
           </Paper>
         </Grid>
       </Grid>

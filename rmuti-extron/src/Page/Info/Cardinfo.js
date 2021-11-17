@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Box from "@material-ui/core/Box";
+import image3 from "../Info/test.png";
 
 import "@fontsource/sarabun";
 
@@ -20,8 +21,8 @@ const useStyles = makeStyles({
     flexDirection: "column",
     flexWrap: "wrap",
     alignItems: "center",
-    marginTop: 20,
-    fontSize: `calc(60% + 0.8vmin)`,
+    // marginTop: 20,
+    fontSize: `calc(65% + 0.8vmin)`,
   },
   bullet: {
     // display: 'inline-block',
@@ -48,13 +49,13 @@ const useStyles = makeStyles({
   },
 
   content2: {
+    marginTop: -10,
     // backgroundColor: "#B09F80",
     // backgroundColor: "#d7c3a5",
     // backgroundColor: "#ddd0cb",
     display: "flex",
-    flexDirection: "column",
-    flexWrap: "wrap",
-    alignItems: "center",
+    justifyContent: "space-around",
+    alignItems: "flex-end",
     margin: 20,
     borderRadius: 10,
     // fontSize: "1.2rem",
@@ -65,24 +66,25 @@ const useStyles = makeStyles({
 
   image: {
     // marginTop: 20,
-    width: "6rem",
+    width: `calc(23% + 0.8vmin)`,
     // backgroundColor: "#B09F80",
     backgroundColor: "#f6d268",
-    height: "13.2rem",
+    // height: "13.2rem",
   },
 
   image2: {
     // marginTop: 20,
-    width: "6rem",
+    width: `calc(15% + 0.8vmin)`,
     backgroundColor: "#B09F80",
     // backgroundColor: "#f6d268",
-    height: "13.4rem",
+    // height: "13.4rem",
   },
 
   paper: {
     // padding: 12,
     fontFamily: "sarabun",
-    marginRight: 490,
+    fontSize: "1.1rem",
+    // marginRight: 590,
     // marginTop: 10,
     // width: "24.688rem",
     width: `calc(28% + 0.8vmin)`,
@@ -91,25 +93,32 @@ const useStyles = makeStyles({
   paper2: {
     // padding: 12,
     fontFamily: "sarabun",
-    marginLeft: 390,
-    marginTop: 50,
+    fontSize: "1.1rem",
+    // marginLeft: 390,
+    // marginTop: 10,
     // width: "24.688rem",
     width: `calc(43% + 0.8vmin)`,
     // backgroundColor: "#f4ebe7",
   },
 
   gridItem: {
-    marginTop: 8,
+    fontSize: `calc(50% + 0.8vmin)`,
   },
-  gridItem2: {
-    marginTop: 8,
-  },
+  // gridItem2: {
+  //   marginTop: 8,
+  // },
 
   box: {
     backgroundColor: "#060606",
     width: `calc(80% + 0.8vmin)`,
     height: "3rem",
   },
+
+  text: {
+    fontSize: `calc(50% + 0.8vmin)`,
+
+  }
+
 });
 
 export default function SimpleCard() {
@@ -137,81 +146,90 @@ export default function SimpleCard() {
         </p>
       </CardContent>
 
-      <CardContent className={classes.content2} >
-      <Paper className={classes.paper}  >
-        <Grid container spacing={2}>
-          <Grid item className={classes.gridimage}>
-            <ButtonBase className={classes.image}>
-              {/* <img className={classes.img} src={myimage4} alt="complex" /> */}
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs className={classes.gridItem}>
-                <Typography
-                  component="div"
-                  className={classes.text}
-                  gutterBottom
-                  variant="subtitle1"
-                  spacing={2}
-                >
-                  <Box letterSpacing={5} m={1} fontFamily="Sarabun">
-                    ใช้งานได้ง่าย <br /> เพียงแค่ <b>อัพโหลด</b>
-                  </Box>
-                </Typography>
-                <p></p>
-                <p className={classes.text2} variant="body2" gutterBottom>
-                  <b letterSpacing={6}> "กระดาษคำตอบ" </b>
-                  <br />
-                  <b> "เฉลยคำตอบ" </b>
-                  <br />
-                  และ
-                  <br />
-                  <b> "ข้อมูลผู้เข้าสอบ" </b>
-                </p>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Paper>
-
-      <Paper className={classes.paper2} >
-        <Grid container spacing={2}>
-          <Grid item className={classes.gridimage}></Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs className={classes.gridItem2}>
-                <Typography
-                  component="div"
-                  className={classes.text}
-                  gutterBottom
-                  variant="subtitle1"
-                  spacing={2}
-                >
-                  <Box letterSpacing={5} m={1} fontFamily="Sarabun">
-                    ซึ่งเว็บแอพพลิเคชันนี้ <br />
-                    <b>ใช้ในการตรวจข้อสอบปรนัย</b>
+      <CardContent className={classes.content2}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            {/* <Grid item className={classes.gridimage}> */}
+            {/* </Grid> */}
+            <Grid item xs={12} sm container>
+              <ButtonBase className={classes.image}>
+                {/* <img className={classes.img} src={myimage4} alt="complex" /> */}
+              </ButtonBase>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs className={classes.gridItem}>
+                  <Typography
+                    component="div"
+                    className={classes.text}
+                    gutterBottom
+                    variant="subtitle1"
+                    spacing={2}
+                  >
+                    <Box letterSpacing={5} m={1} fontFamily="Sarabun">
+                      ใช้งานได้ง่าย <br /> เพียงแค่ <b>อัพโหลด</b>
+                    </Box>
+                  </Typography>
+                  <p></p>
+                  <p className={classes.text2} variant="body2" gutterBottom>
+                    <b letterSpacing={6}> "กระดาษคำตอบ" </b>
                     <br />
-                    โดยโครงข่ายประสาทเทียมแบบคอนโวลูชัน
-                  </Box>
-                </Typography>
-                <p></p>
-                <p className={classes.text2} variant="body2" gutterBottom>
-                  <b letterSpacing={6}> บนเว็บเบราว์เซอร์ </b> และรองรับทุกแพลตฟอร์ม
-                  <br />
-                   ไม่ว่าจะเป็น 
-                  {/* <br /> */}
-                  <br />
-                  <b> {bull} สมาร์ทโฟน , {bull} แท็บเล็ต</b>  หรือ <b> {bull} คอมพิวเตอร์ส่วนบุคคล </b>
-                </p>
+                    <b> "เฉลยคำตอบ" </b>
+                    <br />
+                    และ
+                    <br />
+                    <b> "ข้อมูลผู้เข้าสอบ" </b>
+                  </p>
+                </Grid>
               </Grid>
             </Grid>
-            <ButtonBase className={classes.image2}>
-              {/* <img className={classes.img} src={myimage4} alt="complex" /> */}
-            </ButtonBase>
           </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
+{/* 
+        <ButtonBase className={classes.image3}>
+          <img className={classes.img} src={image3} alt="complex" />
+        </ButtonBase> */}
+
+        <Paper className={classes.paper2}>
+          <Grid container spacing={2}>
+            <Grid item className={classes.gridimage}></Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs className={classes.gridItem}>
+                  <Typography
+                    component="div"
+                    className={classes.text}
+                    gutterBottom
+                    variant="subtitle1"
+                    spacing={2}
+                  >
+                    <Box letterSpacing={5} m={1} fontFamily="Sarabun">
+                      ซึ่งเว็บแอพพลิเคชันนี้ <br />
+                      <b>ใช้ในการตรวจข้อสอบปรนัย</b>
+                      <br />
+                      โดยโครงข่ายประสาทเทียมแบบคอนโวลูชัน
+                    </Box>
+                  </Typography>
+                  <p></p>
+                  <p className={classes.text2} variant="body2" gutterBottom>
+                    <b letterSpacing={6}> บนเว็บเบราว์เซอร์ </b>{" "}
+                    และรองรับทุกแพลตฟอร์ม
+                    <br />
+                    ไม่ว่าจะเป็น
+                    {/* <br /> */}
+                    <br />
+                    <b>
+                      {" "}
+                      {bull} สมาร์ทโฟน , {bull} แท็บเล็ต
+                    </b>{" "}
+                    หรือ <b> {bull} คอมพิวเตอร์ส่วนบุคคล </b>
+                  </p>
+                </Grid>
+              </Grid>
+              <ButtonBase className={classes.image2}>
+                {/* <img className={classes.img} src={myimage4} alt="complex" /> */}
+              </ButtonBase>
+            </Grid>
+          </Grid>
+        </Paper>
       </CardContent>
       {/* 
       <CardActions>

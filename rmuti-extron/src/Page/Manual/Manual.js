@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import ManualOne from "./ManualOne";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -31,9 +33,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
+      // return  <ManualOne/> ;
     case 1:
       return 'An ad group contains one or more ads which target a shared set of keywords.';
     case 2:

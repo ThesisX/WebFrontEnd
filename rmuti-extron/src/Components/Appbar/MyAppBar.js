@@ -31,6 +31,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Hidden from "@material-ui/core/Hidden";
 import "@fontsource/sarabun";
+// import imagelogo from "../Appbar/logormuti.jpg"
+// import  from "../../Page/Manager/3.jpg";
+
 
 const drawerWidth = 292;
 const drawerspace = drawerWidth + 50;
@@ -385,7 +388,7 @@ const MyAppBar = (props) => {
             </IconButton>
           )}
           <b className={classes.text}>ระบบตรวจข้อสอบปรนัย</b>
-          {/* <img className={classes.img} src={image} alt="complex" /> */}
+          {/* <img className={classes.img} src={imagelogo} alt="complex" /> */}
         </Toolbar>
       </AppBar>
 

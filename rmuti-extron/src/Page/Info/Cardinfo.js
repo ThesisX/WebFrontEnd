@@ -128,7 +128,7 @@ export default function SimpleCard() {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Button className={classes.box}></Button>
+        {/* <Button className={classes.box}></Button> */}
         <p>
           {bull} <b>ระบบตรวจข้อสอบปรนัย ด้วยโครงข่ายประสาทเทียมแบบคอนโวลูชัน</b>{" "}
           {bull}

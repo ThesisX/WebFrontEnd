@@ -31,9 +31,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Hidden from "@material-ui/core/Hidden";
 import "@fontsource/sarabun";
+import logormuti from "../Appbar/Logo_RMUTI.png";
+import logocpe from "../Appbar/logocpe.png";
 // import imagelogo from "../Appbar/logormuti.jpg"
 // import  from "../../Page/Manager/3.jpg";
-
 
 const drawerWidth = 292;
 const drawerspace = drawerWidth + 50;
@@ -44,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
     // maxWidth: '80rem',
     margin: "0 auto",
     fontFamily: "sarabun",
+    fontSize: `calc(60% + 0.6vmin)`,
+
   },
   container: {
     marginTop: 180,
@@ -102,40 +105,49 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     maxWidth: 290,
     margin: "0 auto",
+    fontSize: `calc(60% + 0.6vmin)`,
+
   },
 
   toolbartab: {
+    display: "flex",
     justifyContent: "space-between",
     left: "-100%",
     opacity: 0,
     zIndex: 1,
+    fontSize: `calc(60% + 0.6vmin)`,
+
     // display: 'block'
   },
 
   ulList: {
     // width: 290,
-    maxWidth: "18.125rem",
+    width: `calc(90% + 0.6vmin)`,
     margin: "0 auto",
     marginTop: 25,
     marginBottom: 25,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    fontSize: `calc(60% + 0.6vmin)`,
+
   },
 
   ulListTwo: {
     // width: 290,
-    maxWidth: "18.125rem",
+    width: `calc(90% + 0.6vmin)`,
     margin: "0 auto",
     marginTop: 25,
     marginBottom: 25,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    fontSize: `calc(60% + 0.6vmin)`,
+
   },
 
   litsItem: {
-    maxWidth: "16.25rem",
+    width: `calc(90% + 0.6vmin)`,
     backgroundColor: "#ffcdd2",
     "&:hover": {
       backgroundColor: "#f89eb4",
@@ -146,12 +158,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 10,
     justifyContent: "center",
-    fontSize: `calc(60% + 1.3vmin)`,
+    fontSize: `calc(60% + 0.6vmin)`,
     color: "#111",
   },
 
   litsItemTwo: {
-    maxWidth: "16.25rem",
+    width: `calc(90% + 0.6vmin)`,
     backgroundColor: "#b2dfdb",
     "&:hover": {
       backgroundColor: "#79D2AE",
@@ -163,17 +175,19 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: "center",
     justifyContent: "",
-    fontSize: `calc(60% + 1.3vmin)`,
+    fontSize: `calc(60% + 0.6vmin)`,
     color: "#111",
   },
 
   litsItemicon: {
+    fontSize: `calc(50% + 0.6vmin)`,
     justifyContent: "center",
     margin: 4,
     color: "#111",
   },
 
   icontoolbar: {
+    fontSize: `calc(50% + 0.6vmin)`,
     marginTop: 30,
     display: "flex",
     flexDirection: "column",
@@ -181,6 +195,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   iconLogout: {
+    fontSize: `calc(60% + 0.6vmin)`,
     display: "flex",
     justifyContent: "center",
     marginTop: 25,
@@ -220,6 +235,31 @@ const useStyles = makeStyles((theme) => ({
   litsItemText: {
     fontSize: `calc(60% + 1.3vmin)`,
   },
+
+  img: {
+    
+    width: `calc(15.5% + 1.3vmin)`,
+    // margin: 5,
+  },
+
+  gridimg: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "flex-end",
+    // marginRight: -100,
+  },
+
+  toolbarall: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+
+  imglogocpe: {
+    width: `calc(27% + 1.3vmin)`,
+    padding: 6
+
+    // backgroundColor: "#fff9c4",
+  }
   // ulListGrid: {
   //   fontSize:  `calc(60% + 1.3vmin)`,
   //   maxWidth: `calc(40% + 1.3vmin)`,
@@ -366,7 +406,7 @@ const MyAppBar = (props) => {
           [classes.appBarShift]: click,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbarall}>
           {!click ? (
             <IconButton
               color="inherit"
@@ -388,7 +428,46 @@ const MyAppBar = (props) => {
             </IconButton>
           )}
           <b className={classes.text}>ระบบตรวจข้อสอบปรนัย</b>
-          {/* <img className={classes.img} src={imagelogo} alt="complex" /> */}
+          <Grid
+            className={classes.gridimg}
+            style={{
+              // backgroundColor: "ActiveBorder",
+              // backgroundSize: "contain",
+
+              // height: "34vh",
+              // overflow: "hidden",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <img
+              className={classes.img}
+              src={logormuti}
+              alt="complex"
+              style={{
+                // backgroundColor: "ActiveBorder",
+
+                backgroundSize: "contain",
+                // opacity: "100%",
+
+                // height: "34vh",
+                // overflow: "hidden",
+                backgroundRepeat: "no-repeat",
+              }}
+            />
+            <img
+              className={classes.imglogocpe}
+              src={logocpe}
+              alt="complex"
+              style={{
+                backgroundColor: "#2f2f2f",
+                backgroundSize: "contain",
+                borderRadius: 5,
+                // height: "34vh",
+                // overflow: "hidden",
+                backgroundRepeat: "no-repeat",
+              }}
+            />
+          </Grid>
         </Toolbar>
       </AppBar>
 

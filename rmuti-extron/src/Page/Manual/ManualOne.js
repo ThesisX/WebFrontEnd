@@ -10,6 +10,9 @@ import Typography from "@material-ui/core/Typography";
 import "@fontsource/sarabun";
 import { colors, Grid } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
+import imgone from "../Manual/Datastudent.png";
+import imgtwo from "../Manual/answer.png";
+import imgthree from "../Manual/answerSheet.png";
 
 const useStyles = makeStyles({
   root: {
@@ -18,6 +21,20 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140,
+  },
+  imgone: {
+    // marginTop: 20,
+    width: `calc(45% + 0.8vmin)`,
+    // backgroundColor: "#B09F80",
+    backgroundColor: "#f6d268",
+    // height: "13.2rem",
+  },
+  imgtwo_three: {
+    // marginTop: 20,
+    width: `calc(80% + 0.8vmin)`,
+    // backgroundColor: "#B09F80",
+    backgroundColor: "#f6d268",
+    // height: "13.2rem",
   },
 });
 
@@ -31,71 +48,61 @@ export default function MediaCard() {
 
   return (
     <grid className={classes.root}>
-      <h2>สิ่งที่ต้องเตรียม</h2>
-      <b>
-        {bull} ไฟล์ข้อมูลผู้เข้าสอบ
-        {/* <link> (วิธีการทำไฟล์ข้อมูลผู้เข้าสอบ) </link>  */}
-        <br />
-        {bull} ไฟล์เฉลยข้อสอบ <br />
-        {bull} ไฟล์ข้อสอบ <br />
-      </b>
+      <p>
+        <a href="https://app.gitbook.com/s/70adspWkrWyydwKt66mW/c/ZUkUY6XVjrmlH3FKB1PT/.csv">
+          GitBook
+        </a>
+      </p>
+      <h1>สิ่งที่ต้องเตรียม</h1>
+      <h2>
+        <b>
+          {bull} ไฟล์ข้อมูลผู้เข้าสอบ
+          {/* <link> (วิธีการทำไฟล์ข้อมูลผู้เข้าสอบ) </link>  */}
+          <br />
+          {bull} ไฟล์เฉลยข้อสอบ <br />
+          {bull} ไฟล์ข้อสอบ <br />
+        </b>
+      </h2>
       <Card>
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-          />
           <CardContent>
             <Typography gutterBottom variant="h8" component="h2">
               ไฟล์ข้อมูลผู้เข้าสอบ
-            </Typography>
-            <Typography variant="h7" color="initial" component="p">
-              เตรียมไฟล์ข้อมูลผู้เข้าสอบจำนวน 1 ไฟล์เป็นไฟล์เอกสาร (.csv)
-              ที่จัดเก็บรหัสผู้เข้าสอบ หรือเลขที่นั่งของผู้เข้าสอบ
-              หลังจากตรวจข้อสอบสำเร็จระบบจะเพิ่มคะแนนให้กับนักศึกษาในไฟล์
+              {/* https://app.gitbook.com/s/70adspWkrWyydwKt66mW/c/ZUkUY6XVjrmlH3FKB1PT/.csv */}
             </Typography>
           </CardContent>
-        </CardActionArea>
+          <img className={classes.imgone} src={imgone} alt="complex" />
         <CardActions>
           <Button size="small" color="primary">
             วิธีการทำไฟล์ข้อมูลผู้เข้าสอบ
           </Button>
         </CardActions>
+        </CardActionArea>
+
+        <hr/>
 
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-          />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-            ไฟล์ข้อสอบ
+              ไฟล์ข้อสอบ
             </Typography>
-            <Typography variant="body2" color="initial" component="p">
-            การเตรียมไฟล์ข้อสอบจำนวน 1 ไฟล์หรือไม่เกิน 80 ไฟล์เป็นไฟล์ข้อสอบของผู้เข้าสอบ 
-รองรับไฟล์ภาพสกุลไฟล์ (.jpeg, .jpg หรือ .png) จำกัดการอัปโหลดจำนวน 80 ไฟล์ต่อ 1 รายวิชา
-
-            </Typography>
+            <img className={classes.imgtwo_three} src={imgtwo} alt="complex" />
           </CardContent>
         </CardActionArea>
 
+        <hr/>
+
+
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-          />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               ไฟล์ข้อมูลผู้เข้าสอบ
             </Typography>
-            <Typography variant="body2" color="initial" component="p">
-              เตรียมไฟล์ข้อมูลผู้เข้าสอบจำนวน 1 ไฟล์เป็นไฟล์เอกสาร (.csv)
-              ที่จัดเก็บรหัสผู้เข้าสอบ หรือเลขที่นั่งของผู้เข้าสอบ
-              หลังจากตรวจข้อสอบสำเร็จระบบจะเพิ่มคะแนนให้กับนักศึกษาในไฟล์น
-            </Typography>
+            <img
+              className={classes.imgtwo_three}
+              src={imgthree}
+              alt="complex"
+            />
           </CardContent>
         </CardActionArea>
       </Card>

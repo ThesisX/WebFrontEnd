@@ -116,9 +116,7 @@ const useStyles = makeStyles({
 
   text: {
     fontSize: `calc(50% + 0.8vmin)`,
-
-  }
-
+  },
 });
 
 export default function SimpleCard() {
@@ -183,7 +181,7 @@ export default function SimpleCard() {
             </Grid>
           </Grid>
         </Paper>
-{/* 
+        {/* 
         <ButtonBase className={classes.image3}>
           <img className={classes.img} src={image3} alt="complex" />
         </ButtonBase> */}

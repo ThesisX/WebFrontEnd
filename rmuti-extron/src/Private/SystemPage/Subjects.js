@@ -183,7 +183,7 @@ const Subjects = ({ getActivate, sid }) => {
 
                     />
                     <TextField
-                        type="number"
+                        type="text"
                         className={classes.Subjects}
                         placeholder="9"
                         label="กลุ่มที่"
@@ -210,7 +210,7 @@ const Subjects = ({ getActivate, sid }) => {
                 <DialogTitle id="form-dialog-title">สร้างรายวิชา</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        คำแนะนำ: สร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น และตั้งกลุ่มเรียนเป็นตัวเลขเช่น 1 ,30 ,567 เป็นต้น
+                        คำแนะนำ: สร้างรายวิชาได้โดยการตั้งชื่อรายวิชา เช่น วิทยาศาตร์ คอมพิวเตอร์ เป็นต้น และตั้งกลุ่มเรียน เช่น CPE.61231 ,EE.601232 เป็นต้น
                     </DialogContentText>
                     <TextField
                         type="text"

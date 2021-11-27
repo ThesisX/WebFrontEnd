@@ -187,6 +187,7 @@ const System = () => {
     const classes = useStyles();
     const steps = getSteps();
     const tokenCookies = Cookies.get("token");
+
     /* Set Step */
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -242,7 +243,7 @@ const System = () => {
             endTime = ExmCount * AnsUseTime
 
 
-        console.log(`"endTime" : ${endTime}`);
+        // console.log(`"endTime" : ${endTime}`);
         let FastTime = FormatTime(endTime)
         let SlowTime = FormatTime(endTime+60)
 
@@ -360,12 +361,11 @@ const System = () => {
 
         const URL_PredictAns = `${BASE_URL}/predictor/predict-ans?current_subject=${subID}`;
         const URL_PredictExms = `${BASE_URL}/predictor/predict-exm?current_subject=${subID}`;
-
+        let t0 = performance.now();
         let AnsPredTime = 0
         await get(URL_PredictAns, { headers })
             .then(res => {
                 // console.log("Predict Ans return : ", res.data);
-                AnsPredTime = res.data;
             })
             .catch(err => {
                 alert('การบันทึกเฉลยผิดพลาด โปรดลองใหม่อีกครั้ง');
@@ -375,17 +375,25 @@ const System = () => {
         const ntime = await CalculateTime(ansfile[0].name, examfile.length, AnsPredTime)
         await setTxtProcessing(`กำลังตรวจข้อสอบใช้เวลา ${ntime} โดยประมาณ`);
 
+        
+        // let ExmPredTime = 0
+        
+        let exm_fails = 0
         await get(URL_PredictExms, { headers })
             .then(res => {
-                // console.log("Predict Exams return : ", res.data);
+                console.log("Predict Exams return : ", res.data);
+                exm_fails = res.data;
             })
             .catch(err => {
                 alert('การตรวจข้อสอบผิดพลาด โปรดลองใหม่อีกครั้ง');
                 window.location.reload();
             });
-
+        
+        let t1 = performance.now();
+        let pred_time = await FormatTime((t1-t0)/1000);
+        let exm_success = examfile.length - exm_fails;
         await setTxtProcessing("ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!");
-        await alert('ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!');
+        await alert(`ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!\n - ใช้เวลา: ${pred_time} นาที\n - ข้อสอบทั้งหมด ${examfile.length} ชุด\n - ตรวจสำเร็จ: ${exm_success} ชุด\n - ไม่สำเร็จ: ${exm_fails} ชุด`);
         window.location.reload();
 
         // window.history.go(0);

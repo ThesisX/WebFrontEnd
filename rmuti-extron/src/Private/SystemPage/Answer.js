@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
         padding: 20,
         width: '100%',
     },
+    PaperDropZone: {
+        width: '100%',
+        padding: 5,
+        backgroundImage: 'linear-gradient( 136deg, rgb(144, 202, 249) 0%, rgb(47, 154, 247) 50%, rgb(103, 58, 183) 100%)',
+
+    },
 }));
 
 const Answer = ({ stepAns, toStorage, ansList }) => {
@@ -66,28 +72,30 @@ const Answer = ({ stepAns, toStorage, ansList }) => {
         <div>
             <Grid container spacing={1}>
                 <Grid container item xs={7} md={7} sm={7} className={classes.dropzone} >
-                    <DropzoneArea
-                        dropzoneText={
-                            <div>
-                                <Typography Typography variant="h6" color="textPrimary" display="block">
-                                    คลิก หรือลากวางเฉลยข้อสอบที่นี่
-                                </Typography>
-                                <Typography Typography variant="subtitle1" color="error" display="block">
-                                    ** รองรับเฉพาะ .csv .jpeg .jpg .png เท่านั้น **
-                                </Typography>
-                            </div>
-                        }
-                        onChange={(f) => onAdd(f)}
-                        acceptedFiles={['.csv', '.jpeg', '.jpg', '.png']}
-                        maxFileSize={5000000}
-                        alertSnackbarProps={{
-                            autoHideDuration: 5000,
-                        }}
+                    <Paper className={classes.PaperDropZone}>
+                        <DropzoneArea
+                            dropzoneText={
+                                <div>
+                                    <Typography Typography variant="h4" color="primary" display="block">
+                                        คลิก หรือวางเฉลยข้อสอบที่นี่
+                                    </Typography>
+                                    <Typography Typography variant="subtitle1" color="error" display="block">
+                                        ** รองรับเฉพาะ .csv .jpeg .jpg .png เท่านั้น **
+                                    </Typography>
+                                </div>
+                            }
+                            onChange={(f) => onAdd(f)}
+                            acceptedFiles={['.csv', '.jpeg', '.jpg', '.png']}
+                            maxFileSize={5000000}
+                            alertSnackbarProps={{
+                                autoHideDuration: 5000,
+                            }}
 
-                        showPreviewsInDropzone={false}
-                        filesLimit={1}
-                        showAlerts={false}
-                    />
+                            showPreviewsInDropzone={false}
+                            filesLimit={1}
+                            showAlerts={false}
+                        />
+                    </Paper>
                 </Grid>
                 <Grid container item xs={5} md sm={5} >
                     <Paper className={classes.filelist}>

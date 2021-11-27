@@ -224,10 +224,10 @@ const Subjects = ({ getActivate, sid }) => {
 
                     />
                     <TextField
-                        type="number"
+                        type="text"
                         className={classes.SubjectsDialog}
                         label="กลุ่ม"
-                        placeholder="9"
+                        placeholder="CPE.61231"
                         value={subjectgroup}
                         required
                         onChange={handleChangeSubjectgroup}

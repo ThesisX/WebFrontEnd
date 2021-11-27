@@ -36,8 +36,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'inherit',
         padding: 0,
     },
-    GridDropzone:{
+    GridDropzone: {
         margin: 'auto',
+    },
+    PaperDropZone: {
+        width: '100%',
+        padding: 5,
+        backgroundImage: 'linear-gradient( 136deg, rgb(144, 202, 249) 0%, rgb(47, 154, 247) 50%, rgb(103, 58, 183) 100%)',
+
     },
 }));
 
@@ -52,13 +58,10 @@ const Exams = ({ stepExam, toStorage, examList }) => {
 
     const HandleRemove = index => {
         if (index !== -1) {
-            let c = window.confirm("คุณต้องการลบ หรือไม่");
-            if (c) {
-                let newArr = [...filelist];
-                newArr.splice(index, 1);
-                setFilelist(newArr);
-                toStorage(newArr);
-            }
+            let newArr = [...filelist];
+            newArr.splice(index, 1);
+            setFilelist(newArr);
+            toStorage(newArr);            
         }
     };
 
@@ -70,7 +73,7 @@ const Exams = ({ stepExam, toStorage, examList }) => {
         }
     });
 
-    console.log("In List: ", filelist);
+    // console.log("In List: ", filelist);
 
     return (
 
@@ -78,35 +81,37 @@ const Exams = ({ stepExam, toStorage, examList }) => {
         < div >
             <Grid container spacing={1} >
                 <Grid container item xs={12} md={8} sm={12} className={classes.GridDropzone}>
-                    <DropzoneArea
-                        dropzoneText={
-                            <div>
-                                <Typography Typography variant="h6" color="textPrimary" display="block">
-                                    คลิก หรือวางข้อสอบที่นี่
-                                </Typography>
-                                <Typography Typography variant="subtitle1" color="error" display="block">
-                                    ** รองรับเฉพาะ .jpeg .jpg .png เท่านั้น **
-                                </Typography>
-                            </div>
-                        }
-                        // initialFiles={filelist}
-                        fileObjects={filelist}
-                        onChange={HandleAdd}
-                        acceptedFiles={['.jpeg', '.jpg', '.png']}
-                        maxFileSize={5000000}
-                        alertSnackbarProps={{
-                            autoHideDuration: 5000,
-                        }}
-                        showPreviewsInDropzone={false}
-                        filesLimit={80}
-                        showAlerts={false}
-                        onDelete={HandleRemove} 
-                        showPreviews={true}
-                        useChipsForPreview
-                        previewGridProps={{ container: { spacing: 1, direction: 'row' } }}
-                        previewChipProps={{ classes: { root: classes.previewChip } }}
-                        previewText="รายการที่อัปโหลด"
-                    />
+                    <Paper className={classes.PaperDropZone}>
+                        <DropzoneArea
+                            dropzoneText={
+                                <div>
+                                    <Typography Typography variant="h4" color="primary" display="block">
+                                        คลิก หรือวางข้อสอบที่นี่
+                                    </Typography>
+                                    <Typography Typography variant="subtitle1" color="error" display="block">
+                                        ** รองรับเฉพาะ .jpeg .jpg .png เท่านั้น **
+                                    </Typography>
+                                </div>
+                            }
+                            // initialFiles={filelist}
+                            fileObjects={filelist}
+                            onChange={HandleAdd}
+                            acceptedFiles={['.jpeg', '.jpg', '.png']}
+                            maxFileSize={5000000}
+                            alertSnackbarProps={{
+                                autoHideDuration: 5000,
+                            }}
+                            showPreviewsInDropzone={false}
+                            filesLimit={80}
+                            showAlerts={false}
+                            onDelete={HandleRemove}
+                            showPreviews={true}
+                            useChipsForPreview
+                            previewGridProps={{ container: { spacing: 1, direction: 'row' } }}
+                            previewChipProps={{ classes: { root: classes.previewChip } }}
+                            previewText="รายการที่อัปโหลด"
+                        />
+                    </Paper>
                 </Grid>
             </Grid >
         </div >

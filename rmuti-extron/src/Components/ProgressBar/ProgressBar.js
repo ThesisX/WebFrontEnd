@@ -1,36 +1,69 @@
-import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 20,
-    borderRadius: 50,
-  },
-  colorPrimary: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700]
-  },
-  bar: {
-    borderRadius: 5,
-    backgroundColor: "#1a90ff"
-  }
-}))(LinearProgress);
+function LinearProgressWithLabel(props) {
+  const BorderLinearProgress = withStyles((theme) => ({
+    root: {
+      height: 20,
+      borderRadius: 10
+    },
+    colorPrimary: {
+      backgroundColor:
+        theme.palette.grey[theme.palette.type === "light" ? 200 : 700]
+    },
+    bar: {
+      borderRadius: 10,
+      backgroundImage:
+    'linear-gradient( 136deg, rgb(144, 202, 249) 0%, rgb(47, 154, 247) 50%, rgb(103, 58, 183) 100%)',
+    }
+  }))(LinearProgress);
+
+  return (
+    <Box display="flex" alignItems="center">
+      <Box width="100%" mr={1}>
+        {/* <LinearProgress variant="determinate" {...props} /> */}
+        <BorderLinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box minWidth={35}>
+        <Typography variant="body1" color="primary">{`${Math.round(
+          props.value,
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+LinearProgressWithLabel.propTypes = {
+  value: PropTypes.number.isRequired,
+};
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1
-  }
+    margin: 'auto',
+    width: '60%',
+  },
 });
 
-export default function ProgressBar({percent}) {
+export default function ProgressBar({ percent }) {
   const classes = useStyles();
+  const [progress, setProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + percent));
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  });
 
   return (
     <div className={classes.root}>
-      {/* <BorderLinearProgress variant="determinate" value={percent} /> */}
-      <BorderLinearProgress variant="indeterminate" value={percent} />
-      
+      <LinearProgressWithLabel value={progress} />
     </div>
   );
 }

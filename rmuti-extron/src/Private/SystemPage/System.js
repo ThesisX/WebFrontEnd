@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     HandleButton: {
-        '&:disabled' : {
+        '&:disabled': {
             background: 'linear-gradient( 95deg,rgb(242, 242, 242) 0%,rgb(224, 224, 224) 50%,rgb(201, 201, 201) 100%)',
         },
         float: 'right',
@@ -131,7 +131,7 @@ function ColorlibStepIcon(props) {
         1: <AssignmentInd />,
         2: <PlaylistAddCheckIcon />,
         3: <LibraryAddIcon />,
-        4: <FindInPageIcon/>
+        4: <FindInPageIcon />
     };
 
     return (
@@ -183,6 +183,12 @@ const System = () => {
     const [lenghtfile, setLenghtfile] = useState(0);
     const [sumpercent, setSumpercent] = useState(0);
     const [postStatus, setPostStatus] = useState(false);
+    const [timePogress, setTimeProgress] = useState(0);
+    const [successTure, setSuccessTure] = useState(true);
+    const [predTime, setPredTime] = useState(0);
+    const [examLenght, setExamLenght] = useState(0);
+    const [examSuccess, setExamSuccess] = useState(0);
+    const [examFails, setExamFails] = useState(0);
 
     const classes = useStyles();
     const steps = getSteps();
@@ -217,7 +223,7 @@ const System = () => {
     }
 
     const FormatTime = time => {
-        
+
         let hrs = ~~(time / 3600);
         let mins = ~~((time % 3600) / 60);
         let secs = ~~time % 60;
@@ -237,7 +243,7 @@ const System = () => {
     const CalculateTime = (AnsName, ExmCount, AnsUseTime) => {
         let endTime = 0;
 
-        if(AnsUseTime < 10)
+        if (AnsUseTime < 10)
             endTime = ExmCount * 30
         else
             endTime = ExmCount * AnsUseTime
@@ -245,8 +251,9 @@ const System = () => {
 
         // console.log(`"endTime" : ${endTime}`);
         let FastTime = FormatTime(endTime)
-        let SlowTime = FormatTime(endTime+60)
-
+        let SlowTime = FormatTime(endTime + 60)
+        console.log("endTime:", (100 / (endTime + 60)));
+        setTimeProgress((100 / (endTime + 60)));
         return `${FastTime}-${SlowTime} นาที`;
     };
 
@@ -317,6 +324,8 @@ const System = () => {
             FormExamsFile.append('exm_files', f);
         });
 
+        await setExamLenght(examfile.length);
+
         const config = {
             headers: {
                 'accept': 'application/json',
@@ -366,38 +375,37 @@ const System = () => {
         await get(URL_PredictAns, { headers })
             .then(res => {
                 // console.log("Predict Ans return : ", res.data);
+                AnsPredTime = res.data;
             })
             .catch(err => {
                 alert('การบันทึกเฉลยผิดพลาด โปรดลองใหม่อีกครั้ง');
                 window.location.reload();
             });
-        
+
         const ntime = await CalculateTime(ansfile[0].name, examfile.length, AnsPredTime)
         await setTxtProcessing(`กำลังตรวจข้อสอบใช้เวลา ${ntime} โดยประมาณ`);
-
         
-        // let ExmPredTime = 0
-        
-        let exm_fails = 0
+        let exam_fails = 0;
         await get(URL_PredictExms, { headers })
             .then(res => {
-                console.log("Predict Exams return : ", res.data);
-                exm_fails = res.data;
+                // console.log("Predict Exams return : ", res.data);
+                // setExamFails(res.data);
+                exam_fails = res.data;
+                
             })
             .catch(err => {
                 alert('การตรวจข้อสอบผิดพลาด โปรดลองใหม่อีกครั้ง');
                 window.location.reload();
             });
-        
-        let t1 = performance.now();
-        let pred_time = await FormatTime((t1-t0)/1000);
-        let exm_success = examfile.length - exm_fails;
-        await setTxtProcessing("ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!");
-        await alert(`ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!\n - ใช้เวลา: ${pred_time} นาที\n - ข้อสอบทั้งหมด ${examfile.length} ชุด\n - ตรวจสำเร็จ: ${exm_success} ชุด\n - ไม่สำเร็จ: ${exm_fails} ชุด`);
-        window.location.reload();
 
-        // window.history.go(0);
-        // window.location = ROOT_URL;
+        let t1 = performance.now();
+        let pred_time = await FormatTime((t1 - t0) / 1000);
+        let exam_success = examfile.length - examFails;
+        await setTimeProgress(100);
+        await setSuccessTure(false);
+        await setTxtProcessing("ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!");
+        await alert(`ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!\n - ใช้เวลา: ${pred_time} นาที\n - ข้อสอบทั้งหมด ${examfile.length} ชุด\n - ตรวจสำเร็จ: ${exam_success} ชุด\n - ไม่สำเร็จ: ${exam_fails} ชุด`);
+        window.location.reload();
     };
 
     const SystemsComponent = (
@@ -479,7 +487,9 @@ const System = () => {
                     ) : (
                         <div className={classes.CenterObj}>
                             {/* <CircularProgress /> */}
-                            <ProgressBar percent={percent} />
+                            {successTure ? (
+                                <ProgressBar percent={timePogress} />
+                            ) : (<></>)}
                             {/* <h3>percent {percent}</h3> */}
                             <h3>{TxtProcessing}</h3>
                         </div>

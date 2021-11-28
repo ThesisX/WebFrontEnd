@@ -11,6 +11,7 @@ import { BASE_URL } from './service';
 
 const App = () => {
   const [auth, setAuth] = useState(false);
+  const [loadding, setLoadding] = useState(true);
   // const [token, setToken] = useState("");
 
   const readCookie = async () => {
@@ -25,15 +26,20 @@ const App = () => {
         .then(res => {
           let info = res.data;
           // console.log(info)
-          if(info)
+          if(info){
             setAuth(true);
-          else
+            setLoadding(false);
+          
+          }else{
             setAuth(false);
+            setLoadding(true);
+          }
 
         })
         .catch(err => {
           alert('กรุณาเข้าสู่ระบบ');
           setAuth(false);
+          setLoadding(false);
         });
     }
     
@@ -43,15 +49,18 @@ const App = () => {
 
   useEffect(() => {
     readCookie();
+    if(auth){
+      
+    }
   }, [])
 
   return (
     <div>
       <Router basename={'/'}>
-        {!auth ? <RoutesPublic />
-          : <RoutesPrivate />
-        }
-        {/* <RoutesPrivate /> */}
+        {!loadding ? (
+          !auth ? <RoutesPublic />
+            : <RoutesPrivate />
+        ) : (<>กำลังโหลด...</>)}
       </Router>
     </div>
   )

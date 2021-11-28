@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Card, Grid, Paper, Typography } from '@material-ui/core';
 
 import { get } from 'axios';
 import Cookies from "js-cookie";
 import { BASE_URL } from '../../service';
 
+import DataList from './DataLists';
+import { Divider } from '@material-ui/core';
+
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+
 const useStyles = makeStyles((theme) => ({
     root: {
-        '& > *': {
-            margin: theme.spacing(1),
-        },
+        width: '100%',
     },
-    img: {
-        paddingLeft:' 50',
-    }
+    paper: {
+        padding: 50,
+    },
 }));
 
 
@@ -38,21 +46,35 @@ const Dashboard = () => {
 
     useEffect(() => {
         getMe();
+        console.log(data);
 
     }, []);
 
     const classes = useStyles();
 
-
     return (
         <div>
-            <h1>สวัสดีคุณ : {data.full_name}</h1>
-            {/* <button onClick={()=>setCount(count+10)}>click</button> */}
-
-            {/* <Button variant="contained" color="primary" href="/manual">
-            วิธีการใช้งาน
-            </Button> */}
-            {/* <img className={classes.img} src={myimage} alt="complex" /> */}
+            {data ? (
+                <>
+                    <ThemeProvider theme={theme}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <Paper className={classes.paper}>
+                                    <Typography variant="h4">สวัสดีคุณ : {data.full_name}</Typography>
+                                    <br />
+                                    <Divider />
+                                    <br />
+                                    <DataList props={data}/>
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </ThemeProvider>
+                </>
+            ) : (
+                <>
+                    <CircularProgress />
+                </>
+            )}
         </div>
 
     );

@@ -1,71 +1,110 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import "@fontsource/sarabun";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+import img1 from "../Manual/imgManualTwo/5.png";
+import img2 from "../Manual/imgManualTwo/6.png";
+import img3 from "../Manual/imgManualTwo/7.png";
+import img4 from "../Manual/imgManualTwo/8.png";
+import img5 from "../Manual/imgManualTwo/9.png";
+import img6 from "../Manual/imgManualTwo/10.png";
+import img7 from "../Manual/imgManualTwo/11.png";
+import img8 from "../Manual/imgManualTwo/12.png";
+import imgbg from "../Manual/imgManualTwo/bg.png";
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    fontFamily: "sarabun",
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  imgone: {
+    width: `calc(100% + 0.8vmin)`,
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    borderRadius: 30,
 
   },
-  media: {
-    height: 140,
+  gridxs: {
+    width: `calc(90% + 0.8vmin)`,
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "baseline",
+    margin: 30 ,
   },
-});
+}));
 
-export default function MediaCard() {
+export default function NestedGrid() {
   const classes = useStyles();
 
-  return (
-    <Paper className={classes.paper2}>
-    <Grid container spacing={2}>
-      <Grid item className={classes.gridimage}></Grid>
-      <Grid item xs={12} sm container>
-        <Grid item xs container direction="column" spacing={2}>
-          <Grid item xs className={classes.gridItem}>
-            <Typography
-              component="div"
-              className={classes.text}
-              gutterBottom
-              variant="subtitle1"
-              spacing={2}
-            >
-              <Box letterSpacing={5} m={1} fontFamily="Sarabun">
-                ซึ่งเว็บแอพพลิเคชันนี้ <br />
-                <b>ใช้ในการตรวจข้อสอบปรนัย</b>
-                <br />
-                โดยโครงข่ายประสาทเทียมแบบคอนโวลูชัน
-              </Box>
-            </Typography>
-            <p></p>
-            <p className={classes.text2} variant="body2" gutterBottom>
-              <b letterSpacing={6}> บนเว็บเบราว์เซอร์ </b>{" "}
-              และรองรับทุกแพลตฟอร์ม
-              <br />
-              ไม่ว่าจะเป็น
-              {/* <br /> */}
-              <br />
-              <b>
-                {" "}
-                {bull} สมาร์ทโฟน , {bull} แท็บเล็ต
-              </b>{" "}
-              หรือ <b> {bull} คอมพิวเตอร์ส่วนบุคคล </b>
-            </p>
-          </Grid>
+  function FormRow() {
+    return (
+      <React.Fragment>
+        <Grid > 
+          {/* <Paper className={classes.paper}>item</Paper> */}
+          <img className={classes.imgone} src={imgbg} />
         </Grid>
-        <ButtonBase className={classes.image2}>
-          {/* <img className={classes.img} src={myimage4} alt="complex" /> */}
-        </ButtonBase>
+        {/* <Grid item xs={4}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>item</Paper>
+        </Grid>
+       */}
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={1}>
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img1} />
+          {/* <FormRow /> */}
+        </Grid>
+       
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img2}/>
+          {/* <FormRow /> */}
+        </Grid>
+
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img3}/>
+          {/* <FormRow /> */}
+        </Grid>
+
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img4}/>
+          {/* <FormRow /> */}
+        </Grid>
+
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img5}/>
+          {/* <FormRow /> */}
+        </Grid>
+
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img6}/>
+          {/* <FormRow /> */}
+        </Grid>
+
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img7}/>
+          {/* <FormRow /> */}
+        </Grid>
+
+        <Grid container item xs={12} spacing={3}  className={classes.gridxs}>
+          <img className={classes.imgone} src={img8}/>
+          {/* <FormRow /> */}
+        </Grid>
       </Grid>
-    </Grid>
-  </Paper>
+    </div>
   );
 }

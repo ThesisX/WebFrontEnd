@@ -18,9 +18,12 @@ theme = responsiveFontSizes(theme);
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
+        
     },
     paper: {
         padding: 50,
+        fontFamily: "sarabun",
+
     },
 }));
 

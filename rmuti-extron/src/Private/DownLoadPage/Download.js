@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1),
-    backgroundColor: '#d2f4ff',
+    backgroundColor: '#6b645d',
     fontFamily: "sarabun",
 
   },
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: '#dcedc8',
+    backgroundColor: '#d2f4ff',
     color: theme.palette.common.black,
     fontSize: 18,
     textAlign: 'center',

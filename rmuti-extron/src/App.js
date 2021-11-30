@@ -49,25 +49,17 @@ const App = () => {
 
   useEffect(() => {
     readCookie();
-    if(auth){
-      
-    }
+    setLoadding(false);
   }, [])
 
   return (
     <div>
       <Router basename={'/'}>
-<<<<<<< HEAD
-        {/* {!auth ? <RoutesPublic />
-          : <RoutesPrivate />
-        } */}
-        <RoutesPrivate />
-=======
         {!loadding ? (
           !auth ? <RoutesPublic />
             : <RoutesPrivate />
         ) : (<>กำลังโหลด...</>)}
->>>>>>> 365bfe362350890e026325a75f58da56aff3c0e6
+        {/* <RoutesPrivate /> */}
       </Router>
     </div>
   )

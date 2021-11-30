@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+
 import img1 from "../Manual/imgManualTwo/5.png";
 import img2 from "../Manual/imgManualTwo/6.png";
 import img3 from "../Manual/imgManualTwo/7.png";

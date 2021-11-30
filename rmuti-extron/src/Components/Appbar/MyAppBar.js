@@ -19,7 +19,8 @@ import DashboardRoundedIcon from "@material-ui/icons/DashboardRounded";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 import NaturePeopleTwoToneIcon from "@material-ui/icons/NaturePeopleTwoTone";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
-import MeetingRoomIcon from "@material-ui/icons/MeetingRoomTwoTone";
+// import MeetingRoomIcon from "@material-ui/icons/MeetingRoomTwoTone";
+import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
@@ -33,6 +34,8 @@ import Hidden from "@material-ui/core/Hidden";
 import "@fontsource/sarabun";
 import logormuti from "../Appbar/Logo_RMUTI.png";
 import logocpe from "../Appbar/logocpe.png";
+import SchoolRoundedIcon from '@material-ui/icons/SchoolRounded';
+import LaptopMacRoundedIcon from '@material-ui/icons/LaptopMacRounded';
 // import imagelogo from "../Appbar/logormuti.jpg"
 // import  from "../../Page/Manager/3.jpg";
 
@@ -43,17 +46,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     // maxWidth: '80rem',
-    margin: "0 auto",
+    // margin: "0 auto",
     fontFamily: "sarabun",
     fontSize: `calc(60% + 0.6vmin)`,
+    // backgroundColor: "#1c1a18",
 
   },
   container: {
     marginTop: 180,
-    marginLeft: 50,
-    marginRight: 50,
+    // marginLeft: 90,
+    marginRight: 15,
     display: "flex",
     justifyContent: "center",
+    // height: 827,
+
   },
 
   containerShift: {
@@ -62,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
+      
     }),
   },
 
@@ -69,8 +76,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: drawerspace,
     height: 130,
     justifyContent: "center",
-    backgroundColor: "#f0f4c3",
-    color: "black",
+    // backgroundColor: "#f0f4c3",
+    backgroundColor: "#1c1a18", //1c1a18
+    color: "#ffe2c7"
   },
 
   appBarShift: {
@@ -89,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: "#212121",
+    // backgroundColor: "#323232",
+
   },
   drawerHeader: {
     display: "flex",
@@ -97,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
+
   },
   // toolbar: theme.mixins.toolbar,
 
@@ -106,6 +118,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 290,
     margin: "0 auto",
     fontSize: `calc(60% + 0.6vmin)`,
+    // backgroundColor: "#8e8e8e",
+    color: "#ffe2c7",
 
   },
 
@@ -130,7 +144,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     fontSize: `calc(60% + 0.6vmin)`,
-
+    
+    // backgroundColor: "#8e8e8e",
   },
 
   ulListTwo: {
@@ -143,47 +158,60 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     fontSize: `calc(60% + 0.6vmin)`,
+    // backgroundColor: "#8e8e8e",
 
   },
 
   litsItem: {
     width: `calc(90% + 0.6vmin)`,
-    backgroundColor: "#ffcdd2",
+    // backgroundColor: "#ffcdd2",
+    // "&:hover": {
+    //   backgroundColor: "#f89eb4",
+    // },
+    backgroundColor: "#655b50",  //1c1a18
     "&:hover": {
-      backgroundColor: "#f89eb4",
+      backgroundColor: "#b09f85",
     },
     flexDirection: "column",
     alignItems: "center",
-    borderRadius: 35,
+    borderRadius: 15,
     marginTop: 10,
     marginBottom: 10,
     justifyContent: "center",
     fontSize: `calc(60% + 0.6vmin)`,
-    color: "#111",
+    // color: "#111",
+    color: "#ffe2c7"
+
   },
 
   litsItemTwo: {
     width: `calc(90% + 0.6vmin)`,
-    backgroundColor: "#b2dfdb",
+    // backgroundColor: "#b2dfdb",
+    // "&:hover": {
+    //   backgroundColor: "#79D2AE",
+    // },
+    backgroundColor: "#655b50",
     "&:hover": {
-      backgroundColor: "#79D2AE",
+      backgroundColor: "#b09f85",
     },
     flexDirection: "column",
     alignItems: "center",
-    borderRadius: 35,
+    borderRadius: 15,
     marginTop: 10,
     marginBottom: 10,
+    borderColor: "#111",
+
     textAlign: "center",
-    justifyContent: "",
     fontSize: `calc(60% + 0.6vmin)`,
-    color: "#111",
+    color: "#ffe2c7",
   },
 
   litsItemicon: {
+    
     fontSize: `calc(50% + 0.6vmin)`,
     justifyContent: "center",
     margin: 4,
-    color: "#111",
+    color: "#ffe2c7",
   },
 
   icontoolbar: {
@@ -200,7 +228,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginTop: 25,
     // fontSize: '86px',
-    color: "#00000",
+    color: "#ffe2c7",
     marginBottom: 25,
   },
 
@@ -221,6 +249,7 @@ const useStyles = makeStyles((theme) => ({
     // color: '#D2C779',
   },
   buttonLogout: {
+
     color: "#fff9c4",
     backgroundColor: "#111",
     "&:hover": {
@@ -237,7 +266,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   img: {
-    
     width: `calc(15.5% + 1.3vmin)`,
     // margin: 5,
   },
@@ -250,16 +278,18 @@ const useStyles = makeStyles((theme) => ({
   },
 
   toolbarall: {
+    
     display: "flex",
     justifyContent: "space-between",
   },
 
   imglogocpe: {
     width: `calc(27% + 1.3vmin)`,
-    padding: 6
+    padding: 6,
+
 
     // backgroundColor: "#fff9c4",
-  }
+  },
   // ulListGrid: {
   //   fontSize:  `calc(60% + 1.3vmin)`,
   //   maxWidth: `calc(40% + 1.3vmin)`,
@@ -327,8 +357,8 @@ const MyAppBar = (props) => {
     <Grid className={classes.ulListGrid}>
       <div className={classes.toolbar}>
         <div className={classes.icontoolbar}>
-          <CloudQueueIcon fontSize="large" />
-          <NaturePeopleTwoToneIcon fontSize="large" />
+          <SchoolRoundedIcon fontSize="large" />
+          <LaptopMacRoundedIcon fontSize="large" />
         </div>
       </div>
 
@@ -379,7 +409,7 @@ const MyAppBar = (props) => {
       <div className={classes.logout}>
         <div className={classes.iconLogout}>
           <TransferWithinAStationRoundedIcon fontSize="large" />
-          <MeetingRoomIcon fontSize="large" />
+          <MeetingRoomRoundedIcon fontSize="large" />
           <br />
         </div>
         <div className={classes.iconLogout}>

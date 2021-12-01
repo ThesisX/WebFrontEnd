@@ -4,14 +4,15 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 
-import img1 from "../Manual/imgManualTwo/5.png";
-import img2 from "../Manual/imgManualTwo/6.png";
-import img3 from "../Manual/imgManualTwo/7.png";
-import img4 from "../Manual/imgManualTwo/8.png";
-import img5 from "../Manual/imgManualTwo/9.png";
-import img6 from "../Manual/imgManualTwo/10.png";
-import img7 from "../Manual/imgManualTwo/11.png";
-import img8 from "../Manual/imgManualTwo/12.png";
+import img1 from "../Manual/imgManualTwo/4.png";
+import img2 from "../Manual/imgManualTwo/5.png";
+import img3 from "../Manual/imgManualTwo/6.png";
+import img4 from "../Manual/imgManualTwo/7.png";
+import img5 from "../Manual/imgManualTwo/8.png";
+import img6 from "../Manual/imgManualTwo/9.png";
+import img7 from "../Manual/imgManualTwo/10.png";
+import img8 from "../Manual/imgManualTwo/11.png";
+import img9 from "../Manual/imgManualTwo/12.png";
 import imgbg from "../Manual/imgManualTwo/bg.png";
 
 

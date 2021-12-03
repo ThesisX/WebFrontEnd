@@ -318,6 +318,7 @@ const MyAppBar = (props) => {
       text: "วิธีการใช้งาน",
       icon: <ListRoundedIcon />,
       onClick: () => history.push("/manual"),
+
     },
     {
       text: "ระบบตรวจข้อสอบ",
@@ -328,6 +329,7 @@ const MyAppBar = (props) => {
       text: "ดาวน์โหลด",
       icon: <GetAppRoundedIcon />,
       onClick: () => history.push("/download"),
+      
     },
   ];
 

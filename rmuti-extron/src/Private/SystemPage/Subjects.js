@@ -18,6 +18,7 @@ import CasinoIcon from '@material-ui/icons/Casino';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import blue from '@material-ui/core/colors/blue';
+import Linkfilemanual from "./Linkfilemanual";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -204,6 +205,7 @@ const Subjects = ({ getActivate, sid }) => {
                     >
                         {lableDialog}
                     </Button>
+                <Linkfilemanual />
                 </Grid>
             </Grid>
             <Dialog open={open} aria-labelledby="form-dialog-title" onClose={()=>setOpen(false)}>

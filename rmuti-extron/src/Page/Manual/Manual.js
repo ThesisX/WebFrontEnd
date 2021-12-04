@@ -97,6 +97,12 @@ const Manual = () => {
         <ManualTwo />
       </Grid>
     
+      {/* const useStyles = makeStyles((theme) => ({
+    root: {
+      backgroundColor: "#656565",
+    },
+  })); */}
+
     </div>
   );
 };

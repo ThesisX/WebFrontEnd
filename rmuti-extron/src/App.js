@@ -12,57 +12,46 @@ import { BASE_URL } from './service';
 const App = () => {
   const [auth, setAuth] = useState(false);
   const [loadding, setLoadding] = useState(true);
-  // const [token, setToken] = useState("");
 
   const readCookie = async () => {
     let tokenCookies = Cookies.get("token");
-    // tokenCookies ?  : setAuth(false);
-    if(tokenCookies){
-      const headers = {
-        Authorization: `Bearer ${tokenCookies}`,
-      };
-  
-      await get(BASE_URL + '/users/info', { headers })
-        .then(res => {
-          let info = res.data;
-          // console.log(info)
-          if(info){
-            setAuth(true);
-            setLoadding(false);
-          
-          }else{
-            setAuth(false);
-            setLoadding(true);
-          }
 
-        })
-        .catch(err => {
-          alert('กรุณาเข้าสู่ระบบ');
-          setAuth(false);
-          setLoadding(false);
-        });
-    }
-    
+    const headers = {
+      Authorization: `Bearer ${tokenCookies}`,
+    };
 
-  };
+    await get(BASE_URL + '/users/info', { headers })
+      .then(res => {
+        let info = res.data;
+        // console.log(info)
+        setAuth(true);
+        setLoadding(false);
+
+      })
+      .catch(err => {
+        alert('กรุณาเข้าสู่ระบบ');
+        setAuth(false);
+        setLoadding(false);
+      });
+  }
+};
 
 
-  useEffect(() => {
-    readCookie();
-    setLoadding(false);
-  }, [])
+useEffect(() => {
+  readCookie();
+  setLoadding(false);
+}, [])
 
-  return (
-    <div>
-      <Router basename={'/'}>
-        {!loadding ? (
-          !auth ? <RoutesPublic />
-            : <RoutesPrivate />
-        ) : (<>กำลังโหลด...</>)}
-        {/* <RoutesPrivate /> */}
-      </Router>
-    </div>
-  )
-}
+return (
+  <div>
+    <Router basename={'/'}>
+      {!loadding ? (
+        !auth ? <RoutesPublic /> : <RoutesPrivate />
+      ) : (<>กำลังโหลด...</>)}
+
+      {/* <RoutesPrivate /> */}
+    </Router>
+  </div>
+)
 
 export default App;

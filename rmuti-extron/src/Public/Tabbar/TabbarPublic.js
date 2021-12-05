@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     // flexGrow: 1,
     // width: '800rem',
+
     display: 'felx',
     maxWidth: '800rem',
     margin: '0 auto',
@@ -70,6 +71,8 @@ const useStyles = makeStyles((theme) => ({
     // textColor: "#242812",
     borderRadius: 45,
     alignItems: 'center',
+    fontFamily: "sarabun",
+
     // backgroundColor: theme.palette.background.paper,
     // flexWrap: ''
   },
@@ -80,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: '#B8C85E',
     backgroundColor: '#8aab8f ',
     color: '#242812',
+    fontFamily: "sarabun",
+
     // indicatorColor:' #08db80',
   }
 }));

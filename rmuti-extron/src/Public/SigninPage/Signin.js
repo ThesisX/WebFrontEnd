@@ -53,11 +53,15 @@ const useStyles = makeStyles((theme) => ({
     margin: "30px",
     marginLeft: 60,
     marginTop: 50,
+    fontFamily: "sarabun",
+
     // backgroundColor: '#79955a',
     // transparency: '50%',
   },
   griduserpass: {
     marginTop: "30px",
+    fontFamily: "sarabun",
+
   },
 
   form: {
@@ -79,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
   },
   label: {
     fontSize: 16.5,
+    fontFamily: "sarabun",
+
     // fontFamily: "sarabun",
   },
 }));

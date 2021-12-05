@@ -29,6 +29,7 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import StepConnector from '@material-ui/core/StepConnector';
+import Conclusion from './Conclusion';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -175,20 +176,19 @@ const System = () => {
     const [datafile, setDatafile] = useState([]);
     const [subID, setSubID] = useState(0);
     const [TxtProcessing, setTxtProcessing] = useState("กรุณาสร้างรายวิชา");
-    const [clickSubmit, setClickSubmit] = useState(false);
     const [Loadding, setLoadding] = useState(false);
-    const [process, setProcess] = useState(false);
-    const [percent, setPercent] = useState(0);
-    const [count, setCount] = useState(0);
-    const [lenghtfile, setLenghtfile] = useState(0);
-    const [sumpercent, setSumpercent] = useState(0);
-    const [postStatus, setPostStatus] = useState(false);
     const [timePogress, setTimeProgress] = useState(0);
     const [successTure, setSuccessTure] = useState(true);
-    const [predTime, setPredTime] = useState(0);
     const [examLenght, setExamLenght] = useState(0);
-    const [examSuccess, setExamSuccess] = useState(0);
     const [examFails, setExamFails] = useState(0);
+    const [progress, setProgress] = useState(false);
+    const [txtConclusion, setTxtConclusion] = useState({
+        time: '',
+        total: 0,
+        success: 0,
+        fails: 0,
+
+    });
 
     const classes = useStyles();
     const steps = getSteps();
@@ -384,14 +384,14 @@ const System = () => {
 
         const ntime = await CalculateTime(ansfile[0].name, examfile.length, AnsPredTime)
         await setTxtProcessing(`กำลังตรวจข้อสอบใช้เวลา ${ntime} โดยประมาณ`);
-        
+
         let exam_fails = 0;
         await get(URL_PredictExms, { headers })
             .then(res => {
                 // console.log("Predict Exams return : ", res.data);
                 // setExamFails(res.data);
                 exam_fails = res.data;
-                
+
             })
             .catch(err => {
                 alert('การตรวจข้อสอบผิดพลาด โปรดลองใหม่อีกครั้ง');
@@ -404,14 +404,21 @@ const System = () => {
         await setTimeProgress(100);
         await setSuccessTure(false);
         await setTxtProcessing("ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!");
-        await alert(`ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!\n - ใช้เวลา: ${pred_time} นาที\n - ข้อสอบทั้งหมด ${examfile.length} ชุด\n - ตรวจสำเร็จ: ${exam_success} ชุด\n - ไม่สำเร็จ: ${exam_fails} ชุด`);
-        window.location.reload();
+        await setTxtConclusion({
+            time: pred_time,
+            total: examfile.length,
+            success: exam_success,
+            fails: exam_fails
+        });
+
+        await setProgress(true);
     };
 
     const SystemsComponent = (
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
+                    {progress ? (<><Conclusion isProgress={progress} text={txtConclusion}/></>) : (<></>)}
                     {!Loadding ? (
                         <Paper className={classes.paper}>
                             {/* Subject name and Subject group. */}

@@ -33,25 +33,25 @@ const App = () => {
         setAuth(false);
         setLoadding(false);
       });
-  }
+  };
+
+
+  useEffect(() => {
+    readCookie();
+    setLoadding(false);
+  }, [])
+
+  return (
+    <div>
+      <Router basename={'/'}>
+        {!loadding ? (
+          !auth ? <RoutesPublic /> : <RoutesPrivate />
+        ) : (<>กำลังโหลด...</>)}
+
+        {/* <RoutesPrivate /> */}
+      </Router>
+    </div>
+  )
 };
-
-
-useEffect(() => {
-  readCookie();
-  setLoadding(false);
-}, [])
-
-return (
-  <div>
-    <Router basename={'/'}>
-      {!loadding ? (
-        !auth ? <RoutesPublic /> : <RoutesPrivate />
-      ) : (<>กำลังโหลด...</>)}
-
-      {/* <RoutesPrivate /> */}
-    </Router>
-  </div>
-)
 
 export default App;

@@ -463,11 +463,6 @@ const MyAppBar = (props) => {
           <Grid
             className={classes.gridimg}
             style={{
-              // backgroundColor: "ActiveBorder",
-              // backgroundSize: "contain",
-
-              // height: "34vh",
-              // overflow: "hidden",
               backgroundRepeat: "no-repeat",
             }}
           >

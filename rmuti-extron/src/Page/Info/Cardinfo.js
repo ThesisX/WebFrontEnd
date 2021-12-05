@@ -9,7 +9,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Box from "@material-ui/core/Box";
-import image3 from "../Info/test.png";
 
 import "@fontsource/sarabun";
 

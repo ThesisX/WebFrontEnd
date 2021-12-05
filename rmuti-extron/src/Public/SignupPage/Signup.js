@@ -116,7 +116,7 @@ const Signup = () => {
       },
       justifyContent: "space-around",
       maxWidth: "30rem",
-      backgroundColor: "#d3e8d6",
+      backgroundColor: "#fff5e6",
       padding: 40,
       borderRadius: 35,
       justifyContent: "center",

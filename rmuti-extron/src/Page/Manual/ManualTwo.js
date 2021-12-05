@@ -13,7 +13,7 @@ import img6 from "../Manual/imgManualTwo/9.png";
 import img7 from "../Manual/imgManualTwo/10.png";
 import img8 from "../Manual/imgManualTwo/11.png";
 import img9 from "../Manual/imgManualTwo/12.png";
-import imgbg from "../Manual/imgManualTwo/bg.png";
+// import imgbg from "../Manual/imgManualTwo/bg.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +51,7 @@ export default function NestedGrid() {
       <React.Fragment>
         <Grid > 
           {/* <Paper className={classes.paper}>item</Paper> */}
-          <img className={classes.imgone} src={imgbg} />
+          {/* <img className={classes.imgone} src={imgbg} /> */}
         </Grid>
         {/* <Grid item xs={4}>
           <Paper className={classes.paper}>item</Paper>
@@ -60,6 +60,7 @@ export default function NestedGrid() {
           <Paper className={classes.paper}>item</Paper>
         </Grid>
        */}
+
       </React.Fragment>
     );
   }

@@ -61,13 +61,13 @@ const useStyles = makeStyles((theme) => ({
   griduserpass: {
     marginTop: "30px",
     fontFamily: "sarabun",
-
+    // height: " 100%",
   },
 
   form: {
     display: "flex",
     maxWidth: "25rem",
-    backgroundColor: "#d3e8d6",
+    backgroundColor: "#fff5e6",
     padding: 40,
     paddingLeft: 83,
     // margin: 50,
@@ -118,18 +118,16 @@ const Singin = ({ setToken }) => {
     e.preventDefault();
     // setOpen(true);
     let values = true;
-    
+
     setTextSnackbar("กรุณารอสักครู่...");
     setcheckSnackbar(true);
 
     if (Username === "") {
       setTextSnackbar("กรุณากรอก ชื่อผู้เข้าใช้งาน");
       setcheckSnackbar(true);
-
     } else if (Password === "") {
       setTextSnackbar("กรุณากรอก รหัสผ่าน");
       setcheckSnackbar(true);
-
     } else {
       let form_data = {
         username: Username,
@@ -149,10 +147,9 @@ const Singin = ({ setToken }) => {
           window.location.reload();
         })
         .catch((error) => {
-          setTextSnackbar('ไม่สามารถเข้าสู่ระบบได้ โปรดลองใหม่อีกครั้ง');
+          setTextSnackbar("ไม่สามารถเข้าสู่ระบบได้ โปรดลองใหม่อีกครั้ง");
           setcheckSnackbar(true);
         });
-    
     }
   };
   const { vertical, horizontal, open } = state;
@@ -247,7 +244,7 @@ const Singin = ({ setToken }) => {
       >
         เข้าสู่ระบบ
       </Button>
-            <image ></image>
+      <image></image>
       <div></div>
 
       {/* </div> */}

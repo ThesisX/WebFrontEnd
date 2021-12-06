@@ -70,7 +70,7 @@ const Dashboard = () => {
                   <DataList props={data} />
                 </Paper>
               </Grid>
-              <Loadflie />
+              {/* <Loadflie /> */}
             </Grid>
           </ThemeProvider>
         </>

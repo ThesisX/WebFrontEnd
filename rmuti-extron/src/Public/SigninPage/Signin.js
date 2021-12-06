@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 60,
     marginTop: 50,
     fontFamily: "sarabun",
+    // fontSize: `calc(68% + 0.8vmin)`,
 
     // backgroundColor: '#79955a',
     // transparency: '50%',
@@ -61,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
   griduserpass: {
     marginTop: "30px",
     fontFamily: "sarabun",
+    // fontSize: `calc(68% + 0.8vmin)`,
+
     // height: " 100%",
   },
 
@@ -77,12 +80,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "flex-start",
+    // fontSize: `calc(68% + 0.8vmin)`,
+
     // marginLeft: '380px',
     // padding: '80px',
     // borderRadius: 15,
   },
   label: {
-    fontSize: 16.5,
+    // fontSize: `calc(60% + 0.8vmin)`,
     fontFamily: "sarabun",
 
     // fontFamily: "sarabun",

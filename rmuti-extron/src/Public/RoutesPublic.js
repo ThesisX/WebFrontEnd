@@ -7,7 +7,7 @@ import AppbarPublic from "./AppbarPublic";
 const RoutesPublic = () => {
   return (
     
-    <BrowserRouter>
+    <BrowserRouter >
       <AppbarPublic />
       <TabbarPublic />
     </BrowserRouter>

@@ -53,12 +53,16 @@ const useStyles = makeStyles((theme) => ({
     // width: '800rem',
     height: " 100%",
     display: "felx",
-    maxWidth: "800rem",
+    // maxWidth: "800rem",
+    // width: `calc(100% + 0.6vmin)`,
+
     margin: "0 auto",
     // backgroundColor: theme.palette.background.paper,
     // backgroundImage: { imgbg },
     justifyContent: "center",
     fontFamily: "sarabun",
+    // fontSize: `calc(60% + 0.8vmin)`,
+
   },
 
   tabs: {
@@ -75,6 +79,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 45,
     alignItems: "center",
     fontFamily: "sarabun",
+    // fontSize: `calc(60% + 0.8vmin)`,
+
 
     // backgroundColor: theme.palette.background.paper,
     // flexWrap: ''
@@ -83,6 +89,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "60rem",
     margin: 20,
     borderRadius: 35,
+    fontSize: `calc(60% + 0.8vmin)`,
+
     // backgroundColor: '#B8C85E',
     backgroundColor: "#fff5e6",
     color: "#242812",
@@ -105,9 +113,11 @@ export default function ScrollableTabsButtonForce() {
       className={classes.root}
       style={{
         background: "url(" + imgbg1 + ")",
-        height: "115vh",
+        width: `calc(99.7% + 0.6vmin)`,
+
+        // height: "115vh",
         // backgroundOrigin: "inherit",
-        // overflow: "inherit",
+        overflow: "inherit",
         // opacity: '50%',
       }}
     >

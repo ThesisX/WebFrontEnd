@@ -101,9 +101,11 @@ const Signup = () => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
+
       "& input:valid + fieldset": {
         borderColor: "green",
         borderWidth: 1,
+        
       },
       "& input:invalid + fieldset": {
         borderColor: "red",
@@ -123,6 +125,9 @@ const Signup = () => {
       flexDirection: "column",
       alignItems: "flex-start",
       display: "grid",
+      fontSize: `calc(68% + 0.1vmin)`,
+      // width: `calc(100% + 1vmin)`,
+
       // flexWrap: 'wrap',
     },
 
@@ -132,54 +137,56 @@ const Signup = () => {
       // margin: '30px',
       // marginLeft: 60,
       marginTop: 40,
+      fontSize: `calc(50% + 0.8vmin)`,
+      // width: `calc(100% + 1vmin)`,
+
     },
 
     divform: {
       // display: 'flex',
-      maxWidth: "45rem",
-      // width: 490,
-      // backgroundColor: '#d3e8d6',
-      // padding: 40,
-      // margin: 50,
-      // height: '400'
-      // borderRadius: 35,
+      width: `calc(100% + 0.6vmin)`,
       justifyContent: "center",
       flexDirection: "column",
       alignItems: "flex-start",
       display: "grid",
-      // backgroundColor: '#d3e8d6',
-      // marginLeft: 80,
       border: 50,
-      // borderRadius: 35,
-      // justifyContent: 'space-around',
-      // flexDirection: 'column',
-      // alignItems: 'flex-start',
-      // alignItems: 'baseline',
-      // justifyItems: 'stretch',
-      // marginTop: 50,
-      // paddingTop: 50,
+      fontSize: `calc(68% + 1vmin)`,
     },
 
     selectEmpty: {
       marginTop: theme.spacing(3),
+      // fontSize: `calc(68% + 0.8vmin)`,
+
     },
     withoutLabel: {
       marginTop: theme.spacing(3),
+      // fontSize: `calc(68% + 0.8vmin)`,
+
     },
     TextFieldmargin: {
       margin: 10,
+      // fontSize: `calc(68% + 0.8vmin)`,
+
     },
     FormControlmargin: {
       "&:invalid": {
         borderColor: "red",
+        // fontSize: `calc(68% + 0.8vmin)`,
+
       },
       margin: 10,
+      // fontSize: `calc(68% + 0.8vmin)`,
+
     },
     passwordcheckTrue: {
       color: "#005700",
+      // fontSize: `calc(68% + 0.8vmin)`,
+
     },
     passwordcheckFalse: {
       color: "#d10000",
+      // fontSize: `calc(68% + 0.8vmin)`,
+
     },
     // inputlabel: {
     //   width: '10',
@@ -249,7 +256,7 @@ const Signup = () => {
       <Container
         alignItems="center"
         className={classes.root}
-        style={{ width: "190vh" }}
+      //  style={{ width: "190vh" }} //
         required
       >
         <div className={classes.divform}>
@@ -273,7 +280,7 @@ const Signup = () => {
               </FormHelperText>
             )}
           </FormControl>
-          <FormControl variant="outlined" className={classes.FormControlmargin}>
+          <FormControl variant="outlined"  className={classes.FormControlmargin}>
             <InputLabel htmlFor="component-outlined">รหัสผ่าน</InputLabel>
             <OutlinedInput
               name="password"

@@ -1,6 +1,6 @@
 export const F_PORT = "3000";
 const B_PORT = "8080";
-// const B_PORT = "8001";
+// const B_PORT = "8000";
 
 // export const ROOT_URL = "http://localhost";
 export const ROOT_URL = "http://40.90.250.245";

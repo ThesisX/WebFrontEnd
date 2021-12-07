@@ -400,14 +400,13 @@ const System = () => {
 
         let t1 = performance.now();
         let pred_time = await FormatTime((t1 - t0) / 1000);
-        let exam_success = examfile.length - examFails;
         await setTimeProgress(100);
         await setSuccessTure(false);
         await setTxtProcessing("ดีใจด้วยการตรวจข้อสอบ สำเร็จแล้ว!!");
         await setTxtConclusion({
             time: pred_time,
             total: examfile.length,
-            success: exam_success,
+            success: examfile.length - examFails,
             fails: exam_fails
         });
 
